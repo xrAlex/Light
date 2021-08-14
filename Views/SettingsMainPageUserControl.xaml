@@ -35,6 +35,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Slider 
+            x:Name="BlueReduceSlider"
             Style="{StaticResource Horizontal_Slider}" 
             VerticalAlignment="Top" HorizontalAlignment="Left" 
             Width="360" Height="30"
@@ -44,6 +45,7 @@
             IsDirectionReversed="True" 
             Grid.Row="10" Grid.ColumnSpan="5" Grid.Column="1"/>
         <Slider 
+            x:Name="GammaSlider" 
             Style="{StaticResource Horizontal_Slider}"
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Width="360" Height="30"
@@ -53,7 +55,6 @@
             IsDirectionReversed="True" 
             Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="5"/>
         <TextBox 
-            x:Name="GammaTexbox" 
             IsReadOnly="True"
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Height="20" Width="360" 
@@ -61,10 +62,10 @@
             Focusable="False"
             TextWrapping="Wrap" 
             Cursor="Arrow"
-            Text="Гамма: 100" 
+            MaxLength="3"
+            Text="{Binding Value, ElementName=GammaSlider, StringFormat=Гамма: \{0:N0\}}" 
             Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="5"/>
         <TextBox 
-            x:Name="BlueReduceTexbox" 
             IsReadOnly="True"
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Height="20" Width="360" 
@@ -72,7 +73,7 @@
             Focusable="False"
             TextWrapping="Wrap" 
             Cursor="Arrow"
-            Text="Ночной свет: 100" 
+            Text="{Binding Value, ElementName=BlueReduceSlider, StringFormat=Ночной свет: \{0:N0\}}" 
             Grid.Row="9" Grid.ColumnSpan="5" Grid.Column="1"/>
         <TextBox 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
