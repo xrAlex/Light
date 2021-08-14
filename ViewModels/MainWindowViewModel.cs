@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Light.ViewModels
@@ -34,7 +35,10 @@ namespace Light.ViewModels
         public ICommand AppToTrayCommand { get; }
         public ICommand OpenSettingsWindowCommand { get; }
 
-        private void OnCloseAppCommandExecute() { /* in progress */ }
+        private void OnCloseAppCommandExecute() 
+        {
+            Application.Current.Shutdown();
+        }
 
         private void OnAppToTrayCommandExecute() { /* in progress */ }
 

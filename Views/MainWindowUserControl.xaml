@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Light.Views"
-             xmlns:viewmodels="clr-namespace:Light.ViewModels"  
+             xmlns:viewmodels="clr-namespace:Light.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"              
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"   
              mc:Ignorable="d" 
              d:DesignHeight="330" d:DesignWidth="440" 
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}"   
@@ -65,7 +67,7 @@
             BorderThickness="0"
             FontSize="20"
             Cursor="Hand"
-            Command="{Binding OpenSettingsWindowCommand}"
+            Command="{Binding CloseAppCommand}"
             Grid.Column="5" Grid.Row="1">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
