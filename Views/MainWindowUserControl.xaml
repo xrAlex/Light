@@ -21,8 +21,8 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="3*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="42*"/>
+            <RowDefinition Height="10*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Rectangle

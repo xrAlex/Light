@@ -37,9 +37,8 @@
             Height="350" Width="60" Grid.RowSpan="9" Grid.ColumnSpan="3"/>
         <Button 
             Style="{StaticResource ButtonFromTransaprentToBlack}"
-            HorizontalAlignment="Left" VerticalAlignment="Top"
-            Width="50" Height="50"
-            Cursor="Hand" Grid.Column="1" Grid.Row="1">
+            Cursor="Hand" 
+            Grid.Column="1" Grid.Row="1">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -48,9 +47,8 @@
         </Button>
         <Button
             Style="{StaticResource ButtonFromTransaprentToBlack}"
-            HorizontalAlignment="Left" VerticalAlignment="Top"        
-            Width="50" Height="50"
-            Cursor="Hand" Grid.Column="1" Grid.Row="3">
+            Cursor="Hand" 
+            Grid.Column="1" Grid.Row="3">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -60,34 +58,28 @@
         </Button>
         <Button 
             Style="{StaticResource ButtonFromTransaprentToBlack}"
-            HorizontalAlignment="Left" VerticalAlignment="Top"           
-            Width="50" Height="50"
-            Cursor="Hand" Grid.Row="5" Grid.Column="1">
+            Cursor="Hand" 
+            Grid.Row="5" Grid.Column="1">
             <Image
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
                 Width="40" Height="40" 
                 Source="{StaticResource Other}" Stretch="Fill"/>
         </Button>
-
         <Button 
             Style="{StaticResource ButtonFromTransaprentToGray}"
-            Content="Сбросить" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" 
-            Width="80" Height="30"
-            Grid.Column="4"
-            Cursor="Hand" Grid.Row="7"/>
-
+            Content="Сбросить"         
+            Cursor="Hand" 
+            Grid.Row="7" Grid.Column="4"/>
         <Button 
             Style="{StaticResource ButtonFromTransaprentToGray}" 
-            Content="Отменить" VerticalAlignment="Top" Height="30"
-            Grid.Column="6"
-            Cursor="Hand" Grid.Row="7"/>
+            Content="Отменить"     
+            Cursor="Hand" 
+            Grid.Row="7" Grid.Column="6"/>
         <Button 
             Style="{StaticResource ButtonFromTransaprentToGray}" 
-            Content="Применить" 
-            VerticalAlignment="Top"
-            Grid.Column="8" Height="30"
-            Cursor="Hand" Grid.Row="7"/>
+            Content="Применить"          
+            Cursor="Hand" 
+            Grid.Row="7" Grid.Column="8"/>
     </Grid>
 </UserControl>

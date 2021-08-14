@@ -59,6 +59,15 @@
     <Compile Include="Views\MainWindowUserControl.xaml.cs">
       <DependentUpon>MainWindowUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\OtherSettingsPageUserControl.xaml.cs">
+      <DependentUpon>OtherSettingsPageUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcesessPageUserControl.xaml.cs">
+      <DependentUpon>ProcesessPageUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsMainPageUserControl.xaml.cs">
+      <DependentUpon>SettingsMainPageUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
@@ -79,6 +88,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MainWindowUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OtherSettingsPageUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcesessPageUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsMainPageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
