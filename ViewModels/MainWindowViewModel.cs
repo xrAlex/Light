@@ -1,4 +1,5 @@
 ﻿using Light.Commands;
+using Light.Services;
 using Light.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Input;
 
 namespace Light.ViewModels
 {
-    public sealed class MainWindowViewModel : ViewModelBase
+    internal sealed class MainWindowViewModel : ViewModelBase
     {
         #region Values
 
@@ -37,13 +38,19 @@ namespace Light.ViewModels
 
         private void OnAppToTrayCommandExecute() { /* in progress */ }
 
-        private void OnOpenSettingsWindowExecute() { /* in progress */ }
+        private void OnOpenSettingsWindowCommandExecute() 
+        {
+            var windowService = new WindowService();
+            var viewModel = new SettingsWindowViewModel(windowService);
+            windowService.CreateWindow(viewModel, 350, 450);
+            windowService.ShowWindow();
+        }
 
         #endregion
 
         public MainWindowViewModel()
         {
-            OpenSettingsWindowCommand = new LambdaCommand(p => OnOpenSettingsWindowExecute());
+            OpenSettingsWindowCommand = new LambdaCommand(p => OnOpenSettingsWindowCommandExecute());
             CloseAppCommand = new LambdaCommand(p => OnCloseAppCommandExecute());
             AppToTrayCommand = new LambdaCommand(p => OnAppToTrayCommandExecute());
         }

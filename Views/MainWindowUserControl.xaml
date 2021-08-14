@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Light.Views"
+             xmlns:viewmodels="clr-namespace:Light.ViewModels"  
              mc:Ignorable="d" 
              d:DesignHeight="330" d:DesignWidth="440" 
+             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}"   
              Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -63,6 +65,7 @@
             BorderThickness="0"
             FontSize="20"
             Cursor="Hand"
+            Command="{Binding OpenSettingsWindowCommand}"
             Grid.Column="5" Grid.Row="1">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
@@ -75,6 +78,7 @@
             BorderThickness="0"          
             RenderTransformOrigin="0.5,0.5"
             Cursor="Hand" 
+            Command="{Binding OpenSettingsWindowCommand}"
             Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2">
             <Button.Triggers>
                 <EventTrigger>
@@ -96,7 +100,7 @@
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                Width="50" Height="50" 
+                Width="50" Height="50"               
                 Source="{StaticResource Settings}"/>
         </Button>
     </Grid>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Light.ViewModels
 {
-    public sealed class SettingsMainPageViewModel : ViewModelBase
+    internal sealed class SettingsMainPageViewModel : ViewModelBase
     {
         public SettingsMainPageViewModel()
         {

@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Light.Views"
+             xmlns:viewmodels="clr-namespace:Light.ViewModels" 
+             xmlns:local="clr-namespace:Light.Views" xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="450"
-            Background="White">
+             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:SettingsWindowViewModel}}"  
+             Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -31,14 +33,16 @@
             <ColumnDefinition Width="16*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
+        <ContentControl 
+            Content="{Binding SelectedViewModel}" Grid.ColumnSpan="10" Grid.RowSpan="9"/>
         <Rectangle 
             Fill="#FF292929"
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Height="350" Width="60" Grid.RowSpan="9" Grid.ColumnSpan="3"/>
         <Button 
             Style="{StaticResource ButtonFromTransaprentToBlack}"
-            Cursor="Hand" 
-            Grid.Column="1" Grid.Row="1">
+            Cursor="Hand" Grid.Row="3" Grid.Column="1"
+            Command="{Binding ChangePageCommand}" CommandParameter="{Binding ProcessPage}">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -48,7 +52,8 @@
         <Button
             Style="{StaticResource ButtonFromTransaprentToBlack}"
             Cursor="Hand" 
-            Grid.Column="1" Grid.Row="3">
+            Grid.Column="1" Grid.Row="1"
+            Command="{Binding ChangePageCommand}" CommandParameter="{Binding SettingsMainPage}">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -59,7 +64,8 @@
         <Button 
             Style="{StaticResource ButtonFromTransaprentToBlack}"
             Cursor="Hand" 
-            Grid.Row="5" Grid.Column="1">
+            Grid.Row="5" Grid.Column="1"
+            Command="{Binding ChangePageCommand}" CommandParameter="{Binding OtherSettingsPage}">
             <Image
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -69,17 +75,20 @@
         <Button 
             Style="{StaticResource ButtonFromTransaprentToGray}"
             Content="Сбросить"         
-            Cursor="Hand" 
+            Cursor="Hand"
+            Command="{Binding ResetSettingsCommand}"
             Grid.Row="7" Grid.Column="4"/>
         <Button 
             Style="{StaticResource ButtonFromTransaprentToGray}" 
             Content="Отменить"     
             Cursor="Hand" 
+            Command="{Binding CloseSettingsCommand}"
             Grid.Row="7" Grid.Column="6"/>
         <Button 
             Style="{StaticResource ButtonFromTransaprentToGray}" 
             Content="Применить"          
             Cursor="Hand" 
+            Command="{Binding ApplySettingsCommand}"
             Grid.Row="7" Grid.Column="8"/>
     </Grid>
 </UserControl>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Light.ViewModels
 {
-    public sealed class ProcessPageViewModel : ViewModelBase
+    internal sealed class ProcessPageViewModel : ViewModelBase
     {
         public ProcessPageViewModel()
         {
