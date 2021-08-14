@@ -13,8 +13,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Topmost="True" 
-        Background="White"
-        >
+        Background="White">
     <Grid>
         <views:MainWindowUserControl/>
     </Grid>
