@@ -59,6 +59,11 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\LambdaCommand.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\OtherSettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\ProcessPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsMainPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="Views\MainWindowUserControl.xaml.cs">
       <DependentUpon>MainWindowUserControl.xaml</DependentUpon>
     </Compile>
