@@ -4,27 +4,38 @@
              xmlns:local="clr-namespace:Light"
              xmlns:viewmodels="clr-namespace:Light.ViewModels"         
              xmlns:views="clr-namespace:Light.Views"
+             xmlns:converters="clr-namespace:Light.Converters"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            
             <DataTemplate DataType="{x:Type viewmodels:MainWindowViewModel}">
                 <views:MainWindowUserControl/>
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type viewmodels:OtherSettingsPageViewModel}">
                 <views:OtherSettingsPageUserControl/>
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type viewmodels:ProcessPageViewModel}">
                 <views:ProcesessPageUserControl/>
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:SettingsMainPageViewModel}">
                 <views:SettingsMainPageUserControl/>
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:SettingsWindowViewModel}">
                 <views:SettingsUserControl/>
             </DataTemplate>
+
+            <converters:MinConverter x:Key="MinConverter"></converters:MinConverter>
+            <converters:HourConverter x:Key="HourConverter"></converters:HourConverter>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

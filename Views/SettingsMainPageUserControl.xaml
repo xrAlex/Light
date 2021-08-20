@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewmodels="clr-namespace:Light.ViewModels"         
-             xmlns:local="clr-namespace:Light.Views"
+             xmlns:viewmodels="clr-namespace:Light.ViewModels"  
+             xmlns:converters="clr-namespace:Light.Converters" 
+             xmlns:local="clr-namespace:Light.Views" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="450" 
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:SettingsMainPageViewModel}}"
@@ -41,6 +44,7 @@
             Width="360" Height="30"
             Maximum="100" Minimum="1" 
             Cursor="Hand"
+            Value="{Binding BlueReduce}"
             TickPlacement="Both" TickFrequency="10"
             IsDirectionReversed="True" 
             Grid.Row="10" Grid.ColumnSpan="5" Grid.Column="1"/>
@@ -53,6 +57,7 @@
             Cursor="Hand"
             TickPlacement="Both" TickFrequency="10"
             IsDirectionReversed="True" 
+            Value="{Binding Gamma}"
             Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="5"/>
         <TextBox 
             IsReadOnly="True"
@@ -99,7 +104,7 @@
         <TextBox
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="30" Width="80"     
-            Text="23" 
+            Text="{Binding HourStart, Converter= {StaticResource HourConverter}}" 
             MaxLength = "2" 
             FontSize="20" 
             TextWrapping="Wrap" TextAlignment="Right"           
@@ -108,7 +113,7 @@
         <TextBox
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="30" Width="90"          
-            Text="00" 
+            Text="{Binding MinEnd, Converter= {StaticResource MinConverter}}" 
             FontSize="20" MaxLength = "2" 
             TextWrapping="Wrap"
             BorderThickness="0" 
@@ -116,7 +121,7 @@
         <TextBox
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="30" Width="100"           
-            Text="07" 
+            Text="{Binding HourEnd, Converter= {StaticResource HourConverter}}"  
             MaxLength = "2" FontSize="20" 
             TextWrapping="Wrap" TextAlignment="Right"
             BorderThickness="0" 
@@ -124,7 +129,8 @@
         <TextBox 
             Height="30" 
             VerticalAlignment="Top"
-            Text="00" FontSize="20"
+            Text="{Binding MinStart, Converter= {StaticResource MinConverter}}" 
+            FontSize="20"
             MaxLength = "2" TextWrapping="Wrap" 
             BorderThickness="0" 
             Grid.Column="2" Grid.Row="2"/>
@@ -163,7 +169,15 @@
             SelectedIndex="0"
             VerticalAlignment="Center"
             Width="360" 
+            ItemsSource="{Binding Screens}"
             ItemContainerStyle="{DynamicResource ListBoxItemStyle1}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <ei:CallMethodAction 
+                        TargetObject="{Binding}" 
+                        MethodName="Monitors_SelectionChanged"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel 
@@ -173,8 +187,27 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
-
+                    <StackPanel Orientation="Horizontal" Width="66" Height="66" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                        <StackPanel.InputBindings>
+                            <MouseBinding Gesture="LeftDoubleClick"
+                                Command="{Binding DataContext.MonitorDoubleClickCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding SysName}">
+                            </MouseBinding>
+                        </StackPanel.InputBindings>
+                        <Image              
+                            Source="{DynamicResource MonitorBlack}"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                            Width="60" Height="60" 
+                            Opacity="{Binding Opacity}"
+                            Stretch="Fill" Margin="3,0,0,0">
+                        </Image>
+                        <TextBlock
+                            Text="{Binding Name, StringFormat=Monitor \{0\}}" 
+                            Margin="-60,-2,0,52"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            FontSize="12" Width="62"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

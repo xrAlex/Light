@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Light.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Light.ViewModels.Base
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged, IDisposable
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -23,19 +24,6 @@ namespace Light.ViewModels.Base
             field = value;
             OnPropertyChanged(PropetyName);
             return true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        private bool _Disposed;
-
-        protected virtual void Dispose(bool Disposing)
-        {
-            if (!Disposing || _Disposed) return;
-            _Disposed = true;
         }
     }
 }

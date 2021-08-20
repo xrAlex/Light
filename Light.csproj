@@ -15,6 +15,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,13 +39,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Light.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -67,7 +75,19 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\LambdaCommand.cs" />
+    <Compile Include="Converters\HourConverter.cs" />
+    <Compile Include="Converters\MinConverter.cs" />
+    <Compile Include="Infrastructure\FindIndexByName.cs" />
+    <Compile Include="Infrastructure\GammaRegulator.cs" />
+    <Compile Include="Models\CurrentTimeModel.cs" />
+    <Compile Include="Services\GammaRegulatorService.cs" />
+    <Compile Include="Infrastructure\INIManager.cs" />
+    <Compile Include="Services\IDialog.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Models\ScreenModel.cs" />
+    <Compile Include="Services\CurrentTimeService.cs" />
     <Compile Include="Services\IWindowService.cs" />
+    <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Services\WindowService.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -75,6 +95,7 @@
     <Compile Include="ViewModels\ProcessPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsMainPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\MainWindowUserControl.xaml.cs">
       <DependentUpon>MainWindowUserControl.xaml</DependentUpon>
     </Compile>
@@ -154,9 +175,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Images\Accept.png" />
   </ItemGroup>

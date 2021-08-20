@@ -13,26 +13,30 @@
              Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="32*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="28*"/>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="37*"/>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="3*"/>
-            <RowDefinition Height="42*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="14*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Rectangle
             Fill="#FF292929"
             HorizontalAlignment="Left" VerticalAlignment="Top"
-            Height="60" Width="440" Grid.ColumnSpan="7" Grid.RowSpan="3"/>
+            Height="60" Width="440" Grid.ColumnSpan="9" Grid.RowSpan="3"/>
         <TextBox
             Background="Transparent" Foreground="White"
             Text="Light v1.0"
@@ -41,7 +45,7 @@
             Focusable="False"
             Cursor="Arrow"
             BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="3"/>
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
         <TextBox
             Background="Transparent" Foreground="White"
             Text="12:00"
@@ -50,7 +54,7 @@
             Focusable="False"
             Cursor="Arrow"
             BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="2" Grid.RowSpan="3" Margin="0,0,25,0"/>
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="3" Grid.RowSpan="3" Margin="0,0,25,0"/>
         <Button
             Style="{StaticResource ButtonLightGrayBack}"
             Content="—" 
@@ -61,14 +65,14 @@
             Foreground="#FFF1F1F1" 
             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
             Width="30" Height="30" 
-            Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"/>
+            Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"/>
         <Button
             Style="{StaticResource ButtonLightGrayBack}"
             BorderThickness="0"
             FontSize="20"
             Cursor="Hand"
             Command="{Binding CloseAppCommand}"
-            Grid.Column="5" Grid.Row="1">
+            Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -81,7 +85,7 @@
             RenderTransformOrigin="0.5,0.5"
             Cursor="Hand" 
             Command="{Binding OpenSettingsWindowCommand}"
-            Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2">
+            Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3">
             <Button.Triggers>
                 <EventTrigger>
                     <EventTrigger.RoutedEvent>
@@ -105,5 +109,52 @@
                 Width="50" Height="50"               
                 Source="{StaticResource Settings}"/>
         </Button>
+        <ListBox 
+            HorizontalAlignment="Center" 
+            Height="190" 
+            Grid.Row="4" 
+            HorizontalContentAlignment="Left"
+            ItemsSource="{Binding Screens, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Center"
+            IsEnabled="False"
+            BorderThickness="0"
+            Width="400" Grid.ColumnSpan="6" Grid.Column="1" Grid.RowSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Image              
+                            Source="{DynamicResource MonitorBlack}"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                            Width="55" Height="55" 
+                            Stretch="Fill"/>
+                        <TextBlock
+                            Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            FontSize="12" 
+                            Margin="-55,0,0,6"
+                            Height="Auto"
+                            Width="Auto"/>
+                        <TextBlock
+                            Text="{Binding CurrentGamma, Mode=TwoWay, StringFormat=Гамма: \{0\}, UpdateSourceTrigger=PropertyChanged}" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center" 
+                            FontSize="12" 
+                            Margin="3,0,0,18"
+                            Height="Auto"
+                            Width="100"/>
+                        <TextBlock
+                            Text="{Binding CurrentBlueReduce, Mode=TwoWay, StringFormat=Ночной свет: \{0\}, UpdateSourceTrigger=PropertyChanged}" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center" 
+                            FontSize="12" 
+                            Margin="-100,0,0,-23"
+                            Height="Auto"
+                            Width="100"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

@@ -1,11 +1,9 @@
 ﻿using Light.Commands;
+using Light.Infrastructure;
+using Light.Models;
 using Light.Services;
 using Light.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,13 +11,23 @@ namespace Light.ViewModels
 {
     internal sealed class MainWindowViewModel : ViewModelBase
     {
+        #region Fields
+
+        public ObservableCollection<ScreenModel> Screens { get; set; }
+
+        private readonly WindowService _windowService;
+        private readonly ServiceLocator _serviceLocator;
+        private readonly SettingsService _settingsService;
+
+        #endregion
+
         #region Values
 
         private string _currentTime = "12:00";
 
         #endregion
 
-        #region Constructors
+        #region Properties
 
         public string CurrentTime
         {
@@ -35,19 +43,18 @@ namespace Light.ViewModels
         public ICommand AppToTrayCommand { get; }
         public ICommand OpenSettingsWindowCommand { get; }
 
-        private void OnCloseAppCommandExecute() 
+        private void OnCloseAppCommandExecute()
         {
             Application.Current.Shutdown();
         }
 
         private void OnAppToTrayCommandExecute() { /* in progress */ }
 
-        private void OnOpenSettingsWindowCommandExecute() 
+        private void OnOpenSettingsWindowCommandExecute()
         {
-            var windowService = new WindowService();
-            var viewModel = new SettingsWindowViewModel(windowService);
-            windowService.CreateWindow(viewModel, 350, 450);
-            windowService.ShowWindow();
+            var settingsVM = new SettingsWindowViewModel();
+            _windowService.CreateWindow(settingsVM, 350, 450);
+            _windowService.ShowWindow();
         }
 
         #endregion
@@ -57,6 +64,11 @@ namespace Light.ViewModels
             OpenSettingsWindowCommand = new LambdaCommand(p => OnOpenSettingsWindowCommandExecute());
             CloseAppCommand = new LambdaCommand(p => OnCloseAppCommandExecute());
             AppToTrayCommand = new LambdaCommand(p => OnAppToTrayCommandExecute());
+
+            _serviceLocator = ServiceLocator.Source;
+            _windowService = _serviceLocator.WindowService;
+            _settingsService = _serviceLocator.Settings;
+            Screens = _settingsService.Screens;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Light.Infrastructure;
+using Light.Services;
+using Light.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +16,12 @@ namespace Light
     /// </summary>
     public partial class App : Application
     {
+        App()
+        {
+            InitializeComponent();
+            var serviceLocator = ServiceLocator.Source;
+            var appSettings = serviceLocator.Settings;
+            appSettings.Load();
+        }
     }
 }

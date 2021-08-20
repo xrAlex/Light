@@ -1,0 +1,107 @@
+﻿using Light.Infrastructure;
+using Light.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Light.Services
+{
+    public class GammaRegulatorService
+    {
+        private readonly GammaRegulator _gammaRegulator;
+        private readonly ServiceLocator _serviceLocator = ServiceLocator.Source;
+        private readonly SettingsService _settingsService;
+
+        private ScreenModel GetScreen(int screenIndex) => _settingsService.Screens[screenIndex];
+        private void Apply(float gamma = 0f, float blueReduce = 0f, int screenIndex = 1)
+        {
+            const float BlueReduceMult = 0.01f;
+            const float GammaMult = 1.28f;
+            var screen = GetScreen(screenIndex);
+            var validatedGamma = gamma != 0f ? gamma : screen.CurrentGamma;
+            var validatedBlueReduce = blueReduce != 0f ? blueReduce : screen.CurrentBlueReduce;
+
+            _gammaRegulator.ApplyGamma(validatedGamma * GammaMult, validatedBlueReduce * BlueReduceMult, screen.SysName);
+            _settingsService.Screens[screenIndex].CurrentGamma = validatedGamma;
+            _settingsService.Screens[screenIndex].CurrentBlueReduce = validatedBlueReduce;
+        }
+
+        public void SetGamma(float Gamma, int screenIndex) => Apply(Gamma, 0f, screenIndex);
+
+        public void SetBlueReduce(float BlueReduce, int screenIndex) => Apply(0f, BlueReduce, screenIndex);
+
+        public void SetUserGamma(float Gamma, int screenIndex)
+        {
+            var screen = GetScreen(screenIndex);
+            Apply(Gamma, 0f, screenIndex);
+            screen.UserGamma = Gamma;
+        }
+
+        public void SetUserBlueReduce(float BlueReduce, int screenIndex)
+        {
+            var screen = GetScreen(screenIndex);
+            Apply(0f, BlueReduce, screenIndex);
+            screen.UserBlueReduce = BlueReduce;
+        }
+
+        public float GetGamma(int screenIndex)
+        {
+            var screen = GetScreen(screenIndex);
+            return screen.CurrentGamma;
+        }
+
+        public float GetBlueReduce(int screenIndex)
+        {
+            var screen = GetScreen(screenIndex);
+            return screen.CurrentBlueReduce;
+        }
+
+        public void SetDefaultValues(int screenIndex)
+        {
+            SetGamma(100f, screenIndex);
+            SetBlueReduce(100f, screenIndex);
+        }
+
+        public void SetUserValues(int screenIndex)
+        {
+            var screen = _settingsService.Screens[screenIndex];
+            SetGamma(screen.UserGamma, screenIndex);
+            SetBlueReduce(screen.UserBlueReduce, screenIndex);
+        }
+
+        public void SetDefaultGammaOnAllScreens()
+        {
+            foreach (Screen screen in Screen.AllScreens)
+            {
+                _gammaRegulator.ApplyGamma(128f, 1f, screen.DeviceName);
+            }
+        }
+
+        public void ForceGamma()
+        {
+            for (int i = 0; i < _settingsService.Screens.Count; i++)
+            {
+                //var workTime = new WorkTime();
+
+                //if (workTime.IsWorkTime(i))
+                //{
+                //    ForceUserValues(i);
+                //}
+                //else
+                //{
+                //    ForceDefaultValues(i);
+                //}
+            }
+        }
+
+        public GammaRegulatorService()
+        {
+            _gammaRegulator = new();
+            _settingsService = _serviceLocator.Settings;
+        }
+    }
+}

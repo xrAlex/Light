@@ -11,7 +11,7 @@ namespace Light.ViewModels
     {
         public ProcessPageViewModel()
         {
-
+            /* in progress */
         }
     }
 }

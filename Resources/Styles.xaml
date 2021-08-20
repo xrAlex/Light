@@ -225,6 +225,8 @@
          To="0" 
          Duration="0:0:0.1"/>
     </Storyboard>
+    <!--#endregion-->
+
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -234,12 +236,12 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
-    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3D26A0DA"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FF26A0DA"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#ededed"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#ededed"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#ededed"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF5B5B5B"/>
     <Style x:Key="ListBoxItemStyle1" TargetType="{x:Type ListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>
@@ -287,6 +289,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--#endregion-->
 
 </ResourceDictionary>

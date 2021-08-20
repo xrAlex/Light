@@ -11,7 +11,7 @@ namespace Light.ViewModels
     {
         public OtherSettingsPageViewModel()
         {
-
+            /* in progress */
         }
     }
 }

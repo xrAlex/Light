@@ -1,4 +1,6 @@
 ﻿using Light.Commands;
+using Light.Infrastructure;
+using Light.Properties;
 using Light.Services;
 using Light.ViewModels.Base;
 using System;
@@ -12,15 +14,24 @@ namespace Light.ViewModels
 {
     internal sealed class SettingsWindowViewModel : ViewModelBase
     {
-        #region Values
+        #region Fields
 
-        private WindowService _windowService;
-        private ViewModelBase _selectedViewModel;
+        private readonly WindowService _windowService;
+        private readonly SettingsService _settings;
+        private readonly ServiceLocator _serviceLocator;
         public OtherSettingsPageViewModel OtherSettingsPage { get; private set; }
         public SettingsMainPageViewModel SettingsMainPage { get; private set; }
         public ProcessPageViewModel ProcessPage { get; private set; }
 
         #endregion
+
+        #region Values
+
+        private ViewModelBase _selectedViewModel;
+
+        #endregion
+
+        #region Properties
 
         public ViewModelBase SelectedViewModel
         {
@@ -28,6 +39,9 @@ namespace Light.ViewModels
             set => Set(ref _selectedViewModel, value);
         }
 
+        #endregion
+
+        #region Commands
         public ICommand ChangePageCommand { get; }
         public ICommand ApplySettingsCommand { get; }
         public ICommand ResetSettingsCommand { get; }
@@ -37,39 +51,40 @@ namespace Light.ViewModels
         {
             SelectedViewModel = (ViewModelBase)viewModel;
         }
-        private void CreatePages()
-        {
-            OtherSettingsPage = new();
-            SettingsMainPage = new();
-            ProcessPage = new();
-        }
-
         private void OnResetSettingsCommandExecute()
         {
-            /* in progress */
+            _settings.Reset();
         }
 
         private void OnCloseSettingsCommandExecute()
         {
+            _settings.Reset();
             _windowService.CloseWindow();
         }
 
         private void OnApplySettingsCommandExecute()
         {
+            _settings.Save();
             _windowService.CloseWindow();
         }
 
+        #endregion
 
-        public SettingsWindowViewModel(WindowService windowService)
+        public SettingsWindowViewModel()
         {
             ApplySettingsCommand = new LambdaCommand(p => OnApplySettingsCommandExecute());
             ResetSettingsCommand = new LambdaCommand(p => OnResetSettingsCommandExecute());
             CloseSettingsCommand = new LambdaCommand(p => OnCloseSettingsCommandExecute());
             ChangePageCommand = new LambdaCommand(OnChangePageCommandExecute);
 
-            CreatePages();
+            _serviceLocator = ServiceLocator.Source;
+            _settings = _serviceLocator.Settings;
+            _windowService = _serviceLocator.WindowService;
+
+            OtherSettingsPage = new();
+            SettingsMainPage = new();
+            ProcessPage = new();
             SelectedViewModel = SettingsMainPage;
-            _windowService = windowService;
         }
     }
 }
