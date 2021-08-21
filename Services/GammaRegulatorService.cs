@@ -26,8 +26,8 @@ namespace Light.Services
             var validatedBlueReduce = blueReduce != 0f ? blueReduce : screen.CurrentBlueReduce;
 
             _gammaRegulator.ApplyGamma(validatedGamma * GammaMult, validatedBlueReduce * BlueReduceMult, screen.SysName);
-            _settingsService.Screens[screenIndex].CurrentGamma = validatedGamma;
-            _settingsService.Screens[screenIndex].CurrentBlueReduce = validatedBlueReduce;
+            screen.CurrentGamma = validatedGamma;
+            screen.CurrentBlueReduce = validatedBlueReduce;
         }
 
         public void SetGamma(float Gamma, int screenIndex) => Apply(Gamma, 0f, screenIndex);
