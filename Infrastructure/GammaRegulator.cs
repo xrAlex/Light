@@ -36,7 +36,7 @@ namespace Light.Infrastructure
         public void ApplyGamma(float GammaIntensity, float BlueReduceIntensity, string screenName)
         {
             var DC = CreateDC(screenName, null, null, IntPtr.Zero);
-            const int minChannelValue = 128;
+            const int minChannelValue = 64;
             const int maxChannelValue = 256;
             const int maxUShort = 65535;
 
