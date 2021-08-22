@@ -77,7 +77,6 @@
     <Compile Include="Commands\LambdaCommand.cs" />
     <Compile Include="Converters\HourConverter.cs" />
     <Compile Include="Converters\MinConverter.cs" />
-    <Compile Include="Infrastructure\FindIndexByName.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Models\CurrentTimeModel.cs" />
     <Compile Include="Services\GammaRegulatorService.cs" />

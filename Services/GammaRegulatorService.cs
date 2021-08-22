@@ -1,11 +1,5 @@
 ﻿using Light.Infrastructure;
 using Light.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Light.Services
@@ -20,7 +14,7 @@ namespace Light.Services
         private void Apply(float gamma = 0f, float blueReduce = 0f, int screenIndex = 1)
         {
             const float BlueReduceMult = 0.01f;
-            const float GammaMult = 1.28f;
+            const float GammaMult = 1.92f;
             var screen = GetScreen(screenIndex);
             var validatedGamma = gamma != 0f ? gamma : screen.CurrentGamma;
             var validatedBlueReduce = blueReduce != 0f ? blueReduce : screen.CurrentBlueReduce;
@@ -73,11 +67,20 @@ namespace Light.Services
             SetBlueReduce(screen.UserBlueReduce, screenIndex);
         }
 
+        public void ForceUserValuesOnScreens()
+        {
+            var screens = _settingsService.Screens;
+            for (int i = 0; i < screens.Count; i++)
+            {
+                SetUserValues(i);
+            }
+        }
+
         public void SetDefaultGammaOnAllScreens()
         {
             foreach (Screen screen in Screen.AllScreens)
             {
-                _gammaRegulator.ApplyGamma(128f, 1f, screen.DeviceName);
+                _gammaRegulator.ApplyGamma(192f, 1f, screen.DeviceName);
             }
         }
 

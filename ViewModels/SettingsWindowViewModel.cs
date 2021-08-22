@@ -1,13 +1,6 @@
 ﻿using Light.Commands;
-using Light.Infrastructure;
-using Light.Properties;
 using Light.Services;
 using Light.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Light.ViewModels

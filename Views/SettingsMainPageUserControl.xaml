@@ -3,11 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewmodels="clr-namespace:Light.ViewModels"  
-             xmlns:converters="clr-namespace:Light.Converters" 
-             xmlns:local="clr-namespace:Light.Views" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:viewmodels="clr-namespace:Light.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="450" 
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:SettingsMainPageViewModel}}"
@@ -44,7 +40,7 @@
             Width="360" Height="30"
             Maximum="100" Minimum="1" 
             Cursor="Hand"
-            Value="{Binding BlueReduce}"
+            Value="{Binding BlueReduce, Mode=TwoWay}"
             TickPlacement="Both" TickFrequency="10"
             IsDirectionReversed="True" 
             Grid.Row="10" Grid.ColumnSpan="5" Grid.Column="1"/>
@@ -57,7 +53,7 @@
             Cursor="Hand"
             TickPlacement="Both" TickFrequency="10"
             IsDirectionReversed="True" 
-            Value="{Binding Gamma}"
+            Value="{Binding Gamma, Mode=TwoWay}"
             Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="5"/>
         <TextBox 
             IsReadOnly="True"
@@ -68,7 +64,7 @@
             TextWrapping="Wrap" 
             Cursor="Arrow"
             MaxLength="3"
-            Text="{Binding Value, ElementName=GammaSlider, StringFormat=Гамма: \{0:N0\}}" 
+            Text="{Binding Value, ElementName=GammaSlider, StringFormat=Гамма: \{0:N0\}, Mode=OneWay}" 
             Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="5"/>
         <TextBox 
             IsReadOnly="True"
@@ -78,7 +74,7 @@
             Focusable="False"
             TextWrapping="Wrap" 
             Cursor="Arrow"
-            Text="{Binding Value, ElementName=BlueReduceSlider, StringFormat=Ночной свет: \{0:N0\}}" 
+            Text="{Binding Value, ElementName=BlueReduceSlider, StringFormat=Ночной свет: \{0:N0\}, Mode=OneWay}" 
             Grid.Row="9" Grid.ColumnSpan="5" Grid.Column="1"/>
         <TextBox 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
@@ -104,7 +100,7 @@
         <TextBox
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="30" Width="80"     
-            Text="{Binding HourStart, Converter= {StaticResource HourConverter}}" 
+            Text="{Binding HourStart, Converter= {StaticResource HourConverter}, Mode=TwoWay}" 
             MaxLength = "2" 
             FontSize="20" 
             TextWrapping="Wrap" TextAlignment="Right"           
@@ -113,7 +109,7 @@
         <TextBox
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="30" Width="90"          
-            Text="{Binding MinEnd, Converter= {StaticResource MinConverter}}" 
+            Text="{Binding MinEnd, Converter= {StaticResource MinConverter}, Mode=TwoWay}" 
             FontSize="20" MaxLength = "2" 
             TextWrapping="Wrap"
             BorderThickness="0" 
@@ -121,17 +117,19 @@
         <TextBox
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="30" Width="100"           
-            Text="{Binding HourEnd, Converter= {StaticResource HourConverter}}"  
-            MaxLength = "2" FontSize="20" 
+            Text="{Binding HourEnd, Converter= {StaticResource HourConverter}, Mode=TwoWay}"  
+            MaxLength = "2" 
+            FontSize="20" 
             TextWrapping="Wrap" TextAlignment="Right"
             BorderThickness="0" 
             Grid.Column="4" Grid.Row="2"/>
         <TextBox 
             Height="30" 
             VerticalAlignment="Top"
-            Text="{Binding MinStart, Converter= {StaticResource MinConverter}}" 
+            Text="{Binding MinStart, Converter= {StaticResource MinConverter}, Mode=TwoWay}" 
             FontSize="20"
-            MaxLength = "2" TextWrapping="Wrap" 
+            MaxLength = "2" 
+            TextWrapping="Wrap" 
             BorderThickness="0" 
             Grid.Column="2" Grid.Row="2"/>
         <Ellipse 
@@ -158,26 +156,18 @@
             Height="2" Width="2"
             Margin="99,9,0,0"           
             Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <ListBox
+        <ListBox x:Name="listBox"
             Grid.ColumnSpan="5" Grid.Column="1" 
-            HorizontalAlignment="Center" 
-            Height="80" 
+            HorizontalAlignment="Center"          
             Grid.Row="4" 
             BorderThickness="0"
             HorizontalContentAlignment="Center"
             SelectionMode="Single"
-            SelectedIndex="0"
+            SelectedIndex="{Binding SelectedScreen, Mode=TwoWay}"
             VerticalAlignment="Center"
-            Width="360" 
-            ItemsSource="{Binding Screens}"
-            ItemContainerStyle="{DynamicResource ListBoxItemStyle1}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <ei:CallMethodAction 
-                        TargetObject="{Binding}" 
-                        MethodName="Monitors_SelectionChanged"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+            Height="80"  Width="360" 
+            ItemsSource="{Binding Screens, Mode=OneWay}"
+            ItemContainerStyle="{DynamicResource MonitorListBox}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel 
@@ -187,11 +177,14 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Width="66" Height="66" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Width="66" Height="66" 
+                        VerticalAlignment="Bottom" HorizontalAlignment="Center">
                         <StackPanel.InputBindings>
                             <MouseBinding Gesture="LeftDoubleClick"
-                                Command="{Binding DataContext.MonitorDoubleClickCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                CommandParameter="{Binding SysName}">
+                                Command="{Binding DataContext.MonitorDoubleClickCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding SelectedIndex, ElementName=listBox}">
                             </MouseBinding>
                         </StackPanel.InputBindings>
                         <Image              
@@ -199,15 +192,16 @@
                             RenderOptions.BitmapScalingMode="HighQuality"
                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
                             Width="60" Height="60" 
-                            Opacity="{Binding Opacity}"
-                            Stretch="Fill" Margin="3,0,0,0">
+                            Opacity="{Binding Opacity, Mode=OneWay}"
+                            Stretch="Fill" 
+                            Margin="3,0,0,0">
                         </Image>
                         <TextBlock
-                            Text="{Binding Name, StringFormat=Monitor \{0\}}" 
+                            Text="{Binding Name, Mode=OneWay, StringFormat=Monitor \{0\}}" 
                             Margin="-60,-2,0,52"
-                            HorizontalAlignment="Center" 
-                            VerticalAlignment="Center" 
-                            FontSize="12" Width="62"/>
+                            HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            FontSize="12" 
+                            Width="62"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

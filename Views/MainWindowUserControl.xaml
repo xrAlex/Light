@@ -3,10 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Light.Views"
-             xmlns:viewmodels="clr-namespace:Light.ViewModels"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"              
-             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"   
+             xmlns:viewmodels="clr-namespace:Light.ViewModels" 
              mc:Ignorable="d" 
              d:DesignHeight="330" d:DesignWidth="440" 
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}"   
@@ -45,7 +42,8 @@
             Focusable="False"
             Cursor="Arrow"
             BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+            Grid.RowSpan="3" Grid.ColumnSpan="2"/>
         <TextBox
             Background="Transparent" Foreground="White"
             Text="12:00"
@@ -54,7 +52,8 @@
             Focusable="False"
             Cursor="Arrow"
             BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="3" Grid.RowSpan="3" Margin="0,0,25,0"/>
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+            Grid.Column="3" Grid.RowSpan="3"/>
         <Button
             Style="{StaticResource ButtonLightGrayBack}"
             Content="—" 
@@ -71,7 +70,7 @@
             BorderThickness="0"
             FontSize="20"
             Cursor="Hand"
-            Command="{Binding CloseAppCommand}"
+            Command="{Binding CloseAppCommand, Mode=OneWay}"
             Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
@@ -84,18 +83,18 @@
             BorderThickness="0"          
             RenderTransformOrigin="0.5,0.5"
             Cursor="Hand" 
-            Command="{Binding OpenSettingsWindowCommand}"
+            Command="{Binding OpenSettingsWindowCommand, Mode=OneWay}"
             Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3">
             <Button.Triggers>
                 <EventTrigger>
                     <EventTrigger.RoutedEvent>
-                        <RoutedEvent>UIElement.MouseEnter</RoutedEvent>
+                        <RoutedEvent>MouseEnter</RoutedEvent>
                     </EventTrigger.RoutedEvent>
                     <BeginStoryboard Storyboard= "{StaticResource rotateToMax}" />
                 </EventTrigger>
                 <EventTrigger>
                     <EventTrigger.RoutedEvent>
-                        <RoutedEvent>UIElement.MouseLeave</RoutedEvent>
+                        <RoutedEvent>MouseLeave</RoutedEvent>
                     </EventTrigger.RoutedEvent>
                     <BeginStoryboard Storyboard= "{StaticResource rotateToMin}"/>
                 </EventTrigger>
@@ -110,18 +109,19 @@
                 Source="{StaticResource Settings}"/>
         </Button>
         <ListBox 
-            HorizontalAlignment="Center" 
-            Height="190" 
-            Grid.Row="4" 
-            HorizontalContentAlignment="Left"
-            ItemsSource="{Binding Screens, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            HorizontalAlignment="Center" HorizontalContentAlignment="Left"
+            ItemsSource="{Binding Screens, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Center"
             IsEnabled="False"
             BorderThickness="0"
-            Width="400" Grid.ColumnSpan="6" Grid.Column="1" Grid.RowSpan="2">
+            Height="190" Width="400" 
+            Grid.ColumnSpan="6" Grid.Column="1" Grid.RowSpan="2" Grid.Row="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Width="Auto" Height="Auto" 
+                        HorizontalAlignment="Right" VerticalAlignment="Center">
                         <Image              
                             Source="{DynamicResource MonitorBlack}"
                             RenderOptions.BitmapScalingMode="HighQuality"
@@ -129,29 +129,23 @@
                             Width="55" Height="55" 
                             Stretch="Fill"/>
                         <TextBlock
-                            Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            HorizontalAlignment="Center" 
-                            VerticalAlignment="Center" 
+                            Text="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center" 
                             FontSize="12" 
                             Margin="-55,0,0,6"
-                            Height="Auto"
-                            Width="Auto"/>
+                            Height="Auto" Width="Auto"/>
                         <TextBlock
-                            Text="{Binding CurrentGamma, Mode=TwoWay, StringFormat=Гамма: \{0\}, UpdateSourceTrigger=PropertyChanged}" 
-                            HorizontalAlignment="Right" 
-                            VerticalAlignment="Center" 
+                            Text="{Binding CurrentGamma, Mode=OneWay, StringFormat=Гамма: \{0\}, UpdateSourceTrigger=PropertyChanged}" 
+                            HorizontalAlignment="Right" VerticalAlignment="Center" 
                             FontSize="12" 
                             Margin="3,0,0,18"
-                            Height="Auto"
-                            Width="100"/>
+                            Height="Auto" Width="100"/>
                         <TextBlock
-                            Text="{Binding CurrentBlueReduce, Mode=TwoWay, StringFormat=Ночной свет: \{0\}, UpdateSourceTrigger=PropertyChanged}" 
-                            HorizontalAlignment="Right" 
-                            VerticalAlignment="Center" 
+                            Text="{Binding CurrentBlueReduce, Mode=OneWay, StringFormat=Ночной свет: \{0\}, UpdateSourceTrigger=PropertyChanged}" 
+                            HorizontalAlignment="Right" VerticalAlignment="Center" 
                             FontSize="12" 
                             Margin="-100,0,0,-23"
-                            Height="Auto"
-                            Width="100"/>
+                            Height="Auto" Width="100"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

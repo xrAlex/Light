@@ -1,15 +1,8 @@
 ﻿using Light.Commands;
-using Light.Infrastructure;
 using Light.Models;
 using Light.Services;
 using Light.ViewModels.Base;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Light.ViewModels
@@ -39,7 +32,8 @@ namespace Light.ViewModels
             set
             {
                 _selectedScreen = value;
-                ShowMonitorSettings(value);
+                RefreshUI();
+                OnPropertyChanged("SelectedScreen");
             }
         }
 
@@ -103,36 +97,28 @@ namespace Light.ViewModels
         #region Commands
         public ICommand MonitorDoubleClickCommand { get; }
 
-        private void OnMonitorDoubleClickCommandExecute(object screen)
+        private void OnMonitorDoubleClickCommandExecute(object screenIndex)
         {
-            var findIndex = new FindIndexByName();
-            int screenIndex = findIndex.GetIndex(screen.ToString());
-
-            Screens[screenIndex].IsActive = !Screens[screenIndex].IsActive;
+            var index = (int)screenIndex;
+            Screens[index].IsActive = !Screens[index].IsActive;
         }
+
         #endregion
 
         #region Methods
-        public void Monitors_SelectionChanged(object sender, SelectionChangedEventArgs args)
+
+        private void RefreshUI()
         {
-            if (args.AddedItems.Count > 0)
+            if (SelectedScreen != -1)
             {
-                var findIndex = new FindIndexByName();
-                int screenIndex = findIndex.GetIndex(args.AddedItems[0].ToString());
-
-                SelectedScreen = screenIndex;
+                var screen = Screens[SelectedScreen];
+                HourStart = screen.HourStart;
+                MinStart = screen.MinStart;
+                HourEnd = screen.HourEnd;
+                MinEnd = screen.MinEnd;
+                Gamma = screen.UserGamma;
+                BlueReduce = screen.UserBlueReduce;
             }
-        }
-
-        private void ShowMonitorSettings(int monitorIndex)
-        {
-            var screen = Screens[monitorIndex];
-            HourStart = screen.HourStart;
-            MinStart = screen.MinStart;
-            HourEnd = screen.HourEnd;
-            MinEnd = screen.MinEnd;
-            Gamma = screen.UserGamma;
-            BlueReduce = screen.UserBlueReduce;
         }
 
         #endregion
@@ -145,6 +131,8 @@ namespace Light.ViewModels
             _settings = _services.Settings;
             _gammaRegulator = _services.GammaRegulator;
             Screens = _settings.Screens;
+
+            _gammaRegulator.ForceUserValuesOnScreens();
         }
     }
 }
