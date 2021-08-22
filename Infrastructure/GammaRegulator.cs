@@ -8,18 +8,18 @@ namespace Light.Infrastructure
         #region DllImport
 
         [DllImport("gdi32.dll")]
-        public static extern IntPtr CreateDC(string lpszDriver, string lpszDevice, string lpszOutput, IntPtr lpInitData);
+        private static extern IntPtr CreateDC(string lpszDriver, string lpszDevice, string lpszOutput, IntPtr lpInitData);
 
         [DllImport("gdi32.dll")]
-        public static extern IntPtr DeleteDC(IntPtr DC);
+        private static extern IntPtr DeleteDC(IntPtr DC);
 
         [DllImport("gdi32.dll")]
-        public static extern int SetDeviceGammaRamp(IntPtr hDC, ref RAMP lpRamp);
+        private static extern int SetDeviceGammaRamp(IntPtr hDC, ref RAMP lpRamp);
 
         #endregion
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-        public struct RAMP
+        private struct RAMP
         {
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
             public ushort[] Red;
