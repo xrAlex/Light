@@ -46,7 +46,7 @@
             Grid.RowSpan="3" Grid.ColumnSpan="2"/>
         <TextBox
             Background="Transparent" Foreground="White"
-            Text="12:00"
+            Text="{Binding CurrentTime}"
             FontSize="30"
             IsReadOnly="True"
             Focusable="False"
@@ -135,13 +135,13 @@
                             Margin="-55,0,0,6"
                             Height="Auto" Width="Auto"/>
                         <TextBlock
-                            Text="{Binding CurrentGamma, Mode=OneWay, StringFormat=Гамма: \{0\}, UpdateSourceTrigger=PropertyChanged}" 
+                            Text="{Binding CurrentGamma, Mode=OneWay, StringFormat=Гамма: \{0:N0\}, UpdateSourceTrigger=PropertyChanged}" 
                             HorizontalAlignment="Right" VerticalAlignment="Center" 
                             FontSize="12" 
                             Margin="3,0,0,18"
                             Height="Auto" Width="100"/>
                         <TextBlock
-                            Text="{Binding CurrentBlueReduce, Mode=OneWay, StringFormat=Ночной свет: \{0\}, UpdateSourceTrigger=PropertyChanged}" 
+                            Text="{Binding CurrentBlueReduce, Mode=OneWay, StringFormat=Ночной свет: \{0:N0\}, UpdateSourceTrigger=PropertyChanged}" 
                             HorizontalAlignment="Right" VerticalAlignment="Center" 
                             FontSize="12" 
                             Margin="-100,0,0,-23"
