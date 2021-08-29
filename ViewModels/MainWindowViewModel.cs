@@ -17,6 +17,7 @@ namespace Light.ViewModels
         private readonly WindowService _windowService;
         private readonly ServiceLocator _serviceLocator;
         private readonly SettingsService _settingsService;
+        private readonly CurrentTimeService _currentTimeService;
 
         #endregion
 
@@ -67,7 +68,13 @@ namespace Light.ViewModels
             _serviceLocator = ServiceLocator.Source;
             _windowService = _serviceLocator.WindowService;
             _settingsService = _serviceLocator.Settings;
+            _currentTimeService = _serviceLocator.CurrentTimeService;
             Screens = _settingsService.Screens;
+            CurrentTime = _currentTimeService.GetCurrentTime();
+            _currentTimeService.OnCurrTimeChanged += (sender, args) => 
+            { 
+                CurrentTime = args.CurrTime; 
+            };
         }
     }
 }
