@@ -7,28 +7,15 @@ namespace Light.Services
         private GammaRegulatorService _gammaRegulator;
         private SettingsService _settings;
         private WindowService _windowService;
+        private CurrentTimeService _currentTimeService;
 
-        public GammaRegulatorService GammaRegulator 
-        {
-            get 
-            {
-                return _gammaRegulator ??= new();
-            }
-        }
-        public SettingsService Settings 
-        { 
-            get 
-            {
-                return _settings ??= new();
-            }
-        }
-        public WindowService WindowService 
-        { 
-            get
-            {
-                return _windowService ??= new();
-            }
-        }
+        public GammaRegulatorService GammaRegulator => _gammaRegulator ??= new();
+
+        public SettingsService Settings => _settings ??= new();
+
+        public WindowService WindowService => _windowService ??= new();
+
+        public CurrentTimeService CurrentTimeService => _currentTimeService ??= new();
 
         private ServiceLocator() {}
         private static readonly Lazy<ServiceLocator> lazy = new(() => new ServiceLocator());

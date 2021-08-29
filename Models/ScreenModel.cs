@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 
 namespace Light.Models
@@ -16,15 +17,14 @@ namespace Light.Models
         private string _name = "";
         private string _sysName = "";
         private bool _active = false;
-        private int _startHour = 23;
-        private int _startMin = 10;
-        private int _endHour = 7;
-        private int _endMin = 10;
+        private int _startTime = 1380;
+        private int _endTime = 720;
         private float _currentGamma = 100;
         private float _currentBlueReduce = 100;
         private float _userGamma = 100;
         private float _userBlueReduce = 100;
         private float _uiOpacity = 1f;
+        private const int _hour = 60;
 
         #endregion
 
@@ -68,42 +68,26 @@ namespace Light.Models
                 RaisePropertyChanged("IsActive");
             }
         }
-        public int HourStart
+        public int StartTime
         {
-            get => _startHour;
+            get => _startTime;
             set
             {
-                _startHour = value;
+                _startTime = value;
                 RaisePropertyChanged("HourStart");
             }
         }
-        public int MinStart
+
+        public int EndTime
         {
-            get => _startMin;
+            get => _endTime;
             set
             {
-                _startMin = value;
-                RaisePropertyChanged("MinStart");
+                _endTime = value;
+                RaisePropertyChanged("EndTime");
             }
         }
-        public int HourEnd
-        {
-            get => _endHour;
-            set
-            {
-                _endHour = value;
-                RaisePropertyChanged("HourEnd");
-            }
-        }
-        public int MinEnd
-        {
-            get => _endMin;
-            set
-            {
-                _endMin = value;
-                RaisePropertyChanged("MinEnd");
-            }
-        }
+
         public float CurrentGamma
         {
             get => _currentGamma;
@@ -145,8 +129,15 @@ namespace Light.Models
         #endregion
 
         #region Methods
-        public override string ToString() => SysName;
-        
+
+        public void SetWorkTimeStart(int hour, int min) => StartTime = hour * _hour + min;
+        public void SetWorkTimeEnd(int hour, int min) => EndTime = hour * _hour + min;
+
+        public int GetStartHour => StartTime / _hour;
+        public int GetEndHour => EndTime / _hour;
+        public int GetStartMin => StartTime % _hour;
+        public int GetEndMin => EndTime % _hour;
+
 
         protected virtual void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
