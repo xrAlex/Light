@@ -7,7 +7,7 @@ namespace Light.Services
     public class GammaRegulatorService
     {
         private readonly GammaRegulator _gammaRegulator;
-        private readonly ServiceLocator _serviceLocator = ServiceLocator.Source;
+        private readonly ServiceLocator _serviceLocator;
         private readonly SettingsService _settingsService;
 
         private ScreenModel GetScreen(int screenIndex) => _settingsService.Screens[screenIndex];
@@ -76,6 +76,15 @@ namespace Light.Services
             }
         }
 
+        public void ForceDefaultValuesOnScreens()
+        {
+            var screens = _settingsService.Screens;
+            for (int i = 0; i < screens.Count; i++)
+            {
+                SetDefaultValues(i);
+            }
+        }
+
         public void SetDefaultGammaOnAllScreens()
         {
             foreach (Screen screen in Screen.AllScreens)
@@ -88,22 +97,23 @@ namespace Light.Services
         {
             for (int i = 0; i < _settingsService.Screens.Count; i++)
             {
-                //var workTime = new WorkTime();
+                var workTime = new WorkTime();
 
-                //if (workTime.IsWorkTime(i))
-                //{
-                //    ForceUserValues(i);
-                //}
-                //else
-                //{
-                //    ForceDefaultValues(i);
-                //}
+                if (workTime.IsWorkTime(i))
+                {
+                    SetUserValues(i);
+                }
+                else
+                {
+                    SetDefaultValues(i);
+                }
             }
         }
 
         public GammaRegulatorService()
         {
             _gammaRegulator = new();
+            _serviceLocator = ServiceLocator.Source;
             _settingsService = _serviceLocator.Settings;
         }
     }

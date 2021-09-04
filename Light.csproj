@@ -78,6 +78,7 @@
     <Compile Include="Converters\HourConverter.cs" />
     <Compile Include="Converters\MinConverter.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
+    <Compile Include="Infrastructure\WorkTime.cs" />
     <Compile Include="Services\GammaRegulatorService.cs" />
     <Compile Include="Infrastructure\INIManager.cs" />
     <Compile Include="Services\IDialog.cs" />
