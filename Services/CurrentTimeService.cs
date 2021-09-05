@@ -30,7 +30,7 @@ namespace Light.Services
         public string GetCurrentTime() => DateTime.Now.ToString("HH:mm");
         private void Tick()
         {
-            OnCurrTimeChanged?.Invoke(this, new TimeEventArgs(DateTime.Now.ToString("HH:mm")));
+            OnCurrTimeChanged?.Invoke(this, new TimeEventArgs(GetCurrentTime()));
         }
     }
 }
