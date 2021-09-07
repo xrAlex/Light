@@ -79,6 +79,9 @@
     <Compile Include="Converters\MinConverter.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Infrastructure\WorkTime.cs" />
+    <Compile Include="Models\Entities\ScreenEntity.cs" />
+    <Compile Include="Models\ProcessModel.cs" />
+    <Compile Include="Models\Entities\ProcessEntity.cs" />
     <Compile Include="Services\GammaRegulatorService.cs" />
     <Compile Include="Infrastructure\INIManager.cs" />
     <Compile Include="Services\IDialog.cs" />

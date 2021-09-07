@@ -31,22 +31,46 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <CheckBox
+            x:Name ="Checkbox1"
             Content="Не работать в полноэкранных приложениях" 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Height="25" Width="350"
             Grid.Column="1" Grid.Row="1" 
             VerticalContentAlignment="Center" Grid.ColumnSpan="5"/>
-        <ListBox         
+        <ListBox 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
-            Height="200" Width="140"   
-            SelectionMode="Multiple" 
-            Grid.Column="1" Grid.Row="3" Grid.RowSpan="5"/>
-        <ListBox          
+            Height="200" Width="140"  
+            IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
+            SelectionMode="Multiple"      
+            ItemsSource="{Binding Processes, Mode=OneWay}"
+            Grid.Column="1" Grid.Row="3" Grid.RowSpan="5">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource ProcessListBox}">
+                    <Setter 
+                        Property="IsSelected" 
+                        Value="{Binding IsSelected, Mode=TwoWay}">
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <ListBox       
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Height="200" Width="140"           
-            SelectionMode="Multiple" 
-            Grid.Row="3" Grid.Column="5" Grid.RowSpan="5"/>
-        <TextBox Grid.Row="2" 
+            SelectionMode="Multiple"
+            IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
+            ItemsSource="{Binding IgnoredProceses, Mode=OneWay}"
+            Grid.Row="3" Grid.Column="5" Grid.RowSpan="5">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource ProcessListBox}">
+                    <Setter 
+                        Property="IsSelected" 
+                        Value="{Binding IsSelected, Mode=TwoWay}">
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <TextBox 
+            Grid.Row="2" 
             HorizontalAlignment="Center"
             IsReadOnly="True" 
             BorderThickness="0" 
@@ -70,11 +94,13 @@
             Style="{StaticResource ButtonFromTransaprentToGray}" 
             Content="➯" 
             FontSize="25"
+            IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
             Grid.Column="3" Grid.Row="4" 
             BorderThickness="0"
             VerticalAlignment="Top" HorizontalAlignment="Left" 
             Width="60" Height="40" 
-            RenderTransformOrigin="0.5,0.567"/>
+            Command="{Binding MoveToIgnoredProcesessCommand, Mode=OneWay}"
+            RenderTransformOrigin="0.5,0.5"/>
         <Button 
             Style="{StaticResource ButtonFromTransaprentToGray}" 
             Content="➱" 
@@ -83,6 +109,8 @@
             Grid.Column="3" Grid.Row="6"  
             HorizontalAlignment="Left" VerticalAlignment="Top"                   
             Width="60" Height="35"
+            IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
+            Command="{Binding MoveToProcesessCommand, Mode=OneWay}"
             RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>

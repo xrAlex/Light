@@ -1,5 +1,6 @@
 ﻿using Light.Commands;
 using Light.Models;
+using Light.Models.Entities;
 using Light.Services;
 using Light.ViewModels.Base;
 using System.Collections.ObjectModel;
@@ -11,10 +12,11 @@ namespace Light.ViewModels
     {
         #region Fields
 
-        public ObservableCollection<ScreenModel> Screens { get; private set; }
+        public ObservableCollection<ScreenEntity> Screens { get; private set; }
         private readonly ServiceLocator _services;
         private readonly GammaRegulatorService _gammaRegulator;
         private readonly SettingsService _settings;
+        private readonly ScreenModel _screenModel;
 
         #endregion
 
@@ -33,37 +35,37 @@ namespace Light.ViewModels
 
         public int HourStart
         {
-            get => Screens[SelectedScreen].GetStartHour;
+            get => _screenModel.GetStartHour(SelectedScreen);
             set
             {
-                Screens[SelectedScreen].SetWorkTimeStart(value, MinStart);
+                _screenModel.SetWorkTimeStart(value, MinStart, SelectedScreen);
                 OnPropertyChanged("HourStart");
             }
         }
         public int MinStart
         {
-            get => Screens[SelectedScreen].GetStartMin;
+            get => _screenModel.GetStartMin(SelectedScreen);
             set
             {
-                Screens[SelectedScreen].SetWorkTimeStart(HourStart, value);
+                _screenModel.SetWorkTimeStart(HourStart, value, SelectedScreen);
                 OnPropertyChanged("MinStart");
             }
         }
         public int HourEnd
         {
-            get => Screens[SelectedScreen].GetEndHour;
+            get => _screenModel.GetEndHour(SelectedScreen);
             set
             {
-                Screens[SelectedScreen].SetWorkTimeEnd(value, MinEnd);
+                _screenModel.SetWorkTimeEnd(value, MinEnd, SelectedScreen);
                 OnPropertyChanged("HourEnd");
             }
         }
         public int MinEnd
         {
-            get => Screens[SelectedScreen].GetEndMin;
+            get => _screenModel.GetEndMin(SelectedScreen);
             set
             {
-                Screens[SelectedScreen].SetWorkTimeEnd(HourEnd, value);
+                _screenModel.SetWorkTimeEnd(HourEnd, value, SelectedScreen);
                 OnPropertyChanged("MinEnd");
             }
         }
@@ -105,13 +107,12 @@ namespace Light.ViewModels
         {
             if (SelectedScreen != -1)
             {
-                var screen = Screens[SelectedScreen];
-                HourStart = screen.GetStartHour;
-                MinStart = screen.GetStartMin;
-                HourEnd = screen.GetEndHour;
-                MinEnd = screen.GetEndMin;
-                Gamma = screen.UserGamma;
-                BlueReduce = screen.UserBlueReduce;
+                HourStart = _screenModel.GetStartHour(SelectedScreen);
+                MinStart = _screenModel.GetStartMin(SelectedScreen);
+                HourEnd = _screenModel.GetEndHour(SelectedScreen);
+                MinEnd = _screenModel.GetEndMin(SelectedScreen);
+                Gamma = Screens[SelectedScreen].UserGamma;
+                BlueReduce = Screens[SelectedScreen].UserBlueReduce;
             }
         }
 
@@ -121,10 +122,11 @@ namespace Light.ViewModels
         {
             MonitorDoubleClickCommand = new LambdaCommand(OnMonitorDoubleClickCommandExecute);
 
+            _screenModel = new();
             _services = ServiceLocator.Source;
             _settings = _services.Settings;
             _gammaRegulator = _services.GammaRegulator;
-            Screens = _settings.Screens;
+            Screens = _screenModel.Screens;
 
             SelectedScreen = _settings.SelectedScreen;
             _gammaRegulator.ForceUserValuesOnScreens();

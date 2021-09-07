@@ -9,13 +9,13 @@ namespace Light.Services
         private readonly GammaRegulator _gammaRegulator;
         private readonly ServiceLocator _serviceLocator;
         private readonly SettingsService _settingsService;
+        private readonly ScreenModel _screenModel;
 
-        private ScreenModel GetScreen(int screenIndex) => _settingsService.Screens[screenIndex];
         private void Apply(float gamma = 0f, float blueReduce = 0f, int screenIndex = 1)
         {
             const float BlueReduceMult = 0.01f;
             const float GammaMult = 1.92f;
-            var screen = GetScreen(screenIndex);
+            var screen = _screenModel.GetScreen(screenIndex);
             var validatedGamma = gamma != 0f ? gamma : screen.CurrentGamma;
             var validatedBlueReduce = blueReduce != 0f ? blueReduce : screen.CurrentBlueReduce;
 
@@ -30,27 +30,27 @@ namespace Light.Services
 
         public void SetUserGamma(float Gamma, int screenIndex)
         {
-            var screen = GetScreen(screenIndex);
+            var screen = _screenModel.GetScreen(screenIndex);
             Apply(Gamma, 0f, screenIndex);
             screen.UserGamma = Gamma;
         }
 
         public void SetUserBlueReduce(float BlueReduce, int screenIndex)
         {
-            var screen = GetScreen(screenIndex);
+            var screen = _screenModel.GetScreen(screenIndex);
             Apply(0f, BlueReduce, screenIndex);
             screen.UserBlueReduce = BlueReduce;
         }
 
         public float GetGamma(int screenIndex)
         {
-            var screen = GetScreen(screenIndex);
+            var screen = _screenModel.GetScreen(screenIndex);
             return screen.CurrentGamma;
         }
 
         public float GetBlueReduce(int screenIndex)
         {
-            var screen = GetScreen(screenIndex);
+            var screen = _screenModel.GetScreen(screenIndex);
             return screen.CurrentBlueReduce;
         }
 
@@ -113,6 +113,7 @@ namespace Light.Services
         public GammaRegulatorService()
         {
             _gammaRegulator = new();
+            _screenModel = new();
             _serviceLocator = ServiceLocator.Source;
             _settingsService = _serviceLocator.Settings;
         }

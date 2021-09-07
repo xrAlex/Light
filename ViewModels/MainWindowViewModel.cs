@@ -1,5 +1,6 @@
 ﻿using Light.Commands;
 using Light.Models;
+using Light.Models.Entities;
 using Light.Services;
 using Light.ViewModels.Base;
 using System.Collections.ObjectModel;
@@ -12,13 +13,13 @@ namespace Light.ViewModels
     {
         #region Fields
 
-        public ObservableCollection<ScreenModel> Screens { get; set; }
+        public ObservableCollection<ScreenEntity> Screens { get; private set; }
 
         private readonly WindowService _windowService;
         private readonly ServiceLocator _serviceLocator;
-        private readonly SettingsService _settingsService;
         private readonly CurrentTimeService _currentTimeService;
         private readonly GammaRegulatorService _gammaRegulatorService;
+        private readonly ScreenModel _screenModel;
 
         #endregion
 
@@ -66,17 +67,18 @@ namespace Light.ViewModels
             CloseAppCommand = new LambdaCommand(p => OnCloseAppCommandExecute());
             AppToTrayCommand = new LambdaCommand(p => OnAppToTrayCommandExecute());
 
+            _screenModel = new();
             _serviceLocator = ServiceLocator.Source;
             _windowService = _serviceLocator.WindowService;
-            _settingsService = _serviceLocator.Settings;
             _gammaRegulatorService = _serviceLocator.GammaRegulator;
             _currentTimeService = _serviceLocator.CurrentTimeService;
 
-            Screens = _settingsService.Screens;
+            Screens = _screenModel.Screens;
             CurrentTime = _currentTimeService.GetCurrentTime();
-            _currentTimeService.OnCurrTimeChanged += (sender, args) => 
-            { 
-                CurrentTime = args.CurrTime; 
+
+            _currentTimeService.OnCurrTimeChanged += (sender, args) =>
+            {
+                CurrentTime = args.CurrTime;
             };
 
             _gammaRegulatorService.ForceGamma();
