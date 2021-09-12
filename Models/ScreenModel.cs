@@ -18,7 +18,8 @@ namespace Light.Models
         public int GetEndHour(int screenIndex) => GetScreen(screenIndex).EndTime / _hour;
         public int GetStartMin(int screenIndex) => GetScreen(screenIndex).StartTime % _hour;
         public int GetEndMin(int screenIndex) => GetScreen(screenIndex).EndTime % _hour;
-        public ScreenEntity GetScreen(int screenIndex) => Screens[screenIndex]; 
+        public void ChangeScreenActivity(int screenIndex) => Screens[screenIndex].IsActive = !Screens[screenIndex].IsActive;
+        public ScreenEntity GetScreen(int screenIndex) => Screens[screenIndex];
 
         public ScreenModel()
         {

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Light.Models.Entities
 {
@@ -17,8 +18,6 @@ namespace Light.Models.Entities
 
         #region Values
 
-        private string _name = "";
-        private string _sysName = "";
         private bool _active = false;
         private int _startTime = 1380;
         private int _endTime = 720;
@@ -27,21 +26,14 @@ namespace Light.Models.Entities
         private float _userGamma = 100;
         private float _userBlueReduce = 100;
         private float _uiOpacity = 1f;
-        private const int _hour = 60;
 
         #endregion
 
         #region Constructors
 
-        public string SysName
-        {
-            get => _sysName;
-            set
-            {
-                _sysName = value;
-                RaisePropertyChanged("SysName");
-            }
-        }
+        public Screen Instance { get; set; }
+        public string SysName { get; set; }
+        public string Name { get; set; }
 
         public float Opacity
         {
@@ -50,15 +42,6 @@ namespace Light.Models.Entities
             {
                 _uiOpacity = value;
                 RaisePropertyChanged("Opacity");
-            }
-        }
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                RaisePropertyChanged("Name");
             }
         }
         public bool IsActive

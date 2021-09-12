@@ -1,61 +1,48 @@
-﻿using System;
+﻿using Light.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Diagnostics;
 namespace Light.Models.Entities
 {
-    public class ProcessEntity : INotifyPropertyChanged
+    public class ProcessEntity
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly ProcessBounds _processBounds = new();
+        public Process Instance { get; set; }
+        public string Name { get; set; }
+        public bool IsSelected { get; set; }
+        public bool OnFullScreen => _processBounds.IsProcessOnFullScreen(Instance);
+        private string DispalyedText => $"{Name} {(Instance != null ? "" : "[N/A]")} {(OnFullScreen ? "[FullScreen]" : "")}";
+        public override string ToString() => DispalyedText;
 
-        private string _name = "";
-        private bool _selected = false;
-        private bool _fullScreen = false;
-
-        public string Name 
+        public ProcessEntity(Process instance = null, string name = "")
         {
-            get => _name;
-            set 
+            if (instance == null)
             {
-                _name = value;
-                RaisePropertyChanged("Name");
+                Instance = TryFindProcessInstance(name);
             }
-        }
-
-        public bool IsSelected 
-        {
-            get => _selected;
-            set 
+            else
             {
-                _selected = value;
-                RaisePropertyChanged("IsSelected");
+                Instance = instance;
             }
+            _processBounds = new();
+            Name = name;
         }
 
-        public bool OnFullScreen 
+        private Process TryFindProcessInstance(string processName)
         {
-            get => _fullScreen;
-            set 
+            var processes = Process.GetProcesses();
+
+            foreach (var Process in processes)
             {
-                _fullScreen = value;
-                RaisePropertyChanged("OnFullScreen");
-            } 
-        }
-
-        public override string ToString() => Name;
-
-        protected virtual void RaisePropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChanged?.Invoke(this, e);
-        }
-
-        protected void RaisePropertyChanged(string propertyName)
-        {
-            RaisePropertyChanged(new PropertyChangedEventArgs(propertyName));
+                if (Process.ProcessName == processName && Process.MainWindowHandle != IntPtr.Zero)
+                {
+                    return Process;
+                }
+            }
+            return null;
         }
     }
 }
+

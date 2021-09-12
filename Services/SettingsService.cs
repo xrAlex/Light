@@ -65,6 +65,7 @@ namespace Light.Services
             {
                 Screens.Add(new ScreenEntity
                 {
+					Instance = screen,
                     UserGamma = _manager.GetFloatValue($"{index}", "UserGamma", "100"),
                     UserBlueReduce = _manager.GetFloatValue($"{index}", "UserBlueReduce", "100"),
                     StartTime = _manager.GetIntValue($"{index}", "StartTime", "1380"),
@@ -96,13 +97,7 @@ namespace Light.Services
 
             foreach (string processName in strTable)
             {
-                IgnoredProcesses.Add(new ProcessEntity
-                {
-                    Name = processName,
-                    IsSelected = false,
-                    OnFullScreen = false
-                });
-            }
+				IgnoredProcesses.Add(new ProcessEntity(null, processName));            }
         }
     }
 }

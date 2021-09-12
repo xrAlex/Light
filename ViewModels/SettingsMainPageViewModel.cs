@@ -22,7 +22,7 @@ namespace Light.ViewModels
 
         #region Properties 
 
-        public int SelectedScreen
+        public int SelectedScreenIndex
         {
             get => _settings.SelectedScreen;
             set
@@ -34,56 +34,56 @@ namespace Light.ViewModels
         }
 
         public int HourStart
-        {
-            get => _screenModel.GetStartHour(SelectedScreen);
+        {            get => _screenModel.GetStartHour(SelectedScreenIndex);
             set
             {
-                _screenModel.SetWorkTimeStart(value, MinStart, SelectedScreen);
+                _screenModel.SetWorkTimeStart(value, MinStart, SelectedScreenIndex);
                 OnPropertyChanged("HourStart");
             }
         }
         public int MinStart
         {
-            get => _screenModel.GetStartMin(SelectedScreen);
+            get => _screenModel.GetStartMin(SelectedScreenIndex);
             set
             {
-                _screenModel.SetWorkTimeStart(HourStart, value, SelectedScreen);
+                _screenModel.SetWorkTimeStart(HourStart, value, SelectedScreenIndex);
                 OnPropertyChanged("MinStart");
             }
         }
         public int HourEnd
         {
-            get => _screenModel.GetEndHour(SelectedScreen);
+            get => _screenModel.GetEndHour(SelectedScreenIndex);
             set
             {
-                _screenModel.SetWorkTimeEnd(value, MinEnd, SelectedScreen);
+                _screenModel.SetWorkTimeEnd(value, MinEnd, SelectedScreenIndex);
                 OnPropertyChanged("HourEnd");
             }
         }
         public int MinEnd
         {
-            get => _screenModel.GetEndMin(SelectedScreen);
+            get => _screenModel.GetEndMin(SelectedScreenIndex);
             set
             {
-                _screenModel.SetWorkTimeEnd(HourEnd, value, SelectedScreen);
+                _screenModel.SetWorkTimeEnd(HourEnd, value, SelectedScreenIndex);
+
                 OnPropertyChanged("MinEnd");
             }
         }
         public float Gamma
         {
-            get => _gammaRegulator.GetGamma(SelectedScreen);
+            get => _gammaRegulator.GetGamma(SelectedScreenIndex);
             set
             {
-                _gammaRegulator.SetUserGamma(value, SelectedScreen);
+                _gammaRegulator.SetUserGamma(value, SelectedScreenIndex);
                 OnPropertyChanged("Gamma");
             }
         }
         public float BlueReduce
         {
-            get => _gammaRegulator.GetBlueReduce(SelectedScreen);
+            get => _gammaRegulator.GetBlueReduce(SelectedScreenIndex);
             set
             {
-                _gammaRegulator.SetUserBlueReduce(value, SelectedScreen);
+                _gammaRegulator.SetUserBlueReduce(value, SelectedScreenIndex);
                 OnPropertyChanged("BlueReduce");
             }
         }
@@ -93,11 +93,7 @@ namespace Light.ViewModels
         #region Commands
         public ICommand MonitorDoubleClickCommand { get; }
 
-        private void OnMonitorDoubleClickCommandExecute(object screenIndex)
-        {
-            var index = (int)screenIndex;
-            Screens[index].IsActive = !Screens[index].IsActive;
-        }
+        private void OnMonitorDoubleClickCommandExecute() => _screenModel.ChangeScreenActivity(SelectedScreenIndex);
 
         #endregion
 
@@ -105,14 +101,14 @@ namespace Light.ViewModels
 
         private void RefreshUI()
         {
-            if (SelectedScreen != -1)
+            if (SelectedScreenIndex != -1)
             {
-                HourStart = _screenModel.GetStartHour(SelectedScreen);
-                MinStart = _screenModel.GetStartMin(SelectedScreen);
-                HourEnd = _screenModel.GetEndHour(SelectedScreen);
-                MinEnd = _screenModel.GetEndMin(SelectedScreen);
-                Gamma = Screens[SelectedScreen].UserGamma;
-                BlueReduce = Screens[SelectedScreen].UserBlueReduce;
+                HourStart = _screenModel.GetStartHour(SelectedScreenIndex);
+                MinStart = _screenModel.GetStartMin(SelectedScreenIndex);
+                HourEnd = _screenModel.GetEndHour(SelectedScreenIndex);
+                MinEnd = _screenModel.GetEndMin(SelectedScreenIndex);
+                Gamma = Screens[SelectedScreenIndex].UserGamma;
+                BlueReduce = Screens[SelectedScreenIndex].UserBlueReduce;
             }
         }
 
@@ -120,15 +116,14 @@ namespace Light.ViewModels
 
         public SettingsMainPageViewModel()
         {
-            MonitorDoubleClickCommand = new LambdaCommand(OnMonitorDoubleClickCommandExecute);
+            MonitorDoubleClickCommand = new LambdaCommand(p => OnMonitorDoubleClickCommandExecute());
 
             _screenModel = new();
             _services = ServiceLocator.Source;
             _settings = _services.Settings;
             _gammaRegulator = _services.GammaRegulator;
             Screens = _screenModel.Screens;
-
-            SelectedScreen = _settings.SelectedScreen;
+            SelectedScreenIndex = _settings.SelectedScreen;
             _gammaRegulator.ForceUserValuesOnScreens();
         }
     }

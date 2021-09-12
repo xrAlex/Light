@@ -24,12 +24,7 @@ namespace Light.Models
             {
                 if (processEntity.IsSelected)
                 {
-                    IgnoredProcesses.Add(new ProcessEntity 
-                    { 
-                        Name = processEntity.Name,         
-                        IsSelected = false,
-                        OnFullScreen = false
-                    });
+					IgnoredProcesses.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
                     Processes.Remove(processEntity);
                 }
             }
@@ -41,12 +36,7 @@ namespace Light.Models
             {
                 if (processEntity.IsSelected)
                 {
-                    Processes.Add(new ProcessEntity
-                    {
-                        Name = processEntity.Name,
-                        IsSelected = false,
-                        OnFullScreen = false
-                    });
+					Processes.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
                     IgnoredProcesses.Remove(processEntity);
                 }
             }
@@ -62,12 +52,7 @@ namespace Light.Models
                 {
                     if(!IgnoredProcesses.Any(p => p.Name == Process.ProcessName))
                     {
-                        Processes.Add(new ProcessEntity
-                        {
-                            Name = Process.ProcessName,
-                            IsSelected = false,
-                            OnFullScreen = false
-                        });
+                        Processes.Add(new ProcessEntity(Process, Process.ProcessName));
                     }
                 }
             }
