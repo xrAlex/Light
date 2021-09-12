@@ -55,7 +55,7 @@
             HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
             Grid.Column="3" Grid.RowSpan="3"/>
         <Button
-            Style="{StaticResource ButtonLightGrayBack}"
+            Style="{StaticResource DeepGrayButton}"
             Content="—" 
             FontSize="20"
             HorizontalAlignment="Center" VerticalAlignment="Top" 
@@ -66,8 +66,8 @@
             Width="30" Height="30" 
             Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"/>
         <Button
-            Style="{StaticResource ButtonLightGrayBack}"
             BorderThickness="0"
+            Style="{StaticResource DeepGrayButton}"
             FontSize="20"
             Cursor="Hand"
             Command="{Binding CloseAppCommand, Mode=OneWay}"
@@ -79,29 +79,12 @@
                 Source="{StaticResource TurnOff}" Stretch="Fill"/>
         </Button>
         <Button         
-            Style="{StaticResource ButtonCircleLightGrayBack}"
+            Style="{StaticResource RotaryButton}"
             BorderThickness="0"          
             RenderTransformOrigin="0.5,0.5"
             Cursor="Hand" 
             Command="{Binding OpenSettingsWindowCommand, Mode=OneWay}"
             Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3">
-            <Button.Triggers>
-                <EventTrigger>
-                    <EventTrigger.RoutedEvent>
-                        <RoutedEvent>MouseEnter</RoutedEvent>
-                    </EventTrigger.RoutedEvent>
-                    <BeginStoryboard Storyboard= "{StaticResource rotateToMax}" />
-                </EventTrigger>
-                <EventTrigger>
-                    <EventTrigger.RoutedEvent>
-                        <RoutedEvent>MouseLeave</RoutedEvent>
-                    </EventTrigger.RoutedEvent>
-                    <BeginStoryboard Storyboard= "{StaticResource rotateToMin}"/>
-                </EventTrigger>
-            </Button.Triggers>
-            <Button.RenderTransform>
-                <RotateTransform CenterX="0.5" CenterY="0.5" />
-            </Button.RenderTransform>
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -123,7 +106,7 @@
                         Width="Auto" Height="Auto" 
                         HorizontalAlignment="Right" VerticalAlignment="Center">
                         <Image              
-                            Source="{DynamicResource MonitorBlack}"
+                            Source="{StaticResource MonitorBlack}"
                             RenderOptions.BitmapScalingMode="HighQuality"
                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
                             Width="55" Height="55" 

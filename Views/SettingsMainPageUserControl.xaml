@@ -161,13 +161,12 @@
             HorizontalAlignment="Center"          
             Grid.Row="4" 
             BorderThickness="0"
-            HorizontalContentAlignment="Center"
             SelectionMode="Single"
-            SelectedIndex="{Binding SelectedScreen, Mode=TwoWay}"
+            SelectedIndex="{Binding SelectedScreenIndex, Mode=TwoWay}"
             VerticalAlignment="Center"
             Height="80"  Width="360" 
             ItemsSource="{Binding Screens, Mode=OneWay}"
-            ItemContainerStyle="{DynamicResource MonitorListBox}">
+            ItemContainerStyle="{StaticResource MonitorListBox}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel 
@@ -179,16 +178,14 @@
                 <DataTemplate>
                     <StackPanel 
                         Orientation="Horizontal" 
-                        Width="66" Height="66" 
-                        VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                        Width="66" Height="66">
                         <StackPanel.InputBindings>
                             <MouseBinding Gesture="LeftDoubleClick"
-                                Command="{Binding DataContext.MonitorDoubleClickCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                CommandParameter="{Binding SelectedIndex, ElementName=listBox}">
+                                Command="{Binding DataContext.MonitorDoubleClickCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                             </MouseBinding>
                         </StackPanel.InputBindings>
                         <Image              
-                            Source="{DynamicResource MonitorBlack}"
+                            Source="{StaticResource MonitorBlack}"
                             RenderOptions.BitmapScalingMode="HighQuality"
                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
                             Width="60" Height="60" 

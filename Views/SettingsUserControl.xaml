@@ -40,7 +40,7 @@
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Height="350" Width="60" Grid.RowSpan="9" Grid.ColumnSpan="3"/>
         <Button 
-            Style="{StaticResource ButtonFromTransaprentToBlack}"
+            Style="{StaticResource BlackButton}"
             Cursor="Hand" Grid.Row="3" Grid.Column="1"
             Command="{Binding ChangePageCommand}" CommandParameter="{Binding ProcessPage}">
             <Image 
@@ -50,7 +50,7 @@
                 Source="{StaticResource Process}" Stretch="Fill"/>
         </Button>
         <Button
-            Style="{StaticResource ButtonFromTransaprentToBlack}"
+            Style="{StaticResource BlackButton}"
             Cursor="Hand" 
             Grid.Column="1" Grid.Row="1"
             Command="{Binding ChangePageCommand}" CommandParameter="{Binding SettingsMainPage}">
@@ -62,7 +62,7 @@
             </Image>
         </Button>
         <Button 
-            Style="{StaticResource ButtonFromTransaprentToBlack}"
+            Style="{StaticResource BlackButton}"
             Cursor="Hand" 
             Grid.Row="5" Grid.Column="1"
             Command="{Binding ChangePageCommand}" CommandParameter="{Binding OtherSettingsPage}">
@@ -73,19 +73,19 @@
                 Source="{StaticResource Other}" Stretch="Fill"/>
         </Button>
         <Button 
-            Style="{StaticResource ButtonFromTransaprentToGray}"
+            Style="{StaticResource LightGrayButton}"
             Content="Сбросить"         
             Cursor="Hand"
             Command="{Binding ResetSettingsCommand}"
             Grid.Row="7" Grid.Column="4"/>
         <Button 
-            Style="{StaticResource ButtonFromTransaprentToGray}" 
+            Style="{StaticResource LightGrayButton}" 
             Content="Отменить"     
             Cursor="Hand" 
             Command="{Binding CloseSettingsCommand}"
             Grid.Row="7" Grid.Column="6"/>
         <Button 
-            Style="{StaticResource ButtonFromTransaprentToGray}" 
+            Style="{StaticResource LightGrayButton}" 
             Content="Применить"          
             Cursor="Hand" 
             Command="{Binding ApplySettingsCommand}"

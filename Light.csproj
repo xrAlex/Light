@@ -78,6 +78,7 @@
     <Compile Include="Converters\HourConverter.cs" />
     <Compile Include="Converters\MinConverter.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
+    <Compile Include="Infrastructure\ProcessBounds.cs" />
     <Compile Include="Infrastructure\WorkTime.cs" />
     <Compile Include="Models\Entities\ScreenEntity.cs" />
     <Compile Include="Models\ProcessModel.cs" />
@@ -113,7 +114,27 @@
     <Compile Include="Views\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="Resources\Styles.xaml">
+    <Page Include="Resources\Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ScrollBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Slider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

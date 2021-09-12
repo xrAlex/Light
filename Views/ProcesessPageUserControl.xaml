@@ -91,7 +91,7 @@
             VerticalAlignment="Center" 
             TextWrapping="Wrap"/>
         <Button 
-            Style="{StaticResource ButtonFromTransaprentToGray}" 
+            Style="{StaticResource LightGrayButton}" 
             Content="➯" 
             FontSize="25"
             IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
@@ -102,7 +102,7 @@
             Command="{Binding MoveToIgnoredProcesessCommand, Mode=OneWay}"
             RenderTransformOrigin="0.5,0.5"/>
         <Button 
-            Style="{StaticResource ButtonFromTransaprentToGray}" 
+            Style="{StaticResource LightGrayButton}" 
             Content="➱" 
             FontSize="25"           
             BorderThickness="0"
