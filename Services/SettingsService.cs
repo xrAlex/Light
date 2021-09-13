@@ -11,18 +11,22 @@ namespace Light.Services
     public sealed class SettingsService
     {
         private readonly INIManager _manager;
-        public ObservableCollection<ScreenEntity> Screens { get; set; } = new();
-        public ObservableCollection<ProcessEntity> IgnoredProcesses { get; set; } = new();
+        public ObservableCollection<ScreenEntity> Screens { get; set; }
+        public ObservableCollection<ProcessEntity> IgnoredProcesses { get; set; }
 
         public int SelectedScreen { get; set; }
+        public bool CheckFullScreenApps { get; set; }
 
         public SettingsService()
         {
+            IgnoredProcesses = new();
+            Screens = new();
             _manager = new();
         }
         public void Save()
         {
             _manager.WriteValue("Main", "SelectedScreen", SelectedScreen.ToString());
+            _manager.WriteValue("Main", "CheckFullScreenApps", CheckFullScreenApps.ToString());
 
             SaveScreens();
             SaveProcesses();
@@ -31,6 +35,7 @@ namespace Light.Services
         public void Load()
         {
             SelectedScreen = _manager.GetIntValue("Main", "SelectedScreen", "0");
+            CheckFullScreenApps = _manager.GetBoolValue("Main", "CheckFullScreenApps", "false");
 
             LoadScreens();
             LoadProcesess();
@@ -54,7 +59,7 @@ namespace Light.Services
                 _manager.WriteValue($"{i}", "EndTime", Monitor.EndTime.ToString());
                 _manager.WriteValue($"{i}", "Active", Monitor.IsActive.ToString());
                 _manager.WriteValue($"{i}", "Name", Monitor.Name);
-                _manager.WriteValue($"{i}", "Sys", Monitor.SysName);
+                _manager.WriteValue($"{i}", "SysName", Monitor.SysName);
             }
         }
 
@@ -65,7 +70,7 @@ namespace Light.Services
             {
                 Screens.Add(new ScreenEntity
                 {
-					Instance = screen,
+                    Instance = screen,
                     UserGamma = _manager.GetFloatValue($"{index}", "UserGamma", "100"),
                     UserBlueReduce = _manager.GetFloatValue($"{index}", "UserBlueReduce", "100"),
                     StartTime = _manager.GetIntValue($"{index}", "StartTime", "1380"),
@@ -97,7 +102,8 @@ namespace Light.Services
 
             foreach (string processName in strTable)
             {
-				IgnoredProcesses.Add(new ProcessEntity(null, processName));            }
+                IgnoredProcesses.Add(new ProcessEntity(null, processName));
+            }
         }
     }
 }

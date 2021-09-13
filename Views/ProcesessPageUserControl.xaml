@@ -35,6 +35,7 @@
             Content="Не работать в полноэкранных приложениях" 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Height="25" Width="350"
+            IsChecked="{Binding CheckFullScreenApps}"
             Grid.Column="1" Grid.Row="1" 
             VerticalContentAlignment="Center" Grid.ColumnSpan="5"/>
         <ListBox 

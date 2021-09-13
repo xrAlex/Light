@@ -1,6 +1,8 @@
 ﻿using Light.Models;
+using Light.Services;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -27,7 +29,16 @@ namespace Light.Infrastructure
 
         #endregion
 
-        private readonly ScreenModel _screenModel = new();
+        public ProcessBounds()
+        {
+            _screenModel = new();
+            _serviceLocator = ServiceLocator.Source;
+            _settings = _serviceLocator.Settings;
+        }
+
+        private readonly ScreenModel _screenModel;
+        private readonly ServiceLocator _serviceLocator;
+        private readonly SettingsService _settings;
 
         public bool IsProcessOnFullScreen(Process process)
         {
@@ -46,6 +57,23 @@ namespace Light.Infrastructure
             return fullscreen;
         }
 
+        public bool IsFullScreenProcessFounded(Screen screen)
+        {
+            var processes = Process.GetProcesses();
+
+            foreach (var process in processes)
+            {
+                if (ProcessHasWindow(process))
+                {
+                    if (!_settings.IgnoredProcesses.Any(p => p.Name == process.ProcessName) && IsFullScreen(process, screen))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         private bool IsFullScreen(Process process, Screen screen)
         {
             var rect = new RECT();
@@ -59,5 +87,7 @@ namespace Light.Infrastructure
 
             return false;
         }
+
+        private bool ProcessHasWindow(Process process) => process.MainWindowHandle != IntPtr.Zero;
     }
 }

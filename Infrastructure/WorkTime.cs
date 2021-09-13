@@ -1,4 +1,5 @@
-﻿using Light.Services;
+﻿using Light.Models.Entities;
+using Light.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,8 @@ namespace Light.Infrastructure
 {
     public class WorkTime
     {
-        public bool IsWorkTime(int screenIndex)
+        public bool IsWorkTime(ScreenEntity screen)
         {
-            var serviceLocator = ServiceLocator.Source;
-            var settings = serviceLocator.Settings;
-            var screen = settings.Screens[screenIndex];
             var currentTime = DateTime.Now;
 
             int currentMin = ConvertToMin(currentTime.Hour, currentTime.Minute);

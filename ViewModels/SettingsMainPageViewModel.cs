@@ -12,9 +12,8 @@ namespace Light.ViewModels
     {
         #region Fields
 
-        public ObservableCollection<ScreenEntity> Screens { get; private set; }
+        public ObservableCollection<ScreenEntity> Screens { get; }
         private readonly ServiceLocator _services;
-        private readonly GammaRegulatorService _gammaRegulator;
         private readonly SettingsService _settings;
         private readonly ScreenModel _screenModel;
 
@@ -28,13 +27,24 @@ namespace Light.ViewModels
             set
             {
                 _settings.SelectedScreen = value;
-                OnPropertyChanged("SelectedScreen");
                 RefreshUI();
             }
         }
 
+        public float Gamma
+        {
+            get => Screens[SelectedScreenIndex].CurrentGamma;
+            set => _screenModel.SetUserGamma(value, SelectedScreenIndex);
+        }
+        public float BlueReduce
+        {
+            get => Screens[SelectedScreenIndex].CurrentBlueReduce;
+            set => _screenModel.SetUserBlueReduce(value, SelectedScreenIndex);
+        }
+
         public int HourStart
-        {            get => _screenModel.GetStartHour(SelectedScreenIndex);
+        {   
+            get => _screenModel.GetStartHour(SelectedScreenIndex);
             set
             {
                 _screenModel.SetWorkTimeStart(value, MinStart, SelectedScreenIndex);
@@ -65,26 +75,7 @@ namespace Light.ViewModels
             set
             {
                 _screenModel.SetWorkTimeEnd(HourEnd, value, SelectedScreenIndex);
-
                 OnPropertyChanged("MinEnd");
-            }
-        }
-        public float Gamma
-        {
-            get => _gammaRegulator.GetGamma(SelectedScreenIndex);
-            set
-            {
-                _gammaRegulator.SetUserGamma(value, SelectedScreenIndex);
-                OnPropertyChanged("Gamma");
-            }
-        }
-        public float BlueReduce
-        {
-            get => _gammaRegulator.GetBlueReduce(SelectedScreenIndex);
-            set
-            {
-                _gammaRegulator.SetUserBlueReduce(value, SelectedScreenIndex);
-                OnPropertyChanged("BlueReduce");
             }
         }
 
@@ -121,10 +112,9 @@ namespace Light.ViewModels
             _screenModel = new();
             _services = ServiceLocator.Source;
             _settings = _services.Settings;
-            _gammaRegulator = _services.GammaRegulator;
             Screens = _screenModel.Screens;
             SelectedScreenIndex = _settings.SelectedScreen;
-            _gammaRegulator.ForceUserValuesOnScreens();
+            _screenModel.ForceUserValuesOnScreens();
         }
     }
 }

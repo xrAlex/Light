@@ -18,7 +18,6 @@ namespace Light.ViewModels
         private readonly WindowService _windowService;
         private readonly ServiceLocator _serviceLocator;
         private readonly CurrentTimeService _currentTimeService;
-        private readonly GammaRegulatorService _gammaRegulatorService;
         private readonly ScreenModel _screenModel;
 
         #endregion
@@ -70,7 +69,6 @@ namespace Light.ViewModels
             _screenModel = new();
             _serviceLocator = ServiceLocator.Source;
             _windowService = _serviceLocator.WindowService;
-            _gammaRegulatorService = _serviceLocator.GammaRegulator;
             _currentTimeService = _serviceLocator.CurrentTimeService;
 
             Screens = _screenModel.Screens;
@@ -81,7 +79,7 @@ namespace Light.ViewModels
                 CurrentTime = args.CurrTime;
             };
 
-            _gammaRegulatorService.ForceGamma();
+            _screenModel.ForceGamma();
         }
     }
 }
