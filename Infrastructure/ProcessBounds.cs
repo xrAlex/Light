@@ -1,6 +1,7 @@
 ﻿using Light.Models;
 using Light.Services;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -25,8 +26,12 @@ namespace Light.Infrastructure
         private static extern bool GetWindowRect(HandleRef hWnd, [In, Out] ref RECT rect);
 
         [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
+        private static extern nint GetForegroundWindow();
 
+        [DllImport("user32.dll")]
+        public static extern uint GetWindowThreadProcessId(nint hwnd, ref uint pid);
+
+   
         #endregion
 
         public ProcessBounds()
@@ -47,7 +52,7 @@ namespace Light.Infrastructure
             {
                 foreach (var screenEntity in _screenModel.Screens)
                 {
-                    if (IsFullScreen(process, screenEntity.Instance))
+                    if (IsFullScreen(screenEntity.Instance, process.MainWindowHandle))
                     {
                         fullscreen = true;
                         break;
@@ -59,35 +64,20 @@ namespace Light.Infrastructure
 
         public bool IsFullScreenProcessFounded(Screen screen)
         {
-            var processes = Process.GetProcesses();
+            nint handler = GetForegroundWindow();
+            uint pid = 0;
+            GetWindowThreadProcessId(handler, ref pid);
+            Process process = Process.GetProcessById(Convert.ToInt32(pid));
 
-            foreach (var process in processes)
-            {
-                if (ProcessHasWindow(process))
-                {
-                    if (!_settings.IgnoredProcesses.Any(p => p.Name == process.ProcessName) && IsFullScreen(process, screen))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return !_settings.IgnoredProcesses.Any(p => p.Name == process.ProcessName) && IsFullScreen(screen, handler);
         }
 
-        private bool IsFullScreen(Process process, Screen screen)
+        private bool IsFullScreen(Screen screen, nint handle)
         {
             var rect = new RECT();
+            GetWindowRect(new HandleRef(null, handle), ref rect);
 
-            GetWindowRect(new HandleRef(null, process.MainWindowHandle), ref rect);
-
-            if (screen.Bounds.Width == (rect.right + rect.left) && screen.Bounds.Height == (rect.bottom + rect.top))
-            {
-                return true;
-            }
-
-            return false;
+            return screen.Bounds.Width == (rect.right + rect.left) && screen.Bounds.Height == (rect.bottom + rect.top);
         }
-
-        private bool ProcessHasWindow(Process process) => process.MainWindowHandle != IntPtr.Zero;
     }
 }

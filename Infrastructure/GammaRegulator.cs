@@ -8,13 +8,13 @@ namespace Light.Infrastructure
         #region DllImport
 
         [DllImport("gdi32.dll")]
-        private static extern IntPtr CreateDC(string lpszDriver, string lpszDevice, string lpszOutput, IntPtr lpInitData);
+        private static extern nint CreateDC(string lpszDriver, string lpszDevice, string lpszOutput, nint lpInitData);
 
         [DllImport("gdi32.dll")]
-        private static extern IntPtr DeleteDC(IntPtr DC);
+        private static extern nint DeleteDC(nint DC);
 
         [DllImport("gdi32.dll")]
-        private static extern int SetDeviceGammaRamp(IntPtr hDC, ref RAMP lpRamp);
+        private static extern int SetDeviceGammaRamp(nint hDC, ref RAMP lpRamp);
 
         #endregion
 
@@ -31,11 +31,11 @@ namespace Light.Infrastructure
 
         public void ApplyGamma(float GammaIntensity, float BlueReduceIntensity, string screenName)
         {
-            var DC = CreateDC(screenName, null, null, IntPtr.Zero);
+            var DC = CreateDC(screenName, null, null, 0);
             const int minChannelValue = 64;
             const int maxChannelValue = 256;
             const int maxUShort = 65535;
-
+           
             RAMP channels = new()
             {
                 Blue = new ushort[maxChannelValue],
