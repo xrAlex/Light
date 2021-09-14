@@ -17,7 +17,7 @@ namespace Light.Services
         public CurrentTimeService CurrentTimeService => _currentTimeService ??= new();
 
         private ServiceLocator() {}
-        private static readonly Lazy<ServiceLocator> lazy = new(() => new ServiceLocator());
-        public static ServiceLocator Source { get { return lazy.Value; } }
+        private static readonly Lazy<ServiceLocator> Lazy = new(() => new ServiceLocator());
+        public static ServiceLocator Source => Lazy.Value;
     }
 }

@@ -1,19 +1,16 @@
-﻿using Light.Models.Entities;
-using Light.Services;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using Light.Models.Entities;
+using Light.Services;
 
 namespace Light.Models
 {
     public class ProcessModel
     {
-        private readonly ServiceLocator _serviceLocator;
-        private readonly SettingsService _settingsService;
-
-        public ObservableCollection<ProcessEntity> Processes { get; private set; }
-        public ObservableCollection<ProcessEntity> IgnoredProcesses { get; private set; }
+        public ObservableCollection<ProcessEntity> Processes { get; }
+        public ObservableCollection<ProcessEntity> IgnoredProcesses { get; }
 
         public void MoveToIngnoredProcesess()
         {
@@ -21,7 +18,7 @@ namespace Light.Models
             {
                 if (processEntity.IsSelected)
                 {
-					IgnoredProcesses.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
+                    IgnoredProcesses.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
                     Processes.Remove(processEntity);
                 }
             }
@@ -33,7 +30,7 @@ namespace Light.Models
             {
                 if (processEntity.IsSelected)
                 {
-					Processes.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
+                    Processes.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
                     IgnoredProcesses.Remove(processEntity);
                 }
             }
@@ -43,27 +40,32 @@ namespace Light.Models
         {
             var processes = Process.GetProcesses();
 
-            foreach (var Process in processes)
+            foreach (var process in processes)
             {
-                if (ProcessHasWindow(Process))
+                if (ProcessHasWindow(process))
                 {
-                    if(!IgnoredProcesses.Any(p => p.Name == Process.ProcessName))
+                    if (IgnoredProcesses.All(p => p.Name != process.ProcessName))
                     {
-                        Processes.Add(new ProcessEntity(Process, Process.ProcessName));
+                        Processes.Add(new ProcessEntity(process, process.ProcessName));
                     }
                 }
             }
+
         }
 
-        private bool ProcessHasWindow(Process process) => process.MainWindowHandle != IntPtr.Zero;
+        private bool ProcessHasWindow(Process process)
+        {
+            return process.MainWindowHandle != IntPtr.Zero;
+        }
 
         public ProcessModel()
         {
-            _serviceLocator = ServiceLocator.Source;
-            _settingsService = _serviceLocator.Settings;
-            IgnoredProcesses = _settingsService.IgnoredProcesses;
-            Processes = new();
+            var serviceLocator = ServiceLocator.Source;
+            var settingsService = serviceLocator.Settings;
+            IgnoredProcesses = settingsService.IgnoredProcesses;
+            Processes = new ObservableCollection<ProcessEntity>();
             FillProcessCollection();
         }
+
     }
 }

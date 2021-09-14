@@ -1,27 +1,22 @@
-﻿
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Forms;
 using Light.Infrastructure;
 using Light.Models.Entities;
-using System;
-using System.Collections.ObjectModel;
-using System.Windows.Forms;
 
 namespace Light.Services
 {
     public sealed class SettingsService
     {
         private readonly INIManager _manager;
+
         public ObservableCollection<ScreenEntity> Screens { get; set; }
         public ObservableCollection<ProcessEntity> IgnoredProcesses { get; set; }
 
         public int SelectedScreen { get; set; }
         public bool CheckFullScreenApps { get; set; }
 
-        public SettingsService()
-        {
-            IgnoredProcesses = new();
-            Screens = new();
-            _manager = new();
-        }
         public void Save()
         {
             _manager.WriteValue("Main", "SelectedScreen", SelectedScreen.ToString());
@@ -49,22 +44,22 @@ namespace Light.Services
 
         private void SaveScreens()
         {
-            for (int i = 0; i < Screens.Count; i++)
+            for (var i = 0; i < Screens.Count; i++)
             {
-                var Monitor = Screens[i];
-                _manager.WriteValue($"{i}", "UserGamma", Monitor.UserGamma.ToString());
-                _manager.WriteValue($"{i}", "UserBlueReduce", Monitor.UserBlueReduce.ToString());
-                _manager.WriteValue($"{i}", "StartTime", Monitor.StartTime.ToString());
-                _manager.WriteValue($"{i}", "EndTime", Monitor.EndTime.ToString());
-                _manager.WriteValue($"{i}", "Active", Monitor.IsActive.ToString());
-                _manager.WriteValue($"{i}", "Name", Monitor.Name);
-                _manager.WriteValue($"{i}", "SysName", Monitor.SysName);
+                var monitor = Screens[i];
+                _manager.WriteValue($"{i}", "UserGamma", monitor.UserGamma.ToString());
+                _manager.WriteValue($"{i}", "UserBlueReduce", monitor.UserBlueReduce.ToString());
+                _manager.WriteValue($"{i}", "StartTime", monitor.StartTime.ToString());
+                _manager.WriteValue($"{i}", "EndTime", monitor.EndTime.ToString());
+                _manager.WriteValue($"{i}", "Active", monitor.IsActive.ToString());
+                _manager.WriteValue($"{i}", "Name", monitor.Name);
+                _manager.WriteValue($"{i}", "SysName", monitor.SysName);
             }
         }
 
         private void LoadScreens()
         {
-            int index = 0;
+            var index = 0;
             foreach (var screen in Screen.AllScreens)
             {
                 Screens.Add(new ScreenEntity
@@ -75,8 +70,8 @@ namespace Light.Services
                     StartTime = _manager.GetValue<int>($"{index}", "StartTime", "1380"),
                     EndTime = _manager.GetValue<int>($"{index}", "EndTime", "420"),
                     IsActive = _manager.GetValue<bool>($"{index}", "Active", "true"),
-                    Name = _manager.GetValue<string>($"{index}", "Name", $"#{ index + 1 }"),
-                    SysName = _manager.GetValue<string>($"{index}", "SysName", $"{ screen.DeviceName }"),
+                    Name = _manager.GetValue<string>($"{index}", "Name", $"#{index + 1}"),
+                    SysName = _manager.GetValue<string>($"{index}", "SysName", $"{screen.DeviceName}")
                 });
                 index++;
             }
@@ -84,25 +79,27 @@ namespace Light.Services
 
         private void SaveProcesses()
         {
-            string processStr = "";
-            for (int i = 0; i < IgnoredProcesses.Count; i++)
-            {
-                var process = IgnoredProcesses[i];
-                processStr += $"{process.Name};";
-            }
+            var processStr = IgnoredProcesses.Aggregate("", (current, process) => current + $"{process.Name};");
             _manager.WriteValue("Processes", "Ignored", processStr);
         }
 
         private void LoadProcesess()
         {
-            string processStr = _manager.GetValue<string>("Processes", "Ignored", "");
+            var processStr = _manager.GetValue<string>("Processes", "Ignored", "");
 
-            var strTable = processStr.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            var strTable = processStr.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (string processName in strTable)
+            foreach (var processName in strTable)
             {
                 IgnoredProcesses.Add(new ProcessEntity(null, processName));
             }
+        }
+
+        public SettingsService()
+        {
+            IgnoredProcesses = new ObservableCollection<ProcessEntity>();
+            Screens = new ObservableCollection<ScreenEntity>();
+            _manager = new INIManager();
         }
     }
 }

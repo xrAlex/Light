@@ -6,7 +6,6 @@
     <BitmapImage x:Key="Process" UriSource="/Light;component/Resources/Images/Processes.png"/>
     <BitmapImage x:Key="Main" UriSource="/Light;component/Resources/Images/Main.png"/>
     <BitmapImage x:Key="Other" UriSource="/Light;component/Resources/Images/Other.png"/>
-    <BitmapImage x:Key="ProcessIcon" UriSource="/Light;component/Images/Resources/Accept.png"/>
     <BitmapImage x:Key="TurnOff" UriSource="/Light;component/Resources/Images/turnoff.png"/>
     <BitmapImage x:Key="Settings" UriSource="/Light;component/Resources/Images/Settings.png"/>
 

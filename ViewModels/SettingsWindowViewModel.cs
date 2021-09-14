@@ -1,24 +1,12 @@
-﻿using Light.Commands;
+﻿using System.Windows.Input;
+using Light.Commands;
 using Light.Services;
 using Light.ViewModels.Base;
-using System.Windows.Input;
 
 namespace Light.ViewModels
 {
     internal sealed class SettingsWindowViewModel : ViewModelBase
     {
-        #region Fields
-
-        private readonly WindowService _windowService;
-        private readonly SettingsService _settings;
-        private readonly ServiceLocator _serviceLocator;
-        private readonly GammaWatcherService _gammaWatcher;
-        public OtherSettingsPageViewModel OtherSettingsPage { get; private set; }
-        public SettingsMainPageViewModel SettingsMainPage { get; private set; }
-        public ProcessPageViewModel ProcessPage { get; private set; }
-
-        #endregion
-
         #region Values
 
         private ViewModelBase _selectedViewModel;
@@ -30,12 +18,24 @@ namespace Light.ViewModels
         public ViewModelBase SelectedViewModel
         {
             get => _selectedViewModel;
-            set => Set(ref _selectedViewModel, value);
+            private set => Set(ref _selectedViewModel, value);
         }
 
         #endregion
 
+        #region Fields
+
+        private readonly WindowService _windowService;
+        private readonly SettingsService _settings;
+        private readonly GammaWatcherService _gammaWatcher;
+        public OtherSettingsPageViewModel OtherSettingsPage { get; }
+        public SettingsMainPageViewModel SettingsMainPage { get; }
+        public ProcessPageViewModel ProcessPage { get; }
+
+        #endregion
+
         #region Commands
+
         public ICommand ChangePageCommand { get; }
         public ICommand ApplySettingsCommand { get; }
         public ICommand ResetSettingsCommand { get; }
@@ -45,6 +45,7 @@ namespace Light.ViewModels
         {
             SelectedViewModel = (ViewModelBase)viewModel;
         }
+
         private void OnResetSettingsCommandExecute()
         {
             _settings.Reset();
@@ -73,14 +74,14 @@ namespace Light.ViewModels
             CloseSettingsCommand = new LambdaCommand(p => OnCloseSettingsCommandExecute());
             ChangePageCommand = new LambdaCommand(OnChangePageCommandExecute);
 
-            _serviceLocator = ServiceLocator.Source;
-            _settings = _serviceLocator.Settings;
-            _windowService = _serviceLocator.WindowService;
-            _gammaWatcher = _serviceLocator.GammaWatcher;
+            var serviceLocator = ServiceLocator.Source;
+            _settings = serviceLocator.Settings;
+            _windowService = serviceLocator.WindowService;
+            _gammaWatcher = serviceLocator.GammaWatcher;
 
-            OtherSettingsPage = new();
-            SettingsMainPage = new();
-            ProcessPage = new();
+            OtherSettingsPage = new OtherSettingsPageViewModel();
+            SettingsMainPage = new SettingsMainPageViewModel();
+            ProcessPage = new ProcessPageViewModel();
             SelectedViewModel = SettingsMainPage;
             _gammaWatcher.StopWatch();
         }

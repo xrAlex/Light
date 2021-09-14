@@ -5,12 +5,12 @@ using System.Windows.Data;
 
 namespace Light.Converters
 {
-    class MinConverter : IValueConverter
+    internal class MinConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int min = (int)value;
-            string result = System.Convert.ToString(min);
+            var min = (int)value;
+            var result = System.Convert.ToString(min);
 
             if (result.Length < 2)
             {
@@ -22,10 +22,10 @@ namespace Light.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool valid = int.TryParse((string)value, out int min);
+            var valid = int.TryParse((string)value, out var min);
             if (valid)
             {
-                if (min > 60 || min < 0)
+                if (min is > 60 or < 0)
                 {
                     min = 60;
                 }

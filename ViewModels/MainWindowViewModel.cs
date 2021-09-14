@@ -1,28 +1,16 @@
-﻿using Light.Commands;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Input;
+using Light.Commands;
 using Light.Models;
 using Light.Models.Entities;
 using Light.Services;
 using Light.ViewModels.Base;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Input;
 
 namespace Light.ViewModels
 {
     internal sealed class MainWindowViewModel : ViewModelBase
     {
-        #region Fields
-
-        public ObservableCollection<ScreenEntity> Screens { get; }
-
-        private readonly WindowService _windowService;
-        private readonly ServiceLocator _serviceLocator;
-        private readonly CurrentTimeService _currentTimeService;
-        private readonly GammaWatcherService _gammaWatcher;
-        private readonly ScreenModel _screenModel;
-
-        #endregion
-
         #region Values
 
         private string _currentTime = "12:00";
@@ -39,6 +27,15 @@ namespace Light.ViewModels
 
         #endregion
 
+        #region Fields
+
+        public ObservableCollection<ScreenEntity> Screens { get; }
+
+        private readonly WindowService _windowService;
+        private readonly ScreenModel _screenModel;
+
+        #endregion
+
         #region Commands
 
         public ICommand CloseAppCommand { get; }
@@ -51,7 +48,10 @@ namespace Light.ViewModels
             Application.Current.Shutdown();
         }
 
-        private void OnAppToTrayCommandExecute() { /* in progress */ }
+        private void OnAppToTrayCommandExecute()
+        {
+            /* in progress */
+        }
 
         private void OnOpenSettingsWindowCommandExecute()
         {
@@ -62,28 +62,26 @@ namespace Light.ViewModels
 
         #endregion
 
+
         public MainWindowViewModel()
         {
             OpenSettingsWindowCommand = new LambdaCommand(p => OnOpenSettingsWindowCommandExecute());
             CloseAppCommand = new LambdaCommand(p => OnCloseAppCommandExecute());
             AppToTrayCommand = new LambdaCommand(p => OnAppToTrayCommandExecute());
 
-            _screenModel = new();
-            _serviceLocator = ServiceLocator.Source;
-            _windowService = _serviceLocator.WindowService;
-            _currentTimeService = _serviceLocator.CurrentTimeService;
-            _gammaWatcher = _serviceLocator.GammaWatcher;
+            _screenModel = new ScreenModel();
+            var serviceLocator = ServiceLocator.Source;
+            _windowService = serviceLocator.WindowService;
+            var currentTimeService = serviceLocator.CurrentTimeService;
+            var gammaWatcher = serviceLocator.GammaWatcher;
 
             Screens = _screenModel.Screens;
-            CurrentTime = _currentTimeService.GetCurrentTime();
+            CurrentTime = currentTimeService.GetCurrentTime();
 
-            _currentTimeService.OnCurrTimeChanged += (sender, args) =>
-            {
-                CurrentTime = args.CurrTime;
-            };
+            currentTimeService.OnCurrTimeChanged += (sender, args) => { CurrentTime = args.CurrTime; };
 
             _screenModel.ForceGamma();
-            _gammaWatcher.StartWatch();
+            gammaWatcher.StartWatch();
         }
     }
 }

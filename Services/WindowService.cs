@@ -8,7 +8,7 @@ namespace Light.Services
 
         public void CreateWindow(object viewModel, int H, int W)
         {
-            Window = new Window()
+            Window = new Window
             {
                 Content = viewModel,
                 Height = H,
@@ -18,7 +18,7 @@ namespace Light.Services
                 WindowStyle = WindowStyle.None,
                 AllowsTransparency = true,
                 Owner = Application.Current.MainWindow,
-                Topmost = true,
+                Topmost = true
             };
         }
 

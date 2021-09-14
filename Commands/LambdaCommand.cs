@@ -4,16 +4,16 @@ namespace Light.Commands
 {
     internal class LambdaCommand : Command
     {
-        private readonly Action<object> _Execute;
-        private readonly Func<object, bool> _CanExecute;
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
 
-        public LambdaCommand(Action<object> Execute, Func<object, bool> CanExecute = null)
+        public LambdaCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
-            _Execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
-            _CanExecute = CanExecute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
         }
 
-        public override bool CanExecute(object parameter) => _CanExecute?.Invoke(parameter) ?? true;
-        public override void Execute(object parameter) => _Execute(parameter);
+        public override bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
+        public override void Execute(object parameter) => _execute(parameter);
     }
 }

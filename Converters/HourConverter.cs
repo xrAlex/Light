@@ -5,12 +5,12 @@ using System.Windows.Data;
 
 namespace Light.Converters
 {
-    class HourConverter : IValueConverter
+    internal class HourConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int hour = (int)value;
-            string result = System.Convert.ToString(hour);
+            var hour = (int)value;
+            var result = System.Convert.ToString(hour);
 
             if (result.Length < 2)
             {
@@ -22,10 +22,10 @@ namespace Light.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool valid = int.TryParse((string)value, out int hour);
+            var valid = int.TryParse((string)value, out var hour);
             if (valid)
             {
-                if (hour > 23 || hour < 0)
+                if (hour is > 23 or < 0)
                 {
                     hour = 23;
                 }

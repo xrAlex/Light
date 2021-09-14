@@ -1,46 +1,47 @@
-﻿using Light.Infrastructure;
-using Light.Models;
-using Light.Models.Entities;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Light.Infrastructure;
+using Light.Models;
 
 namespace Light.Services
 {
     public class GammaWatcherService
     {
+        private readonly ProcessBounds _processBounds;
         private readonly ScreenModel _screenModel;
         private readonly SettingsService _settings;
-        private readonly ServiceLocator _serviceLocator;
         private readonly WorkTime _workTime;
-        private readonly ProcessBounds _processBounds;
-        private CancellationTokenSource cts;
+        private CancellationTokenSource _cts;
 
         public GammaWatcherService()
         {
-            _screenModel = new();
-            _workTime = new();
-            _processBounds = new();
-            _serviceLocator = ServiceLocator.Source;
-            _settings = _serviceLocator.Settings;
+            _screenModel = new ScreenModel();
+            _workTime = new WorkTime();
+            _processBounds = new ProcessBounds();
+            var serviceLocator = ServiceLocator.Source;
+            _settings = serviceLocator.Settings;
         }
 
         public void StartWatch()
         {
-            cts = new CancellationTokenSource();
-            Task.Run(() => Cycle(cts.Token), cts.Token);
+            _cts = new CancellationTokenSource();
+            Task.Run(() => Cycle(_cts.Token), _cts.Token);
         }
 
-        public void StopWatch() => cts.Cancel();
+        public void StopWatch()
+        {
+            _cts.Cancel();
+        }
 
         private async Task Cycle(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
             {
-                foreach (ScreenEntity screen in _screenModel.Screens)
+                foreach (var screen in _screenModel.Screens)
                 {
                     if (screen.IsActive)
                     {
-                        bool isWorkTime = _workTime.IsWorkTime(screen);
+                        var isWorkTime = _workTime.IsWorkTime(screen);
 
                         if (isWorkTime)
                         {
@@ -58,10 +59,12 @@ namespace Light.Services
                                 break;
                             }
                         }
+
                         _screenModel.SetDefaultValues(screen);
                     }
                 }
-                await Task.Delay(1000);
+
+                await Task.Delay(1000, token);
             }
         }
     }

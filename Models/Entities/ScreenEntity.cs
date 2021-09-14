@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Light.Models.Entities
 {
-    public class ScreenEntity : INotifyPropertyChanged
+    public sealed class ScreenEntity : INotifyPropertyChanged
     {
         #region Fields
 
@@ -13,7 +13,7 @@ namespace Light.Models.Entities
 
         #region Values
 
-        private bool _active = false;
+        private bool _active;
         private int _startTime = 1380;
         private int _endTime = 720;
         private float _currentGamma = 100;
@@ -33,12 +33,13 @@ namespace Light.Models.Entities
         public float Opacity
         {
             get => _uiOpacity;
-            set
+            private set
             {
                 _uiOpacity = value;
                 RaisePropertyChanged("Opacity");
             }
         }
+
         public bool IsActive
         {
             get => _active;
@@ -49,6 +50,7 @@ namespace Light.Models.Entities
                 RaisePropertyChanged("IsActive");
             }
         }
+
         public int StartTime
         {
             get => _startTime;
@@ -78,6 +80,7 @@ namespace Light.Models.Entities
                 RaisePropertyChanged("CurrentGamma");
             }
         }
+
         public float CurrentBlueReduce
         {
             get => _currentBlueReduce;
@@ -97,6 +100,7 @@ namespace Light.Models.Entities
                 RaisePropertyChanged("UserGamma");
             }
         }
+
         public float UserBlueReduce
         {
             get => _userBlueReduce;
@@ -111,12 +115,12 @@ namespace Light.Models.Entities
 
         #region Methods
 
-        protected virtual void RaisePropertyChanged(PropertyChangedEventArgs e)
+        private void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
         }
 
-        protected void RaisePropertyChanged(string propertyName)
+        private void RaisePropertyChanged(string propertyName)
         {
             RaisePropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
