@@ -15,8 +15,8 @@ namespace Light.ViewModels
         private readonly ProcessModel _processModel;
         private readonly ServiceLocator _serviceLocator;
         private readonly SettingsService _settings;
-        public ObservableCollection<ProcessEntity> Processes { get; set; }
-        public ObservableCollection<ProcessEntity> IgnoredProceses { get; set; }
+        public ObservableCollection<ProcessEntity> Processes { get; }
+        public ObservableCollection<ProcessEntity> IgnoredProceses { get; }
 
         #endregion
 
@@ -25,11 +25,7 @@ namespace Light.ViewModels
         public bool CheckFullScreenApps
         {
             get => _settings.CheckFullScreenApps;
-            set
-            {
-                _settings.CheckFullScreenApps = value;
-                OnPropertyChanged("SelectedScreen");
-            }
+            set => _settings.CheckFullScreenApps = value;
         }
 
         #endregion

@@ -13,29 +13,18 @@ namespace Light.Infrastructure
         public bool IsWorkTime(ScreenEntity screen)
         {
             var currentTime = DateTime.Now;
-
             int currentMin = ConvertToMin(currentTime.Hour, currentTime.Minute);
             int startFromMin = screen.StartTime;
             int endFromMin = screen.EndTime;
 
             if (endFromMin < startFromMin)
             {
-                if (currentMin < startFromMin && currentMin < endFromMin)
-                {
-                    return true;
-                }
-
-                if (currentMin >= startFromMin)
-                {
-                    return true;
-                }
+                if (currentMin < startFromMin && currentMin < endFromMin) return true;
+                if (currentMin >= startFromMin) return true;
             }
             else
             {
-                if (currentMin >= startFromMin && currentMin < endFromMin)
-                {
-                    return true;
-                }
+                if (currentMin >= startFromMin && currentMin < endFromMin) return true;
             }
 
             return false;

@@ -13,7 +13,6 @@ namespace Light.ViewModels
         private readonly WindowService _windowService;
         private readonly SettingsService _settings;
         private readonly ServiceLocator _serviceLocator;
-        private readonly ScreenModel _screenModel;
         private readonly GammaWatcherService _gammaWatcher;
         public OtherSettingsPageViewModel OtherSettingsPage { get; private set; }
         public SettingsMainPageViewModel SettingsMainPage { get; private set; }
@@ -83,7 +82,6 @@ namespace Light.ViewModels
             OtherSettingsPage = new();
             SettingsMainPage = new();
             ProcessPage = new();
-            _screenModel = new();
             SelectedViewModel = SettingsMainPage;
             _gammaWatcher.StopWatch();
         }

@@ -27,7 +27,6 @@ namespace Light.ViewModels
             set
             {
                 _settings.SelectedScreen = value;
-                OnPropertyChanged("SelectedScreenIndex");
                 RefreshUI();
             }
         }

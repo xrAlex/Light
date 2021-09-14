@@ -16,8 +16,6 @@ namespace Light.Infrastructure
         [DllImport("gdi32.dll")]
         private static extern int SetDeviceGammaRamp(nint hDC, ref RAMP lpRamp);
 
-        #endregion
-
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         private struct RAMP
         {
@@ -28,6 +26,8 @@ namespace Light.Infrastructure
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
             public ushort[] Blue;
         }
+
+        #endregion
 
         public void ApplyGamma(float GammaIntensity, float BlueReduceIntensity, string screenName)
         {

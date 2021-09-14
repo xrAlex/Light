@@ -31,15 +31,7 @@ namespace Light.Infrastructure
         [DllImport("user32.dll")]
         public static extern uint GetWindowThreadProcessId(nint hwnd, ref uint pid);
 
-   
         #endregion
-
-        public ProcessBounds()
-        {
-            _screenModel = new();
-            _serviceLocator = ServiceLocator.Source;
-            _settings = _serviceLocator.Settings;
-        }
 
         private readonly ScreenModel _screenModel;
         private readonly ServiceLocator _serviceLocator;
@@ -47,19 +39,14 @@ namespace Light.Infrastructure
 
         public bool IsProcessOnFullScreen(Process process)
         {
-            bool fullscreen = false;
             if (process != null)
             {
                 foreach (var screenEntity in _screenModel.Screens)
                 {
-                    if (IsFullScreen(screenEntity.Instance, process.MainWindowHandle))
-                    {
-                        fullscreen = true;
-                        break;
-                    }
+                    return IsFullScreen(screenEntity.Instance, process.MainWindowHandle);
                 }
             }
-            return fullscreen;
+            return false;
         }
 
         public bool IsFullScreenProcessFounded(Screen screen)
@@ -79,5 +66,13 @@ namespace Light.Infrastructure
 
             return screen.Bounds.Width == (rect.right + rect.left) && screen.Bounds.Height == (rect.bottom + rect.top);
         }
+
+        public ProcessBounds()
+        {
+            _screenModel = new();
+            _serviceLocator = ServiceLocator.Source;
+            _settings = _serviceLocator.Settings;
+        }
+
     }
 }

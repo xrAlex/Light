@@ -36,7 +36,7 @@ namespace Light.Services
 
         public void StopWatch() => cts.Cancel();
 
-        private async void Cycle(CancellationToken token)
+        private async Task Cycle(CancellationToken token)
         {
             while (true)
             {

@@ -12,20 +12,17 @@ namespace Light.Infrastructure
         [DllImport("kernel32.dll", EntryPoint = "WritePrivateProfileString")]
         private static extern int WritePrivateString(string section, string key, string str, string path);
 
-        private readonly string path = ".\\config.ini";
+        private const string path = ".\\config.ini";
         private const int SIZE = 1024;
 
-        private string GetValue(string section, string key, string def)
+        public T GetValue<T>(string section, string key, string def) where T : IConvertible
         {
             StringBuilder buffer = new(SIZE);
             GetPrivateString(section, key, def, buffer, SIZE, path);
-            return buffer.ToString();
+
+            return (T)Convert.ChangeType(buffer.ToString(), typeof(T));
         }
 
-        public string GetStringValue(string section, string key, string def) => GetValue(section, key, def);
-        public int GetIntValue(string section, string key, string def) => Convert.ToInt32(GetValue(section, key, def));
-        public float GetFloatValue(string section, string key, string def) => (float)Convert.ToDouble(GetValue(section, key, def));
-        public bool GetBoolValue(string section, string key, string def) => Convert.ToBoolean(GetValue(section, key, def));
-        public void WriteValue(string Section, string Key, string Value) => WritePrivateString(Section, Key, Value, path);
+        public void WriteValue(string section, string key, string value) => WritePrivateString(section, key, value, path);
     }
 }

@@ -102,7 +102,6 @@
     <Compile Include="ViewModels\ProcessPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsMainPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\MainWindowUserControl.xaml.cs">
       <DependentUpon>MainWindowUserControl.xaml</DependentUpon>
     </Compile>

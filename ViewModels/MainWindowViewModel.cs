@@ -13,7 +13,7 @@ namespace Light.ViewModels
     {
         #region Fields
 
-        public ObservableCollection<ScreenEntity> Screens { get; private set; }
+        public ObservableCollection<ScreenEntity> Screens { get; }
 
         private readonly WindowService _windowService;
         private readonly ServiceLocator _serviceLocator;
