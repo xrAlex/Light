@@ -38,10 +38,8 @@ namespace Light.Services
 
         private async Task Cycle(CancellationToken token)
         {
-            while (true)
+            while (!token.IsCancellationRequested)
             {
-                if (token.IsCancellationRequested) break;
-
                 foreach (ScreenEntity screen in _screenModel.Screens)
                 {
                     if (screen.IsActive)

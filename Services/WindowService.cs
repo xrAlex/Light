@@ -22,17 +22,8 @@ namespace Light.Services
             };
         }
 
-        public void CloseWindow()
-        {
-            Window.Close();
-        }
-        public void HideWindow()
-        {
-            Window.Hide();
-        }
-        public void ShowWindow()
-        {
-            Window.Show();
-        }
+        public void CloseWindow() => Window.Close();
+        public void HideWindow() => Window.Hide();
+        public void ShowWindow() => Window.Show();
     }
 }

@@ -18,14 +18,7 @@ namespace Light.Models.Entities
 
         public ProcessEntity(Process instance = null, string name = "")
         {
-            if (instance == null)
-            {
-                Instance = TryFindProcessInstance(name);
-            }
-            else
-            {
-                Instance = instance;
-            }
+            Instance = instance ?? TryFindProcessInstance(name);
             _processBounds = new();
             Name = name;
         }
