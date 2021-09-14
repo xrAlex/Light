@@ -86,7 +86,7 @@ namespace Light.Models
             {
                 if (screen.IsActive)
                 {
-                    SetDefaultValues(screen);
+                    SetUserValues(screen);
                 }
             }
         }
