@@ -14,6 +14,7 @@ namespace Light.ViewModels
         private readonly SettingsService _settings;
         private readonly ServiceLocator _serviceLocator;
         private readonly ScreenModel _screenModel;
+        private readonly GammaWatcherService _gammaWatcher;
         public OtherSettingsPageViewModel OtherSettingsPage { get; private set; }
         public SettingsMainPageViewModel SettingsMainPage { get; private set; }
         public ProcessPageViewModel ProcessPage { get; private set; }
@@ -55,14 +56,14 @@ namespace Light.ViewModels
         {
             _settings.Reset();
             _windowService.CloseWindow();
-            _screenModel.ForceGamma();
+            _gammaWatcher.StartWatch();
         }
 
         private void OnApplySettingsCommandExecute()
         {
             _settings.Save();
             _windowService.CloseWindow();
-            _screenModel.ForceGamma();
+            _gammaWatcher.StartWatch();
         }
 
         #endregion
@@ -77,12 +78,14 @@ namespace Light.ViewModels
             _serviceLocator = ServiceLocator.Source;
             _settings = _serviceLocator.Settings;
             _windowService = _serviceLocator.WindowService;
+            _gammaWatcher = _serviceLocator.GammaWatcher;
 
             OtherSettingsPage = new();
             SettingsMainPage = new();
             ProcessPage = new();
             _screenModel = new();
             SelectedViewModel = SettingsMainPage;
+            _gammaWatcher.StopWatch();
         }
     }
 }

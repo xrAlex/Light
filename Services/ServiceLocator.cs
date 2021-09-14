@@ -4,11 +4,13 @@ namespace Light.Services
 {
     public class ServiceLocator
     {
+        private GammaWatcherService _gammaWatcher;
         private SettingsService _settings;
         private WindowService _windowService;
         private CurrentTimeService _currentTimeService;
 
         public SettingsService Settings => _settings ??= new();
+        public GammaWatcherService GammaWatcher => _gammaWatcher ??= new();
 
         public WindowService WindowService => _windowService ??= new();
 

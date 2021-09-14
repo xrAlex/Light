@@ -27,6 +27,7 @@ namespace Light.ViewModels
             set
             {
                 _settings.SelectedScreen = value;
+                OnPropertyChanged("SelectedScreenIndex");
                 RefreshUI();
             }
         }
@@ -34,12 +35,21 @@ namespace Light.ViewModels
         public float Gamma
         {
             get => Screens[SelectedScreenIndex].CurrentGamma;
-            set => _screenModel.SetUserGamma(value, SelectedScreenIndex);
+            set 
+            {
+                _screenModel.SetUserGamma(value, SelectedScreenIndex);
+                OnPropertyChanged("Gamma");
+            }
+
         }
         public float BlueReduce
         {
             get => Screens[SelectedScreenIndex].CurrentBlueReduce;
-            set => _screenModel.SetUserBlueReduce(value, SelectedScreenIndex);
+            set 
+            {
+                _screenModel.SetUserBlueReduce(value, SelectedScreenIndex);
+                OnPropertyChanged("BlueReduce");
+            }
         }
 
         public int HourStart

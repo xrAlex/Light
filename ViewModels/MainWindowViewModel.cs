@@ -18,6 +18,7 @@ namespace Light.ViewModels
         private readonly WindowService _windowService;
         private readonly ServiceLocator _serviceLocator;
         private readonly CurrentTimeService _currentTimeService;
+        private readonly GammaWatcherService _gammaWatcher;
         private readonly ScreenModel _screenModel;
 
         #endregion
@@ -46,6 +47,7 @@ namespace Light.ViewModels
 
         private void OnCloseAppCommandExecute()
         {
+            _screenModel.SetDefaultGammaOnAllScreens();
             Application.Current.Shutdown();
         }
 
@@ -70,6 +72,7 @@ namespace Light.ViewModels
             _serviceLocator = ServiceLocator.Source;
             _windowService = _serviceLocator.WindowService;
             _currentTimeService = _serviceLocator.CurrentTimeService;
+            _gammaWatcher = _serviceLocator.GammaWatcher;
 
             Screens = _screenModel.Screens;
             CurrentTime = _currentTimeService.GetCurrentTime();
@@ -80,6 +83,7 @@ namespace Light.ViewModels
             };
 
             _screenModel.ForceGamma();
+            _gammaWatcher.StartWatch();
         }
     }
 }
