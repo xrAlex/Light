@@ -1,6 +1,5 @@
 ﻿
 using Light.Infrastructure;
-using Light.Models;
 using Light.Models.Entities;
 using System;
 using System.Collections.ObjectModel;
