@@ -127,16 +127,15 @@ namespace Light.Models
             var workTime = new WorkTime();
             foreach (var screen in Screens)
             {
-                if (screen.IsActive)
+                if (!screen.IsActive) continue;
+
+                if (workTime.IsWorkTime(screen))
                 {
-                    if (workTime.IsWorkTime(screen))
-                    {
-                        SetUserValues(screen);
-                    }
-                    else
-                    {
-                        SetDefaultValues(screen);
-                    }
+                    SetUserValues(screen);
+                }
+                else
+                {
+                    SetDefaultValues(screen);
                 }
             }
         }

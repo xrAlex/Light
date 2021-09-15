@@ -20,20 +20,23 @@ namespace Light.Infrastructure
 
         public bool IsFullScreenProcessFounded(Screen screen)
         {
-            var handler = GetForegroundWindow();
-            uint pid = 0;
-            GetWindowThreadProcessId(handler, ref pid);
-            var process = Process.GetProcessById(Convert.ToInt32(pid));
+            var handler = Native.User32.GetForegroundWindow();
+            if (handler == 0 || !Native.User32.IsWindowVisible(handler)) return false;
 
+            uint pid = 0;
+            Native.User32.GetWindowThreadProcessId(handler, ref pid);
+            if (pid == 0) return false;
+
+            var process = Process.GetProcessById(Convert.ToInt32(pid));
             return _settings.IgnoredProcesses.All(p => p.Name != process.ProcessName) && IsFullScreen(screen, handler);
         }
 
         private bool IsFullScreen(Screen screen, nint handle)
         {
-            var rect = new Rect();
-            GetWindowRect(new HandleRef(null, handle), ref rect);
+            var rect = new Native.Rect();
+            Native.User32.GetWindowRect(new HandleRef(null, handle), ref rect);
 
-            return screen.Bounds.Width == rect.right + rect.left && screen.Bounds.Height == rect.bottom + rect.top;
+            return screen.Bounds.Width == rect.Right + rect.Left && screen.Bounds.Height == rect.Bottom + rect.Top;
         }
 
         public ProcessBounds()
@@ -41,28 +44,5 @@ namespace Light.Infrastructure
             _screenModel = new ScreenModel();
             _settings = ServiceLocator.Source.Settings;
         }
-
-
-        #region DLLImport
-
-        [StructLayout(LayoutKind.Sequential)]
-        private readonly struct Rect
-        {
-            public readonly int left;
-            public readonly int top;
-            public readonly int right;
-            public readonly int bottom;
-        }
-
-        [DllImport("user32.dll")]
-        private static extern bool GetWindowRect(HandleRef hWnd, [In] [Out] ref Rect rect);
-
-        [DllImport("user32.dll")]
-        private static extern nint GetForegroundWindow();
-
-        [DllImport("user32.dll")]
-        public static extern uint GetWindowThreadProcessId(nint hwnd, ref uint pid);
-
-        #endregion
     }
 }

@@ -9,18 +9,22 @@ namespace Light.Models
 {
     public class ProcessModel
     {
+        #region Fields
         public ObservableCollection<ProcessEntity> Processes { get; }
         public ObservableCollection<ProcessEntity> IgnoredProcesses { get; }
+
+        #endregion
+
+        #region Methods
 
         public void MoveToIngnoredProcesess()
         {
             foreach (var processEntity in Processes.ToArray())
             {
-                if (processEntity.IsSelected)
-                {
-                    IgnoredProcesses.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
-                    Processes.Remove(processEntity);
-                }
+                if (!processEntity.IsSelected) continue;
+
+                IgnoredProcesses.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
+                Processes.Remove(processEntity);
             }
         }
 
@@ -28,11 +32,10 @@ namespace Light.Models
         {
             foreach (var processEntity in IgnoredProcesses.ToArray())
             {
-                if (processEntity.IsSelected)
-                {
-                    Processes.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
-                    IgnoredProcesses.Remove(processEntity);
-                }
+                if (!processEntity.IsSelected) continue;
+
+                Processes.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
+                IgnoredProcesses.Remove(processEntity);
             }
         }
 
@@ -42,21 +45,18 @@ namespace Light.Models
 
             foreach (var process in processes)
             {
-                if (ProcessHasWindow(process))
+                nint handler = process.MainWindowHandle;
+                if (handler == 0 || !Native.User32.IsWindowVisible(handler)) continue;
+
+                if (IgnoredProcesses.All(p => p.Name != process.ProcessName))
                 {
-                    if (IgnoredProcesses.All(p => p.Name != process.ProcessName))
-                    {
-                        Processes.Add(new ProcessEntity(process, process.ProcessName));
-                    }
+                    Processes.Add(new ProcessEntity(process, process.ProcessName));
                 }
             }
 
         }
 
-        private bool ProcessHasWindow(Process process)
-        {
-            return process.MainWindowHandle != IntPtr.Zero;
-        }
+        #endregion
 
         public ProcessModel()
         {
@@ -66,6 +66,5 @@ namespace Light.Models
             Processes = new ObservableCollection<ProcessEntity>();
             FillProcessCollection();
         }
-
     }
 }

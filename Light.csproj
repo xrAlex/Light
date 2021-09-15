@@ -48,17 +48,11 @@
   <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -82,6 +76,11 @@
     <Compile Include="Models\ProcessModel.cs" />
     <Compile Include="Models\Entities\ProcessEntity.cs" />
     <Compile Include="Infrastructure\INIManager.cs" />
+    <Compile Include="Native\GammaRamp.cs" />
+    <Compile Include="Native\Gdi32.cs" />
+    <Compile Include="Native\Kernel32.cs" />
+    <Compile Include="Native\Rect.cs" />
+    <Compile Include="Native\User32.cs" />
     <Compile Include="Services\GammaWatcherService.cs" />
     <Compile Include="Services\IDialog.cs" />
     <Compile Include="Services\SettingsService.cs" />

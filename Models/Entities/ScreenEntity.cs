@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace Light.Models.Entities
@@ -36,7 +37,7 @@ namespace Light.Models.Entities
             private set
             {
                 _uiOpacity = value;
-                RaisePropertyChanged("Opacity");
+                OnPropertyChanged();
             }
         }
 
@@ -47,7 +48,7 @@ namespace Light.Models.Entities
             {
                 _active = value;
                 Opacity = value ? 1f : 0.5f;
-                RaisePropertyChanged("IsActive");
+                OnPropertyChanged();
             }
         }
 
@@ -57,7 +58,7 @@ namespace Light.Models.Entities
             set
             {
                 _startTime = value;
-                RaisePropertyChanged("HourStart");
+                OnPropertyChanged();
             }
         }
 
@@ -67,7 +68,7 @@ namespace Light.Models.Entities
             set
             {
                 _endTime = value;
-                RaisePropertyChanged("EndTime");
+                OnPropertyChanged();
             }
         }
 
@@ -77,7 +78,7 @@ namespace Light.Models.Entities
             set
             {
                 _currentGamma = value;
-                RaisePropertyChanged("CurrentGamma");
+                OnPropertyChanged();
             }
         }
 
@@ -87,7 +88,7 @@ namespace Light.Models.Entities
             set
             {
                 _currentBlueReduce = value;
-                RaisePropertyChanged("CurrentBlueReduce");
+                OnPropertyChanged();
             }
         }
 
@@ -97,7 +98,7 @@ namespace Light.Models.Entities
             set
             {
                 _userGamma = value;
-                RaisePropertyChanged("UserGamma");
+                OnPropertyChanged();
             }
         }
 
@@ -107,7 +108,7 @@ namespace Light.Models.Entities
             set
             {
                 _userBlueReduce = value;
-                RaisePropertyChanged("UserBlueReduce");
+                OnPropertyChanged();
             }
         }
 
@@ -115,14 +116,9 @@ namespace Light.Models.Entities
 
         #region Methods
 
-        private void RaisePropertyChanged(PropertyChangedEventArgs e)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, e);
-        }
-
-        private void RaisePropertyChanged(string propertyName)
-        {
-            RaisePropertyChanged(new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

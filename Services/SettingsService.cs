@@ -9,18 +9,16 @@ namespace Light.Services
 {
     public sealed class SettingsService
     {
-        private readonly INIManager _manager;
-
-        public ObservableCollection<ScreenEntity> Screens { get; set; }
-        public ObservableCollection<ProcessEntity> IgnoredProcesses { get; set; }
+        public ObservableCollection<ScreenEntity> Screens { get; }
+        public ObservableCollection<ProcessEntity> IgnoredProcesses { get; }
 
         public int SelectedScreen { get; set; }
         public bool CheckFullScreenApps { get; set; }
 
         public void Save()
         {
-            _manager.WriteValue("Main", "SelectedScreen", SelectedScreen.ToString());
-            _manager.WriteValue("Main", "CheckFullScreenApps", CheckFullScreenApps.ToString());
+            INIManager.WriteValue("Main", "SelectedScreen", SelectedScreen.ToString());
+            INIManager.WriteValue("Main", "CheckFullScreenApps", CheckFullScreenApps.ToString());
 
             SaveScreens();
             SaveProcesses();
@@ -28,8 +26,8 @@ namespace Light.Services
 
         public void Load()
         {
-            SelectedScreen = _manager.GetValue<int>("Main", "SelectedScreen", "0");
-            CheckFullScreenApps = _manager.GetValue<bool>("Main", "CheckFullScreenApps", "false");
+            SelectedScreen = INIManager.GetValue<int>("Main", "SelectedScreen", "0");
+            CheckFullScreenApps = INIManager.GetValue<bool>("Main", "CheckFullScreenApps", "false");
 
             LoadScreens();
             LoadProcesess();
@@ -47,13 +45,13 @@ namespace Light.Services
             for (var i = 0; i < Screens.Count; i++)
             {
                 var monitor = Screens[i];
-                _manager.WriteValue($"{i}", "UserGamma", monitor.UserGamma.ToString());
-                _manager.WriteValue($"{i}", "UserBlueReduce", monitor.UserBlueReduce.ToString());
-                _manager.WriteValue($"{i}", "StartTime", monitor.StartTime.ToString());
-                _manager.WriteValue($"{i}", "EndTime", monitor.EndTime.ToString());
-                _manager.WriteValue($"{i}", "Active", monitor.IsActive.ToString());
-                _manager.WriteValue($"{i}", "Name", monitor.Name);
-                _manager.WriteValue($"{i}", "SysName", monitor.SysName);
+                INIManager.WriteValue($"{i}", "UserGamma", monitor.UserGamma.ToString());
+                INIManager.WriteValue($"{i}", "UserBlueReduce", monitor.UserBlueReduce.ToString());
+                INIManager.WriteValue($"{i}", "StartTime", monitor.StartTime.ToString());
+                INIManager.WriteValue($"{i}", "EndTime", monitor.EndTime.ToString());
+                INIManager.WriteValue($"{i}", "Active", monitor.IsActive.ToString());
+                INIManager.WriteValue($"{i}", "Name", monitor.Name);
+                INIManager.WriteValue($"{i}", "SysName", monitor.SysName);
             }
         }
 
@@ -65,13 +63,13 @@ namespace Light.Services
                 Screens.Add(new ScreenEntity
                 {
                     Instance = screen,
-                    UserGamma = _manager.GetValue<float>($"{index}", "UserGamma", "100"),
-                    UserBlueReduce = _manager.GetValue<float>($"{index}", "UserBlueReduce", "100"),
-                    StartTime = _manager.GetValue<int>($"{index}", "StartTime", "1380"),
-                    EndTime = _manager.GetValue<int>($"{index}", "EndTime", "420"),
-                    IsActive = _manager.GetValue<bool>($"{index}", "Active", "true"),
-                    Name = _manager.GetValue<string>($"{index}", "Name", $"#{index + 1}"),
-                    SysName = _manager.GetValue<string>($"{index}", "SysName", $"{screen.DeviceName}")
+                    UserGamma = INIManager.GetValue<float>($"{index}", "UserGamma", "100"),
+                    UserBlueReduce = INIManager.GetValue<float>($"{index}", "UserBlueReduce", "100"),
+                    StartTime = INIManager.GetValue<int>($"{index}", "StartTime", "1380"),
+                    EndTime = INIManager.GetValue<int>($"{index}", "EndTime", "420"),
+                    IsActive = INIManager.GetValue<bool>($"{index}", "Active", "true"),
+                    Name = INIManager.GetValue<string>($"{index}", "Name", $"#{index + 1}"),
+                    SysName = INIManager.GetValue<string>($"{index}", "SysName", $"{screen.DeviceName}")
                 });
                 index++;
             }
@@ -80,12 +78,12 @@ namespace Light.Services
         private void SaveProcesses()
         {
             var processStr = IgnoredProcesses.Aggregate("", (current, process) => current + $"{process.Name};");
-            _manager.WriteValue("Processes", "Ignored", processStr);
+            INIManager.WriteValue("Processes", "Ignored", processStr);
         }
 
         private void LoadProcesess()
         {
-            var processStr = _manager.GetValue<string>("Processes", "Ignored", "");
+            var processStr = INIManager.GetValue<string>("Processes", "Ignored", "");
 
             var strTable = processStr.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -99,7 +97,6 @@ namespace Light.Services
         {
             IgnoredProcesses = new ObservableCollection<ProcessEntity>();
             Screens = new ObservableCollection<ScreenEntity>();
-            _manager = new INIManager();
         }
     }
 }
