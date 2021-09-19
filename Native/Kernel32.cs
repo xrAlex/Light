@@ -10,10 +10,10 @@ namespace Light.Native
     internal static class Kernel32
     {
 
-        [DllImport("kernel32.dll", EntryPoint = "GetPrivateProfileString")]
-        public static extern int GetPrivateString(string section, string key, string def, StringBuilder buffer, int size, string path);
+        [DllImport("kernel32.dll")]
+        public static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder buffer, int size, string path);
 
-        [DllImport("kernel32.dll", EntryPoint = "WritePrivateProfileString")]
-        public static extern int WritePrivateString(string section, string key, string str, string path);
+        [DllImport("kernel32.dll")]
+        public static extern int WritePrivateProfileString(string section, string key, string str, string path);
     }
 }

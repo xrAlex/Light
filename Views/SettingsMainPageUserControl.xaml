@@ -42,7 +42,7 @@
             Cursor="Hand"
             Value="{Binding BlueReduce, Mode=TwoWay}"
             TickPlacement="Both" TickFrequency="10"
-            IsDirectionReversed="True" 
+            IsDirectionReversed="true" 
             Grid.Row="10" Grid.ColumnSpan="5" Grid.Column="1"/>
         <Slider 
             x:Name="GammaSlider" 

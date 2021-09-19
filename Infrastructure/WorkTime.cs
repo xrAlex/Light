@@ -14,8 +14,7 @@ namespace Light.Infrastructure
 
             if (endFromMin < startFromMin)
             {
-                if (currentMin < startFromMin && currentMin < endFromMin || currentMin >= startFromMin)
-                    return true;
+                if (currentMin < startFromMin && currentMin < endFromMin || currentMin >= startFromMin) return true;
             }
             else
             {
