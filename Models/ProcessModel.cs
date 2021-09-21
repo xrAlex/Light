@@ -2,7 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Forms;
+using Light.Infrastructure;
 using Light.Models.Entities;
+using Light.Native;
 using Light.Services;
 
 namespace Light.Models
@@ -10,6 +13,7 @@ namespace Light.Models
     public class ProcessModel
     {
         #region Fields
+
         public ObservableCollection<ProcessEntity> Processes { get; }
         public ObservableCollection<ProcessEntity> IgnoredProcesses { get; }
 
@@ -17,44 +21,38 @@ namespace Light.Models
 
         #region Methods
 
-        public void MoveToIngnoredProcesess()
+        public void MoveToIgnoredProcesses()
         {
-            foreach (var processEntity in Processes.ToArray())
-            {
-                if (!processEntity.IsSelected) continue;
-
-                IgnoredProcesses.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
-                Processes.Remove(processEntity);
-            }
+            Processes
+                .Where(x => x.IsSelected)
+                .ToList()
+                .ForEach(x =>
+                {
+                    IgnoredProcesses.Add(new ProcessEntity(x.Instance, x.Name));
+                    Processes.Remove(x);
+                });
         }
 
-        public void MoveToProcesess()
+        public void MoveToProcesses()
         {
-            foreach (var processEntity in IgnoredProcesses.ToArray())
-            {
-                if (!processEntity.IsSelected) continue;
-
-                Processes.Add(new ProcessEntity(processEntity.Instance, processEntity.Name));
-                IgnoredProcesses.Remove(processEntity);
-            }
+            IgnoredProcesses
+                .Where(x => x.IsSelected)
+                .ToList()
+                .ForEach(x =>
+                {
+                    Processes.Add(new ProcessEntity(x.Instance, x.Name));
+                    IgnoredProcesses.Remove(x);
+                });
         }
 
         private void FillProcessCollection()
         {
-            var processes = Process.GetProcesses();
-
-            foreach (var process in processes)
-            {
-                nint handler = process.MainWindowHandle;
-                if (handler == 0 || !Native.User32.IsWindowVisible(handler)) continue;
-
-                if (IgnoredProcesses.All(p => p.Name != process.ProcessName))
-                {
-                    Processes.Add(new ProcessEntity(process, process.ProcessName));
-                }
-            }
-
+            Process.GetProcesses()
+                .AsParallel()
+                .Where(x => WindowHelper.IsWindowValid(x.MainWindowHandle) && !IgnoredProcesses.Any(y => y.Name == x.ProcessName))
+                .ForAll(x => Processes.Add(new ProcessEntity(x, x.ProcessName)));
         }
+
 
         #endregion
 

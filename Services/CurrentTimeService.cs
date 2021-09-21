@@ -3,16 +3,6 @@ using System.Windows.Threading;
 
 namespace Light.Services
 {
-    public class TimeEventArgs : EventArgs
-    {
-        public TimeEventArgs(string currTime)
-        {
-            CurrTime = currTime;
-        }
-
-        public string CurrTime { get; set; }
-    }
-
     public class CurrentTimeService
     {
         public CurrentTimeService()

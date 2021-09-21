@@ -44,7 +44,7 @@ namespace Light.ViewModels
 
         private void OnCloseAppCommandExecute()
         {
-            _screenModel.SetDefaultGammaOnAllScreens();
+            _screenModel.SetDefaultColorTemperatureOnAllScreens();
             Application.Current.Shutdown();
         }
 
@@ -73,15 +73,15 @@ namespace Light.ViewModels
             var serviceLocator = ServiceLocator.Source;
             _windowService = serviceLocator.WindowService;
             var currentTimeService = serviceLocator.CurrentTimeService;
-            var gammaWatcher = serviceLocator.GammaWatcher;
+            var colorTemperatureWatcher = serviceLocator.ColorTemperatureWatcher;
 
             Screens = _screenModel.Screens;
             CurrentTime = currentTimeService.GetCurrentTime();
 
             currentTimeService.OnCurrTimeChanged += (sender, args) => { CurrentTime = args.CurrTime; };
 
-            _screenModel.ForceGamma();
-            gammaWatcher.StartWatch();
+            _screenModel.ForceColorTemperature();
+            colorTemperatureWatcher.StartWatch();
         }
     }
 }

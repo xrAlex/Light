@@ -20,8 +20,8 @@ namespace Light.ViewModels
                 MinStart = _screenModel.GetStartMin(SelectedScreenIndex);
                 HourEnd = _screenModel.GetEndHour(SelectedScreenIndex);
                 MinEnd = _screenModel.GetEndMin(SelectedScreenIndex);
-                Gamma = Screens[SelectedScreenIndex].UserGamma;
-                BlueReduce = Screens[SelectedScreenIndex].UserBlueReduce;
+                DayColorTemperature = Screens[SelectedScreenIndex].DayColorTemperature;
+                NightColorTemperature = Screens[SelectedScreenIndex].NightColorTemperature;
             }
         }
 
@@ -47,22 +47,22 @@ namespace Light.ViewModels
             }
         }
 
-        public float Gamma
+        public int DayColorTemperature
         {
-            get => Screens[SelectedScreenIndex].CurrentGamma;
+            get => Screens[SelectedScreenIndex].DayColorTemperature;
             set
             {
-                _screenModel.SetUserGamma(value, SelectedScreenIndex);
+                _screenModel.SetDayColorTemperature(value, SelectedScreenIndex);
                 OnPropertyChanged();
             }
         }
 
-        public float BlueReduce
+        public int NightColorTemperature
         {
-            get => Screens[SelectedScreenIndex].CurrentBlueReduce;
+            get => Screens[SelectedScreenIndex].NightColorTemperature;
             set
             {
-                _screenModel.SetUserBlueReduce(value, SelectedScreenIndex);
+                _screenModel.SetNightColorTemperature(value, SelectedScreenIndex);
                 OnPropertyChanged();
             }
         }
@@ -126,8 +126,7 @@ namespace Light.ViewModels
             _settings = services.Settings;
             Screens = _screenModel.Screens;
             SelectedScreenIndex = _settings.SelectedScreen;
-            _screenModel.ForceUserValuesOnScreens();
+            _screenModel.ForceColorTemperature();
         }
-
     }
 }

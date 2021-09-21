@@ -4,13 +4,15 @@ namespace Light.Services
 {
     public class ServiceLocator
     {
-        private GammaWatcherService _gammaWatcher;
+        // TODO: Di Container
+
+        private ColorTemperatureWatcherService _colorTemperatureWatcher;
         private SettingsService _settings;
         private WindowService _windowService;
         private CurrentTimeService _currentTimeService;
 
         public SettingsService Settings => _settings ??= new();
-        public GammaWatcherService GammaWatcher => _gammaWatcher ??= new();
+        public ColorTemperatureWatcherService ColorTemperatureWatcher => _colorTemperatureWatcher ??= new();
 
         public WindowService WindowService => _windowService ??= new();
 

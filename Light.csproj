@@ -70,7 +70,7 @@
     <Compile Include="Converters\HourConverter.cs" />
     <Compile Include="Converters\MinConverter.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
-    <Compile Include="Infrastructure\ProcessBounds.cs" />
+    <Compile Include="Infrastructure\WindowHelper.cs" />
     <Compile Include="Infrastructure\WorkTime.cs" />
     <Compile Include="Models\Entities\ScreenEntity.cs" />
     <Compile Include="Models\ProcessModel.cs" />
@@ -81,13 +81,13 @@
     <Compile Include="Native\Kernel32.cs" />
     <Compile Include="Native\Rect.cs" />
     <Compile Include="Native\User32.cs" />
-    <Compile Include="Services\GammaWatcherService.cs" />
-    <Compile Include="Services\IDialog.cs" />
+    <Compile Include="Services\ColorTemperatureWatcherService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Models\ScreenModel.cs" />
     <Compile Include="Services\CurrentTimeService.cs" />
     <Compile Include="Services\IWindowService.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
+    <Compile Include="Services\TimeEventArgs.cs" />
     <Compile Include="Services\WindowService.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -184,6 +184,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

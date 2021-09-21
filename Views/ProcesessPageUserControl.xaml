@@ -99,7 +99,7 @@
             BorderThickness="0"
             VerticalAlignment="Top" HorizontalAlignment="Left" 
             Width="60" Height="40" 
-            Command="{Binding MoveToIgnoredProcesessCommand, Mode=OneWay}"
+            Command="{Binding MoveToIgnoredProcessesCommand, Mode=OneWay}"
             RenderTransformOrigin="0.5,0.5"/>
         <Button 
             Style="{StaticResource LightGrayButton}" 
@@ -110,7 +110,7 @@
             HorizontalAlignment="Left" VerticalAlignment="Top"                   
             Width="60" Height="35"
             IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
-            Command="{Binding MoveToProcesessCommand, Mode=OneWay}"
+            Command="{Binding MoveToProcessesCommand, Mode=OneWay}"
             RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>

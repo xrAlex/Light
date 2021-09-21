@@ -118,16 +118,22 @@
                             Margin="-55,0,0,6"
                             Height="Auto" Width="Auto"/>
                         <TextBlock
-                            Text="{Binding CurrentGamma, Mode=OneWay, StringFormat=Гамма: \{0:N0\}, UpdateSourceTrigger=PropertyChanged}" 
+                            Text="{Binding CurrentColorTemperature, Mode=OneWay, StringFormat= K : \{0\}, UpdateSourceTrigger=PropertyChanged}" 
                             HorizontalAlignment="Right" VerticalAlignment="Center" 
                             FontSize="12" 
-                            Margin="3,0,0,18"
+                            Margin="3,0,0,29"
                             Height="Auto" Width="100"/>
                         <TextBlock
-                            Text="{Binding CurrentBlueReduce, Mode=OneWay, StringFormat=Ночной свет: \{0:N0\}, UpdateSourceTrigger=PropertyChanged}" 
+                            Text="{Binding  DayColorTemperature, Mode=OneWay, StringFormat=День K : \{0\}, UpdateSourceTrigger=PropertyChanged}" 
                             HorizontalAlignment="Right" VerticalAlignment="Center" 
                             FontSize="12" 
-                            Margin="-100,0,0,-23"
+                            Margin="-100,0,0,-1.6"
+                            Height="Auto" Width="100"/>
+                        <TextBlock
+                            Text="{Binding  NightColorTemperature, Mode=OneWay, StringFormat=Ночь K : \{0\}, UpdateSourceTrigger=PropertyChanged}" 
+                            HorizontalAlignment="Right" VerticalAlignment="Center" 
+                            FontSize="12" 
+                            Margin="-100,0,0,-31"
                             Height="Auto" Width="100"/>
                     </StackPanel>
                 </DataTemplate>

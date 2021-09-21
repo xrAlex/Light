@@ -31,18 +31,18 @@ namespace Light.ViewModels
 
         #region Commands
 
-        public ICommand MoveToIgnoredProcesessCommand { get; }
-        public ICommand MoveToProcesessCommand { get; }
+        public ICommand MoveToIgnoredProcessesCommand { get; }
+        public ICommand MoveToProcessesCommand { get; }
 
-        private void OnMoveToIgnoredProcesessCommandExecute() => _processModel.MoveToIngnoredProcesess();
-        private void OnMoveToProcesessCommandExecute() => _processModel.MoveToProcesess();
+        private void OnMoveToIgnoredProcessesCommandExecute() => _processModel.MoveToIgnoredProcesses();
+        private void OnMoveToProcessesCommandExecute() => _processModel.MoveToProcesses();
 
         #endregion
 
         public ProcessPageViewModel()
         {
-            MoveToIgnoredProcesessCommand = new LambdaCommand(p => OnMoveToIgnoredProcesessCommandExecute());
-            MoveToProcesessCommand = new LambdaCommand(p => OnMoveToProcesessCommandExecute());
+            MoveToIgnoredProcessesCommand = new LambdaCommand(p => OnMoveToIgnoredProcessesCommandExecute());
+            MoveToProcessesCommand = new LambdaCommand(p => OnMoveToProcessesCommandExecute());
 
             _processModel = new ProcessModel();
             var serviceLocator = ServiceLocator.Source;

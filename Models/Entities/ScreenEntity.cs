@@ -17,10 +17,10 @@ namespace Light.Models.Entities
         private bool _active;
         private int _startTime = 1380;
         private int _endTime = 720;
-        private float _currentGamma = 100;
+        private float _currentColorTemperature = 100;
         private float _currentBlueReduce = 100;
-        private float _userGamma = 100;
-        private float _userBlueReduce = 100;
+        private int _dayColorTemperature = 6600;
+        private int _nightColorTemperature = 4000;
         private float _uiOpacity = 1f;
 
         #endregion
@@ -72,12 +72,12 @@ namespace Light.Models.Entities
             }
         }
 
-        public float CurrentGamma
+        public float CurrentColorTemperature
         {
-            get => _currentGamma;
+            get => _currentColorTemperature;
             set
             {
-                _currentGamma = value;
+                _currentColorTemperature = value;
                 OnPropertyChanged();
             }
         }
@@ -92,22 +92,22 @@ namespace Light.Models.Entities
             }
         }
 
-        public float UserGamma
+        public int DayColorTemperature
         {
-            get => _userGamma;
+            get => _dayColorTemperature;
             set
             {
-                _userGamma = value;
+                _dayColorTemperature = value;
                 OnPropertyChanged();
             }
         }
 
-        public float UserBlueReduce
+        public int NightColorTemperature
         {
-            get => _userBlueReduce;
+            get => _nightColorTemperature;
             set
             {
-                _userBlueReduce = value;
+                _nightColorTemperature = value;
                 OnPropertyChanged();
             }
         }

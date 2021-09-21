@@ -34,26 +34,28 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Slider 
-            x:Name="BlueReduceSlider"
-            Style="{StaticResource Horizontal_Slider}" 
+            x:Name="NightSlider"
+            Style="{StaticResource HorizontalSlider}" 
             VerticalAlignment="Top" HorizontalAlignment="Left" 
             Width="360" Height="30"
-            Maximum="100" Minimum="1" 
+            Maximum="11900" Minimum="1000" 
+            TickFrequency="100"
+            IsSnapToTickEnabled ="True"
             Cursor="Hand"
-            Value="{Binding BlueReduce, Mode=TwoWay}"
-            TickPlacement="Both" TickFrequency="10"
-            IsDirectionReversed="true" 
+            IsDirectionReversed="true"
+            Value="{Binding NightColorTemperature, Mode=TwoWay}"
             Grid.Row="10" Grid.ColumnSpan="5" Grid.Column="1"/>
         <Slider 
-            x:Name="GammaSlider" 
-            Style="{StaticResource Horizontal_Slider}"
+            x:Name="DaySlider" 
+            Style="{StaticResource HorizontalSlider}"
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Width="360" Height="30"
-            Maximum="100" Minimum="1" 
+            Maximum="11900" Minimum="1000" 
+            TickFrequency="100"
+            IsSnapToTickEnabled ="True"
             Cursor="Hand"
-            TickPlacement="Both" TickFrequency="10"
             IsDirectionReversed="True" 
-            Value="{Binding Gamma, Mode=TwoWay}"
+            Value="{Binding DayColorTemperature, Mode=TwoWay}"
             Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="5"/>
         <TextBox 
             IsReadOnly="True"
@@ -64,7 +66,7 @@
             TextWrapping="Wrap" 
             Cursor="Arrow"
             MaxLength="3"
-            Text="{Binding Value, ElementName=GammaSlider, StringFormat=Гамма: \{0:N0\}, Mode=OneWay}" 
+            Text="{Binding Value, ElementName=DaySlider, StringFormat=Дневной свет: \{0:N0\}, Mode=OneWay}" 
             Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="5"/>
         <TextBox 
             IsReadOnly="True"
@@ -74,7 +76,7 @@
             Focusable="False"
             TextWrapping="Wrap" 
             Cursor="Arrow"
-            Text="{Binding Value, ElementName=BlueReduceSlider, StringFormat=Ночной свет: \{0:N0\}, Mode=OneWay}" 
+            Text="{Binding Value, ElementName=NightSlider, StringFormat=Ночной свет: \{0:N0\}, Mode=OneWay}" 
             Grid.Row="9" Grid.ColumnSpan="5" Grid.Column="1"/>
         <TextBox 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
@@ -156,7 +158,7 @@
             Height="2" Width="2"
             Margin="99,9,0,0"           
             Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="listBox"
+        <ListBox
             Grid.ColumnSpan="5" Grid.Column="1" 
             HorizontalAlignment="Center"          
             Grid.Row="4" 

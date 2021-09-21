@@ -83,7 +83,7 @@
         </Grid>
     </ControlTemplate>
 
-    <Style x:Key="Horizontal_Slider" TargetType="Slider">
+    <Style x:Key="HorizontalSlider" TargetType="Slider">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />

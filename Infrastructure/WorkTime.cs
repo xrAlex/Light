@@ -5,7 +5,7 @@ namespace Light.Infrastructure
 {
     public class WorkTime
     {
-        public bool IsWorkTime(ScreenEntity screen)
+        public bool IsNightTemperatureTime(ScreenEntity screen)
         {
             var currentTime = DateTime.Now;
             var currentMin = ConvertToMin(currentTime.Hour, currentTime.Minute);

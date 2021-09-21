@@ -27,7 +27,7 @@ namespace Light.ViewModels
 
         private readonly WindowService _windowService;
         private readonly SettingsService _settings;
-        private readonly GammaWatcherService _gammaWatcher;
+        private readonly ColorTemperatureWatcherService _colorTemperatureWatcher;
         public OtherSettingsPageViewModel OtherSettingsPage { get; }
         public SettingsMainPageViewModel SettingsMainPage { get; }
         public ProcessPageViewModel ProcessPage { get; }
@@ -55,14 +55,14 @@ namespace Light.ViewModels
         {
             _settings.Reset();
             _windowService.CloseWindow();
-            _gammaWatcher.StartWatch();
+            _colorTemperatureWatcher.StartWatch();
         }
 
         private void OnApplySettingsCommandExecute()
         {
             _settings.Save();
             _windowService.CloseWindow();
-            _gammaWatcher.StartWatch();
+            _colorTemperatureWatcher.StartWatch();
         }
 
         #endregion
@@ -77,13 +77,13 @@ namespace Light.ViewModels
             var serviceLocator = ServiceLocator.Source;
             _settings = serviceLocator.Settings;
             _windowService = serviceLocator.WindowService;
-            _gammaWatcher = serviceLocator.GammaWatcher;
+            _colorTemperatureWatcher = serviceLocator.ColorTemperatureWatcher;
 
             OtherSettingsPage = new OtherSettingsPageViewModel();
             SettingsMainPage = new SettingsMainPageViewModel();
             ProcessPage = new ProcessPageViewModel();
             SelectedViewModel = SettingsMainPage;
-            _gammaWatcher.StopWatch();
+            _colorTemperatureWatcher.StopWatch();
         }
     }
 }

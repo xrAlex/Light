@@ -1,36 +1,61 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using Light.Native;
 
 namespace Light.Infrastructure
 {
-    public class GammaRegulator
+    public static class ColorTemperatureRegulator
     {
-        public void ApplyGamma(float gammaIntensity, float blueReduceIntensity, string screenName)
+        // Algorithm taken from http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code
+        private static double GetRedFromKelvin(int temp)
         {
-            var dc = Native.Gdi32.CreateDC(screenName, null, null, 0);
-            const int minChannelValue = 64;
-            const int maxChannelValue = 256;
-            const int maxUShort = 65535;
+            if (temp > 6600) return Math.Pow(temp * 0.01 - 60, -0.1332047592) * 329.698727446 / 255;
 
-            Native.GammaRamp channels = new()
+            return 1;
+        }
+
+        private static double GetGreenFromKelvin(int temp)
+        {
+            if (temp > 6600) return Math.Pow(temp / 100 - 60, -0.0755148492) * 288.1221695283 / 255;
+
+            return (Math.Log(temp * 0.01) * 99.4708025861 - 161.1195681661) / 255;
+        }
+
+        private static double GetBlueFromKelvin(int temp)
+        {
+            if (temp >= 6600) return 1;
+            if (temp <= 1900) return 0;
+
+            return (Math.Log(temp * 0.01 - 10) * 138.5177312231 - 305.0447927307) / 255;
+        }
+
+        public static void ApplyColorTemperature(int colorTemperature, string screenName)
+        {
+            // Brightness 0.1 -1
+            var dc = Gdi32.CreateDC(screenName, null, null, 0);
+            const int maxChannelValue = 256;
+            const int channelMult = 255;
+
+            var redMult = GetRedFromKelvin(colorTemperature);
+            var greenMult = GetGreenFromKelvin(colorTemperature);
+            var blueMult = GetBlueFromKelvin(colorTemperature);
+
+            GammaRamp channels = new()
             {
-                Blue = new ushort[maxChannelValue],
+                Red = new ushort[maxChannelValue],
                 Green = new ushort[maxChannelValue],
-                Red = new ushort[maxChannelValue]
+                Blue = new ushort[maxChannelValue]
             };
 
-            for (var i = 1; i < maxChannelValue; i++)
+            for (var i = 0; i < maxChannelValue; i++)
             {
-                var value = i * (gammaIntensity + minChannelValue);
-                value = value > maxUShort ? maxUShort : value;
-
-                channels.Red[i] = Convert.ToUInt16(value);
-                channels.Green[i] = Convert.ToUInt16(value);
-                channels.Blue[i] = Convert.ToUInt16(value * blueReduceIntensity);
+                channels.Red[i] = (ushort) (i * channelMult * redMult);
+                channels.Green[i] = (ushort) (i * channelMult * greenMult);
+                channels.Blue[i] = (ushort) (i * channelMult * blueMult);
             }
 
-            Native.Gdi32.SetDeviceGammaRamp(dc, ref channels);
-            Native.Gdi32.DeleteDC(dc);
+            Gdi32.SetDeviceGammaRamp(dc, ref channels);
+            Gdi32.DeleteDC(dc);
         }
     }
 }

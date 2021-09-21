@@ -10,7 +10,6 @@ namespace Light.Models
     {
         #region Fields
 
-        private readonly GammaRegulator _gammaRegulator;
         public ObservableCollection<ScreenEntity> Screens { get; }
 
         #endregion
@@ -18,10 +17,6 @@ namespace Light.Models
         #region Values
 
         private const int Hour = 60;
-        private const float DefaultGamma = 192f;
-        private const float DefaultBlueReduce = 1f;
-        private const float BlueReduceMult = 0.01f;
-        private const float GammaMult = 1.92f;
 
         #endregion
 
@@ -43,108 +38,84 @@ namespace Light.Models
 
         private ScreenEntity GetScreen(int screenIndex) => Screens[screenIndex];
 
+        public void SetColorTemperature(int colorTemperature, ScreenEntity screen) => ApplyColorTemperatureValues(colorTemperature, screen);
+        public void SetDayTemperature(ScreenEntity screen) => SetColorTemperature(screen.DayColorTemperature, screen);
+        public void SetNightTemperature(ScreenEntity screen) => SetColorTemperature(screen.NightColorTemperature, screen);
 
-        private void ApplyGammaValues(float gamma = 0f, float blueReduce = 0f, ScreenEntity screen = null, bool forced = false)
-        {
-            if (screen == null || (!screen.IsActive && !forced)) return;
-
-            var validatedGamma = gamma != 0f ? gamma : screen.CurrentGamma;
-            var validatedBlueReduce = blueReduce != 0f ? blueReduce : screen.CurrentBlueReduce;
-
-            _gammaRegulator.ApplyGamma(validatedGamma * GammaMult, validatedBlueReduce * BlueReduceMult, screen.SysName);
-            screen.CurrentGamma = validatedGamma;
-            screen.CurrentBlueReduce = validatedBlueReduce;
-        }
-
-        private void SetGamma(float gamma, ScreenEntity screen)
-        {
-            ApplyGammaValues(gamma, 0f, screen);
-        }
-
-        private void SetBlueReduce(float blueReduce, ScreenEntity screen)
-        {
-            ApplyGammaValues(0f, blueReduce, screen);
-        }
-
-        public void SetUserGamma(float gamma, int screenIndex)
+        public void SetDayColorTemperature(int colorTemperature, int screenIndex)
         {
             var screen = GetScreen(screenIndex);
-            ApplyGammaValues(gamma, 0f, screen);
-            screen.UserGamma = gamma;
+            ApplyColorTemperatureValues(colorTemperature, screen);
+            screen.DayColorTemperature = colorTemperature;
         }
 
-        public void SetUserBlueReduce(float blueReduce, int screenIndex)
+        public void SetNightColorTemperature(int colorTemperature, int screenIndex)
         {
             var screen = GetScreen(screenIndex);
-            ApplyGammaValues(0f, blueReduce, screen);
-            screen.UserBlueReduce = blueReduce;
+            ApplyColorTemperatureValues(colorTemperature, screen);
+            screen.NightColorTemperature = colorTemperature;
         }
 
-        public void SetDefaultValues(ScreenEntity screen)
-        {
-            SetGamma(100f, screen);
-            SetBlueReduce(100f, screen);
-        }
-
-        public void SetUserValues(ScreenEntity screen)
-        {
-            SetGamma(screen.UserGamma, screen);
-            SetBlueReduce(screen.UserBlueReduce, screen);
-        }
-
-        public void ForceUserValuesOnScreens()
+        public void ForceDayTemperatureOnScreens()
         {
             foreach (var screen in Screens)
             {
                 if (screen.IsActive)
                 {
-                    SetUserValues(screen);
+                    SetDayTemperature(screen);
                 }
             }
         }
 
-        public void ForceDefaultValuesOnScreens()
+        public void ForceNightTemperatureOnScreens()
         {
             foreach (var screen in Screens)
             {
                 if (screen.IsActive)
                 {
-                    SetDefaultValues(screen);
+                    SetNightTemperature(screen);
                 }
             }
         }
 
-        public void SetDefaultGammaOnAllScreens()
+        public void SetDefaultColorTemperatureOnAllScreens()
         {
             foreach (var screen in Screen.AllScreens)
             {
-                _gammaRegulator.ApplyGamma(DefaultGamma, DefaultBlueReduce, screen.DeviceName);
+                ColorTemperatureRegulator.ApplyColorTemperature(6600, screen.DeviceName);
             }
         }
 
-        public void ForceGamma()
+        public void ForceColorTemperature()
         {
             var workTime = new WorkTime();
             foreach (var screen in Screens)
             {
                 if (!screen.IsActive) continue;
 
-                if (workTime.IsWorkTime(screen))
+                if (workTime.IsNightTemperatureTime(screen))
                 {
-                    SetUserValues(screen);
+                    SetNightTemperature(screen);
                 }
                 else
                 {
-                    SetDefaultValues(screen);
+                    SetDayTemperature(screen);
                 }
             }
+        }
+
+        private void ApplyColorTemperatureValues(int colorTemperature, ScreenEntity screen)
+        {
+            if (screen == null) return;
+
+            ColorTemperatureRegulator.ApplyColorTemperature(colorTemperature, screen.SysName);
+            screen.CurrentColorTemperature = colorTemperature;
         }
 
         #endregion
 
         public ScreenModel()
         {
-            _gammaRegulator = new GammaRegulator();
             var serviceLocator = ServiceLocator.Source;
             var settingsService = serviceLocator.Settings;
             Screens = settingsService.Screens;

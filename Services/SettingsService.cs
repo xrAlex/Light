@@ -45,8 +45,8 @@ namespace Light.Services
             for (var i = 0; i < Screens.Count; i++)
             {
                 var monitor = Screens[i];
-                INIManager.WriteValue($"{i}", "UserGamma", monitor.UserGamma.ToString());
-                INIManager.WriteValue($"{i}", "UserBlueReduce", monitor.UserBlueReduce.ToString());
+                INIManager.WriteValue($"{i}", "DayColorTemperature", monitor.DayColorTemperature.ToString());
+                INIManager.WriteValue($"{i}", "NightColorTemperature", monitor.NightColorTemperature.ToString());
                 INIManager.WriteValue($"{i}", "StartTime", monitor.StartTime.ToString());
                 INIManager.WriteValue($"{i}", "EndTime", monitor.EndTime.ToString());
                 INIManager.WriteValue($"{i}", "Active", monitor.IsActive.ToString());
@@ -63,8 +63,8 @@ namespace Light.Services
                 Screens.Add(new ScreenEntity
                 {
                     Instance = screen,
-                    UserGamma = INIManager.GetValue<float>($"{index}", "UserGamma", "100"),
-                    UserBlueReduce = INIManager.GetValue<float>($"{index}", "UserBlueReduce", "100"),
+                    DayColorTemperature = INIManager.GetValue<int>($"{index}", "DayColorTemperature", "6600"),
+                    NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "4000"),
                     StartTime = INIManager.GetValue<int>($"{index}", "StartTime", "1380"),
                     EndTime = INIManager.GetValue<int>($"{index}", "EndTime", "420"),
                     IsActive = INIManager.GetValue<bool>($"{index}", "Active", "true"),
