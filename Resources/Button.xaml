@@ -76,6 +76,18 @@
         </Setter>
     </Style>
 
+    <Style x:Key="TransparentButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="Transparent">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="DeepGrayButton" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonChangableBackgroundOpacity}">
         <Setter Property="Background" Value="{StaticResource TDeepGray}"/>
     </Style>

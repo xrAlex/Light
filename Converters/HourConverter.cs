@@ -12,10 +12,7 @@ namespace Light.Converters
             var hour = (int)value;
             var result = System.Convert.ToString(hour);
 
-            if (result.Length < 2)
-            {
-                result = $"0{result}";
-            }
+            if (result.Length < 2) result = $"0{result}";
 
             return result;
         }
@@ -23,18 +20,10 @@ namespace Light.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var valid = int.TryParse((string)value, out var hour);
-            if (valid)
-            {
-                if (hour is > 23 or < 0)
-                {
-                    hour = 23;
-                }
-                return hour;
-            }
-            else
-            {
-                return DependencyProperty.UnsetValue;
-            }
+            if (!valid) return DependencyProperty.UnsetValue;
+            if (hour is > 23 or < 0) hour = 23;
+
+            return hour;
         }
     }
 }

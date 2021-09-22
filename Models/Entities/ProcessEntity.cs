@@ -7,19 +7,26 @@ namespace Light.Models.Entities
 {
     public class ProcessEntity
     {
+        private bool isSelected;
         public Process Instance { get; }
         public string Name { get; }
-        public bool IsSelected { get; set; }
+
+        public bool IsSelected
+        {
+            get => isSelected;
+            set
+            {
+                isSelected = value;
+
+            }
+        }
+
         private bool OnFullScreen { get; set; }
         private string DisplayedText => $"{Name} {(Instance != null ? "" : "[N/A]")} {(OnFullScreen ? "[FullScreen]" : "")}";
         public override string ToString() => DisplayedText;
 
-        private Process TryFindProcessInstance(string processName)
-        {
-            var processes = Process.GetProcesses();
-            return processes.FirstOrDefault(process => process.ProcessName == processName);
-        }
-
+        private Process TryFindProcessInstance(string processName) => Process.GetProcesses().FirstOrDefault(process => process.ProcessName == processName);
+        
         private bool IsFullScreenProcess()
         {
             if (Instance == null) return false;
@@ -37,7 +44,7 @@ namespace Light.Models.Entities
         public ProcessEntity(Process instance = null, string name = "")
         {
             Instance = instance ?? TryFindProcessInstance(name);
-            Name = name;
+            Name = name == "" && instance != null? Instance.ProcessName : name;
             OnFullScreen = IsFullScreenProcess();
         }
     }

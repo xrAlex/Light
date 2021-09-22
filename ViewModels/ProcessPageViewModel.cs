@@ -25,30 +25,24 @@ namespace Light.ViewModels
         private readonly ProcessModel _processModel;
         private readonly SettingsService _settings;
         public ObservableCollection<ProcessEntity> Processes { get; }
-        public ObservableCollection<ProcessEntity> IgnoredProceses { get; }
 
         #endregion
 
         #region Commands
 
         public ICommand MoveToIgnoredProcessesCommand { get; }
-        public ICommand MoveToProcessesCommand { get; }
-
         private void OnMoveToIgnoredProcessesCommandExecute() => _processModel.MoveToIgnoredProcesses();
-        private void OnMoveToProcessesCommandExecute() => _processModel.MoveToProcesses();
 
         #endregion
 
         public ProcessPageViewModel()
         {
             MoveToIgnoredProcessesCommand = new LambdaCommand(p => OnMoveToIgnoredProcessesCommandExecute());
-            MoveToProcessesCommand = new LambdaCommand(p => OnMoveToProcessesCommandExecute());
 
             _processModel = new ProcessModel();
             var serviceLocator = ServiceLocator.Source;
             _settings = serviceLocator.Settings;
             Processes = _processModel.Processes;
-            IgnoredProceses = _processModel.IgnoredProcesses;
         }
     }
 }

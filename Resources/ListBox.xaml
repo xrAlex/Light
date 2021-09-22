@@ -25,10 +25,10 @@
                     <Border>
                         <Grid>
                             <Border x:Name="BorderSelectedFocused" 
-                                CornerRadius="3" 
-                                Padding="{TemplateBinding Padding}"
-                                Background="{StaticResource TGray}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    CornerRadius="3" 
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{StaticResource TGray}" 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             </Border>
                             <Border x:Name="BorderNavi" 
                                 CornerRadius="3" 

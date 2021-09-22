@@ -23,25 +23,13 @@ namespace Light.Models
 
         public void MoveToIgnoredProcesses()
         {
+            IgnoredProcesses.Clear();
             Processes
                 .Where(x => x.IsSelected)
                 .ToList()
                 .ForEach(x =>
                 {
                     IgnoredProcesses.Add(new ProcessEntity(x.Instance, x.Name));
-                    Processes.Remove(x);
-                });
-        }
-
-        public void MoveToProcesses()
-        {
-            IgnoredProcesses
-                .Where(x => x.IsSelected)
-                .ToList()
-                .ForEach(x =>
-                {
-                    Processes.Add(new ProcessEntity(x.Instance, x.Name));
-                    IgnoredProcesses.Remove(x);
                 });
         }
 
@@ -49,8 +37,17 @@ namespace Light.Models
         {
             Process.GetProcesses()
                 .AsParallel()
-                .Where(x => WindowHelper.IsWindowValid(x.MainWindowHandle) && !IgnoredProcesses.Any(y => y.Name == x.ProcessName))
-                .ForAll(x => Processes.Add(new ProcessEntity(x, x.ProcessName)));
+                .Where(x => WindowHelper.IsWindowValid(x.MainWindowHandle))
+                .ForAll(x =>
+                {
+                    Processes.Add
+                    (
+                        new ProcessEntity(x, x.ProcessName)
+                        {
+                            IsSelected = IgnoredProcesses.Any(y => y.Name == x.ProcessName)
+                        }
+                    );
+                });
         }
 
 

@@ -1,39 +1,39 @@
 ﻿<UserControl x:Class="Light.Views.MainWindowUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewmodels="clr-namespace:Light.ViewModels" 
-             mc:Ignorable="d" 
-             d:DesignHeight="330" d:DesignWidth="440" 
-             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}"   
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewmodels="clr-namespace:Light.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="330" d:DesignWidth="440"
+             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}"
              Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="28*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="37*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="28*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="37*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="24*"/>
-            <RowDefinition Height="14*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="24*" />
+            <RowDefinition Height="14*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Rectangle
             Fill="#FF292929"
             HorizontalAlignment="Left" VerticalAlignment="Top"
-            Height="60" Width="440" Grid.ColumnSpan="9" Grid.RowSpan="3"/>
+            Height="60" Width="440" Grid.ColumnSpan="9" Grid.RowSpan="3" />
         <TextBox
             Background="Transparent" Foreground="White"
             Text="Light v1.0"
@@ -42,8 +42,8 @@
             Focusable="False"
             Cursor="Arrow"
             BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-            Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            Grid.RowSpan="3" Grid.ColumnSpan="2" />
         <TextBox
             Background="Transparent" Foreground="White"
             Text="{Binding CurrentTime}"
@@ -52,19 +52,19 @@
             Focusable="False"
             Cursor="Arrow"
             BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-            Grid.Column="3" Grid.RowSpan="3"/>
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            Grid.Column="3" Grid.RowSpan="3" />
         <Button
             Style="{StaticResource DeepGrayButton}"
-            Content="—" 
+            Content="—"
             FontSize="20"
-            HorizontalAlignment="Center" VerticalAlignment="Top" 
-            BorderThickness="0"          
-            Cursor="Hand" 
-            Foreground="#FFF1F1F1" 
-            VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
-            Width="30" Height="30" 
-            Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"/>
+            HorizontalAlignment="Center" VerticalAlignment="Top"
+            BorderThickness="0"
+            Cursor="Hand"
+            Foreground="#FFF1F1F1"
+            VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+            Width="30" Height="30"
+            Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" />
         <Button
             BorderThickness="0"
             Style="{StaticResource DeepGrayButton}"
@@ -72,70 +72,85 @@
             Cursor="Hand"
             Command="{Binding CloseAppCommand, Mode=OneWay}"
             Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2">
-            <Image 
+            <Image
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                Width="20" Height="20" 
-                Source="{StaticResource TurnOff}" Stretch="Fill"/>
+                Width="20" Height="20"
+                Source="{StaticResource TurnOff}" Stretch="Fill" />
         </Button>
-        <Button         
+        <Button
             Style="{StaticResource RotaryButton}"
-            BorderThickness="0"          
+            BorderThickness="0"
             RenderTransformOrigin="0.5,0.5"
-            Cursor="Hand" 
+            Cursor="Hand"
             Command="{Binding OpenSettingsWindowCommand, Mode=OneWay}"
             Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3">
-            <Image 
+            <Image
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                Width="50" Height="50"               
-                Source="{StaticResource Settings}"/>
+                Width="50" Height="50"
+                Source="{StaticResource Settings}" />
         </Button>
-        <ListBox 
+        <ListBox
             HorizontalAlignment="Center" HorizontalContentAlignment="Left"
             ItemsSource="{Binding Screens, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Center"
             IsEnabled="False"
             BorderThickness="0"
-            Height="190" Width="400" 
+            Height="190" Width="400"
             Grid.ColumnSpan="6" Grid.Column="1" Grid.RowSpan="2" Grid.Row="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel 
-                        Orientation="Horizontal" 
-                        Width="Auto" Height="Auto" 
-                        HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Image              
-                            Source="{StaticResource MonitorBlack}"
-                            RenderOptions.BitmapScalingMode="HighQuality"
-                            VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                            Width="55" Height="55" 
-                            Stretch="Fill"/>
-                        <TextBlock
-                            Text="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                            FontSize="12" 
-                            Margin="-55,0,0,6"
-                            Height="Auto" Width="Auto"/>
-                        <TextBlock
-                            Text="{Binding CurrentColorTemperature, Mode=OneWay, StringFormat= K : \{0\}, UpdateSourceTrigger=PropertyChanged}" 
-                            HorizontalAlignment="Right" VerticalAlignment="Center" 
-                            FontSize="12" 
-                            Margin="3,0,0,29"
-                            Height="Auto" Width="100"/>
-                        <TextBlock
-                            Text="{Binding  DayColorTemperature, Mode=OneWay, StringFormat=День K : \{0\}, UpdateSourceTrigger=PropertyChanged}" 
-                            HorizontalAlignment="Right" VerticalAlignment="Center" 
-                            FontSize="12" 
-                            Margin="-100,0,0,-1.6"
-                            Height="Auto" Width="100"/>
-                        <TextBlock
-                            Text="{Binding  NightColorTemperature, Mode=OneWay, StringFormat=Ночь K : \{0\}, UpdateSourceTrigger=PropertyChanged}" 
-                            HorizontalAlignment="Right" VerticalAlignment="Center" 
-                            FontSize="12" 
-                            Margin="-100,0,0,-31"
-                            Height="Auto" Width="100"/>
-                    </StackPanel>
+                    <GroupBox Header="{Binding Name, Mode=OneWay, StringFormat=Monitor: \{0:N0\}}">
+                        <Grid Height="67" Width="200">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56*"/>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="65*"/>
+                                <ColumnDefinition Width="72*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*"/>
+                                <RowDefinition Height="18*"/>
+                                <RowDefinition Height="18*"/>
+                                <RowDefinition Height="19*"/>
+                                <RowDefinition Height="7*"/>
+                            </Grid.RowDefinitions>
+                            <Image
+                                Source="{StaticResource MonitorBlack}"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                VerticalAlignment="Center" HorizontalAlignment="Left"
+                                Stretch="Fill" Grid.Row="0"
+                                Grid.Column="0" Grid.RowSpan="4" Height="60" Width="56"/>
+
+                            <TextBlock
+                                Text="{Binding CurrentColorTemperature, Mode=OneWay, StringFormat= CTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="12" 
+                                Grid.Column="2" Grid.Row="1"/>
+                            <TextBlock
+                                Text="{Binding CurrentBrightness, Mode=OneWay, StringFormat= CBT : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="12" 
+                                Grid.Column="3" Grid.Row="1"/>
+
+                            <TextBlock
+                                Text="{Binding DayColorTemperature, Mode=OneWay, StringFormat= DTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="12"
+                                Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2"/>
+                            <TextBlock
+                                Text="{Binding DayBrightness, Mode=OneWay, StringFormat= DBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="12"
+                                Grid.Column="3" Grid.Row="2"/>
+
+                            <TextBlock
+                                Text="{Binding  NightColorTemperature, Mode=OneWay, StringFormat=NTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="12"
+                                Grid.Row="3" Grid.Column="2" Height="Auto" />
+                            <TextBlock
+                                Text="{Binding  NightBrightness, Mode=OneWay, StringFormat=NBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="12"
+                                Grid.Row="3" Grid.Column="3" Height="Auto" />
+                        </Grid>
+                    </GroupBox>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

@@ -56,7 +56,7 @@ namespace Light.ViewModels
         private void OnOpenSettingsWindowCommandExecute()
         {
             var settingsVM = new SettingsWindowViewModel();
-            _windowService.CreateWindow(settingsVM, 350, 450);
+            _windowService.CreateWindow(settingsVM, 500, 450);
             _windowService.ShowWindow();
         }
 
@@ -80,7 +80,6 @@ namespace Light.ViewModels
 
             currentTimeService.OnCurrTimeChanged += (sender, args) => { CurrentTime = args.CurrTime; };
 
-            _screenModel.ForceColorTemperature();
             colorTemperatureWatcher.StartWatch();
         }
     }

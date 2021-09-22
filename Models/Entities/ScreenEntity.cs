@@ -10,6 +10,7 @@ namespace Light.Models.Entities
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+
         #endregion
 
         #region Values
@@ -17,10 +18,12 @@ namespace Light.Models.Entities
         private bool _active;
         private int _startTime = 1380;
         private int _endTime = 720;
-        private float _currentColorTemperature = 100;
-        private float _currentBlueReduce = 100;
+        private float _currentColorTemperature = 6600;
+        private float _currentBrightness = 1f;
         private int _dayColorTemperature = 6600;
+        private float _dayBrightness = 1f;
         private int _nightColorTemperature = 4000;
+        private float _nightBrightness = 1f;
         private float _uiOpacity = 1f;
 
         #endregion
@@ -82,12 +85,12 @@ namespace Light.Models.Entities
             }
         }
 
-        public float CurrentBlueReduce
+        public float CurrentBrightness
         {
-            get => _currentBlueReduce;
+            get => _currentBrightness;
             set
             {
-                _currentBlueReduce = value;
+                _currentBrightness = value;
                 OnPropertyChanged();
             }
         }
@@ -101,6 +104,15 @@ namespace Light.Models.Entities
                 OnPropertyChanged();
             }
         }
+        public float DayBrightness
+        {
+            get => _dayBrightness;
+            set
+            {
+                _dayBrightness = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int NightColorTemperature
         {
@@ -108,6 +120,15 @@ namespace Light.Models.Entities
             set
             {
                 _nightColorTemperature = value;
+                OnPropertyChanged();
+            }
+        }
+        public float NightBrightness
+        {
+            get => _nightBrightness;
+            set
+            {
+                _nightBrightness = value;
                 OnPropertyChanged();
             }
         }

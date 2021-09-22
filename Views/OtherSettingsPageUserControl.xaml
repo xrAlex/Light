@@ -12,16 +12,26 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="31*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="27*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="36*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <CheckBox 
             Content="Автозапуск"     
             VerticalContentAlignment="Center" HorizontalAlignment="Left"
-            Grid.Column="1" Grid.Row="1"/>
+            Grid.Column="1" Grid.Row="1" Width="360"/>
+        <CheckBox 
+            Content="Разблокировать расширенный диапозон гаммы"     
+            VerticalContentAlignment="Center" HorizontalAlignment="Left"
+            Grid.Column="1" Grid.Row="2" Width="360"/>
+        <CheckBox 
+            Content="Плавное изменение яркости"     
+            VerticalContentAlignment="Center" HorizontalAlignment="Left"
+            Grid.Column="1" Grid.Row="3" Width="360"/>
     </Grid>
 </UserControl>

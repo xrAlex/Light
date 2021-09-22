@@ -5,29 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewmodels="clr-namespace:Light.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="450" 
+             d:DesignHeight="500" d:DesignWidth="450" 
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:ProcessPageViewModel}}"  
              Background="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="17*"/>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="18*"/>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="57*"/>
+            <RowDefinition Height="253*"/>
+            <RowDefinition Height="75*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="16*"/>
-            <ColumnDefinition Width="28*"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="12*"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="28*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <CheckBox
             x:Name ="Checkbox1"
@@ -36,14 +30,15 @@
             Height="25" Width="350"
             IsChecked="{Binding CheckFullScreenApps}"
             Grid.Column="1" Grid.Row="1" 
-            VerticalContentAlignment="Center" Grid.ColumnSpan="5"/>
+            VerticalContentAlignment="Center"/>
         <ListBox 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
-            Height="200" Width="140"  
+            Height="345" Width="350"  
+            BorderThickness="0"
             IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
             SelectionMode="Multiple"      
             ItemsSource="{Binding Processes, Mode=OneWay}"
-            Grid.Column="1" Grid.Row="3" Grid.RowSpan="5">
+            Grid.Column="1" Grid.Row="3" Grid.RowSpan="3">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource ProcessListBox}">
                     <Setter 
@@ -52,71 +47,28 @@
                     </Setter>
                 </Style>
             </ListBox.ItemContainerStyle>
-        </ListBox>
-        <ListBox       
-            HorizontalAlignment="Left" VerticalAlignment="Top" 
-            Height="200" Width="140"           
-            SelectionMode="Multiple"
-            IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
-            ItemsSource="{Binding IgnoredProceses, Mode=OneWay}"
-            Grid.Row="3" Grid.Column="5" Grid.RowSpan="5">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem" BasedOn="{StaticResource ProcessListBox}">
-                    <Setter 
-                        Property="IsSelected" 
-                        Value="{Binding IsSelected, Mode=TwoWay}">
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox
+                        Width="344"
+                        Height="20"
+                        VerticalContentAlignment="Center"
+                        IsChecked="{Binding IsSelected}"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.MoveToIgnoredProcessesCommand }"
+                        Content="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <TextBox 
             Grid.Row="2" 
             HorizontalAlignment="Center"
             IsReadOnly="True" 
             BorderThickness="0" 
-            Height="15" Width="140" 
-            Text="Список процессов" 
+            Height="14" Width="350" 
+            Text="Whitelist процессов" 
             TextAlignment="Center" 
             VerticalAlignment="Center" 
             TextWrapping="Wrap" 
-            Grid.Column="1"/>
-        <TextBox
-            Grid.Column="5" Grid.Row="2" 
-            HorizontalAlignment="Center"
-            IsReadOnly="True" 
-            BorderThickness="0" 
-            Height="15" Width="140" 
-            Text="Исключения" 
-            TextAlignment="Center" 
-            VerticalAlignment="Center" 
-            TextWrapping="Wrap"/>
-        <Button 
-            Style="{StaticResource LightGrayButton}" 
-            Content="➯" 
-            FontSize="25"
-            IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
-            Grid.Column="3" Grid.Row="4" 
-            BorderThickness="0"
-            VerticalAlignment="Top" HorizontalAlignment="Left" 
-            Width="60" Height="40" 
-            Command="{Binding MoveToIgnoredProcessesCommand, Mode=OneWay}"
-            RenderTransformOrigin="0.5,0.5"/>
-        <Button 
-            Style="{StaticResource LightGrayButton}" 
-            Content="➱" 
-            FontSize="25"           
-            BorderThickness="0"
-            Grid.Column="3" Grid.Row="6"  
-            HorizontalAlignment="Left" VerticalAlignment="Top"                   
-            Width="60" Height="35"
-            IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
-            Command="{Binding MoveToProcessesCommand, Mode=OneWay}"
-            RenderTransformOrigin="0.5,0.5">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <RotateTransform Angle="180"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
+            Grid.Column="1" Margin="0,1,0,0"/>
     </Grid>
 </UserControl>

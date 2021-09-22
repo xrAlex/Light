@@ -57,12 +57,32 @@ namespace Light.ViewModels
             }
         }
 
+        public float DayBrightness
+        {
+            get => Screens[SelectedScreenIndex].DayBrightness;
+            set
+            {
+                _screenModel.SetDayBrightness(value, SelectedScreenIndex);
+                OnPropertyChanged();
+            }
+        }
+
         public int NightColorTemperature
         {
             get => Screens[SelectedScreenIndex].NightColorTemperature;
             set
             {
                 _screenModel.SetNightColorTemperature(value, SelectedScreenIndex);
+                OnPropertyChanged();
+            }
+        }
+
+        public float NightBrightness
+        {
+            get => Screens[SelectedScreenIndex].NightBrightness;
+            set
+            {
+                _screenModel.SetNightBrightness(value, SelectedScreenIndex);
                 OnPropertyChanged();
             }
         }

@@ -30,7 +30,7 @@ namespace Light.Services
             CheckFullScreenApps = INIManager.GetValue<bool>("Main", "CheckFullScreenApps", "false");
 
             LoadScreens();
-            LoadProcesess();
+            LoadProcesses();
         }
 
         public void Reset()
@@ -46,7 +46,9 @@ namespace Light.Services
             {
                 var monitor = Screens[i];
                 INIManager.WriteValue($"{i}", "DayColorTemperature", monitor.DayColorTemperature.ToString());
+                INIManager.WriteValue($"{i}", "DayBrightness", monitor.DayBrightness.ToString());
                 INIManager.WriteValue($"{i}", "NightColorTemperature", monitor.NightColorTemperature.ToString());
+                INIManager.WriteValue($"{i}", "NightBrightness", monitor.NightBrightness.ToString());
                 INIManager.WriteValue($"{i}", "StartTime", monitor.StartTime.ToString());
                 INIManager.WriteValue($"{i}", "EndTime", monitor.EndTime.ToString());
                 INIManager.WriteValue($"{i}", "Active", monitor.IsActive.ToString());
@@ -64,7 +66,9 @@ namespace Light.Services
                 {
                     Instance = screen,
                     DayColorTemperature = INIManager.GetValue<int>($"{index}", "DayColorTemperature", "6600"),
+                    DayBrightness = INIManager.GetValue<float>($"{index}", "DayBrightness", "1"),
                     NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "4000"),
+                    NightBrightness = INIManager.GetValue<float>($"{index}", "NightBrightness", "1"),
                     StartTime = INIManager.GetValue<int>($"{index}", "StartTime", "1380"),
                     EndTime = INIManager.GetValue<int>($"{index}", "EndTime", "420"),
                     IsActive = INIManager.GetValue<bool>($"{index}", "Active", "true"),
@@ -81,7 +85,7 @@ namespace Light.Services
             INIManager.WriteValue("Processes", "Ignored", processStr);
         }
 
-        private void LoadProcesess()
+        private void LoadProcesses()
         {
             var processStr = INIManager.GetValue<string>("Processes", "Ignored", "");
 

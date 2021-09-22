@@ -5,20 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewmodels="clr-namespace:Light.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="450"
+             d:DesignHeight="500" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:SettingsWindowViewModel}}"  
              Background="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="26*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="174*"/>
+            <RowDefinition Height="46*"/>
             <RowDefinition Height="4*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="116*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -37,38 +37,36 @@
         <Rectangle 
             Fill="#FF292929"
             HorizontalAlignment="Left" VerticalAlignment="Top" 
-            Height="350" Width="60" Grid.RowSpan="9" Grid.ColumnSpan="3"/>
+            Height="500" Width="60" Grid.RowSpan="9" Grid.ColumnSpan="3"/>
         <Button 
             Style="{StaticResource BlackButton}"
-            Cursor="Hand" Grid.Row="3" Grid.Column="1"
-            Command="{Binding ChangePageCommand}" CommandParameter="{Binding ProcessPage}">
+            Cursor="Hand" Grid.Column="1"
+            Command="{Binding ChangePageCommand}" CommandParameter="{Binding ProcessPage}" Margin="0,1,0,4" Grid.RowSpan="2" Grid.Row="3">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center" 
-                Width="40" Height="40" 
+                Width="37" Height="37" 
                 Source="{StaticResource Process}" Stretch="Fill"/>
         </Button>
         <Button
             Style="{StaticResource BlackButton}"
-            Cursor="Hand" 
-            Grid.Column="1" Grid.Row="1"
-            Command="{Binding ChangePageCommand}" CommandParameter="{Binding SettingsMainPage}">
+            Cursor="Hand"
+            Command="{Binding ChangePageCommand}" CommandParameter="{Binding SettingsMainPage}" Margin="0,0,0,1" Grid.Column="1" Grid.Row="1">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center" 
-                Width="40" Height="40" 
+                Width="37" Height="37" 
                 Source="{StaticResource Main}" Stretch="Fill">
             </Image>
         </Button>
         <Button 
             Style="{StaticResource BlackButton}"
-            Cursor="Hand" 
-            Grid.Row="5" Grid.Column="1"
-            Command="{Binding ChangePageCommand}" CommandParameter="{Binding OtherSettingsPage}">
+            Cursor="Hand" Grid.Column="1"
+            Command="{Binding ChangePageCommand}" CommandParameter="{Binding OtherSettingsPage}" Height="45" VerticalAlignment="Top" Grid.Row="5">
             <Image
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                Width="40" Height="40" 
+                Width="37" Height="37" 
                 Source="{StaticResource Other}" Stretch="Fill"/>
         </Button>
         <Button 

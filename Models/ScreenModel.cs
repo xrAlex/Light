@@ -38,23 +38,45 @@ namespace Light.Models
 
         private ScreenEntity GetScreen(int screenIndex) => Screens[screenIndex];
 
-        public void SetColorTemperature(int colorTemperature, ScreenEntity screen) => ApplyColorTemperatureValues(colorTemperature, screen);
-        public void SetDayTemperature(ScreenEntity screen) => SetColorTemperature(screen.DayColorTemperature, screen);
-        public void SetNightTemperature(ScreenEntity screen) => SetColorTemperature(screen.NightColorTemperature, screen);
+        public void SetDayTemperature(ScreenEntity screen) => ApplyColorConfiguration(screen.DayColorTemperature, screen.DayBrightness,screen);
+        public void SetNightTemperature(ScreenEntity screen) => ApplyColorConfiguration(screen.NightColorTemperature, screen.NightBrightness, screen);
 
         public void SetDayColorTemperature(int colorTemperature, int screenIndex)
         {
             var screen = GetScreen(screenIndex);
-            ApplyColorTemperatureValues(colorTemperature, screen);
+            ApplyColorConfiguration(colorTemperature, screen.DayBrightness, screen);
             screen.DayColorTemperature = colorTemperature;
         }
 
         public void SetNightColorTemperature(int colorTemperature, int screenIndex)
         {
             var screen = GetScreen(screenIndex);
-            ApplyColorTemperatureValues(colorTemperature, screen);
+            ApplyColorConfiguration(colorTemperature, screen.NightBrightness, screen);
             screen.NightColorTemperature = colorTemperature;
         }
+
+        public void SetDayBrightness(float brightness, int screenIndex)
+        {
+            var screen = GetScreen(screenIndex);
+            ApplyColorConfiguration(screen.DayColorTemperature, brightness, screen);
+            screen.DayBrightness = brightness;
+        }
+
+        public void SetNightBrightness(float brightness, int screenIndex)
+        {
+            var screen = GetScreen(screenIndex);
+            ApplyColorConfiguration(screen.NightColorTemperature, brightness, screen);
+            screen.NightBrightness = brightness;
+        }
+
+
+        private void ApplyColorConfiguration(int colorTemperature, float brightness, ScreenEntity screen)
+        {
+            ColorTemperatureRegulator.ApplyColorTemperature(colorTemperature, brightness, screen.SysName);
+            screen.CurrentColorTemperature = colorTemperature;
+            screen.CurrentBrightness = brightness;
+        }
+
 
         public void ForceDayTemperatureOnScreens()
         {
@@ -82,7 +104,7 @@ namespace Light.Models
         {
             foreach (var screen in Screen.AllScreens)
             {
-                ColorTemperatureRegulator.ApplyColorTemperature(6600, screen.DeviceName);
+                ColorTemperatureRegulator.ApplyColorTemperature(6600,1f, screen.DeviceName);
             }
         }
 
@@ -102,14 +124,6 @@ namespace Light.Models
                     SetDayTemperature(screen);
                 }
             }
-        }
-
-        private void ApplyColorTemperatureValues(int colorTemperature, ScreenEntity screen)
-        {
-            if (screen == null) return;
-
-            ColorTemperatureRegulator.ApplyColorTemperature(colorTemperature, screen.SysName);
-            screen.CurrentColorTemperature = colorTemperature;
         }
 
         #endregion
