@@ -11,7 +11,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="29*"/>
-            <RowDefinition Height="36*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="16*"/>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="35*"/>
             <RowDefinition Height="57*"/>
@@ -24,10 +25,11 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <CheckBox
+            Style="{StaticResource SliderCheckBox}"
             x:Name ="Checkbox1"
             Content="Не работать в полноэкранных приложениях" 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
-            Height="25" Width="350"
+            Height="20" Width="350"
             IsChecked="{Binding CheckFullScreenApps}"
             Grid.Column="1" Grid.Row="1" 
             VerticalContentAlignment="Center"/>
@@ -38,7 +40,7 @@
             IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
             SelectionMode="Multiple"      
             ItemsSource="{Binding Processes, Mode=OneWay}"
-            Grid.Column="1" Grid.Row="3" Grid.RowSpan="3">
+            Grid.Column="1" Grid.Row="4" Grid.RowSpan="3">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource ProcessListBox}">
                     <Setter 
@@ -60,7 +62,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBox 
-            Grid.Row="2" 
+            Grid.Row="3" 
             HorizontalAlignment="Center"
             IsReadOnly="True" 
             BorderThickness="0" 

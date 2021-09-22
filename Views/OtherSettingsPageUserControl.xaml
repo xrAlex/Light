@@ -5,16 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewmodels="clr-namespace:Light.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="450" 
+             d:DesignHeight="500" d:DesignWidth="450" 
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:OtherSettingsPageViewModel}}"  
              Background="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="27*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="103*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*"/>
@@ -22,14 +22,18 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <CheckBox 
+            Style="{StaticResource SliderCheckBox}"
             Content="Автозапуск"     
             VerticalContentAlignment="Center" HorizontalAlignment="Left"
-            Grid.Column="1" Grid.Row="1" Width="360"/>
+            Grid.Column="1" Grid.Row="1" Width="360" Height="20" VerticalAlignment="Top"/>
         <CheckBox 
+            Style="{StaticResource SliderCheckBox}"
             Content="Разблокировать расширенный диапозон гаммы"     
             VerticalContentAlignment="Center" HorizontalAlignment="Left"
             Grid.Column="1" Grid.Row="2" Width="360"/>
         <CheckBox 
+            IsChecked="True"
+            Style="{StaticResource SliderCheckBox}"
             Content="Плавное изменение яркости"     
             VerticalContentAlignment="Center" HorizontalAlignment="Left"
             Grid.Column="1" Grid.Row="3" Width="360"/>
