@@ -1,12 +1,22 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿#region
+
+using System;
 using Light.Native;
+using Light.Templates.Entities;
+
+#endregion
 
 namespace Light.Infrastructure
 {
-    public static class ColorTemperatureRegulator
+    /// <summary>
+    /// Класс применяет цветовую конфигурацию к источнику отображения
+    /// </summary>
+    public static class GammaRegulator
     {
-        public static void ApplyColorTemperature(int colorTemperature, float brightness, string screenName)
+        /// <summary>
+        /// Метод преобразует значения цветовой конфигурации для работы с WinApi
+        /// </summary>
+        public static void ApplyColorConfiguration(int colorTemperature, float brightness, string screenName)
         {
             // http://jonls.dk/2010/09/windows-gamma-adjustments/
             var dc = Gdi32.CreateDC(screenName, null, null, 0);
@@ -35,7 +45,11 @@ namespace Light.Infrastructure
             Gdi32.DeleteDC(dc);
         }
 
-        // Algorithm taken from http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code
+        /// <summary>
+        /// Метод преобразует кельвины в RGB формат
+        /// </summary>
+        /// <remarks> Алогоритм: http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code </remarks>
+        /// <returns> Значение красного канала цвета </returns>
         private static double GetRedFromKelvin(int temp)
         {
             if (temp > 6600) return Math.Pow(temp * 0.01 - 60, -0.1332047592) * 329.698727446 / 255;
@@ -43,6 +57,11 @@ namespace Light.Infrastructure
             return 1;
         }
 
+        /// <summary>
+        /// Метод преобразует кельвины в RGB формат
+        /// </summary>
+        /// <remarks> Алогоритм: http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code </remarks>
+        /// <returns> Значение зеленого канала цвета </returns>
         private static double GetGreenFromKelvin(int temp)
         {
             if (temp > 6600) return Math.Pow(temp / 100 - 60, -0.0755148492) * 288.1221695283 / 255;
@@ -50,6 +69,11 @@ namespace Light.Infrastructure
             return (Math.Log(temp * 0.01) * 99.4708025861 - 161.1195681661) / 255;
         }
 
+        /// <summary>
+        /// Метод преобразует кельвины в RGB формат
+        /// </summary>
+        /// <remarks> Алогоритм: http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code </remarks>
+        /// <returns> Значение синего канала цвета </returns>
         private static double GetBlueFromKelvin(int temp)
         {
             if (temp >= 6600) return 1;

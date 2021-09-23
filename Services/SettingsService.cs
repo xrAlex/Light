@@ -1,12 +1,19 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
 using Light.Infrastructure;
-using Light.Models.Entities;
+using Light.Templates.Entities;
+
+#endregion
 
 namespace Light.Services
 {
+    /// <summary>
+    /// Класс выполняет загрузку и сохранение настроек приложения
+    /// </summary>
     public sealed class SettingsService
     {
         public ObservableCollection<ScreenEntity> Screens { get; }
@@ -44,16 +51,16 @@ namespace Light.Services
         {
             for (var i = 0; i < Screens.Count; i++)
             {
-                var monitor = Screens[i];
-                INIManager.WriteValue($"{i}", "DayColorTemperature", monitor.DayColorTemperature.ToString());
-                INIManager.WriteValue($"{i}", "DayBrightness", monitor.DayBrightness.ToString());
-                INIManager.WriteValue($"{i}", "NightColorTemperature", monitor.NightColorTemperature.ToString());
-                INIManager.WriteValue($"{i}", "NightBrightness", monitor.NightBrightness.ToString());
-                INIManager.WriteValue($"{i}", "StartTime", monitor.StartTime.ToString());
-                INIManager.WriteValue($"{i}", "EndTime", monitor.EndTime.ToString());
-                INIManager.WriteValue($"{i}", "Active", monitor.IsActive.ToString());
-                INIManager.WriteValue($"{i}", "Name", monitor.Name);
-                INIManager.WriteValue($"{i}", "SysName", monitor.SysName);
+                var screen = Screens[i];
+                INIManager.WriteValue($"{i}", "DayColorTemperature", screen.ColorConfiguration.DayColorTemperature.ToString());
+                INIManager.WriteValue($"{i}", "DayBrightness", screen.ColorConfiguration.DayBrightness.ToString());
+                INIManager.WriteValue($"{i}", "NightColorTemperature", screen.ColorConfiguration.NightColorTemperature.ToString());
+                INIManager.WriteValue($"{i}", "NightBrightness", screen.ColorConfiguration.NightBrightness.ToString());
+                INIManager.WriteValue($"{i}", "StartTime", screen.StartTime.ToString());
+                INIManager.WriteValue($"{i}", "EndTime", screen.EndTime.ToString());
+                INIManager.WriteValue($"{i}", "Active", screen.IsActive.ToString());
+                INIManager.WriteValue($"{i}", "Name", screen.Name);
+                INIManager.WriteValue($"{i}", "SysName", screen.SysName);
             }
         }
 
@@ -64,17 +71,21 @@ namespace Light.Services
             {
                 Screens.Add(new ScreenEntity
                 {
+                    ColorConfiguration =
+                    {
+                        DayColorTemperature = INIManager.GetValue<int>($"{index}", "DayColorTemperature", "6600"),
+                        DayBrightness = INIManager.GetValue<float>($"{index}", "DayBrightness", "1"),
+                        NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "4000"),
+                        NightBrightness = INIManager.GetValue<float>($"{index}", "NightBrightness", "1"),
+                    },
                     Instance = screen,
-                    DayColorTemperature = INIManager.GetValue<int>($"{index}", "DayColorTemperature", "6600"),
-                    DayBrightness = INIManager.GetValue<float>($"{index}", "DayBrightness", "1"),
-                    NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "4000"),
-                    NightBrightness = INIManager.GetValue<float>($"{index}", "NightBrightness", "1"),
                     StartTime = INIManager.GetValue<int>($"{index}", "StartTime", "1380"),
                     EndTime = INIManager.GetValue<int>($"{index}", "EndTime", "420"),
                     IsActive = INIManager.GetValue<bool>($"{index}", "Active", "true"),
                     Name = INIManager.GetValue<string>($"{index}", "Name", $"#{index + 1}"),
                     SysName = INIManager.GetValue<string>($"{index}", "SysName", $"{screen.DeviceName}")
                 });
+                
                 index++;
             }
         }

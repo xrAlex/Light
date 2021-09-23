@@ -1,7 +1,15 @@
-﻿using System.Windows;
+﻿#region
+
+using System.Windows;
+using Light.Interfaces;
+
+#endregion
 
 namespace Light.Services
 {
+    /// <summary>
+    /// Класс создает и хранит окна приложения, предоставля методы для работы с ними
+    /// </summary>
     public class WindowService : IWindowService
     {
         private Window Window { get; set; }

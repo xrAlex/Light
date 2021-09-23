@@ -1,29 +1,20 @@
-﻿using System;
+﻿#region
+
 using System.Diagnostics;
 using System.Linq;
 using Light.Infrastructure;
 
-namespace Light.Models.Entities
+#endregion
+
+namespace Light.Templates.Entities
 {
     public class ProcessEntity
     {
-        private bool isSelected;
         public Process Instance { get; }
         public string Name { get; }
-
-        public bool IsSelected
-        {
-            get => isSelected;
-            set
-            {
-                isSelected = value;
-
-            }
-        }
-
-        private bool OnFullScreen { get; set; }
-        private string DisplayedText => $"{Name} {(Instance != null ? "" : "[N/A]")} {(OnFullScreen ? "[FullScreen]" : "")}";
-        public override string ToString() => DisplayedText;
+        public bool IsSelected { get; set; }
+        private bool OnFullScreen { get; }
+        public string DisplayedText => $"{Name} {(Instance != null ? "" : "[N/A]")} {(OnFullScreen ? "[FullScreen]" : "")}";
 
         private Process TryFindProcessInstance(string processName) => Process.GetProcesses().FirstOrDefault(process => process.ProcessName == processName);
         

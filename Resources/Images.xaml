@@ -8,5 +8,7 @@
     <BitmapImage x:Key="Other" UriSource="/Light;component/Resources/Images/Other.png"/>
     <BitmapImage x:Key="TurnOff" UriSource="/Light;component/Resources/Images/turnoff.png"/>
     <BitmapImage x:Key="Settings" UriSource="/Light;component/Resources/Images/Settings.png"/>
+    <BitmapImage x:Key="Day" UriSource="/Light;component/Resources/Images/Gamma.png"/>
+    <BitmapImage x:Key="Night" UriSource="/Light;component/Resources/Images/BlueReduce.png"/>
 
 </ResourceDictionary>

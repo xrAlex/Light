@@ -1,11 +1,18 @@
-﻿using Light.Models.Entities;
+﻿#region
+
 using System;
+using Light.Templates.Entities;
+
+#endregion
 
 namespace Light.Infrastructure
 {
+    /// <summary>
+    /// Класс проверяет какой рабочий период необходимо установить для экрана
+    /// </summary>
     public class WorkTime
     {
-        public bool IsNightTemperatureTime(ScreenEntity screen)
+        public bool IsDayPeriod(ScreenEntity screen)
         {
             var currentTime = DateTime.Now;
             var currentMin = ConvertToMin(currentTime.Hour, currentTime.Minute);

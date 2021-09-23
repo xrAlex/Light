@@ -1,5 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Runtime.InteropServices;
+using Light.Templates.Entities;
+
+#endregion
 
 namespace Light.Native
 {

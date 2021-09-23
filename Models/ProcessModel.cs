@@ -1,12 +1,13 @@
-﻿using System;
+﻿#region
+
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Forms;
 using Light.Infrastructure;
-using Light.Models.Entities;
-using Light.Native;
 using Light.Services;
+using Light.Templates.Entities;
+
+#endregion
 
 namespace Light.Models
 {
@@ -15,7 +16,7 @@ namespace Light.Models
         #region Fields
 
         public ObservableCollection<ProcessEntity> Processes { get; }
-        public ObservableCollection<ProcessEntity> IgnoredProcesses { get; }
+        private ObservableCollection<ProcessEntity> IgnoredProcesses { get; }
 
         #endregion
 

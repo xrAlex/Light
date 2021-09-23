@@ -1,8 +1,16 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Windows.Threading;
+using Light.Templates.EventHandlers;
+
+#endregion
 
 namespace Light.Services
 {
+    /// <summary>
+    /// Класс обновляет текущее время отображаемоена главном окне приложения
+    /// </summary>
     public class CurrentTimeService
     {
         public CurrentTimeService()
@@ -17,10 +25,7 @@ namespace Light.Services
 
         public event EventHandler<TimeEventArgs> OnCurrTimeChanged;
 
-        public string GetCurrentTime()
-        {
-            return DateTime.Now.ToString("HH:mm");
-        }
+        public string GetCurrentTime() => DateTime.Now.ToString("HH:mm");
 
         private void Tick()
         {

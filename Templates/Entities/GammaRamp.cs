@@ -1,6 +1,10 @@
-﻿using System.Runtime.InteropServices;
+﻿#region
 
-namespace Light.Native
+using System.Runtime.InteropServices;
+
+#endregion
+
+namespace Light.Templates.Entities
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct GammaRamp

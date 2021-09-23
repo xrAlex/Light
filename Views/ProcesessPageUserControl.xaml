@@ -57,7 +57,7 @@
                         VerticalContentAlignment="Center"
                         IsChecked="{Binding IsSelected}"
                         Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.MoveToIgnoredProcessesCommand }"
-                        Content="{Binding Name}"/>
+                        Content="{Binding DisplayedText}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

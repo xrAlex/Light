@@ -1,7 +1,11 @@
-﻿using System.Windows.Input;
+﻿#region
+
+using System.Windows.Input;
 using Light.Commands;
 using Light.Services;
 using Light.ViewModels.Base;
+
+#endregion
 
 namespace Light.ViewModels
 {

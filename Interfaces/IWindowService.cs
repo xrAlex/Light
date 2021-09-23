@@ -1,4 +1,4 @@
-﻿namespace Light.Services
+﻿namespace Light.Interfaces
 {
     public interface IWindowService
     {

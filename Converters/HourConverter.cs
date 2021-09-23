@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+
+#endregion
 
 namespace Light.Converters
 {
@@ -11,7 +15,6 @@ namespace Light.Converters
         {
             var hour = (int)value;
             var result = System.Convert.ToString(hour);
-
             if (result.Length < 2) result = $"0{result}";
 
             return result;

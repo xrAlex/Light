@@ -49,7 +49,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -73,22 +72,23 @@
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Infrastructure\WindowHelper.cs" />
     <Compile Include="Infrastructure\WorkTime.cs" />
-    <Compile Include="Models\Entities\ScreenEntity.cs" />
+    <Compile Include="Templates\Entities\ColorConfiguration.cs" />
+    <Compile Include="Templates\Entities\ProcessEntity.cs" />
+    <Compile Include="Templates\Entities\ScreenEntity.cs" />
     <Compile Include="Models\ProcessModel.cs" />
-    <Compile Include="Models\Entities\ProcessEntity.cs" />
     <Compile Include="Infrastructure\INIManager.cs" />
-    <Compile Include="Native\GammaRamp.cs" />
+    <Compile Include="Templates\Entities\GammaRamp.cs" />
     <Compile Include="Native\Gdi32.cs" />
     <Compile Include="Native\Kernel32.cs" />
-    <Compile Include="Native\Rect.cs" />
+    <Compile Include="Templates\Entities\Rect.cs" />
     <Compile Include="Native\User32.cs" />
     <Compile Include="Services\ColorTemperatureWatcherService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Models\ScreenModel.cs" />
     <Compile Include="Services\CurrentTimeService.cs" />
-    <Compile Include="Services\IWindowService.cs" />
+    <Compile Include="Interfaces\IWindowService.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
-    <Compile Include="Services\TimeEventArgs.cs" />
+    <Compile Include="Templates\EventHandlers\TimeEventArgs.cs" />
     <Compile Include="Services\WindowService.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

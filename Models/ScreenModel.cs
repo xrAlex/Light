@@ -1,8 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿#region
+
+using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using Light.Infrastructure;
-using Light.Models.Entities;
 using Light.Services;
+using Light.Templates.Entities;
+
+#endregion
 
 namespace Light.Models
 {
@@ -23,88 +27,63 @@ namespace Light.Models
         #region Methods
 
         public void SetWorkTimeStart(int hour, int min, int screenIndex) => GetScreen(screenIndex).StartTime = hour * Hour + min;
-
         public void SetWorkTimeEnd(int hour, int min, int screenIndex) => GetScreen(screenIndex).EndTime = hour * Hour + min;
-
         public int GetStartHour(int screenIndex) => GetScreen(screenIndex).StartTime / Hour;
-
         public int GetEndHour(int screenIndex) => GetScreen(screenIndex).EndTime / Hour;
-
         public int GetStartMin(int screenIndex) => GetScreen(screenIndex).StartTime % Hour;
-
         public int GetEndMin(int screenIndex) => GetScreen(screenIndex).EndTime % Hour;
-
         public void ChangeScreenActivity(int screenIndex) => Screens[screenIndex].IsActive = !Screens[screenIndex].IsActive;
+        public ScreenEntity GetScreen(int screenIndex) => Screens[screenIndex];
 
-        private ScreenEntity GetScreen(int screenIndex) => Screens[screenIndex];
-
-        public void SetDayTemperature(ScreenEntity screen) => ApplyColorConfiguration(screen.DayColorTemperature, screen.DayBrightness,screen);
-        public void SetNightTemperature(ScreenEntity screen) => ApplyColorConfiguration(screen.NightColorTemperature, screen.NightBrightness, screen);
-
-        public void SetDayColorTemperature(int colorTemperature, int screenIndex)
+        public void SetDayPeriod(ScreenEntity screen)
         {
-            var screen = GetScreen(screenIndex);
-            ApplyColorConfiguration(colorTemperature, screen.DayBrightness, screen);
-            screen.DayColorTemperature = colorTemperature;
+            screen.IsDayTimePeriod = true;
+            ApplyColorConfiguration(screen);
         }
 
-        public void SetNightColorTemperature(int colorTemperature, int screenIndex)
+        public void SetNightPeriod(ScreenEntity screen)
         {
-            var screen = GetScreen(screenIndex);
-            ApplyColorConfiguration(colorTemperature, screen.NightBrightness, screen);
-            screen.NightColorTemperature = colorTemperature;
+            screen.IsDayTimePeriod = false;
+            ApplyColorConfiguration(screen);
         }
 
-        public void SetDayBrightness(float brightness, int screenIndex)
+        public void ApplyColorConfiguration(ScreenEntity screen)
         {
-            var screen = GetScreen(screenIndex);
-            ApplyColorConfiguration(screen.DayColorTemperature, brightness, screen);
-            screen.DayBrightness = brightness;
-        }
-
-        public void SetNightBrightness(float brightness, int screenIndex)
-        {
-            var screen = GetScreen(screenIndex);
-            ApplyColorConfiguration(screen.NightColorTemperature, brightness, screen);
-            screen.NightBrightness = brightness;
-        }
-
-
-        private void ApplyColorConfiguration(int colorTemperature, float brightness, ScreenEntity screen)
-        {
-            ColorTemperatureRegulator.ApplyColorTemperature(colorTemperature, brightness, screen.SysName);
-            screen.CurrentColorTemperature = colorTemperature;
-            screen.CurrentBrightness = brightness;
-        }
-
-
-        public void ForceDayTemperatureOnScreens()
-        {
-            foreach (var screen in Screens)
+            var configuration = screen.ColorConfiguration;
+            float brightness;
+            int colorTemperature;
+            if (screen.IsDayTimePeriod)
             {
-                if (screen.IsActive)
-                {
-                    SetDayTemperature(screen);
-                }
+                colorTemperature = configuration.DayColorTemperature;
+                brightness = configuration.DayBrightness;
             }
+            else
+            {
+                colorTemperature = configuration.NightColorTemperature;
+                brightness = configuration.NightBrightness;
+            }
+            GammaRegulator.ApplyColorConfiguration(colorTemperature, brightness, screen.SysName);
+            screen.ColorConfiguration.CurrentColorTemperature = colorTemperature;
+            screen.ColorConfiguration.CurrentBrightness = brightness;
         }
 
-        public void ForceNightTemperatureOnScreens()
+        public void ApplyColorConfiguration(ScreenEntity screen, int colorTemperature, float brightness)
         {
-            foreach (var screen in Screens)
-            {
-                if (screen.IsActive)
-                {
-                    SetNightTemperature(screen);
-                }
-            }
+            var configuration = screen.ColorConfiguration;
+
+            colorTemperature = colorTemperature == -1 ? configuration.CurrentColorTemperature : colorTemperature;
+            brightness = brightness == -1 ? configuration.CurrentBrightness : brightness;
+
+            GammaRegulator.ApplyColorConfiguration(colorTemperature, brightness, screen.SysName);
+            screen.ColorConfiguration.CurrentColorTemperature = colorTemperature;
+            screen.ColorConfiguration.CurrentBrightness = brightness;
         }
 
         public void SetDefaultColorTemperatureOnAllScreens()
         {
             foreach (var screen in Screen.AllScreens)
             {
-                ColorTemperatureRegulator.ApplyColorTemperature(6600,1f, screen.DeviceName);
+                GammaRegulator.ApplyColorConfiguration(6600,1f, screen.DeviceName);
             }
         }
 
@@ -115,13 +94,13 @@ namespace Light.Models
             {
                 if (!screen.IsActive) continue;
 
-                if (workTime.IsNightTemperatureTime(screen))
+                if (workTime.IsDayPeriod(screen))
                 {
-                    SetNightTemperature(screen);
+                    SetNightPeriod(screen);
                 }
                 else
                 {
-                    SetDayTemperature(screen);
+                    SetDayPeriod(screen);
                 }
             }
         }

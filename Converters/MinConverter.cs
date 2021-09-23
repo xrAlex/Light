@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+
+#endregion
 
 namespace Light.Converters
 {
@@ -11,7 +15,6 @@ namespace Light.Converters
         {
             var min = (int)value;
             var result = System.Convert.ToString(min);
-
             if (result.Length < 2) result = $"0{result}";
 
             return result;

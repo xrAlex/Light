@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿#region
+
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,8 +9,13 @@ using Light.Infrastructure;
 using Light.Models;
 using Light.Native;
 
+#endregion
+
 namespace Light.Services
 {
+    /// <summary>
+    /// Класс циклически проверяет какая цветовая конфигурация должна быть быть установлена
+    /// </summary>
     public class ColorTemperatureWatcherService
     {
         private readonly ScreenModel _screenModel;
@@ -43,7 +50,7 @@ namespace Light.Services
                 {
                     if (!screen.IsActive) continue;
 
-                    var isWorkTime = _workTime.IsNightTemperatureTime(screen);
+                    var isWorkTime = _workTime.IsDayPeriod(screen);
 
                     if (isWorkTime)
                     {
@@ -51,21 +58,28 @@ namespace Light.Services
                         {
                             if (IsFullScreenProcessFounded(screen.Instance))
                             {
-                                _screenModel.SetDayTemperature(screen);
-                                break;
+                                _screenModel.SetDayPeriod(screen);
                             }
                         }
-                        _screenModel.SetNightTemperature(screen);
-                        break;
+                        else
+                        {
+                            _screenModel.SetNightPeriod(screen);
+                        }
                     }
-
-                    _screenModel.SetDayTemperature(screen);
+                    else
+                    {
+                        _screenModel.SetDayPeriod(screen);
+                    }
                 }
 
                 await Task.Delay(1000, token);
             }
         }
 
+        /// <summary>
+        /// Метод проверяет для устройства отображения развернуто ли окно на переднем плане во весь экран
+        /// </summary>
+        /// <returns> true если окно работает в полноэкранном режиме </returns>
         private bool IsFullScreenProcessFounded(Screen screen)
         {
             var handler = User32.GetForegroundWindow();
@@ -76,7 +90,7 @@ namespace Light.Services
             if (pid == 0) return false;
 
             var process = Process.GetProcessById((int)pid);
-            return _settings.IgnoredProcesses.Any(p => p.Name != process.ProcessName);
+            return _settings.IgnoredProcesses.Count == 0 || _settings.IgnoredProcesses.Any(p => p.Name != process.ProcessName);
         }
 
     }

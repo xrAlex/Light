@@ -63,7 +63,7 @@
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <!--<Setter TargetName="ForegroundPanel" Property="Background" Value="{DynamicResource Accent}" />-->
-                            <Setter TargetName="ForegroundPanel" Property="Background" Value="Green" />
+                            <Setter TargetName="ForegroundPanel" Property="Background" Value="{StaticResource DeepGray}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard x:Name="BeginStoryboardCheckedTrue" Storyboard="{StaticResource StoryboardIsChecked}" />
                                 <RemoveStoryboard BeginStoryboardName="BeginStoryboardCheckedFalse" />

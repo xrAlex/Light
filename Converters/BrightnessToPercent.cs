@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
+
+using System;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
+
+#endregion
 
 namespace Light.Converters
 {
     internal class BrightnessToPercent : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return System.Convert.ToSingle(value) * 100;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return System.Convert.ToSingle(value) * 0.01;
-        }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => System.Convert.ToSingle(value) * 100;
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => System.Convert.ToSingle(value) * 0.01;
     }
 }

@@ -1,11 +1,15 @@
-﻿using System.Collections.ObjectModel;
+﻿#region
+
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using Light.Commands;
 using Light.Models;
-using Light.Models.Entities;
 using Light.Services;
+using Light.Templates.Entities;
 using Light.ViewModels.Base;
+
+#endregion
 
 namespace Light.ViewModels
 {
@@ -62,7 +66,6 @@ namespace Light.ViewModels
 
         #endregion
 
-
         public MainWindowViewModel()
         {
             OpenSettingsWindowCommand = new LambdaCommand(p => OnOpenSettingsWindowCommandExecute());
@@ -80,6 +83,7 @@ namespace Light.ViewModels
 
             currentTimeService.OnCurrTimeChanged += (sender, args) => { CurrentTime = args.CurrTime; };
 
+            _screenModel.ForceColorTemperature();
             colorTemperatureWatcher.StartWatch();
         }
     }

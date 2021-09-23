@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿#region
+
+using System.Windows;
 using Light.Services;
+
+#endregion
 
 namespace Light
 {

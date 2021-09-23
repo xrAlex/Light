@@ -1,10 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿#region
+
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Light.Commands;
 using Light.Models;
-using Light.Models.Entities;
 using Light.Services;
+using Light.Templates.Entities;
 using Light.ViewModels.Base;
+
+#endregion
 
 namespace Light.ViewModels
 {
@@ -20,8 +24,8 @@ namespace Light.ViewModels
                 MinStart = _screenModel.GetStartMin(SelectedScreenIndex);
                 HourEnd = _screenModel.GetEndHour(SelectedScreenIndex);
                 MinEnd = _screenModel.GetEndMin(SelectedScreenIndex);
-                DayColorTemperature = Screens[SelectedScreenIndex].DayColorTemperature;
-                NightColorTemperature = Screens[SelectedScreenIndex].NightColorTemperature;
+                DayColorTemperature = SelectedScreen.ColorConfiguration.DayColorTemperature;
+                NightColorTemperature = SelectedScreen.ColorConfiguration.NightColorTemperature;
             }
         }
 
@@ -47,42 +51,48 @@ namespace Light.ViewModels
             }
         }
 
+        private ScreenEntity SelectedScreen => _screenModel.GetScreen(SelectedScreenIndex);
+
         public int DayColorTemperature
         {
-            get => Screens[SelectedScreenIndex].DayColorTemperature;
+            get => SelectedScreen.ColorConfiguration.DayColorTemperature;
             set
             {
-                _screenModel.SetDayColorTemperature(value, SelectedScreenIndex);
+                SelectedScreen.ColorConfiguration.DayColorTemperature = value;
+                _screenModel.ApplyColorConfiguration(SelectedScreen, value, -1f);
                 OnPropertyChanged();
             }
         }
 
         public float DayBrightness
         {
-            get => Screens[SelectedScreenIndex].DayBrightness;
+            get => SelectedScreen.ColorConfiguration.DayBrightness;
             set
             {
-                _screenModel.SetDayBrightness(value, SelectedScreenIndex);
+                SelectedScreen.ColorConfiguration.DayBrightness = value;
+                _screenModel.ApplyColorConfiguration(SelectedScreen, -1, value);
                 OnPropertyChanged();
             }
         }
 
         public int NightColorTemperature
         {
-            get => Screens[SelectedScreenIndex].NightColorTemperature;
+            get => SelectedScreen.ColorConfiguration.NightColorTemperature;
             set
             {
-                _screenModel.SetNightColorTemperature(value, SelectedScreenIndex);
+                SelectedScreen.ColorConfiguration.NightColorTemperature = value;
+                _screenModel.ApplyColorConfiguration(SelectedScreen, value, -1f);
                 OnPropertyChanged();
             }
         }
 
         public float NightBrightness
         {
-            get => Screens[SelectedScreenIndex].NightBrightness;
+            get => SelectedScreen.ColorConfiguration.NightBrightness;
             set
             {
-                _screenModel.SetNightBrightness(value, SelectedScreenIndex);
+                SelectedScreen.ColorConfiguration.NightBrightness = value;
+                _screenModel.ApplyColorConfiguration(SelectedScreen, -1, value);
                 OnPropertyChanged();
             }
         }

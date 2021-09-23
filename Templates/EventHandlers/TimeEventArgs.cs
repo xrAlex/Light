@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
 
-namespace Light.Services
+using System;
+
+#endregion
+
+namespace Light.Templates.EventHandlers
 {
     public class TimeEventArgs : EventArgs
     {

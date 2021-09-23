@@ -1,11 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace Light.Services
 {
+    /// <summary>
+    /// Класс представляет из себя хранилище объектов которые должны быть созданы в одном экземпляре
+    /// </summary>
+    /// <remarks> [Нужно заменить на DI контeйнер] </remarks>
     public class ServiceLocator
     {
-        // TODO: Di Container
-
         private ColorTemperatureWatcherService _colorTemperatureWatcher;
         private SettingsService _settings;
         private WindowService _windowService;
@@ -13,9 +19,7 @@ namespace Light.Services
 
         public SettingsService Settings => _settings ??= new();
         public ColorTemperatureWatcherService ColorTemperatureWatcher => _colorTemperatureWatcher ??= new();
-
         public WindowService WindowService => _windowService ??= new();
-
         public CurrentTimeService CurrentTimeService => _currentTimeService ??= new();
 
         private ServiceLocator() {}

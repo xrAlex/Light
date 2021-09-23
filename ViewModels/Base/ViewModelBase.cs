@@ -1,5 +1,9 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace Light.ViewModels.Base
 {
