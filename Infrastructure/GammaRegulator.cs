@@ -1,6 +1,8 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 using Light.Native;
 using Light.Templates.Entities;
 
@@ -23,9 +25,7 @@ namespace Light.Infrastructure
             const int maxChannelValue = 256;
             const int channelMult = 255;
 
-            var redMult = GetRedFromKelvin(colorTemperature);
-            var greenMult = GetGreenFromKelvin(colorTemperature);
-            var blueMult = GetBlueFromKelvin(colorTemperature);
+            var RGBmask = GetRGBFromKelvin(colorTemperature);
 
             GammaRamp channels = new()
             {
@@ -36,50 +36,40 @@ namespace Light.Infrastructure
 
             for (var i = 0; i < maxChannelValue; i++)
             {
-                channels.Red[i] = (ushort) (i * channelMult * redMult * brightness);
-                channels.Green[i] = (ushort) (i * channelMult * greenMult * brightness);
-                channels.Blue[i] = (ushort) (i * channelMult * blueMult * brightness);
+                channels.Red[i] = (ushort) (i * channelMult * RGBmask.Red * brightness);
+                channels.Green[i] = (ushort) (i * channelMult * RGBmask.Green * brightness);
+                channels.Blue[i] = (ushort) (i * channelMult * RGBmask.Blue * brightness);
             }
 
             Gdi32.SetDeviceGammaRamp(dc, ref channels);
             Gdi32.DeleteDC(dc);
         }
 
-        /// <summary>
-        /// Метод преобразует кельвины в RGB формат
-        /// </summary>
-        /// <remarks> Алогоритм: http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code </remarks>
-        /// <returns> Значение красного канала цвета </returns>
-        private static double GetRedFromKelvin(int temp)
-        {
-            if (temp > 6600) return Math.Pow(temp * 0.01 - 60, -0.1332047592) * 329.698727446 / 255;
-
-            return 1;
-        }
 
         /// <summary>
         /// Метод преобразует кельвины в RGB формат
         /// </summary>
         /// <remarks> Алогоритм: http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code </remarks>
-        /// <returns> Значение зеленого канала цвета </returns>
-        private static double GetGreenFromKelvin(int temp)
+        /// <returns> Маску RGB цветов </returns>
+        private static RGBMask GetRGBFromKelvin(int kelvinValue)
         {
-            if (temp > 6600) return Math.Pow(temp / 100 - 60, -0.0755148492) * 288.1221695283 / 255;
+            RGBMask mask = new()
+            {
+                Red = kelvinValue > 6600 
+                    ? Math.Pow(kelvinValue * 0.01 - 60, -0.1332047592) * 329.698727446 / 255
+                    : 1,
+                Green = kelvinValue > 6600 
+                    ? Math.Pow(kelvinValue * 0.01 - 60, -0.0755148492) * 288.1221695283 / 255
+                    : (Math.Log(kelvinValue * 0.01) * 99.4708025861 - 161.1195681661) / 255,
+                Blue = kelvinValue >= 6600 
+                    ? 1
+                    : kelvinValue <= 1900
+                        ? 0
+                        : (Math.Log(kelvinValue * 0.01 - 10) * 138.5177312231 - 305.0447927307) / 255
+            };
 
-            return (Math.Log(temp * 0.01) * 99.4708025861 - 161.1195681661) / 255;
+            return mask;
         }
 
-        /// <summary>
-        /// Метод преобразует кельвины в RGB формат
-        /// </summary>
-        /// <remarks> Алогоритм: http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code </remarks>
-        /// <returns> Значение синего канала цвета </returns>
-        private static double GetBlueFromKelvin(int temp)
-        {
-            if (temp >= 6600) return 1;
-            if (temp <= 1900) return 0;
-
-            return (Math.Log(temp * 0.01 - 10) * 138.5177312231 - 305.0447927307) / 255;
-        }
     }
 }
