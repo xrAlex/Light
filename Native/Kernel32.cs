@@ -9,8 +9,7 @@ namespace Light.Native
 {
     internal static class Kernel32
     {
-
-        private const string Dll = "user32.dll";
+        private const string Dll = "Kernel32.dll";
 
         [DllImport(Dll)]
         public static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder buffer, int size, string path);
