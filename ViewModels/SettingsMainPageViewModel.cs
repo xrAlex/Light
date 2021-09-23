@@ -36,10 +36,15 @@ namespace Light.ViewModels
         public ObservableCollection<ScreenEntity> Screens { get; }
         private readonly SettingsService _settings;
         private readonly ScreenModel _screenModel;
+        private readonly RegistryModel _registryModel;
 
         #endregion
 
         #region Properties
+
+        public int MinGammaRange => _registryModel.IsExtendedGammaRangeActive() ? 1000 : 4200;
+        public int MinBrightnessRange => _registryModel.IsExtendedGammaRangeActive() ? 10 : 70;
+
 
         public int SelectedScreenIndex
         {
@@ -151,7 +156,8 @@ namespace Light.ViewModels
         {
             MonitorDoubleClickCommand = new LambdaCommand(p => OnMonitorDoubleClickCommandExecute());
 
-            _screenModel = new ScreenModel();
+            _screenModel = new();
+            _registryModel = new();
             var services = ServiceLocator.Source;
             _settings = services.Settings;
             Screens = _screenModel.Screens;

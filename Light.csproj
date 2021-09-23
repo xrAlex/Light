@@ -72,8 +72,10 @@
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Infrastructure\WindowHelper.cs" />
     <Compile Include="Infrastructure\WorkTime.cs" />
+    <Compile Include="Models\RegistryModel.cs" />
     <Compile Include="Templates\Entities\ColorConfiguration.cs" />
     <Compile Include="Templates\Entities\ProcessEntity.cs" />
+    <Compile Include="Templates\Entities\RGBMask.cs" />
     <Compile Include="Templates\Entities\ScreenEntity.cs" />
     <Compile Include="Models\ProcessModel.cs" />
     <Compile Include="Infrastructure\INIManager.cs" />
