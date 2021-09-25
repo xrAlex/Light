@@ -53,20 +53,21 @@ namespace Light.Infrastructure
         /// <returns> Маску RGB цветов </returns>
         private static RGBMask GetRGBFromKelvin(int kelvinValue)
         {
-            RGBMask mask = new()
-            {
-                Red = kelvinValue > 6600 
+            RGBMask mask = new
+            (
+                kelvinValue > 6600
                     ? Math.Pow(kelvinValue * 0.01 - 60, -0.1332047592) * 329.698727446 / 255
-                    : 1,
-                Green = kelvinValue > 6600 
+                    : 1, 
+                kelvinValue > 6600
                     ? Math.Pow(kelvinValue * 0.01 - 60, -0.0755148492) * 288.1221695283 / 255
                     : (Math.Log(kelvinValue * 0.01) * 99.4708025861 - 161.1195681661) / 255,
-                Blue = kelvinValue >= 6600 
+               kelvinValue >= 6600
                     ? 1
                     : kelvinValue <= 1900
                         ? 0
                         : (Math.Log(kelvinValue * 0.01 - 10) * 138.5177312231 - 305.0447927307) / 255
-            };
+            );
+
 
             return mask;
         }
