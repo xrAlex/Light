@@ -164,5 +164,13 @@ namespace Light.ViewModels
             SelectedScreenIndex = _settings.SelectedScreen;
             _screenModel.ForceColorTemperature();
         }
+
+#if DEBUG
+        ~SettingsMainPageViewModel()
+        {
+            DebugConsole.Print("SettingsMainPageViewModel Disposed");
+        }
+#endif
+
     }
 }

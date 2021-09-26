@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Light.Templates.Entities
+﻿namespace Light.Templates.Entities
 {
-    internal struct RGBMask
+    internal readonly struct RGBMask
     {
         public double Red { get; }
+
         public double Green { get; }
+
         public double Blue { get; }
 
         public RGBMask(double red, double green, double blue)

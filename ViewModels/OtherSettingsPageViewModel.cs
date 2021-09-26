@@ -47,5 +47,12 @@ namespace Light.ViewModels
         {
             _registryModel = new();
         }
+
+#if DEBUG
+        ~OtherSettingsPageViewModel()
+        {
+            DebugConsole.Print("OtherSettingsPageViewModel Disposed");
+        }
+#endif
     }
 }

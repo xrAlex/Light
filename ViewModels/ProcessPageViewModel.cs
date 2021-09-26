@@ -46,7 +46,14 @@ namespace Light.ViewModels
             _processModel = new ProcessModel();
             var serviceLocator = ServiceLocator.Source;
             _settings = serviceLocator.Settings;
-            Processes = _processModel.Processes;
+            Processes = _settings.Processes;
         }
+
+#if DEBUG
+        ~ProcessPageViewModel()
+        {
+            DebugConsole.Print("ProcessPageViewModel Disposed");
+        }
+#endif
     }
 }

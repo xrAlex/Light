@@ -1,7 +1,6 @@
 ﻿#region
 
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using Light.Native;
 using Light.Templates.Entities;
 
@@ -24,12 +23,11 @@ namespace Light.Infrastructure
         /// Метод проверяет работает ли окно на полный экран с учетом таскбара
         /// </summary>
         /// <returns> true если окно развернуто на полный экран </returns>
-        public static bool IsWindowOnFullScreen(Screen screen, nint handler)
+        public static bool IsWindowOnFullScreen(ScreenEntity screen, nint handler)
         {
-            var rect = new Rect();
-            User32.GetWindowRect(new HandleRef(null, handler), ref rect);
+            _ = User32.GetWindowRect(new HandleRef(null, handler), out var rect);
 
-            return screen.Bounds.Width == rect.Right + rect.Left && screen.Bounds.Height == rect.Bottom + rect.Top;
+            return screen.Bounds["Width"] == rect.Right + rect.Left && screen.Bounds["Height"] == rect.Bottom + rect.Top;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Light.Infrastructure
         }
 
         /// <summary>
-        /// Метод записывает данные в строку используя WinApi
+        /// Метод записывает данные в файл
         /// </summary>
         public static void WriteValue(string section, string key, string value) => Kernel32.WritePrivateProfileString(section, key, value, Path);
     }

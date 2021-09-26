@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -16,8 +17,9 @@ namespace Light.Services
     /// </summary>
     public sealed class SettingsService
     {
+        public ObservableCollection<ProcessEntity> Processes { get; }
         public ObservableCollection<ScreenEntity> Screens { get; }
-        public ObservableCollection<ProcessEntity> IgnoredProcesses { get; }
+        public List<string> IgnoredProcesses { get; }
 
         public int SelectedScreen { get; set; }
         public bool CheckFullScreenApps { get; set; }
@@ -78,21 +80,24 @@ namespace Light.Services
                         NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "4000"),
                         NightBrightness = INIManager.GetValue<float>($"{index}", "NightBrightness", "1"),
                     },
-                    Instance = screen,
+                    Bounds = new Dictionary<string, int>()
+                    {
+                        {"Height", screen.Bounds.Height},
+                        {"Width", screen.Bounds.Width}
+                    },
                     StartTime = INIManager.GetValue<int>($"{index}", "StartTime", "1380"),
                     EndTime = INIManager.GetValue<int>($"{index}", "EndTime", "420"),
                     IsActive = INIManager.GetValue<bool>($"{index}", "Active", "true"),
                     Name = INIManager.GetValue<string>($"{index}", "Name", $"#{index + 1}"),
                     SysName = INIManager.GetValue<string>($"{index}", "SysName", $"{screen.DeviceName}")
                 });
-                
                 index++;
             }
         }
 
         private void SaveProcesses()
         {
-            var processStr = IgnoredProcesses.Aggregate("", (current, process) => current + $"{process.Name};");
+            var processStr = IgnoredProcesses.Aggregate("", (current, process) => current + $"{process};");
             INIManager.WriteValue("Processes", "Ignored", processStr);
         }
 
@@ -104,14 +109,15 @@ namespace Light.Services
 
             foreach (var processName in strTable)
             {
-                IgnoredProcesses.Add(new ProcessEntity(null, processName));
+                IgnoredProcesses.Add($"{processName}");
             }
         }
 
         public SettingsService()
         {
-            IgnoredProcesses = new ObservableCollection<ProcessEntity>();
+            IgnoredProcesses = new List<string>();
             Screens = new ObservableCollection<ScreenEntity>();
+            Processes = new ObservableCollection<ProcessEntity>();
         }
     }
 }

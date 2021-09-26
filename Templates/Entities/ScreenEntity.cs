@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 
 #endregion
@@ -40,7 +39,7 @@ namespace Light.Templates.Entities
 
         #region Propeties
 
-        public Screen Instance { get; set; }
+        public Dictionary<string,int> Bounds { get; set; }
         public string SysName { get; set; }
         public string Name { get; set; }
 

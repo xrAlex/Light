@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Light.Infrastructure;
 using Light.Models;
 using Light.Native;
-using Light.Templates.Entities;
 
 #endregion
 
@@ -16,14 +16,14 @@ namespace Light.Services
     /// <summary>
     /// Класс циклически проверяет какая цветовая конфигурация должна быть быть установлена
     /// </summary>
-    public class ColorTemperatureWatcherService
+    public class ColorConfigurationWatcherService
     {
         private readonly ScreenModel _screenModel;
         private readonly SettingsService _settings;
         private readonly WorkTime _workTime;
         private CancellationTokenSource _cts;
 
-        public ColorTemperatureWatcherService()
+        public ColorConfigurationWatcherService()
         {
             _screenModel = new ScreenModel();
             _workTime = new WorkTime();
@@ -56,7 +56,7 @@ namespace Light.Services
                     {
                         if (_settings.CheckFullScreenApps)
                         {
-                            if (IsFullScreenProcessFounded(screen))
+                            if (IsFullScreenProcessFounded(screen.Instance))
                             {
                                 _screenModel.SetDayPeriod(screen);
                             }
@@ -80,7 +80,7 @@ namespace Light.Services
         /// Метод проверяет для устройства отображения развернуто ли окно на переднем плане во весь экран
         /// </summary>
         /// <returns> true если окно работает в полноэкранном режиме </returns>
-        private bool IsFullScreenProcessFounded(ScreenEntity screen)
+        private bool IsFullScreenProcessFounded(Screen screen)
         {
             var handler = User32.GetForegroundWindow();
             if (!WindowHelper.IsWindowValid(handler) || !WindowHelper.IsWindowOnFullScreen(screen, handler)) return false;
@@ -90,7 +90,7 @@ namespace Light.Services
             if (pid == 0) return false;
 
             var process = Process.GetProcessById((int)pid);
-            return _settings.IgnoredProcesses.Count == 0 || _settings.IgnoredProcesses.Any(p => p != process.ProcessName);
+            return _settings.IgnoredProcesses.Count == 0 || _settings.IgnoredProcesses.Any(p => p.Name != process.ProcessName);
         }
 
     }

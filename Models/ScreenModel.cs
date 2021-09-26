@@ -10,7 +10,7 @@ using Light.Templates.Entities;
 
 namespace Light.Models
 {
-    public class ScreenModel
+    internal sealed class ScreenModel
     {
         #region Fields
 
@@ -83,7 +83,7 @@ namespace Light.Models
         {
             foreach (var screen in Screen.AllScreens)
             {
-                GammaRegulator.ApplyColorConfiguration(6600,1f, screen.DeviceName);
+                GammaRegulator.ApplyColorConfiguration(6600, 1f, screen.DeviceName);
             }
         }
 
@@ -113,5 +113,12 @@ namespace Light.Models
             var settingsService = serviceLocator.Settings;
             Screens = settingsService.Screens;
         }
+
+#if DEBUG
+        ~ScreenModel()
+        {
+            DebugConsole.Print("ScreenModel Disposed");
+        }
+#endif
     }
 }

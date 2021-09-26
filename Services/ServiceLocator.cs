@@ -14,13 +14,13 @@ namespace Light.Services
     {
         private ColorTemperatureWatcherService _colorTemperatureWatcher;
         private SettingsService _settings;
-        private WindowService _windowService;
         private CurrentTimeService _currentTimeService;
-
+        private DialogService _dialogService;
+        
         public SettingsService Settings => _settings ??= new();
         public ColorTemperatureWatcherService ColorTemperatureWatcher => _colorTemperatureWatcher ??= new();
-        public WindowService WindowService => _windowService ??= new();
         public CurrentTimeService CurrentTimeService => _currentTimeService ??= new();
+        public DialogService DialogService => _dialogService ??= new();
 
         private ServiceLocator() {}
         private static readonly Lazy<ServiceLocator> Lazy = new(() => new ServiceLocator());

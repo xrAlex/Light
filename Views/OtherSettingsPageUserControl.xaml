@@ -10,11 +10,11 @@
              Background="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="103*"/>
+            <RowDefinition Height="28*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="394*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*"/>
@@ -23,10 +23,11 @@
         </Grid.ColumnDefinitions>
         <CheckBox 
             Style="{StaticResource SliderCheckBox}"
-            Content="Автозапуск"     
+            Content="Автозапуск" 
+            
             IsChecked="{Binding LaunchOnStartup}"
             VerticalContentAlignment="Center" HorizontalAlignment="Left"
-            Grid.Column="1" Grid.Row="1" Width="360" Height="20" VerticalAlignment="Top"/>
+            Grid.Column="1" Grid.Row="1" Width="360"/>
         <CheckBox 
             Style="{StaticResource SliderCheckBox}"
             IsChecked="{Binding ExtendedGammaRange}"

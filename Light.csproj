@@ -5,7 +5,6 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E1B6BF7F-767A-483B-BF0C-7591C9A48700}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
     <RootNamespace>Light</RootNamespace>
     <AssemblyName>Light</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -17,6 +16,26 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+	
+	<DisableWinExeOutputInference>true</DisableWinExeOutputInference>
+	<OutputType>WinExe</OutputType>
+
+	
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,7 +59,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Light.App</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -69,10 +89,12 @@
     <Compile Include="Converters\BrightnessToPercent.cs" />
     <Compile Include="Converters\HourConverter.cs" />
     <Compile Include="Converters\MinConverter.cs" />
+    <Compile Include="DebugConsole.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Infrastructure\WindowHelper.cs" />
     <Compile Include="Infrastructure\WorkTime.cs" />
     <Compile Include="Models\RegistryModel.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Templates\Entities\ColorConfiguration.cs" />
     <Compile Include="Templates\Entities\ProcessEntity.cs" />
     <Compile Include="Templates\Entities\RGBMask.cs" />
@@ -91,7 +113,6 @@
     <Compile Include="Interfaces\IWindowService.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Templates\EventHandlers\TimeEventArgs.cs" />
-    <Compile Include="Services\WindowService.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\OtherSettingsPageViewModel.cs" />
@@ -112,6 +133,9 @@
     </Compile>
     <Compile Include="Views\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Brushes.xaml">
       <SubType>Designer</SubType>
@@ -173,6 +197,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -201,7 +229,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Accept.png" />
   </ItemGroup>

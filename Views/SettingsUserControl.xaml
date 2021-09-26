@@ -41,7 +41,7 @@
         <Button 
             Style="{StaticResource BlackButton}"
             Cursor="Hand" Grid.Column="1"
-            Command="{Binding ChangePageCommand}" CommandParameter="{Binding ProcessPage}" Margin="0,1,0,4" Grid.RowSpan="2" Grid.Row="3">
+            Command="{Binding ToProcessPageCommand}" Margin="0,1,0,4" Grid.RowSpan="2" Grid.Row="3">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -51,7 +51,7 @@
         <Button
             Style="{StaticResource BlackButton}"
             Cursor="Hand"
-            Command="{Binding ChangePageCommand}" CommandParameter="{Binding SettingsMainPage}" Margin="0,0,0,1" Grid.Column="1" Grid.Row="1">
+            Command="{Binding ToSettingsMainPageCommand}" Margin="0,0,0,1" Grid.Column="1" Grid.Row="1">
             <Image 
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -62,7 +62,7 @@
         <Button 
             Style="{StaticResource BlackButton}"
             Cursor="Hand" Grid.Column="1"
-            Command="{Binding ChangePageCommand}" CommandParameter="{Binding OtherSettingsPage}" Height="45" VerticalAlignment="Top" Grid.Row="5">
+            Command="{Binding ToOtherSettingsPageCommand}" Height="45" VerticalAlignment="Top" Grid.Row="5">
             <Image
                 RenderOptions.BitmapScalingMode="HighQuality"
                 VerticalAlignment="Center" HorizontalAlignment="Center"

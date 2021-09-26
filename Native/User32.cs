@@ -12,7 +12,7 @@ namespace Light.Native
         private const string Dll = "user32.dll";
 
         [DllImport(Dll, SetLastError = true)]
-        public static extern bool GetWindowRect(HandleRef hWnd, [In][Out] ref Rect rect);
+        public static extern bool GetWindowRect(HandleRef hWnd, out Rect lpRect);
 
         [DllImport(Dll, SetLastError = true)]
         public static extern nint GetForegroundWindow();

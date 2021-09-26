@@ -1,8 +1,6 @@
 ﻿#region
 
 using System;
-using System.Collections.Generic;
-using System.Windows.Documents;
 using Light.Native;
 using Light.Templates.Entities;
 
@@ -20,14 +18,13 @@ namespace Light.Infrastructure
         /// </summary>
         public static void ApplyColorConfiguration(int colorTemperature, float brightness, string screenName)
         {
-            // http://jonls.dk/2010/09/windows-gamma-adjustments/
             var dc = Gdi32.CreateDC(screenName, null, null, 0);
             const int maxChannelValue = 256;
             const int channelMult = 255;
 
             var RGBmask = GetRGBFromKelvin(colorTemperature);
 
-            GammaRamp channels = new()
+            var channels = new GammaRamp
             {
                 Red = new ushort[maxChannelValue],
                 Green = new ushort[maxChannelValue],
@@ -68,6 +65,9 @@ namespace Light.Infrastructure
                         : (Math.Log(kelvinValue * 0.01 - 10) * 138.5177312231 - 305.0447927307) / 255
             );
 
+#if DEBUG
+            DebugConsole.Print($"Kelvin = {kelvinValue} /nRGB Mask [R: {mask.Red} G:{mask.Green} B: {mask.Blue}]");
+#endif
 
             return mask;
         }

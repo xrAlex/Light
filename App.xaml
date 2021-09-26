@@ -4,8 +4,7 @@
              xmlns:local="clr-namespace:Light"
              xmlns:viewmodels="clr-namespace:Light.ViewModels"         
              xmlns:views="clr-namespace:Light.Views"
-             xmlns:converters="clr-namespace:Light.Converters"
-             StartupUri="Views/MainWindow.xaml">
+             xmlns:converters="clr-namespace:Light.Converters">
     <Application.Resources>
         <ResourceDictionary>
             

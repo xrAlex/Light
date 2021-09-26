@@ -29,25 +29,32 @@ namespace Light.ViewModels
 
         #region Fields
 
-        private readonly WindowService _windowService;
+        private readonly DialogService _dialogService;
         private readonly SettingsService _settings;
         private readonly ColorTemperatureWatcherService _colorTemperatureWatcher;
-        public OtherSettingsPageViewModel OtherSettingsPage { get; }
-        public SettingsMainPageViewModel SettingsMainPage { get; }
-        public ProcessPageViewModel ProcessPage { get; }
 
         #endregion
 
         #region Commands
 
-        public ICommand ChangePageCommand { get; }
+        public ICommand ToOtherSettingsPageCommand { get; }
+        public ICommand ToSettingsMainPageCommand { get; }
+        public ICommand ToProcessPageCommand { get; }
         public ICommand ApplySettingsCommand { get; }
         public ICommand ResetSettingsCommand { get; }
         public ICommand CloseSettingsCommand { get; }
 
-        private void OnChangePageCommandExecute(object viewModel)
+        private void OnToOtherSettingsPageCommandExecute()
         {
-            SelectedViewModel = (ViewModelBase)viewModel;
+            SelectedViewModel = new OtherSettingsPageViewModel();
+        }
+        private void OnToSettingsMainPageCommandExecute()
+        {
+            SelectedViewModel = new SettingsMainPageViewModel();
+        }
+        private void OnToProcessPageCommandExecute()
+        {
+            SelectedViewModel = new ProcessPageViewModel();
         }
 
         private void OnResetSettingsCommandExecute()
@@ -58,14 +65,14 @@ namespace Light.ViewModels
         private void OnCloseSettingsCommandExecute()
         {
             _settings.Reset();
-            _windowService.CloseWindow();
+            _dialogService.CloseDialog<SettingsWindowViewModel>();
             _colorTemperatureWatcher.StartWatch();
         }
 
         private void OnApplySettingsCommandExecute()
         {
             _settings.Save();
-            _windowService.CloseWindow();
+            _dialogService.CloseDialog<SettingsWindowViewModel>();
             _colorTemperatureWatcher.StartWatch();
         }
 
@@ -76,18 +83,25 @@ namespace Light.ViewModels
             ApplySettingsCommand = new LambdaCommand(p => OnApplySettingsCommandExecute());
             ResetSettingsCommand = new LambdaCommand(p => OnResetSettingsCommandExecute());
             CloseSettingsCommand = new LambdaCommand(p => OnCloseSettingsCommandExecute());
-            ChangePageCommand = new LambdaCommand(OnChangePageCommandExecute);
+
+            ToOtherSettingsPageCommand = new LambdaCommand(p => OnToOtherSettingsPageCommandExecute());
+            ToSettingsMainPageCommand = new LambdaCommand(p => OnToSettingsMainPageCommandExecute());
+            ToProcessPageCommand = new LambdaCommand(p => OnToProcessPageCommandExecute());
 
             var serviceLocator = ServiceLocator.Source;
             _settings = serviceLocator.Settings;
-            _windowService = serviceLocator.WindowService;
+            _dialogService = serviceLocator.DialogService;
             _colorTemperatureWatcher = serviceLocator.ColorTemperatureWatcher;
-
-            OtherSettingsPage = new OtherSettingsPageViewModel();
-            SettingsMainPage = new SettingsMainPageViewModel();
-            ProcessPage = new ProcessPageViewModel();
-            SelectedViewModel = SettingsMainPage;
             _colorTemperatureWatcher.StopWatch();
+
+            SelectedViewModel = new SettingsMainPageViewModel();
         }
+
+#if DEBUG
+        ~SettingsWindowViewModel()
+        {
+            DebugConsole.Print("SettingsWindowViewModel Disposed");
+        }
+#endif
     }
 }

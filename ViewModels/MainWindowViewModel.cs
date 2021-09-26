@@ -35,8 +35,8 @@ namespace Light.ViewModels
 
         public ObservableCollection<ScreenEntity> Screens { get; }
 
-        private readonly WindowService _windowService;
         private readonly ScreenModel _screenModel;
+        private readonly DialogService _dialogService;
 
         #endregion
 
@@ -49,6 +49,7 @@ namespace Light.ViewModels
         private void OnCloseAppCommandExecute()
         {
             _screenModel.SetDefaultColorTemperatureOnAllScreens();
+            _dialogService.CloseDialog<MainWindowViewModel>();
             Application.Current.Shutdown();
         }
 
@@ -59,9 +60,7 @@ namespace Light.ViewModels
 
         private void OnOpenSettingsWindowCommandExecute()
         {
-            var settingsVM = new SettingsWindowViewModel();
-            _windowService.CreateWindow(settingsVM, 500, 450);
-            _windowService.ShowWindow();
+            _dialogService.ShowDialog<SettingsWindowViewModel, MainWindowViewModel>();
         }
 
         #endregion
@@ -74,7 +73,7 @@ namespace Light.ViewModels
 
             _screenModel = new ScreenModel();
             var serviceLocator = ServiceLocator.Source;
-            _windowService = serviceLocator.WindowService;
+            _dialogService = serviceLocator.DialogService;
             var currentTimeService = serviceLocator.CurrentTimeService;
             var colorTemperatureWatcher = serviceLocator.ColorTemperatureWatcher;
 
@@ -86,5 +85,12 @@ namespace Light.ViewModels
             _screenModel.ForceColorTemperature();
             colorTemperatureWatcher.StartWatch();
         }
+
+#if DEBUG
+        ~MainWindowViewModel()
+        {
+            DebugConsole.Print("MainWindowViewModel Disposed");
+        }
+#endif
     }
 }

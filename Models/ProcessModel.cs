@@ -1,22 +1,23 @@
 ﻿#region
 
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
 using Light.Infrastructure;
 using Light.Services;
 using Light.Templates.Entities;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
 
 #endregion
 
 namespace Light.Models
 {
-    public class ProcessModel
+    internal sealed class ProcessModel
     {
         #region Fields
 
-        public ObservableCollection<ProcessEntity> Processes { get; }
-        private ObservableCollection<ProcessEntity> IgnoredProcesses { get; }
+        private ObservableCollection<ProcessEntity> Processes { get; }
+        private List<string> IgnoredProcesses { get; }
 
         #endregion
 
@@ -25,32 +26,46 @@ namespace Light.Models
         public void MoveToIgnoredProcesses()
         {
             IgnoredProcesses.Clear();
+
             Processes
                 .Where(x => x.IsSelected)
                 .ToList()
                 .ForEach(x =>
                 {
-                    IgnoredProcesses.Add(new ProcessEntity(x.Instance, x.Name));
+                    IgnoredProcesses.Add($"{x.Name}");
                 });
         }
 
         private void FillProcessCollection()
         {
-            Process.GetProcesses()
-                .AsParallel()
-                .Where(x => WindowHelper.IsWindowValid(x.MainWindowHandle))
-                .ForAll(x =>
+            Processes.Clear();
+
+            var processes = Process.GetProcesses();
+
+            foreach (var process in processes)
+            {
+                using (process)
                 {
-                    Processes.Add
-                    (
-                        new ProcessEntity(x, x.ProcessName)
+                    if (WindowHelper.IsWindowValid(process.MainWindowHandle))
+                    {
+                        Processes.Add(new ProcessEntity
                         {
-                            IsSelected = IgnoredProcesses.Any(y => y.Name == x.ProcessName)
-                        }
-                    );
-                });
+                            Name = process.ProcessName,
+                            IsSelected = IgnoredProcesses.Any(y => y == process.ProcessName),
+                            OnFullScreen = IsFullScreenProcess(process.MainWindowHandle)
+                        });
+                    }
+                }
+            }
         }
 
+        private bool IsFullScreenProcess(nint handle)
+        {
+            var serviceLocator = ServiceLocator.Source;
+            var settings = serviceLocator.Settings;
+
+            return settings.Screens.Select(screen => WindowHelper.IsWindowValid(handle) && WindowHelper.IsWindowOnFullScreen(screen, handle)).FirstOrDefault();
+        }
 
         #endregion
 
@@ -59,8 +74,15 @@ namespace Light.Models
             var serviceLocator = ServiceLocator.Source;
             var settingsService = serviceLocator.Settings;
             IgnoredProcesses = settingsService.IgnoredProcesses;
-            Processes = new ObservableCollection<ProcessEntity>();
+            Processes = settingsService.Processes;
             FillProcessCollection();
         }
+
+#if DEBUG
+        ~ProcessModel()
+        {
+            Debug.Print("ProcessModel Disposed");
+        }
+#endif
     }
 }

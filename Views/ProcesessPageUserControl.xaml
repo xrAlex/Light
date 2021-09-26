@@ -11,9 +11,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="29*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="6*"/>
             <RowDefinition Height="20*"/>
-            <RowDefinition Height="16*"/>
-            <RowDefinition Height="15*"/>
             <RowDefinition Height="35*"/>
             <RowDefinition Height="57*"/>
             <RowDefinition Height="253*"/>
@@ -28,11 +28,10 @@
             Style="{StaticResource SliderCheckBox}"
             x:Name ="Checkbox1"
             Content="Не работать в полноэкранных приложениях" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" 
-            Height="20" Width="350"
+            HorizontalAlignment="Left" Width="360"
             IsChecked="{Binding CheckFullScreenApps}"
             Grid.Column="1" Grid.Row="1" 
-            VerticalContentAlignment="Center"/>
+            VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
         <ListBox 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Height="345" Width="350"  
@@ -66,11 +65,11 @@
             HorizontalAlignment="Center"
             IsReadOnly="True" 
             BorderThickness="0" 
-            Height="14" Width="350" 
+            Height="20" Width="350" 
             Text="Whitelist процессов" 
             TextAlignment="Center" 
             VerticalAlignment="Center" 
             TextWrapping="Wrap" 
-            Grid.Column="1" Margin="0,1,0,0"/>
+            Grid.Column="1" FontSize="14"/>
     </Grid>
 </UserControl>

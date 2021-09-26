@@ -157,6 +157,7 @@
                 Header="День" 
                 HorizontalAlignment="Left" VerticalAlignment="Bottom"
                 Grid.Row="6" 
+                FontSize ="14"
                 Grid.ColumnSpan="5" Grid.Column="1" Height="112" Width="360" >
             <StackPanel>
                 <Grid Height="90">
@@ -170,10 +171,12 @@
                     <TextBox
                             BorderThickness="0"
                             IsReadOnly="True"
+                            FontSize ="12"
                             Text="{Binding Value, ElementName=DayTemperatureSlider, StringFormat= Температура: \{0:\}, Mode=OneWay }"/>
                     <TextBox
                             BorderThickness="0"
                             IsReadOnly="True"
+                            FontSize ="12"
                             Text="{Binding Value, ElementName=DayBrightnessSlider, StringFormat= Яркость: \{0:N0\}, Mode=OneWay }" 
                             Grid.Row="2"/>
                     <Slider 
@@ -201,7 +204,8 @@
         <GroupBox 
                 Header="Ночь" 
                 HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                Height="112" 
+                Height="112"
+                FontSize ="14"
                 Grid.Row="8" Grid.ColumnSpan="5" Grid.Column="1" Width="360">
             <StackPanel>
                 <Grid Height="90">
@@ -215,11 +219,13 @@
                     <TextBox
                             BorderThickness="0"
                             IsReadOnly="True"
+                            FontSize ="12"
                             Text="{Binding Value, ElementName=NightTemperatureSlider, Mode=OneWay, StringFormat=Температура: \{0:\}}"/>
                     <TextBox
                             BorderThickness="0"
                             Text="{Binding Value, ElementName=NightBrightnessSlider, Mode=OneWay, StringFormat=Яркость: \{0:N0\}}" 
                             Grid.Row="2" 
+                            FontSize ="12"
                             IsReadOnly="True"/>
                     <Slider 
                             x:Name="NightTemperatureSlider" 

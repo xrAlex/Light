@@ -15,5 +15,11 @@ namespace Light.Views
         {
             InitializeComponent();
         }
+
+        private void MainWindowUserControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+            DragMove();
+        }
     }
 }

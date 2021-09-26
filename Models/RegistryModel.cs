@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
+
+using System;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Mime;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Win32;
+
+#endregion
 
 namespace Light.Models
 {
     /// <summary>
     /// Модель для работы с записями в регистре
     /// </summary>
-    public class RegistryModel
+    internal sealed class RegistryModel
     {
         private static readonly string AppNameKey = $"{AppDomain.CurrentDomain.FriendlyName}";
         private const string StartupPath = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
@@ -86,5 +84,13 @@ namespace Light.Models
         }
 
         private string GetAppExecutingLocation => $"\"{Assembly.GetExecutingAssembly().Location}\"";
+
+#if DEBUG
+        ~RegistryModel()
+        {
+            Debug.Print("RegistryModel Disposed");
+        }
+#endif
     }
+
 }
