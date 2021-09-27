@@ -122,18 +122,12 @@
                             </Grid.RowDefinitions>
                             <Image
                                 Source="{StaticResource MonitorBlack}"
-                                RenderOptions.BitmapScalingMode="HighQuality"
-                                VerticalAlignment="Center" HorizontalAlignment="Left"
-                                Stretch="Fill" Grid.Row="0"
-                                Grid.Column="0" Grid.RowSpan="6" Height="60" Width="56" Grid.ColumnSpan="3"/>
-
+                                Height="60" Width="56" 
+                                Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="3"/>
                             <Image
                                 Source="{Binding CurrentTimePeriodImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                RenderOptions.BitmapScalingMode="HighQuality"
-                                VerticalAlignment="Center" HorizontalAlignment="Right"
-                                Stretch="Fill" Grid.Row="2"
-                                Grid.Column="1" Grid.RowSpan="2" Height="25" Width="26"/>
-
+                                Height="25" Width="26"
+                                Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"/>
                             <TextBlock
                                 Text="{Binding GetColorConfiguration.CurrentColorTemperature, Mode=OneWay, StringFormat= CTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                 FontSize="12" 
@@ -142,7 +136,6 @@
                                 Text="{Binding GetColorConfiguration.CurrentBrightness, Mode=OneWay, StringFormat= CBT : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                 FontSize="12" 
                                 Grid.Column="5" Grid.Row="1" Grid.RowSpan="2"/>
-
                             <TextBlock
                                 Text="{Binding GetColorConfiguration.DayColorTemperature, Mode=OneWay, StringFormat= DTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                 FontSize="12"
@@ -151,7 +144,6 @@
                                 Text="{Binding GetColorConfiguration.DayBrightness, Mode=OneWay, StringFormat= DBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                 FontSize="12"
                                 Grid.Column="5" Grid.Row="3" Grid.RowSpan="2"/>
-
                             <TextBlock
                                 Text="{Binding  GetColorConfiguration.NightColorTemperature, Mode=OneWay, StringFormat=NTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                 FontSize="12"
