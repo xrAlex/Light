@@ -83,7 +83,9 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\LambdaCommand.cs" />
+    <Compile Include="Converters\TemperatureToKelvin.cs" />
     <Compile Include="Converters\BrightnessToPercent.cs" />
+    <Compile Include="Converters\BrightnessToDouble.cs" />
     <Compile Include="Converters\HourConverter.cs" />
     <Compile Include="Converters\MinConverter.cs" />
     <Compile Include="DebugConsole.cs" />

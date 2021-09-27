@@ -1,5 +1,9 @@
 ﻿#region
 
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
 using Light.Services;
 using Light.ViewModels;
@@ -22,7 +26,7 @@ namespace Light
             var dialogService = serviceLocator.DialogService;
             appSettings.Load();
 
-            dialogService.Register<MainWindowViewModel,MainWindow>();
+            dialogService.Register<MainWindowViewModel, MainWindow>();
             dialogService.Register<SettingsWindowViewModel, SettingsWindow>();
             dialogService.ShowDialog<MainWindowViewModel>();
         }

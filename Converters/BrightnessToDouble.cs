@@ -8,20 +8,17 @@ using System.Windows.Data;
 
 namespace Light.Converters
 {
-    [ValueConversion(typeof(double), typeof(string))]
-    internal class BrightnessToPercent : IValueConverter
+    [ValueConversion(typeof(double), typeof(double))]
+    internal class BrightnessToDouble : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = System.Convert.ToDouble(value);
-            return $"Яркость: {Math.Round(val)} %";
+            return System.Convert.ToSingle(value) * 100;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = (string)value;
-            var dble = System.Convert.ToDouble(val.Trim('%', ' '));
-            return $"{val} %";
+            return System.Convert.ToSingle(value) * 0.01;
         }
     }
 }

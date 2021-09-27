@@ -30,7 +30,9 @@
 
             <converters:MinConverter x:Key="MinConverter"></converters:MinConverter>
             <converters:HourConverter x:Key="HourConverter"></converters:HourConverter>
+            <converters:BrightnessToDouble x:Key="BrightnessToDouble"></converters:BrightnessToDouble>
             <converters:BrightnessToPercent x:Key="BrightnessToPercent"></converters:BrightnessToPercent>
+            <converters:TemperatureToKelvin x:Key="TemperatureToKelvin"></converters:TemperatureToKelvin>
             
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Brushes.xaml" />

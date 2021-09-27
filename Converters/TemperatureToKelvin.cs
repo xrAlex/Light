@@ -9,18 +9,18 @@ using System.Windows.Data;
 namespace Light.Converters
 {
     [ValueConversion(typeof(double), typeof(string))]
-    internal class BrightnessToPercent : IValueConverter
+    internal class TemperatureToKelvin : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = System.Convert.ToDouble(value);
-            return $"Яркость: {Math.Round(val)} %";
+            return $"Температура: {Math.Round(val)} К";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = (string)value;
-            var dble = System.Convert.ToDouble(val.Trim('%', ' '));
+            var dble = System.Convert.ToDouble(val.Trim('K', ' '));
             return $"{val} %";
         }
     }

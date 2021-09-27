@@ -23,48 +23,70 @@
             <ColumnDefinition Width="39*"/>
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="1" 
-            HorizontalAlignment="Center" 
-            BorderThickness="0"
-            SelectionMode="Single"
-            SelectedIndex="{Binding SelectedScreenIndex, Mode=TwoWay}"
-            VerticalAlignment="Top"
-            Height="80"  Width="360"
-            ItemsSource="{Binding Screens, Mode=OneWay}"
-            ItemContainerStyle="{StaticResource MonitorListBox}" Grid.ColumnSpan="2" Grid.Row="1">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel 
-                        Orientation="Horizontal" 
-                        Cursor="Hand"
-                        Width="66" Height="66">
-                        <StackPanel.InputBindings>
-                            <MouseBinding Gesture="LeftDoubleClick"
+        <GroupBox 
+            Header="Мониторы"
+            Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80*"/>
+                </Grid.ColumnDefinitions>
+                <ListBox
+                 HorizontalAlignment="Center" 
+                 BorderThickness="0"
+                 SelectionMode="Single"
+                 SelectedIndex="{Binding SelectedScreenIndex, Mode=TwoWay}"
+                 VerticalAlignment="Top"
+                 ItemsSource="{Binding Screens, Mode=OneWay}"
+                 ItemContainerStyle="{StaticResource MonitorListBox}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Cursor="Hand"
+                                Width="65" Height="65">
+                                <StackPanel.InputBindings>
+                                    <MouseBinding Gesture="LeftDoubleClick"
                                 Command="{Binding DataContext.MonitorDoubleClickCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                            </MouseBinding>
-                        </StackPanel.InputBindings>
-                        <Image              
-                            Source="{StaticResource MonitorBlack}"
-                            VerticalAlignment="Bottom"
-                            Width="60" Height="60" 
-                            Opacity="{Binding Opacity, Mode=OneWay}"
-                            Margin="3,0,0,0">
-                        </Image>
-                        <TextBlock
-                            Text="{Binding Name, Mode=OneWay, StringFormat=Monitor \{0\}}" 
-                            Margin="-60,-2,0,52"
-                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                            FontSize="12" 
-                            Width="62"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                    </MouseBinding>
+                                </StackPanel.InputBindings>
+                                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="65" Height="65">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="16*"/>
+                                        <RowDefinition Height="49*"/>
+                                    </Grid.RowDefinitions>
+                                    <Image              
+                                        Source="{StaticResource MonitorBlack}"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Stretch"
+                                        Width="Auto" Height="49" 
+                                        Stretch="Uniform"
+                                        Opacity="{Binding Opacity, Mode=OneWay}" Grid.RowSpan="1" Grid.Row="1" Margin="0">
+                                    </Image>
+                                    <TextBox
+                                        Text="{Binding Name, Mode=OneWay, StringFormat=Monitor \{0\}}"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"
+                                        Background="Transparent"
+                                        Cursor="Hand"
+                                        FontSize="12" 
+                                        Width="65"/>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </GroupBox>
         <GroupBox 
             Header="День" 
             Grid.Row="3" 
@@ -75,7 +97,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="113*"/>
                         <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="48*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="56*"/>
@@ -96,17 +119,17 @@
                         HorizontalAlignment="Left" VerticalAlignment="Top" 
                         Height="4"  Width="4"
                         Margin="0,3,0,0"
-                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2"/>
                     <Ellipse 
                         Fill= "Black" Stroke="Black" 
                         HorizontalAlignment="Left"  Width="4"
                         Margin="0,12,0,6"
-                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2"/>
                     <Image              
                         Source="{StaticResource Day}"
                         Width="124" Height="124" 
                         Stretch="Fill"
-                        Opacity="0.03" Grid.RowSpan="6" Grid.ColumnSpan="6" Grid.Column="1"/>
+                        Opacity="0.03" Grid.RowSpan="6" Grid.ColumnSpan="7" Grid.Column="1"/>
                     <TextBox
                         Text="{Binding HourEnd, Converter= {StaticResource HourConverter}, Mode=TwoWay}" 
                         MaxLength = "2" 
@@ -117,7 +140,7 @@
                         Background="Transparent"
                         VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Right"
-                        Grid.Column="2" Grid.Row="1" Padding="0,-5,0,0"/>
+                        Grid.Column="2" Grid.Row="1" Padding="0,-5,0,0" Grid.ColumnSpan="2"/>
                     <TextBox
                         Text="{Binding MinEnd, Converter= {StaticResource MinConverter}, Mode=TwoWay}" 
                         MaxLength = "2" 
@@ -129,28 +152,28 @@
                         Background="Transparent"
                         VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Left"
-                        Grid.Column="5" Grid.Row="1" Padding="0,-5,0,0"/>
+                        Grid.Column="6" Grid.Row="1" Padding="0,-5,0,0"/>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
                         FontSize ="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding Value, ElementName=DayTemperatureSlider, StringFormat= Температура: \{0:\}, Mode=OneWay }" Grid.Row="2" Grid.ColumnSpan="2"/>
+                        Text="{Binding Value, ElementName=DayTemperatureSlider, Converter={StaticResource TemperatureToKelvin}, Mode=OneWay }" Grid.Row="2" Grid.ColumnSpan="3"/>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
                         FontSize ="15"
                         Background="Transparent"
-                        Text="Восход" Grid.ColumnSpan="4" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-4,0,0" UseLayoutRounding="False"/>
+                        Text="Восход" Grid.ColumnSpan="5" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-4,0,0" UseLayoutRounding="False"/>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
                         FontSize ="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding Value, ElementName=DayBrightnessSlider, StringFormat= Яркость: \{0:N0\}, Mode=OneWay }" 
-                        Grid.Row="4" Grid.ColumnSpan="2"/>
+                        Text="{Binding Value, ElementName=DayBrightnessSlider, Converter={StaticResource BrightnessToPercent}, Mode=OneWay }" 
+                        Grid.Row="4" Grid.ColumnSpan="3"/>
                     <Slider 
                         x:Name="DayTemperatureSlider" 
                         Style="{StaticResource HorizontalSlider}"
@@ -162,15 +185,15 @@
                         Cursor="Hand"
                         IsDirectionReversed="True" 
                         Value="{Binding DayColorTemperature, Mode=TwoWay}" 
-                        Grid.Row="3" Grid.ColumnSpan="8" Margin="0,0,0,11" Grid.RowSpan="2"/>
+                        Grid.Row="3" Grid.ColumnSpan="9" Margin="0,0,0,11" Grid.RowSpan="2"/>
                     <Slider 
                         x:Name="DayBrightnessSlider" 
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="100" Minimum="{Binding MinBrightnessRange}"
                         Cursor="Hand"
                         IsDirectionReversed="True" 
-                        Value="{Binding DayBrightness, Converter= {StaticResource BrightnessToPercent} ,Mode=TwoWay}" 
-                        Grid.Row="5" Grid.ColumnSpan="8"/>
+                        Value="{Binding DayBrightness, Converter= {StaticResource BrightnessToDouble}, Mode=TwoWay}" 
+                        Grid.Row="5" Grid.ColumnSpan="9"/>
                 </Grid>
             </StackPanel>
         </GroupBox>
@@ -184,7 +207,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="113*"/>
                         <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="48*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="56*"/>
@@ -205,17 +229,17 @@
                         HorizontalAlignment="Left" VerticalAlignment="Top" 
                         Height="4"  Width="4"
                         Margin="0,3,0,0"
-                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2"/>
                     <Ellipse 
                         Fill= "Black" Stroke="Black" 
                         HorizontalAlignment="Left"  Width="4"
                         Margin="0,12,0,6"
-                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2"/>
                     <Image              
                         Source="{StaticResource Night}"
                         Width="124" Height="124" 
                         Stretch="Fill"
-                        Opacity="0.03" Grid.RowSpan="6" Grid.ColumnSpan="6" Grid.Column="1"/>
+                        Opacity="0.03" Grid.RowSpan="6" Grid.ColumnSpan="7" Grid.Column="1"/>
                     <TextBox
                         Text="{Binding HourStart, Converter= {StaticResource HourConverter}, Mode=TwoWay}" 
                         MaxLength = "2" 
@@ -226,7 +250,7 @@
                         Background="Transparent"
                         VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Right"
-                        Grid.Column="2" Grid.Row="1" Padding="0,-5,0,0"/>
+                        Grid.Column="2" Grid.Row="1" Padding="0,-5,0,0" Grid.ColumnSpan="2"/>
                     <TextBox
                         Text="{Binding MinStart, Converter= {StaticResource MinConverter}, Mode=TwoWay}" 
                         MaxLength = "2" 
@@ -238,27 +262,27 @@
                         Background="Transparent"
                         VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Left"
-                        Grid.Column="5" Grid.Row="1" Padding="0,-5,0,0"/>
+                        Grid.Column="6" Grid.Row="1" Padding="0,-5,0,0"/>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
                         FontSize ="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding Value, ElementName=NightTemperatureSlider, StringFormat= Температура: \{0:\}, Mode=OneWay }" Grid.Row="2" Grid.ColumnSpan="2"/>
+                        Text="{Binding Value, ElementName=NightTemperatureSlider, Converter={StaticResource TemperatureToKelvin} , Mode=OneWay }" Grid.Row="2" Grid.ColumnSpan="3"/>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
                         FontSize ="15"
                         Background="Transparent"
-                        Text="Заход" Grid.ColumnSpan="4" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-4,0,0" UseLayoutRounding="False"/>
+                        Text="Заход" Grid.ColumnSpan="5" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-4,0,0" UseLayoutRounding="False"/>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
                         FontSize ="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding Value, ElementName=NightBrightnessSlider, StringFormat= Яркость: \{0:N0\}, Mode=OneWay }" 
+                        Text="{Binding Value, ElementName=NightBrightnessSlider, Converter={StaticResource BrightnessToPercent}, Mode=OneWay }" 
                         Grid.Row="4" Grid.ColumnSpan="2"/>
                     <Slider 
                         x:Name="NightTemperatureSlider" 
@@ -271,15 +295,15 @@
                         Cursor="Hand"
                         IsDirectionReversed="True" 
                         Value="{Binding NightColorTemperature, Mode=TwoWay}" 
-                        Grid.Row="3" Grid.ColumnSpan="8" Margin="0,0,0,11" Grid.RowSpan="2"/>
+                        Grid.Row="3" Grid.ColumnSpan="9" Margin="0,0,0,11" Grid.RowSpan="2"/>
                     <Slider 
                         x:Name="NightBrightnessSlider" 
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="100" Minimum="{Binding MinBrightnessRange}"
                         Cursor="Hand"
                         IsDirectionReversed="True" 
-                        Value="{Binding NightBrightness, Converter= {StaticResource BrightnessToPercent} ,Mode=TwoWay}" 
-                        Grid.Row="5" Grid.ColumnSpan="8"/>
+                        Value="{Binding NightBrightness, Converter= {StaticResource BrightnessToDouble} ,Mode=TwoWay}" 
+                        Grid.Row="5" Grid.ColumnSpan="9"/>
                 </Grid>
             </StackPanel>
         </GroupBox>
