@@ -6,7 +6,7 @@ using System.Text;
 
 #endregion
 
-namespace Light.Native
+namespace Light.WinApi
 {
     [Flags]
     internal enum ProcessAccessFlags : uint
@@ -26,25 +26,21 @@ namespace Light.Native
         Synchronize = 0x00100000
     }
     //ProcessAccessFlags.QueryLimitedInformation
-    internal static class Kernel32
+    internal static partial class Native
     {
-        private const string Dll = "Kernel32.dll";
-
-        [DllImport(Dll, SetLastError = true)]
+        [DllImport("Kernel32.dll", SetLastError = true)]
         public static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
-        [DllImport(Dll, SetLastError = true)]
+        [DllImport("Kernel32.dll", SetLastError = true)]
         public static extern int WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
 
-        public delegate bool EnumWindowsProc(nint hWnd, nint lParam);
-
-        [DllImport(Dll, SetLastError = true)]
+        [DllImport("Kernel32.dll", SetLastError = true)]
         public static extern nint OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, uint processId);
 
-        [DllImport(Dll, SetLastError = true)]
+        [DllImport("Kernel32.dll", SetLastError = true)]
         public static extern bool QueryFullProcessImageName(nint hPrc, uint dwFlags, StringBuilder lpExeName, ref uint lpdwSize);
 
-        [DllImport(Dll, SetLastError = true)]
+        [DllImport("Kernel32.dll", SetLastError = true)]
         public static extern bool CloseHandle(nint hObj);
     }
 }

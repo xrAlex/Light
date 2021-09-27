@@ -2,7 +2,7 @@
 
 using System;
 using System.Text;
-using Light.Native;
+using Light.WinApi;
 
 #endregion
 
@@ -23,7 +23,7 @@ namespace Light.Infrastructure
         public static T GetValue<T>(string section, string key, string defaultValue) where T : IConvertible
         {
             StringBuilder buffer = new(MaxStringSize);
-            Kernel32.GetPrivateProfileString(section, key, defaultValue, buffer, MaxStringSize, Path);
+            Native.GetPrivateProfileString(section, key, defaultValue, buffer, MaxStringSize, Path);
 
             return (T)Convert.ChangeType(buffer.ToString(), typeof(T));
         }
@@ -31,6 +31,6 @@ namespace Light.Infrastructure
         /// <summary>
         /// Метод записывает данные в файл
         /// </summary>
-        public static void WriteValue(string section, string key, string value) => Kernel32.WritePrivateProfileString(section, key, value, Path);
+        public static void WriteValue(string section, string key, string value) => Native.WritePrivateProfileString(section, key, value, Path);
     }
 }

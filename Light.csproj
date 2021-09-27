@@ -17,11 +17,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
-	
-	<DisableWinExeOutputInference>true</DisableWinExeOutputInference>
-	<OutputType>WinExe</OutputType>
-
-	
+    <DisableWinExeOutputInference>true</DisableWinExeOutputInference>
+    <OutputType>WinExe</OutputType>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -102,10 +99,11 @@
     <Compile Include="Models\ProcessModel.cs" />
     <Compile Include="Infrastructure\INIManager.cs" />
     <Compile Include="Templates\Entities\GammaRamp.cs" />
-    <Compile Include="Native\Gdi32.cs" />
-    <Compile Include="Native\Kernel32.cs" />
+    <Compile Include="Templates\Entities\SystemProcess.cs" />
+    <Compile Include="WinApi\Gdi32.cs" />
+    <Compile Include="WinApi\Kernel32.cs" />
     <Compile Include="Templates\Entities\Rect.cs" />
-    <Compile Include="Native\User32.cs" />
+    <Compile Include="WinApi\User32.cs" />
     <Compile Include="Services\ColorTemperatureWatcherService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Models\ScreenModel.cs" />
@@ -146,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\GlobalStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

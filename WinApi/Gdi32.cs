@@ -5,22 +5,20 @@ using Light.Templates.Entities;
 
 #endregion
 
-namespace Light.Native
+namespace Light.WinApi
 {
-    internal static class Gdi32
+    internal static partial class Native
     {
-        private const string Dll = "gdi32.dll";
-
-        [DllImport(Dll, SetLastError = true)]
+        [DllImport("gdi32.dll", SetLastError = true)]
         public static extern nint CreateDC(string lpszDriver, string lpszDevice, string lpszOutput, nint lpInitData);
 
-        [DllImport(Dll, SetLastError = true)]
+        [DllImport("gdi32.dll", SetLastError = true)]
         public static extern bool DeleteDC(nint hDc);
 
-        [DllImport(Dll, SetLastError = true)]
+        [DllImport("gdi32.dll", SetLastError = true)]
         public static extern bool SetDeviceGammaRamp(nint hDc, ref GammaRamp lpRamp);
 
-        [DllImport(Dll, SetLastError = true)]
+        [DllImport("gdi32.dll", SetLastError = true)]
         public static extern bool GetDeviceGammaRamp(nint hDc, out GammaRamp lpRamp);
     }
 }

@@ -6,8 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Light.Infrastructure;
 using Light.Models;
-using Light.Native;
 using Light.Templates.Entities;
+using Light.WinApi;
 
 #endregion
 
@@ -82,16 +82,14 @@ namespace Light.Services
         /// <returns> true если окно работает в полноэкранном режиме </returns>
         private bool IsFullScreenProcessFounded(ScreenEntity screen)
         {
-            var handler = User32.GetForegroundWindow();
+            var handler = Native.GetForegroundWindow();
             if (!WindowHelper.IsWindowValid(handler) || !WindowHelper.IsWindowOnFullScreen(screen, handler)) return false;
 
-            uint pid = 0;
-            User32.GetWindowThreadProcessId(handler, ref pid);
+            Native.GetWindowThreadProcessId(handler, out var pid);
             if (pid == 0) return false;
 
             var process = Process.GetProcessById((int)pid);
             return _settings.IgnoredProcesses.Count == 0 || _settings.IgnoredProcesses.Any(p => p != process.ProcessName);
         }
-
     }
 }

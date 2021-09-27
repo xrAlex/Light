@@ -1,8 +1,8 @@
 ﻿#region
 
 using System;
-using Light.Native;
 using Light.Templates.Entities;
+using Light.WinApi;
 
 #endregion
 
@@ -18,7 +18,7 @@ namespace Light.Infrastructure
         /// </summary>
         public static void ApplyColorConfiguration(int colorTemperature, float brightness, string screenName)
         {
-            var dc = Gdi32.CreateDC(screenName, null, null, 0);
+            var dc = Native.CreateDC(screenName, null, null, 0);
             const int maxChannelValue = 256;
             const int channelMult = 255;
 
@@ -38,8 +38,8 @@ namespace Light.Infrastructure
                 channels.Blue[i] = (ushort) (i * channelMult * RGBmask.Blue * brightness);
             }
 
-            Gdi32.SetDeviceGammaRamp(dc, ref channels);
-            Gdi32.DeleteDC(dc);
+            Native.SetDeviceGammaRamp(dc, ref channels);
+            Native.DeleteDC(dc);
         }
 
 

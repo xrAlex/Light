@@ -6,7 +6,9 @@ using Light.Templates.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using Light.WinApi;
 
 #endregion
 
@@ -40,23 +42,40 @@ namespace Light.Models
         {
             Processes.Clear();
 
-            var processes = Process.GetProcesses();
+            var windowsHandle = WindowHelper.GetAllWindows();
 
-            foreach (var process in processes)
+            foreach (var handle in windowsHandle)
             {
-                using (process)
+                Native.GetWindowThreadProcessId(handle, out var pId);
+                if (pId == 0) continue;
+
+                using var process = SystemProcess.TryOpen(pId);
+                var processPath = process?.TryGetExecutableFilePath();
+                var processFileName = Path.GetFileNameWithoutExtension(processPath);
+
+                if (!IsProcessValid(processPath, processFileName)) continue;
+
+                Processes.Add(new ProcessEntity
                 {
-                    if (WindowHelper.IsWindowValid(process.MainWindowHandle))
-                    {
-                        Processes.Add(new ProcessEntity
-                        {
-                            Name = process.ProcessName,
-                            IsSelected = IgnoredProcesses.Any(y => y == process.ProcessName),
-                            OnFullScreen = IsFullScreenProcess(process.MainWindowHandle)
-                        });
-                    }
-                }
+                    ExecutableFilePath = processPath,
+                    Name = processFileName,
+                    IsSelected = IgnoredProcesses.Any(y => y == processFileName),
+                    OnFullScreen = IsFullScreenProcess(handle)
+                });
             }
+        }
+
+        private bool IsProcessValid(string processPath, string processFileName)
+        {
+            if (string.IsNullOrWhiteSpace(processPath) || string.IsNullOrWhiteSpace(processFileName))
+            {
+                return false;
+            }
+            if (Processes.Any(y => y.ExecutableFilePath == processPath))
+            {
+                return false;
+            }
+            return true;
         }
 
         private bool IsFullScreenProcess(nint handle)
@@ -64,7 +83,7 @@ namespace Light.Models
             var serviceLocator = ServiceLocator.Source;
             var settings = serviceLocator.Settings;
 
-            return settings.Screens.Select(screen => WindowHelper.IsWindowValid(handle) && WindowHelper.IsWindowOnFullScreen(screen, handle)).FirstOrDefault();
+            return settings.Screens.Select(screen => WindowHelper.IsWindowOnFullScreen(screen, handle)).FirstOrDefault();
         }
 
         #endregion
