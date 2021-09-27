@@ -59,35 +59,23 @@
             Content="—"
             FontSize="20"
             HorizontalAlignment="Center" VerticalAlignment="Top"
-            BorderThickness="0"
-            Cursor="Hand"
             Foreground="#FFF1F1F1"
             VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
             Width="30" Height="30"
             Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" />
         <Button
-            BorderThickness="0"
             Style="{StaticResource DeepGrayButton}"
-            FontSize="20"
-            Cursor="Hand"
             Command="{Binding CloseAppCommand, Mode=OneWay}"
             Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2">
             <Image
-                RenderOptions.BitmapScalingMode="HighQuality"
-                VerticalAlignment="Center" HorizontalAlignment="Center"
                 Width="20" Height="20"
                 Source="{StaticResource TurnOff}" Stretch="Fill" />
         </Button>
         <Button
             Style="{StaticResource RotaryButton}"
-            BorderThickness="0"
-            RenderTransformOrigin="0.5,0.5"
-            Cursor="Hand"
             Command="{Binding OpenSettingsWindowCommand, Mode=OneWay}"
             Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3">
             <Image
-                RenderOptions.BitmapScalingMode="HighQuality"
-                VerticalAlignment="Center" HorizontalAlignment="Center"
                 Width="50" Height="50"
                 Source="{StaticResource Settings}" />
         </Button>

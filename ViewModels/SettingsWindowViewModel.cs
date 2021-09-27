@@ -31,7 +31,7 @@ namespace Light.ViewModels
 
         private readonly DialogService _dialogService;
         private readonly SettingsService _settings;
-        private readonly ColorTemperatureWatcherService _colorTemperatureWatcher;
+        private readonly PeriodWatcherService _colorTemperatureWatcher;
 
         #endregion
 

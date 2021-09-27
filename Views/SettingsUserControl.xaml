@@ -40,51 +40,41 @@
             Height="500" Width="60" Grid.RowSpan="9" Grid.ColumnSpan="3"/>
         <Button 
             Style="{StaticResource BlackButton}"
-            Cursor="Hand" Grid.Column="1"
-            Command="{Binding ToProcessPageCommand}" Margin="0,1,0,4" Grid.RowSpan="2" Grid.Row="3">
+            Grid.Column="1" Grid.RowSpan="2" Grid.Row="3"
+            Command="{Binding ToProcessPageCommand}">
             <Image 
-                RenderOptions.BitmapScalingMode="HighQuality"
-                VerticalAlignment="Center" HorizontalAlignment="Center" 
                 Width="37" Height="37" 
                 Source="{StaticResource Process}" Stretch="Fill"/>
         </Button>
         <Button
             Style="{StaticResource BlackButton}"
-            Cursor="Hand"
-            Command="{Binding ToSettingsMainPageCommand}" Margin="0,0,0,1" Grid.Column="1" Grid.Row="1">
+            Command="{Binding ToSettingsMainPageCommand}" Grid.Column="1" Grid.Row="1">
             <Image 
-                RenderOptions.BitmapScalingMode="HighQuality"
-                VerticalAlignment="Center" HorizontalAlignment="Center" 
                 Width="37" Height="37" 
                 Source="{StaticResource Main}" Stretch="Fill">
             </Image>
         </Button>
         <Button 
             Style="{StaticResource BlackButton}"
-            Cursor="Hand" Grid.Column="1"
+            Grid.Column="1"
             Command="{Binding ToOtherSettingsPageCommand}" Height="45" VerticalAlignment="Top" Grid.Row="5">
             <Image
-                RenderOptions.BitmapScalingMode="HighQuality"
-                VerticalAlignment="Center" HorizontalAlignment="Center"
                 Width="37" Height="37" 
                 Source="{StaticResource Other}" Stretch="Fill"/>
         </Button>
         <Button 
             Style="{StaticResource LightGrayButton}"
-            Content="Сбросить"         
-            Cursor="Hand"
+            Content="Сбросить"
             Command="{Binding ResetSettingsCommand}"
             Grid.Row="7" Grid.Column="4"/>
         <Button 
             Style="{StaticResource LightGrayButton}" 
-            Content="Отменить"     
-            Cursor="Hand" 
+            Content="Отменить"
             Command="{Binding CloseSettingsCommand}"
             Grid.Row="7" Grid.Column="6"/>
         <Button 
             Style="{StaticResource LightGrayButton}" 
-            Content="Применить"          
-            Cursor="Hand" 
+            Content="Применить"
             Command="{Binding ApplySettingsCommand}"
             Grid.Row="7" Grid.Column="8"/>
     </Grid>

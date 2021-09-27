@@ -18,7 +18,7 @@ namespace Light.Models
     {
         #region Fields
 
-        private ObservableCollection<ProcessEntity> Processes { get; }
+        private ObservableCollection<ApplicationEntity> Processes { get; }
         private List<string> IgnoredProcesses { get; }
 
         #endregion
@@ -42,20 +42,18 @@ namespace Light.Models
         {
             Processes.Clear();
 
-            var windowsHandle = WindowHelper.GetAllWindows();
+            var windowsHandle = SystemWindow.GetAllWindows();
 
             foreach (var handle in windowsHandle)
             {
-                Native.GetWindowThreadProcessId(handle, out var pId);
-                if (pId == 0) continue;
-
-                using var process = SystemProcess.TryOpen(pId);
-                var processPath = process?.TryGetExecutableFilePath();
+                var pId = SystemProcess.GetId(handle);
+                using var process = SystemProcess.TryOpenProcess(pId);
+                var processPath = process?.TryGetProcessPath();
                 var processFileName = Path.GetFileNameWithoutExtension(processPath);
 
                 if (!IsProcessValid(processPath, processFileName)) continue;
 
-                Processes.Add(new ProcessEntity
+                Processes.Add(new ApplicationEntity
                 {
                     ExecutableFilePath = processPath,
                     Name = processFileName,
@@ -67,15 +65,8 @@ namespace Light.Models
 
         private bool IsProcessValid(string processPath, string processFileName)
         {
-            if (string.IsNullOrWhiteSpace(processPath) || string.IsNullOrWhiteSpace(processFileName))
-            {
-                return false;
-            }
-            if (Processes.Any(y => y.ExecutableFilePath == processPath))
-            {
-                return false;
-            }
-            return true;
+            return !string.IsNullOrWhiteSpace(processPath) && !string.IsNullOrWhiteSpace(processFileName) 
+                                                           && Processes.All(y => y.ExecutableFilePath != processPath);
         }
 
         private bool IsFullScreenProcess(nint handle)
@@ -83,7 +74,7 @@ namespace Light.Models
             var serviceLocator = ServiceLocator.Source;
             var settings = serviceLocator.Settings;
 
-            return settings.Screens.Select(screen => WindowHelper.IsWindowOnFullScreen(screen, handle)).FirstOrDefault();
+            return settings.Screens.Select(screen => SystemWindow.IsWindowOnFullScreen(screen, handle)).FirstOrDefault();
         }
 
         #endregion

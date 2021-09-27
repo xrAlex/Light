@@ -24,20 +24,16 @@
         <CheckBox 
             Style="{StaticResource SliderCheckBox}"
             Content="Автозапуск" 
-            
             IsChecked="{Binding LaunchOnStartup}"
-            VerticalContentAlignment="Center" HorizontalAlignment="Left"
-            Grid.Column="1" Grid.Row="1" Width="360"/>
+            Grid.Column="1" Grid.Row="1"/>
         <CheckBox 
             Style="{StaticResource SliderCheckBox}"
             IsChecked="{Binding ExtendedGammaRange}"
-            Content="Разблокировать расширенный диапозон гаммы"     
-            VerticalContentAlignment="Center" HorizontalAlignment="Left"
-            Grid.Column="1" Grid.Row="2" Width="360"/>
+            Content="Разблокировать расширенный диапозон гаммы"
+            Grid.Column="1" Grid.Row="2"/>
         <CheckBox 
             Style="{StaticResource SliderCheckBox}"
             Content="Плавное изменение яркости"     
-            VerticalContentAlignment="Center" HorizontalAlignment="Left"
-            Grid.Column="1" Grid.Row="3" Width="360"/>
+            Grid.Column="1" Grid.Row="3"/>
     </Grid>
 </UserControl>

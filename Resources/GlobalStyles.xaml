@@ -3,7 +3,16 @@
     <Style TargetType="{x:Type Image}">
         <Setter Property="RenderOptions.BitmapScalingMode" Value ="HighQuality"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Stretch" Value="Fill"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="TextWrapping" Value ="Wrap"/>
+        <Setter Property="TextAlignment" Value ="Center"/>
+        <Setter Property="BorderThickness" Value ="0"/>
+        <Setter Property="IsReadOnly" Value ="True"/>
+        <Setter Property="Focusable" Value ="False"/>
+        <Setter Property="Cursor" Value ="Arrow"/>
     </Style>
 </ResourceDictionary>

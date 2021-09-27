@@ -9,6 +9,7 @@ using System.Windows.Data;
 
 namespace Light.Converters
 {
+    [ValueConversion(typeof(int), typeof(string))]
     internal class HourConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -40,6 +40,7 @@
                 <ResourceDictionary Source="Resources/ScrollBar.xaml" />
                 <ResourceDictionary Source="Resources/Slider.xaml" />
                 <ResourceDictionary Source="Resources/CheckBox.xaml" />
+                <ResourceDictionary Source="Resources/GlobalStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>

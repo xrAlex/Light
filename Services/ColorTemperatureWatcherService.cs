@@ -1,6 +1,7 @@
 ﻿#region
 
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,14 +17,14 @@ namespace Light.Services
     /// <summary>
     /// Класс циклически проверяет какая цветовая конфигурация должна быть быть установлена
     /// </summary>
-    public class ColorTemperatureWatcherService
+    public class PeriodWatcherService
     {
         private readonly ScreenModel _screenModel;
         private readonly SettingsService _settings;
         private readonly WorkTime _workTime;
         private CancellationTokenSource _cts;
 
-        public ColorTemperatureWatcherService()
+        public PeriodWatcherService()
         {
             _screenModel = new ScreenModel();
             _workTime = new WorkTime();
@@ -60,6 +61,10 @@ namespace Light.Services
                             {
                                 _screenModel.SetDayPeriod(screen);
                             }
+                            else
+                            {
+                                _screenModel.SetNightPeriod(screen);
+                            }
                         }
                         else
                         {
@@ -82,14 +87,15 @@ namespace Light.Services
         /// <returns> true если окно работает в полноэкранном режиме </returns>
         private bool IsFullScreenProcessFounded(ScreenEntity screen)
         {
-            var handler = Native.GetForegroundWindow();
-            if (!WindowHelper.IsWindowValid(handler) || !WindowHelper.IsWindowOnFullScreen(screen, handler)) return false;
+            var handle = Native.GetForegroundWindow();
+            if (!SystemWindow.IsWindowValid(handle) || !SystemWindow.IsWindowOnFullScreen(screen, handle)) return false;
 
-            Native.GetWindowThreadProcessId(handler, out var pid);
-            if (pid == 0) return false;
+            var pId = SystemProcess.GetId(handle);
+            using var process = SystemProcess.TryOpenProcess(pId);
+            var processPath = process?.TryGetProcessPath();
+            var processFileName = Path.GetFileNameWithoutExtension(processPath);
 
-            var process = Process.GetProcessById((int)pid);
-            return _settings.IgnoredProcesses.Count == 0 || _settings.IgnoredProcesses.Any(p => p != process.ProcessName);
+            return _settings.IgnoredProcesses.Count == 0 || _settings.IgnoredProcesses.All(p => p != processFileName);
         }
     }
 }

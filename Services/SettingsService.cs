@@ -17,7 +17,7 @@ namespace Light.Services
     /// </summary>
     public sealed class SettingsService
     {
-        public ObservableCollection<ProcessEntity> Processes { get; }
+        public ObservableCollection<ApplicationEntity> Processes { get; }
         public ObservableCollection<ScreenEntity> Screens { get; }
         public List<string> IgnoredProcesses { get; }
 
@@ -117,7 +117,7 @@ namespace Light.Services
         {
             IgnoredProcesses = new List<string>();
             Screens = new ObservableCollection<ScreenEntity>();
-            Processes = new ObservableCollection<ProcessEntity>();
+            Processes = new ObservableCollection<ApplicationEntity>();
         }
     }
 }

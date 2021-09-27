@@ -7,7 +7,7 @@ using Light.WinApi;
 
 namespace Light.Templates.Entities
 {
-    public class ProcessEntity
+    public class ApplicationEntity
     {
         public string Name { get; set; }
         public string ExecutableFilePath { get; set; }

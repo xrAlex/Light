@@ -28,7 +28,7 @@ namespace Light.ViewModels
 
         private readonly ProcessModel _processModel;
         private readonly SettingsService _settings;
-        public ObservableCollection<ProcessEntity> Processes { get; }
+        public ObservableCollection<ApplicationEntity> Processes { get; }
 
         #endregion
 

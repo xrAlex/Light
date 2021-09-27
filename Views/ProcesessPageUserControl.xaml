@@ -51,7 +51,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox
-                        Width="344"
+                        Width="340"
                         Height="20"
                         VerticalContentAlignment="Center"
                         IsChecked="{Binding IsSelected}"
@@ -62,14 +62,7 @@
         </ListBox>
         <TextBox 
             Grid.Row="3" 
-            HorizontalAlignment="Center"
-            IsReadOnly="True" 
-            BorderThickness="0" 
-            Height="20" Width="350" 
-            Text="Whitelist процессов" 
-            TextAlignment="Center" 
-            VerticalAlignment="Center" 
-            TextWrapping="Wrap" 
+            Text="Whitelist процессов"
             Grid.Column="1" FontSize="14"/>
     </Grid>
 </UserControl>
