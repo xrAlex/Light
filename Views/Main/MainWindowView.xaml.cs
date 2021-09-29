@@ -1,16 +1,8 @@
-﻿#region
-
-using System.Windows;
-using System.Windows.Input;
-
-#endregion
+﻿using System.Windows.Input;
 
 namespace Light.Views.Main
 {
-    /// <summary>
-    ///     Логика взаимодействия для MainWindow.xaml
-    /// </summary>
-    public partial class MainWindowView : Window
+    public partial class MainWindowView
     {
         public MainWindowView()
         {

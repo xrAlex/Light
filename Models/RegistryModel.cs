@@ -1,16 +1,12 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Reflection;
 using Microsoft.Win32;
 
-#endregion
-
 namespace Light.Models
 {
     /// <summary>
-    /// Модель для работы с записями в регистре
+    /// A model for working with register entries
     /// </summary>
     internal sealed class RegistryModel
     {
@@ -34,10 +30,10 @@ namespace Light.Models
         public void SetExtendedGammaRangeKey() => ExecuteFromCMD(SetExtendedGammaRangeValue, true, false);
 
         /// <summary>
-        /// Исполняет команду используя CMD
+        /// Executes the command using CMD
         /// </summary>
-        /// <remarks> Используется для того что бы не запрашивать права администратора при запуске программы </remarks>
-        /// <returns> Если redirectOutput = true результат исполнения команды </returns>
+        /// <remarks> It is used in order not to request administrator rights when starting the program </remarks>
+        /// <returns> If redirectOutput = true, returns result of executing command </returns>
         private string ExecuteFromCMD(string command, bool shellExecute, bool redirectOutput)
         {
             var output = "";

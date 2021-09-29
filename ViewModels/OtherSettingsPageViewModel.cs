@@ -1,9 +1,5 @@
-﻿#region
-
-using Light.Models;
+﻿using Light.Models;
 using Light.ViewModels.Base;
-
-#endregion
 
 namespace Light.ViewModels
 {

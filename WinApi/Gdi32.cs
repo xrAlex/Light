@@ -1,9 +1,6 @@
-﻿#region
-
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Light.Templates.Entities;
 
-#endregion
 
 namespace Light.WinApi
 {

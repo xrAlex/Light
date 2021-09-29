@@ -1,14 +1,11 @@
-﻿#region
-
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Light.Commands;
+﻿using Light.Commands;
 using Light.Models;
 using Light.Services;
 using Light.Templates.Entities;
 using Light.ViewModels.Base;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
-#endregion
 
 namespace Light.ViewModels
 {

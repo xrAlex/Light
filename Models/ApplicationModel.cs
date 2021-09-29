@@ -1,6 +1,4 @@
-﻿#region
-
-using Light.Infrastructure;
+﻿using Light.Infrastructure;
 using Light.Services;
 using Light.Templates.Entities;
 using System.Collections.Generic;
@@ -8,18 +6,15 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Light.WinApi;
-
-#endregion
 
 namespace Light.Models
 {
-    internal sealed class ProcessModel
+    internal sealed class ApplicationModel
     {
         #region Fields
 
-        private ObservableCollection<ApplicationEntity> Processes { get; }
-        private List<string> IgnoredProcesses { get; }
+        private ObservableCollection<ApplicationEntity> Applications { get; }
+        private List<string> IgnoredApplications { get; }
 
         #endregion
 
@@ -27,20 +22,20 @@ namespace Light.Models
 
         public void MoveToIgnoredProcesses()
         {
-            IgnoredProcesses.Clear();
+            IgnoredApplications.Clear();
 
-            Processes
-                .Where(x => x.IsSelected)
-                .ToList()
-                .ForEach(x =>
+            foreach (var applicationEntity in Applications)
+            {
+                if (applicationEntity.IsSelected)
                 {
-                    IgnoredProcesses.Add($"{x.Name}");
-                });
+                    IgnoredApplications.Add($"{applicationEntity.Name}");
+                }
+            }
         }
 
-        private void FillProcessCollection()
+        private void FillApplicationsCollection()
         {
-            Processes.Clear();
+            Applications.Clear();
 
             var windowsHandle = SystemWindow.GetAllWindows();
 
@@ -53,11 +48,11 @@ namespace Light.Models
 
                 if (!IsProcessValid(processPath, processFileName)) continue;
 
-                Processes.Add(new ApplicationEntity
+                Applications.Add(new ApplicationEntity
                 {
                     ExecutableFilePath = processPath,
                     Name = processFileName,
-                    IsSelected = IgnoredProcesses.Any(y => y == processFileName),
+                    IsSelected = IgnoredApplications.Any(x => x == processFileName),
                     OnFullScreen = IsFullScreenProcess(handle)
                 });
             }
@@ -66,7 +61,7 @@ namespace Light.Models
         private bool IsProcessValid(string processPath, string processFileName)
         {
             return !string.IsNullOrWhiteSpace(processPath) && !string.IsNullOrWhiteSpace(processFileName) 
-                                                           && Processes.All(y => y.ExecutableFilePath != processPath);
+                                                           && Applications.All(y => y.ExecutableFilePath != processPath);
         }
 
         private bool IsFullScreenProcess(nint handle)
@@ -79,17 +74,17 @@ namespace Light.Models
 
         #endregion
 
-        public ProcessModel()
+        public ApplicationModel()
         {
             var serviceLocator = ServiceLocator.Source;
             var settingsService = serviceLocator.Settings;
-            IgnoredProcesses = settingsService.IgnoredProcesses;
-            Processes = settingsService.Processes;
-            FillProcessCollection();
+            IgnoredApplications = settingsService.IgnoredApplications;
+            Applications = settingsService.Application;
+            FillApplicationsCollection();
         }
 
 #if DEBUG
-        ~ProcessModel()
+        ~ApplicationModel()
         {
             Debug.Print("ProcessModel Disposed");
         }

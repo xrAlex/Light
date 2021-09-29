@@ -1,15 +1,6 @@
-﻿#region
-
-using System.Windows.Controls;
-
-#endregion
-
-namespace Light.Views.Main
+﻿namespace Light.Views.Main
 {
-    /// <summary>
-    ///     Логика взаимодействия для MainWindowUserControl.xaml
-    /// </summary>
-    public partial class MainWindowUserControl : UserControl
+    public partial class MainWindowUserControl
     {
         public MainWindowUserControl()
         {

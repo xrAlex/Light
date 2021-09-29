@@ -1,22 +1,22 @@
-﻿#region
-
+﻿using Light.Templates.Entities.Base;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Media.Imaging;
-
-#endregion
 
 namespace Light.Templates.Entities
 {
-    public sealed class ScreenEntity : INotifyPropertyChanged
+    public sealed class ScreenEntity : NotifyingEntity
     {
         #region Fields
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private bool _active;
+        private int _startTime;
+        private int _endTime;
+        private float _uiOpacity;
+        private bool _isDayTimePeriod;
+        private BitmapImage _currentTimePeriodImage;
 
-        public readonly ColorConfiguration ColorConfiguration = new();
+        public ColorConfiguration ColorConfiguration { get; } = new();
 
         private readonly List<BitmapImage> _imageList = new()
         {
@@ -26,24 +26,11 @@ namespace Light.Templates.Entities
 
         #endregion
 
-        #region Values
-
-        private bool _active;
-        private int _startTime;
-        private int _endTime;
-        private float _uiOpacity;
-        private bool _isDayTimePeriod;
-        private BitmapImage _currentTimePeriodImage;
-
-        #endregion
-
         #region Propeties
 
         public Dictionary<string,int> Bounds { get; set; }
         public string SysName { get; set; }
         public string Name { get; set; }
-
-        public ColorConfiguration GetColorConfiguration => ColorConfiguration;
 
         public BitmapImage CurrentTimePeriodImage
         {
@@ -103,15 +90,6 @@ namespace Light.Templates.Entities
                 _endTime = value;
                 OnPropertyChanged();
             }
-        }
-
-        #endregion
-
-        #region Methods
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

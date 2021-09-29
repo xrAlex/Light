@@ -1,11 +1,4 @@
-﻿#region
-
-#endregion
-
-using System;
-using Light.WinApi;
-
-namespace Light.Templates.Entities
+﻿namespace Light.Templates.Entities
 {
     public class ApplicationEntity
     {

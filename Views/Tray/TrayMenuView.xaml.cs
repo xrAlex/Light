@@ -1,8 +1,6 @@
-﻿using System.Windows;
-
-namespace Light.Views.Tray
+﻿namespace Light.Views.Tray
 {
-    public partial class TrayMenuView : Window
+    public partial class TrayMenuView
     {
         public TrayMenuView()
         {

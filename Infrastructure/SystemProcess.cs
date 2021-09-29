@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using Light.WinApi;
+using System;
 using System.Text;
-using System.Threading.Tasks;
-using Light.WinApi;
 
 namespace Light.Infrastructure
 {
@@ -13,18 +9,22 @@ namespace Light.Infrastructure
         private nint Handle { get; }
         private SystemProcess(nint handle) => Handle = handle;
 
-        public void Dispose()
+        /// <summary>
+        /// Method tries to get the executable path of the process
+        /// </summary>
+        /// <returns> If successful, returns executable path of process </returns>
+        public string TryGetProcessPath()
         {
-            if (Native.CloseHandle(Handle))
-            {
-                GC.SuppressFinalize(this);
-            }
+            var buffer = new StringBuilder(1024);
+            var bufferSize = (uint)buffer.Capacity + 1;
+
+            return Native.QueryFullProcessImageName(Handle, 0, buffer, ref bufferSize) ? buffer.ToString() : null;
         }
 
         /// <summary>
-        /// Метод получает id процесса по дескриптору его кона
+        /// Gets process id by window handle
         /// </summary>
-        /// <returns> id процесса </returns>
+        /// <returns> Process id </returns>
         public static uint GetId(nint handle)
         {
             Native.GetWindowThreadProcessId(handle, out var pId);
@@ -32,25 +32,21 @@ namespace Light.Infrastructure
         }
 
         /// <summary>
-        /// Метод пытется получить исполняемый путь процесса
+        /// Method tries to get system process object
         /// </summary>
-        /// <returns> Вслучаем успеха возвращает исполняемый путь процесса </returns>
-        public string TryGetProcessPath()
-        {
-            var buffer = new StringBuilder(1024);
-            var bufferSize = (uint)buffer.Capacity + 1;
-
-            return Native.QueryFullProcessImageName(Handle, 0, buffer, ref bufferSize)? buffer.ToString() : null;
-        }
-
-        /// <summary>
-        /// Метод пытется получить доступ к объекту системного процесса
-        /// </summary>
-        /// <returns> В случае успеха возвращает объект типа SystemProcess </returns>
+        /// <returns> If successful, returns an object of type SystemProcess </returns>
         public static SystemProcess TryOpenProcess(uint pId)
         {
             var handle = Native.OpenProcess(ProcessAccessFlags.QueryLimitedInformation, false, pId);
             return handle != 0? new SystemProcess(handle) : null;
+        }
+
+        public void Dispose()
+        {
+            if (Native.CloseHandle(Handle))
+            {
+                GC.SuppressFinalize(this);
+            }
         }
 
         ~SystemProcess() => Dispose();

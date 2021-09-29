@@ -1,27 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using Light.Infrastructure;
-using Light.Models;
-using Light.Services;
+﻿using Light.Services;
 using Light.Templates.EventHandlers;
 using Light.ViewModels;
+using System;
+using System.Windows;
+using System.Windows.Forms;
 
-namespace Light.Templates.Entities
+namespace Light.Infrastructure
 {
     public sealed class TrayNotifier : IDisposable
     {
-        public event EventHandler<TrayLocationEventArgs> OnLocationChanged;
+        #region Fields
 
+        public event EventHandler<TrayLocationEventArgs> OnLocationChanged;
         private readonly NotifyIcon _notifier;
         private readonly DialogService _dialogService;
-        private readonly ScreenModel _screenModel;
-        private readonly PeriodWatcherService _periodWatcherService;
         private Point _trayMenuLocation;
+
+        private enum TaskBarLocation
+        {
+            Top,
+            Bottom,
+            Right,
+            Left
+        }
+
+        #endregion
+
+        #region Constructors
 
         private Point TrayMenuLocation
         {
@@ -33,19 +38,16 @@ namespace Light.Templates.Entities
             }
         }
 
-        private enum TaskBarLocation
-        {
-            Top,
-            Bottom,
-            Right,
-            Left
-        }
+        #endregion
+
+        #region Methods
 
         private void TrayIcon_Click(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 _dialogService.ShowDialog<MainWindowViewModel>();
+                _dialogService.CloseDialog<TrayMenuViewModel>();
                 this.Dispose();
             }
             else
@@ -98,27 +100,27 @@ namespace Light.Templates.Entities
             TrayMenuLocation = position;
         }
 
-
-        public TrayNotifier()
-        {
-            var serviceLocator = ServiceLocator.Source;
-            _dialogService = serviceLocator.DialogService;
-            _screenModel = new();
-            _periodWatcherService = serviceLocator.PeriodWatcherService;
-
-
-            _notifier = new();
-            _notifier.Icon = Properties.Resources.Icon1;
-            _notifier.Text = $@"{AppDomain.CurrentDomain.FriendlyName}";
-            _notifier.Visible = true;
-            _notifier.MouseClick += TrayIcon_Click;
-        }
-
         public void Dispose()
         {
             _notifier.MouseClick -= TrayIcon_Click;
             _notifier.Visible = false;
             _notifier.Dispose();
+        }
+
+        #endregion
+
+        public TrayNotifier()
+        {
+            var serviceLocator = ServiceLocator.Source;
+            _dialogService = serviceLocator.DialogService;
+
+            _notifier = new NotifyIcon
+            {
+                Icon = Properties.Resources.Icon1,
+                Text = $@"{AppDomain.CurrentDomain.FriendlyName}",
+                Visible = true
+            };
+            _notifier.MouseClick += TrayIcon_Click;
         }
     }
 }

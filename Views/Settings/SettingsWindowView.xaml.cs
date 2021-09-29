@@ -1,16 +1,8 @@
-﻿#region
-
-using System.Windows;
-using System.Windows.Input;
-
-#endregion
+﻿using System.Windows.Input;
 
 namespace Light.Views.Settings
 {
-    /// <summary>
-    ///     Логика взаимодействия для SettingsWindow.xaml
-    /// </summary>
-    public partial class SettingsWindowView : Window
+    public partial class SettingsWindowView
     {
         public SettingsWindowView()
         {

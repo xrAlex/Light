@@ -1,12 +1,8 @@
-﻿#region
-
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using Light.Infrastructure;
 using Light.Services;
 using Light.Templates.Entities;
-
-#endregion
 
 namespace Light.Models
 {
@@ -79,7 +75,7 @@ namespace Light.Models
             screen.ColorConfiguration.CurrentBrightness = brightness;
         }
 
-        public void SetDefaultColorTemperatureOnAllScreens()
+        public static void SetDefaultColorTemperatureOnAllScreens()
         {
             foreach (var screen in Screen.AllScreens)
             {

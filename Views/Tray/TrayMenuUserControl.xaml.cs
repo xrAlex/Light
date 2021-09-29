@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace Light.Views.Tray
+﻿namespace Light.Views.Tray
 {
-    public partial class TrayMenuUserControl : UserControl
+    public partial class TrayMenuUserControl
     {
         public TrayMenuUserControl()
         {

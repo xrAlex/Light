@@ -1,15 +1,11 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Text;
 using Light.WinApi;
-
-#endregion
 
 namespace Light.Infrastructure
 {
     /// <summary>
-    /// Класс содержит методы для  работы с .ini файлами 
+    /// Contains methods for working with .ini files
     /// </summary>
     public static class INIManager
     {
@@ -17,9 +13,9 @@ namespace Light.Infrastructure
         private const int MaxStringSize = 1024;
 
         /// <summary>
-        /// Метод конвертирует строку из .ini файла
+        /// Converts a string from .ini file to specified type
         /// </summary>
-        /// <returns>Значение приведенное из строки к указанному типу</returns>
+        /// <returns>Converted value</returns>
         public static T GetValue<T>(string section, string key, string defaultValue) where T : IConvertible
         {
             StringBuilder buffer = new(MaxStringSize);
@@ -29,7 +25,7 @@ namespace Light.Infrastructure
         }
 
         /// <summary>
-        /// Метод записывает данные в файл
+        /// Writes data to .ini file
         /// </summary>
         public static void WriteValue(string section, string key, string value) => Native.WritePrivateProfileString(section, key, value, Path);
     }

@@ -1,22 +1,13 @@
-﻿#region
-
-using System.Windows.Input;
-using Light.Commands;
+﻿using Light.Commands;
 using Light.Services;
 using Light.ViewModels.Base;
+using System.Windows.Input;
 
-#endregion
 
 namespace Light.ViewModels
 {
     internal sealed class SettingsWindowViewModel : ViewModelBase
     {
-        #region Values
-
-        private ViewModelBase _selectedViewModel;
-
-        #endregion
-
         #region Properties
 
         public ViewModelBase SelectedViewModel
@@ -28,7 +19,7 @@ namespace Light.ViewModels
         #endregion
 
         #region Fields
-
+        private ViewModelBase _selectedViewModel;
         private readonly DialogService _dialogService;
         private readonly SettingsService _settings;
         private readonly PeriodWatcherService _colorTemperatureWatcher;

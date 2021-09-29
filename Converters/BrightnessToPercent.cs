@@ -1,10 +1,6 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-
-#endregion
 
 namespace Light.Converters
 {
@@ -20,8 +16,8 @@ namespace Light.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = (string)value;
-            var dble = System.Convert.ToDouble(val.Trim('%', ' '));
-            return $"{val} %";
+            var convertedStr = System.Convert.ToDouble(val.Trim('%', ' '));
+            return convertedStr;
         }
     }
 }

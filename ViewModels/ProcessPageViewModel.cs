@@ -1,14 +1,10 @@
-﻿#region
-
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Light.Commands;
+﻿using Light.Commands;
 using Light.Models;
 using Light.Services;
 using Light.Templates.Entities;
 using Light.ViewModels.Base;
-
-#endregion
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Light.ViewModels
 {
@@ -26,7 +22,7 @@ namespace Light.ViewModels
 
         #region Fields
 
-        private readonly ProcessModel _processModel;
+        private readonly ApplicationModel _processModel;
         private readonly SettingsService _settings;
         public ObservableCollection<ApplicationEntity> Processes { get; }
 
@@ -43,10 +39,10 @@ namespace Light.ViewModels
         {
             MoveToIgnoredProcessesCommand = new LambdaCommand(p => OnMoveToIgnoredProcessesCommandExecute());
 
-            _processModel = new ProcessModel();
+            _processModel = new ApplicationModel();
             var serviceLocator = ServiceLocator.Source;
             _settings = serviceLocator.Settings;
-            Processes = _settings.Processes;
+            Processes = _settings.Application;
         }
 
 #if DEBUG

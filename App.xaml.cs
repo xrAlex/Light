@@ -1,21 +1,12 @@
-﻿#region
-
-using System.Windows;
-using Light.Services;
+﻿using Light.Services;
 using Light.ViewModels;
-using Light.Views;
 using Light.Views.Main;
 using Light.Views.Settings;
 using Light.Views.Tray;
 
-#endregion
-
 namespace Light
 {
-    /// <summary>
-    ///     Логика взаимодействия для App.xaml
-    /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         private App()
         {

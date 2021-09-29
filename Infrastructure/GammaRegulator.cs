@@ -1,20 +1,16 @@
-﻿#region
-
-using System;
+﻿using System;
 using Light.Templates.Entities;
 using Light.WinApi;
-
-#endregion
 
 namespace Light.Infrastructure
 {
     /// <summary>
-    /// Класс применяет цветовую конфигурацию к источнику отображения
+    /// Applies a color configuration to screen source
     /// </summary>
     public static class GammaRegulator
     {
         /// <summary>
-        /// Метод преобразует значения цветовой конфигурации для работы с WinApi
+        /// Converts color configuration values to work with WinApi
         /// </summary>
         public static void ApplyColorConfiguration(int colorTemperature, float brightness, string screenName)
         {
@@ -44,10 +40,10 @@ namespace Light.Infrastructure
 
 
         /// <summary>
-        /// Метод преобразует кельвины в RGB формат
+        /// Converts color temperature (Kelvin) to RGB format
         /// </summary>
-        /// <remarks> Алогоритм: http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code </remarks>
-        /// <returns> Маску RGB цветов </returns>
+        /// <remarks> Algorithm http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code </remarks>
+        /// <returns> RGB color mask </returns>
         private static RGBMask GetRGBFromKelvin(int kelvinValue)
         {
             RGBMask mask = new

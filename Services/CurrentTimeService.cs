@@ -1,10 +1,6 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Windows.Threading;
 using Light.Templates.EventHandlers;
-
-#endregion
 
 namespace Light.Services
 {

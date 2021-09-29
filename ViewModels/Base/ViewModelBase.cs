@@ -1,9 +1,5 @@
-﻿#region
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
-#endregion
 
 namespace Light.ViewModels.Base
 {
@@ -11,12 +7,12 @@ namespace Light.ViewModels.Base
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propetyName = null)
+        protected bool Set<T>(ref T field, T value, [CallerMemberName] string propetyName = null)
         {
             if (Equals(field, value)) return false;
             field = value;

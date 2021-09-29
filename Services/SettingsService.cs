@@ -1,14 +1,10 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
 using Light.Infrastructure;
 using Light.Templates.Entities;
-
-#endregion
 
 namespace Light.Services
 {
@@ -17,9 +13,9 @@ namespace Light.Services
     /// </summary>
     public sealed class SettingsService
     {
-        public ObservableCollection<ApplicationEntity> Processes { get; }
+        public ObservableCollection<ApplicationEntity> Application { get; }
         public ObservableCollection<ScreenEntity> Screens { get; }
-        public List<string> IgnoredProcesses { get; }
+        public List<string> IgnoredApplications { get; }
 
         public int SelectedScreen { get; set; }
         public bool CheckFullScreenApps { get; set; }
@@ -44,7 +40,7 @@ namespace Light.Services
 
         public void Reset()
         {
-            IgnoredProcesses.Clear();
+            IgnoredApplications.Clear();
             Screens.Clear();
             Load();
         }
@@ -97,7 +93,7 @@ namespace Light.Services
 
         private void SaveProcesses()
         {
-            var processStr = IgnoredProcesses.Aggregate("", (current, process) => current + $"{process};");
+            var processStr = IgnoredApplications.Aggregate("", (current, process) => current + $"{process};");
             INIManager.WriteValue("Processes", "Ignored", processStr);
         }
 
@@ -109,15 +105,15 @@ namespace Light.Services
 
             foreach (var processName in strTable)
             {
-                IgnoredProcesses.Add($"{processName}");
+                IgnoredApplications.Add($"{processName}");
             }
         }
 
         public SettingsService()
         {
-            IgnoredProcesses = new List<string>();
+            IgnoredApplications = new List<string>();
             Screens = new ObservableCollection<ScreenEntity>();
-            Processes = new ObservableCollection<ApplicationEntity>();
+            Application = new ObservableCollection<ApplicationEntity>();
         }
     }
 }

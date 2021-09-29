@@ -1,15 +1,10 @@
-﻿#region
-
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-#endregion
+﻿using Light.Templates.Entities.Base;
 
 namespace Light.Templates.Entities
 {
-    public class ColorConfiguration : INotifyPropertyChanged
+    public class ColorConfiguration : NotifyingEntity
     {
-        #region Values
+        #region Fields
 
         private float _currentBrightness;
         private int _currentColorTemperature;
@@ -17,12 +12,6 @@ namespace Light.Templates.Entities
         private float _dayBrightness;
         private int _nightColorTemperature;
         private float _nightBrightness;
-
-        #endregion
-
-        #region Fields
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
@@ -86,15 +75,6 @@ namespace Light.Templates.Entities
                 _nightBrightness = value;
                 OnPropertyChanged();
             }
-        }
-
-        #endregion
-
-        #region Methods
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

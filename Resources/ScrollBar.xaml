@@ -47,8 +47,7 @@
                                 IsDirectionReversed="true"
                                 IsEnabled="{TemplateBinding IsMouseOver}"
                                 Width="8"
-                                HorizontalAlignment="Center"
-                                Grid.Row="1">
+                                HorizontalAlignment="Center">
                                 <Track.DecreaseRepeatButton>
                                     <RepeatButton Opacity ="0" Command="{x:Static ScrollBar.PageUpCommand}"/>
                                 </Track.DecreaseRepeatButton>

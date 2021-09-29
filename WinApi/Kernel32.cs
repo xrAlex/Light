@@ -1,10 +1,6 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
-
-#endregion
 
 namespace Light.WinApi
 {

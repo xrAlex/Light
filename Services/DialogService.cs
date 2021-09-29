@@ -42,7 +42,7 @@ namespace Light.Services
         }
 
         /// <summary>
-        /// Метод создает экземпляр диалогового окна и отображает его
+        /// Метод создает экземпляр диалогового окна
         /// </summary>
         public void CreateDialog<TViewModel>() where TViewModel : ViewModelBase
         {
@@ -56,9 +56,9 @@ namespace Light.Services
         }
 
         /// <summary>
-        /// Метод создает экземпляр диалогового окна и отображает его, принимает вторым параметром Owner окна
+        /// Метод отображает диалогового окна, если экземпляр окна не создан, то создает его
         /// </summary>
-        public void ShowDialog<TViewModel>() where TViewModel : ViewModelBase 
+        public void ShowDialog<TViewModel>() where TViewModel : ViewModelBase
         {
             var dialogStorage = _mappings[typeof(TViewModel)];
             var dialog = dialogStorage.Instance;
@@ -71,7 +71,7 @@ namespace Light.Services
         }
 
         /// <summary>
-        /// Метод закрывает диалоговое
+        /// Метод закрывает диалоговое окно
         /// </summary>
         public void CloseDialog<TViewModel>() where TViewModel : ViewModelBase
         {
@@ -79,6 +79,9 @@ namespace Light.Services
             dialogStorage.CloseInstance();
         }
 
+        /// <summary>
+        /// Метод скрывает диалоговое окно
+        /// </summary>
         public void HideDialog<TViewModel>() where TViewModel : ViewModelBase
         {
             var dialogStorage = _mappings[typeof(TViewModel)];

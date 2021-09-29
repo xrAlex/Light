@@ -1,13 +1,7 @@
-﻿#region
-
-using System.Diagnostics;
-using System.Security;
-
-#endregion
+﻿using System.Diagnostics;
 
 namespace Light
 {
-    [SuppressUnmanagedCodeSecurity]
     public static class DebugConsole
     {
         public static void Print(string str) => Trace.WriteLine(str);

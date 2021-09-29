@@ -1,14 +1,10 @@
-﻿#region
-
-using System;
+﻿using System;
 using Light.Templates.Entities;
-
-#endregion
 
 namespace Light.Infrastructure
 {
     /// <summary>
-    /// Класс проверяет какой рабочий период необходимо установить для экрана
+    /// Checks which working period needs to be set for screen
     /// </summary>
     public class WorkTime
     {

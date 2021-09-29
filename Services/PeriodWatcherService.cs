@@ -1,16 +1,11 @@
-﻿#region
-
-using System.Diagnostics;
+﻿using Light.Infrastructure;
+using Light.Models;
+using Light.Templates.Entities;
+using Light.WinApi;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Light.Infrastructure;
-using Light.Models;
-using Light.Templates.Entities;
-using Light.WinApi;
-
-#endregion
 
 namespace Light.Services
 {
@@ -35,7 +30,7 @@ namespace Light.Services
         public void StartWatch()
         {
             _cts = new CancellationTokenSource();
-            Task.Run(() => Cycle(_cts.Token), _cts.Token);
+            Task.Run(() => Cycle(_cts.Token), _cts.Token).ConfigureAwait(false);
         }
 
         public void StopWatch()
@@ -95,7 +90,7 @@ namespace Light.Services
             var processPath = process?.TryGetProcessPath();
             var processFileName = Path.GetFileNameWithoutExtension(processPath);
 
-            return _settings.IgnoredProcesses.Count == 0 || _settings.IgnoredProcesses.All(p => p != processFileName);
+            return _settings.IgnoredApplications.Count == 0 || _settings.IgnoredApplications.All(p => p != processFileName);
         }
     }
 }

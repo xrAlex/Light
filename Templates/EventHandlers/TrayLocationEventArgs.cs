@@ -1,15 +1,11 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Windows;
-
-#endregion
 
 namespace Light.Templates.EventHandlers
 {
     public class TrayLocationEventArgs : EventArgs
     {
-        public Point Location { get; set; }
+        public Point Location { get; }
         public TrayLocationEventArgs(Point location)
         {
             Location = location;

@@ -1,32 +1,25 @@
-﻿#region
-
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Windows.Markup;
 using Light.Templates.Entities;
 using Light.WinApi;
-
-#endregion
 
 namespace Light.Infrastructure
 {
     /// <summary>
-    /// Класс реализует методы расширяющие возможности работы с окнами
+    /// Implements methods for working with system windows
     /// </summary>
     public static class SystemWindow
     {
         /// <summary>
-        /// Метод проверяет отображается ли окно приложения
+        /// Checks if the application window is displayed
         /// </summary>
-        /// <returns> true если окно может быть отображено </returns>
+        /// <returns> true when window can be displayed </returns>
         public static bool IsWindowValid(nint handler) => handler != 0 && Native.IsWindowVisible(handler);
 
         /// <summary>
-        /// Метод проверяет работает ли окно на полный экран с учетом таскбара
+        /// Checks if the window works in full screen, given a task bar
         /// </summary>
-        /// <returns> true если окно развернуто на полный экран </returns>
+        /// <returns> true, when window expanded on full screen</returns>
         public static bool IsWindowOnFullScreen(ScreenEntity screen, nint handler)
         {
             Native.GetWindowRect(new HandleRef(null, handler), out var rect);
@@ -34,9 +27,9 @@ namespace Light.Infrastructure
         }
 
         /// <summary>
-        /// Метод получает все дескрипторы окон в системе
+        /// Method gets all window handlers in system
         /// </summary>
-        /// <returns> List дескрипторов окон </returns>
+        /// <returns> List of window handlers </returns>
         public static IEnumerable<nint> GetAllWindows()
         {
             var windows = new List<nint>();
