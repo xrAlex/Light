@@ -1,31 +1,36 @@
 ﻿<Application x:Class="Light.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Light"
              xmlns:viewmodels="clr-namespace:Light.ViewModels"         
-             xmlns:views="clr-namespace:Light.Views"
-             xmlns:converters="clr-namespace:Light.Converters">
+             xmlns:converters="clr-namespace:Light.Converters"
+             xmlns:main="clr-namespace:Light.Views.Main"
+             xmlns:tray="clr-namespace:Light.Views.Tray"
+             xmlns:settings="clr-namespace:Light.Views.Settings">
     <Application.Resources>
         <ResourceDictionary>
             
             <DataTemplate DataType="{x:Type viewmodels:MainWindowViewModel}">
-                <views:MainWindowUserControl/>
+                <main:MainWindowUserControl/>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type viewmodels:OtherSettingsPageViewModel}">
-                <views:OtherSettingsPageUserControl/>
+                <settings:OtherSettingsPageUserControl/>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type viewmodels:ProcessPageViewModel}">
-                <views:ProcesessPageUserControl/>
+                <settings:ProcessesPageUserControl/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:SettingsMainPageViewModel}">
-                <views:SettingsMainPageUserControl/>
+                <settings:SettingsMainPageUserControl/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:SettingsWindowViewModel}">
-                <views:SettingsUserControl/>
+                <settings:SettingsUserControl/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:TrayMenuViewModel}">
+                <tray:TrayMenuUserControl/>
             </DataTemplate>
 
             <converters:MinConverter x:Key="MinConverter"></converters:MinConverter>

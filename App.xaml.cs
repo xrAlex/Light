@@ -1,13 +1,12 @@
 ﻿#region
 
-using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Windows;
 using Light.Services;
 using Light.ViewModels;
 using Light.Views;
+using Light.Views.Main;
+using Light.Views.Settings;
+using Light.Views.Tray;
 
 #endregion
 
@@ -26,8 +25,10 @@ namespace Light
             var dialogService = serviceLocator.DialogService;
             appSettings.Load();
 
-            dialogService.Register<MainWindowViewModel, MainWindow>();
-            dialogService.Register<SettingsWindowViewModel, SettingsWindow>();
+            dialogService.Register<MainWindowViewModel, MainWindowView>();
+            dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
+            dialogService.Register<TrayMenuViewModel, TrayMenuView>();
+            dialogService.CreateDialog<MainWindowViewModel>();
             dialogService.ShowDialog<MainWindowViewModel>();
         }
     }

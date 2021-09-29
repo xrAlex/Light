@@ -15,9 +15,12 @@ namespace Light.Templates.Entities
 
         public void CloseInstance()
         {
-            Instance.Close();
+            Instance?.Close();
             Instance = null;
         }
+
+        public void ShowInstance() => Instance?.Show();
+        public void HideInstance() => Instance?.Hide();
 
         public DialogStorage(Window instance = null, Window owner = null, Type type = null)
         {

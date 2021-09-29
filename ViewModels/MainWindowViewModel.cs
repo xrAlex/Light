@@ -1,13 +1,14 @@
 ﻿#region
 
 using System.Collections.ObjectModel;
-using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Light.Commands;
 using Light.Models;
 using Light.Services;
 using Light.Templates.Entities;
 using Light.ViewModels.Base;
+using Application = System.Windows.Application;
 
 #endregion
 
@@ -55,12 +56,14 @@ namespace Light.ViewModels
 
         private void OnAppToTrayCommandExecute()
         {
-            /* in progress */
+            _dialogService.HideDialog<MainWindowViewModel>();
+            _dialogService.CreateDialog<TrayMenuViewModel>();
         }
 
         private void OnOpenSettingsWindowCommandExecute()
         {
-            _dialogService.ShowDialog<SettingsWindowViewModel, MainWindowViewModel>();
+            _dialogService.CreateDialog<SettingsWindowViewModel, MainWindowViewModel>();
+            _dialogService.ShowDialog<SettingsWindowViewModel>();
         }
 
         #endregion
@@ -75,7 +78,7 @@ namespace Light.ViewModels
             var serviceLocator = ServiceLocator.Source;
             _dialogService = serviceLocator.DialogService;
             var currentTimeService = serviceLocator.CurrentTimeService;
-            var colorTemperatureWatcher = serviceLocator.ColorTemperatureWatcher;
+            var colorTemperatureWatcher = serviceLocator.PeriodWatcherService;
 
             Screens = _screenModel.Screens;
             CurrentTime = currentTimeService.GetCurrentTime();

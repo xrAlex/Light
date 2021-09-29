@@ -91,7 +91,7 @@ namespace Light.ViewModels
             var serviceLocator = ServiceLocator.Source;
             _settings = serviceLocator.Settings;
             _dialogService = serviceLocator.DialogService;
-            _colorTemperatureWatcher = serviceLocator.ColorTemperatureWatcher;
+            _colorTemperatureWatcher = serviceLocator.PeriodWatcherService;
             _colorTemperatureWatcher.StopWatch();
 
             SelectedViewModel = new SettingsMainPageViewModel();

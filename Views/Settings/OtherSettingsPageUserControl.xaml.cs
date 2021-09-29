@@ -4,10 +4,10 @@ using System.Windows.Controls;
 
 #endregion
 
-namespace Light.Views
+namespace Light.Views.Settings
 {
     /// <summary>
-    /// Логика взаимодействия для OtherSettingsPageUserControl.xaml
+    ///     Логика взаимодействия для OtherSettingsPageUserControl.xaml
     /// </summary>
     public partial class OtherSettingsPageUserControl : UserControl
     {

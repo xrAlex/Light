@@ -4,10 +4,10 @@ using System.Windows.Controls;
 
 #endregion
 
-namespace Light.Views
+namespace Light.Views.Main
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindowUserControl.xaml
+    ///     Логика взаимодействия для MainWindowUserControl.xaml
     /// </summary>
     public partial class MainWindowUserControl : UserControl
     {

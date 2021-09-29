@@ -28,25 +28,46 @@ namespace Light.Services
         /// <summary>
         /// Метод создает экземпляр диалогового окна и отображает его, принимает вторым параметром Owner окна
         /// </summary>
-        public void ShowDialog<TViewModel, TOwner>() where TViewModel : ViewModelBase where TOwner : ViewModelBase
+        public void CreateDialog<TViewModel, TOwner>() where TViewModel : ViewModelBase where TOwner : ViewModelBase
         {
             var dialogStorage = _mappings[typeof(TViewModel)];
             var dialogOwner = _mappings[typeof(TOwner)];
-            var dialog = (Window)Activator.CreateInstance(dialogStorage.Type);
-            dialogStorage.Instance = dialog;
+            var dialog = dialogStorage.Instance;
+            if (dialog == null)
+            {
+                dialog = (Window)Activator.CreateInstance(dialogStorage.Type);
+                dialogStorage.Instance = dialog;
+            }
             dialog.Owner = dialogOwner.Instance;
-            dialog.ShowDialog();
         }
 
         /// <summary>
         /// Метод создает экземпляр диалогового окна и отображает его
         /// </summary>
-        public void ShowDialog<TViewModel>() where TViewModel : ViewModelBase
+        public void CreateDialog<TViewModel>() where TViewModel : ViewModelBase
         {
             var dialogStorage = _mappings[typeof(TViewModel)];
-            var dialog = (Window)Activator.CreateInstance(dialogStorage.Type);
-            dialogStorage.Instance = dialog;
-            dialog.ShowDialog();
+            var dialog = dialogStorage.Instance;
+            if (dialog == null)
+            {
+                dialog = (Window)Activator.CreateInstance(dialogStorage.Type);
+                dialogStorage.Instance = dialog;
+            }
+        }
+
+        /// <summary>
+        /// Метод создает экземпляр диалогового окна и отображает его, принимает вторым параметром Owner окна
+        /// </summary>
+        public void ShowDialog<TViewModel>() where TViewModel : ViewModelBase 
+        {
+            var dialogStorage = _mappings[typeof(TViewModel)];
+            var dialog = dialogStorage.Instance;
+            if (dialog == null)
+            {
+                dialog = (Window)Activator.CreateInstance(dialogStorage.Type);
+                dialogStorage.Instance = dialog;
+            }
+            dialogStorage.ShowInstance();
         }
 
         /// <summary>
@@ -54,8 +75,14 @@ namespace Light.Services
         /// </summary>
         public void CloseDialog<TViewModel>() where TViewModel : ViewModelBase
         {
-            var dialog = _mappings[typeof(TViewModel)];
-            dialog.CloseInstance();
+            var dialogStorage = _mappings[typeof(TViewModel)];
+            dialogStorage.CloseInstance();
+        }
+
+        public void HideDialog<TViewModel>() where TViewModel : ViewModelBase
+        {
+            var dialogStorage = _mappings[typeof(TViewModel)];
+            dialogStorage.HideInstance();
         }
 
         public DialogService()

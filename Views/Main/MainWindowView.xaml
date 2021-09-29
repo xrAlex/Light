@@ -1,23 +1,24 @@
-﻿<Window x:Class="Light.Views.SettingsWindow"
+﻿<Window x:Class="Light.Views.Main.MainWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:Light.ViewModels"
-        xmlns:views ="clr-namespace:Light.Views"
+        xmlns:views="clr-namespace:Light.Views.Main"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        Height="500" Width="450"
+        Title="MainWindow"
+        Height="330" Width="440"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
-        Topmost="True" 
+        Topmost="True"
         Background="White">
     <Window.DataContext>
-        <viewmodels:SettingsWindowViewModel/>
+        <viewmodels:MainWindowViewModel />
     </Window.DataContext>
     <Grid>
-        <views:SettingsUserControl MouseLeftButtonDown="SettingsUserControl_MouseLeftButtonDown"/>
+        <views:MainWindowUserControl
+            MouseLeftButtonDown="MainWindowUserControl_MouseLeftButtonDown" />
     </Grid>
 </Window>

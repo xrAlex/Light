@@ -5,14 +5,14 @@ using System.Windows.Input;
 
 #endregion
 
-namespace Light.Views
+namespace Light.Views.Settings
 {
     /// <summary>
-    /// Логика взаимодействия для SettingsWindow.xaml
+    ///     Логика взаимодействия для SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class SettingsWindowView : Window
     {
-        public SettingsWindow()
+        public SettingsWindowView()
         {
             InitializeComponent();
         }

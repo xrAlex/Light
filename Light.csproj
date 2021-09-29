@@ -91,8 +91,14 @@
     <Compile Include="DebugConsole.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Infrastructure\SystemWindow.cs" />
+    <Compile Include="Infrastructure\TrayMenuPosition.cs" />
     <Compile Include="Infrastructure\WorkTime.cs" />
     <Compile Include="Models\RegistryModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Templates\Entities\ColorConfiguration.cs" />
     <Compile Include="Templates\Entities\ApplicationEntity.cs" />
@@ -103,11 +109,20 @@
     <Compile Include="Infrastructure\INIManager.cs" />
     <Compile Include="Templates\Entities\GammaRamp.cs" />
     <Compile Include="Infrastructure\SystemProcess.cs" />
+    <Compile Include="Templates\Entities\TrayNotifier.cs" />
+    <Compile Include="Templates\EventHandlers\TrayLocationEventArgs.cs" />
+    <Compile Include="ViewModels\TrayMenuViewModel.cs" />
+    <Compile Include="Views\Tray\TrayMenuUserControl.xaml.cs">
+      <DependentUpon>TrayMenuUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tray\TrayMenuView.xaml.cs">
+      <DependentUpon>TrayMenuView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinApi\Gdi32.cs" />
     <Compile Include="WinApi\Kernel32.cs" />
     <Compile Include="Templates\Entities\Rect.cs" />
     <Compile Include="WinApi\User32.cs" />
-    <Compile Include="Services\ColorTemperatureWatcherService.cs" />
+    <Compile Include="Services\PeriodWatcherService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Models\ScreenModel.cs" />
     <Compile Include="Services\CurrentTimeService.cs" />
@@ -120,23 +135,23 @@
     <Compile Include="ViewModels\ProcessPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsMainPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
-    <Compile Include="Views\MainWindowUserControl.xaml.cs">
+    <Compile Include="Views\Main\MainWindowUserControl.xaml.cs">
       <DependentUpon>MainWindowUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OtherSettingsPageUserControl.xaml.cs">
+    <Compile Include="Views\Settings\OtherSettingsPageUserControl.xaml.cs">
       <DependentUpon>OtherSettingsPageUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProcesessPageUserControl.xaml.cs">
+    <Compile Include="Views\Settings\ProcesessPageUserControl.xaml.cs">
       <DependentUpon>ProcesessPageUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsMainPageUserControl.xaml.cs">
+    <Compile Include="Views\Settings\SettingsMainPageUserControl.xaml.cs">
       <DependentUpon>SettingsMainPageUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsUserControl.xaml.cs">
+    <Compile Include="Views\Settings\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsWindow.xaml.cs">
-      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    <Compile Include="Views\Settings\SettingsWindowView.xaml.cs">
+      <DependentUpon>SettingsWindowView.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Brushes.xaml">
       <SubType>Designer</SubType>
@@ -170,7 +185,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="Views\Main\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -178,31 +193,39 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Views\Main\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MainWindowUserControl.xaml">
+    <Page Include="Views\Main\MainWindowUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OtherSettingsPageUserControl.xaml">
+    <Page Include="Views\Settings\OtherSettingsPageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProcesessPageUserControl.xaml">
+    <Page Include="Views\Settings\ProcesessPageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsMainPageUserControl.xaml">
+    <Page Include="Views\Settings\SettingsMainPageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsUserControl.xaml">
+    <Page Include="Views\Settings\SettingsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsWindow.xaml">
+    <Page Include="Views\Settings\SettingsWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tray\TrayMenuUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tray\TrayMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,11 +234,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -223,8 +241,8 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -275,6 +293,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\turnoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\TrayIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Icon1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
