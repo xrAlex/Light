@@ -34,26 +34,6 @@
             Fill="#FF292929"
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="60" Width="440" Grid.ColumnSpan="9" Grid.RowSpan="3" />
-        <TextBox
-            Background="Transparent" Foreground="White"
-            Text="Light v1.0"
-            FontSize="30"
-            IsReadOnly="True"
-            Focusable="False"
-            Cursor="Arrow"
-            BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            Grid.RowSpan="3" Grid.ColumnSpan="2" />
-        <TextBox
-            Background="Transparent" Foreground="White"
-            Text="{Binding CurrentTime}"
-            FontSize="30"
-            IsReadOnly="True"
-            Focusable="False"
-            Cursor="Arrow"
-            BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            Grid.Column="3" Grid.RowSpan="3" />
         <Button
             Style="{StaticResource DeepGrayButton}"
             Content="—"
@@ -64,87 +44,5 @@
             VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
             Width="30" Height="30"
             Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" />
-        <Button
-            Style="{StaticResource DeepGrayButton}"
-            Command="{Binding CloseAppCommand, Mode=OneWay}"
-            Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2">
-            <Image
-                Width="20" Height="20"
-                Source="{StaticResource TurnOff}" Stretch="Fill" />
-        </Button>
-        <Button
-            Style="{StaticResource RotaryButton}"
-            Command="{Binding OpenSettingsWindowCommand, Mode=OneWay}"
-            Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3">
-            <Image
-                Width="50" Height="50"
-                Source="{StaticResource Settings}" />
-        </Button>
-        <ListBox
-            HorizontalAlignment="Center" HorizontalContentAlignment="Left"
-            ItemsSource="{Binding Screens, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-            VerticalAlignment="Center"
-            IsEnabled="False"
-            BorderThickness="0"
-            Height="190" Width="400"
-            Grid.ColumnSpan="6" Grid.Column="1" Grid.RowSpan="2" Grid.Row="4">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <GroupBox Header="{Binding Name, Mode=OneWay, StringFormat=Monitor: \{0:N0\}}">
-                        <Grid Height="67" Width="200">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15*" />
-                                <ColumnDefinition Width="26*" />
-                                <ColumnDefinition Width="15*" />
-                                <ColumnDefinition Width="7*" />
-                                <ColumnDefinition Width="65*" />
-                                <ColumnDefinition Width="72*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="5*" />
-                                <RowDefinition Height="10*" />
-                                <RowDefinition Height="9*" />
-                                <RowDefinition Height="16*" />
-                                <RowDefinition Height="2*" />
-                                <RowDefinition Height="19*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
-                            <Image
-                                Source="{StaticResource MonitorBlack}"
-                                Height="60" Width="56"
-                                Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="3" />
-                            <Image
-                                Source="{Binding CurrentTimePeriodImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Height="25" Width="26"
-                                Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" />
-                            <TextBlock
-                                Text="{Binding ColorConfiguration.CurrentColorTemperature, Mode=OneWay, StringFormat= CTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
-                                FontSize="12"
-                                Grid.Column="4" Grid.Row="1" Grid.RowSpan="2" />
-                            <TextBlock
-                                Text="{Binding ColorConfiguration.CurrentBrightness, Mode=OneWay, StringFormat= CBT : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
-                                FontSize="12"
-                                Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" />
-                            <TextBlock
-                                Text="{Binding ColorConfiguration.DayColorTemperature, Mode=OneWay, StringFormat= DTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
-                                FontSize="12"
-                                Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" />
-                            <TextBlock
-                                Text="{Binding ColorConfiguration.DayBrightness, Mode=OneWay, StringFormat= DBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
-                                FontSize="12"
-                                Grid.Column="5" Grid.Row="3" Grid.RowSpan="2" />
-                            <TextBlock
-                                Text="{Binding  ColorConfiguration.NightColorTemperature, Mode=OneWay, StringFormat=NTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
-                                FontSize="12"
-                                Grid.Row="5" Grid.Column="4" Height="Auto" Grid.RowSpan="2" />
-                            <TextBlock
-                                Text="{Binding  ColorConfiguration.NightBrightness, Mode=TwoWay, StringFormat=NBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
-                                FontSize="12"
-                                Grid.Row="5" Grid.Column="5" Height="Auto" Grid.RowSpan="2" />
-                        </Grid>
-                    </GroupBox>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
     </Grid>
 </UserControl>

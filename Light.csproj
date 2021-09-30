@@ -83,16 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\LambdaCommand.cs" />
-    <Compile Include="Converters\TemperatureToKelvin.cs" />
-    <Compile Include="Converters\BrightnessToPercent.cs" />
-    <Compile Include="Converters\BrightnessToDouble.cs" />
-    <Compile Include="Converters\HourConverter.cs" />
-    <Compile Include="Converters\MinConverter.cs" />
     <Compile Include="DebugConsole.cs" />
-    <Compile Include="Infrastructure\GammaRegulator.cs" />
-    <Compile Include="Infrastructure\SystemWindow.cs" />
-    <Compile Include="Infrastructure\WorkTime.cs" />
-    <Compile Include="Models\RegistryModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,15 +91,7 @@
     </Compile>
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Templates\Entities\Base\NotifyingEntity.cs" />
-    <Compile Include="Templates\Entities\ColorConfiguration.cs" />
-    <Compile Include="Templates\Entities\ApplicationEntity.cs" />
     <Compile Include="Templates\Entities\DialogStorage.cs" />
-    <Compile Include="Templates\Entities\RGBMask.cs" />
-    <Compile Include="Templates\Entities\ScreenEntity.cs" />
-    <Compile Include="Models\ApplicationModel.cs" />
-    <Compile Include="Infrastructure\INIManager.cs" />
-    <Compile Include="Templates\Entities\GammaRamp.cs" />
-    <Compile Include="Infrastructure\SystemProcess.cs" />
     <Compile Include="Infrastructure\TrayNotifier.cs" />
     <Compile Include="Templates\EventHandlers\TrayLocationEventArgs.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
@@ -118,39 +101,11 @@
     <Compile Include="Views\Tray\TrayMenuView.xaml.cs">
       <DependentUpon>TrayMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WinApi\Gdi32.cs" />
-    <Compile Include="WinApi\Kernel32.cs" />
-    <Compile Include="Templates\Entities\Rect.cs" />
-    <Compile Include="WinApi\User32.cs" />
-    <Compile Include="Services\PeriodWatcherService.cs" />
-    <Compile Include="Services\SettingsService.cs" />
-    <Compile Include="Models\ScreenModel.cs" />
-    <Compile Include="Services\CurrentTimeService.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
-    <Compile Include="Templates\EventHandlers\TimeEventArgs.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\OtherSettingsPageViewModel.cs" />
-    <Compile Include="ViewModels\ProcessPageViewModel.cs" />
-    <Compile Include="ViewModels\SettingsMainPageViewModel.cs" />
-    <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="Views\Main\MainWindowUserControl.xaml.cs">
       <DependentUpon>MainWindowUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\OtherSettingsPageUserControl.xaml.cs">
-      <DependentUpon>OtherSettingsPageUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\ProcesessPageUserControl.xaml.cs">
-      <DependentUpon>ProcesessPageUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\SettingsMainPageUserControl.xaml.cs">
-      <DependentUpon>SettingsMainPageUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\SettingsUserControl.xaml.cs">
-      <DependentUpon>SettingsUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\SettingsWindowView.xaml.cs">
-      <DependentUpon>SettingsWindowView.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Brushes.xaml">
       <SubType>Designer</SubType>
@@ -160,27 +115,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\CheckBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resources\GlobalStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Images.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ListBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ScrollBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Slider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,26 +136,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Main\MainWindowUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\OtherSettingsPageUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\ProcesessPageUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\SettingsMainPageUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\SettingsUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\SettingsWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -300,7 +219,7 @@
     <Resource Include="Resources\Images\Icon1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

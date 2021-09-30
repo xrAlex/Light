@@ -33,7 +33,6 @@
             Grid.ColumnSpan="6" Grid.RowSpan="2" />
         <Button
             Style="{StaticResource LightGrayButton}"
-            Command="{Binding ShutdownCommand}"
             Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4">
             <Grid Height="20" Width="116">
                 <Grid.ColumnDefinitions>
@@ -50,12 +49,10 @@
         <Button
             Style="{StaticResource LightGrayButton}"
             Content="Приостановить"
-            Command="{Binding PauseCommand}"
             Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4"/>
         <Button
             Style="{StaticResource LightGrayButton}"
             Content="Выйти"
-            Command="{Binding CloseTrayMenuCommand}"
             Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="4"/>
         <TextBlock
             FontSize="20"

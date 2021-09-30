@@ -2,51 +2,23 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewmodels="clr-namespace:Light.ViewModels"         
-             xmlns:converters="clr-namespace:Light.Converters"
              xmlns:main="clr-namespace:Light.Views.Main"
-             xmlns:tray="clr-namespace:Light.Views.Tray"
-             xmlns:settings="clr-namespace:Light.Views.Settings">
+             xmlns:tray="clr-namespace:Light.Views.Tray">
     <Application.Resources>
         <ResourceDictionary>
             
             <DataTemplate DataType="{x:Type viewmodels:MainWindowViewModel}">
                 <main:MainWindowUserControl/>
             </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type viewmodels:OtherSettingsPageViewModel}">
-                <settings:OtherSettingsPageUserControl/>
-            </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type viewmodels:ProcessPageViewModel}">
-                <settings:ProcessesPageUserControl/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:SettingsMainPageViewModel}">
-                <settings:SettingsMainPageUserControl/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:SettingsWindowViewModel}">
-                <settings:SettingsUserControl/>
-            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:TrayMenuViewModel}">
                 <tray:TrayMenuUserControl/>
             </DataTemplate>
 
-            <converters:MinConverter x:Key="MinConverter"></converters:MinConverter>
-            <converters:HourConverter x:Key="HourConverter"></converters:HourConverter>
-            <converters:BrightnessToDouble x:Key="BrightnessToDouble"></converters:BrightnessToDouble>
-            <converters:BrightnessToPercent x:Key="BrightnessToPercent"></converters:BrightnessToPercent>
-            <converters:TemperatureToKelvin x:Key="TemperatureToKelvin"></converters:TemperatureToKelvin>
-            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
                 <ResourceDictionary Source="Resources/Button.xaml" />
                 <ResourceDictionary Source="Resources/Images.xaml" />
-                <ResourceDictionary Source="Resources/ListBox.xaml" />
-                <ResourceDictionary Source="Resources/ScrollBar.xaml" />
-                <ResourceDictionary Source="Resources/Slider.xaml" />
-                <ResourceDictionary Source="Resources/CheckBox.xaml" />
                 <ResourceDictionary Source="Resources/GlobalStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
