@@ -95,9 +95,6 @@
     <Compile Include="Infrastructure\TrayNotifier.cs" />
     <Compile Include="Templates\EventHandlers\TrayLocationEventArgs.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
-    <Compile Include="Views\Tray\TrayMenuUserControl.xaml.cs">
-      <DependentUpon>TrayMenuUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Tray\TrayMenuView.xaml.cs">
       <DependentUpon>TrayMenuView.xaml</DependentUpon>
     </Compile>
@@ -136,10 +133,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Main\MainWindowUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Tray\TrayMenuUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
