@@ -21,14 +21,16 @@
         <!--Вот этот ресурс должем быть индивидуальным для каждой кнопки.
         Вы обращаетесь к свойству кнопки, на в ней ссылка на ресурс.
         Поэтому вы меняете сам ресурс, а не только свойство одной кнопки.-->
-        <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
+        <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0" 
+                         xmlns:ice="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+                         ice:Freeze="True"/>
 
         <!--Ключ не задавал, чтобы стиль применялся автоматом ко всем кнопкам.-->
         <Style TargetType="{x:Type Button}">
 
             <!--Точно не уверен будут ли в этом случае работать сеттеры событий
-            Если не будут, то придётся для каждой кнопки индивидуально задавать--><!--
-            <EventSetter Event="MouseEnter" Handler="OnButtonMouseEnterLeave"/>
+            Если не будут, то придётся для каждой кнопки индивидуально задавать-->
+            <!--<EventSetter Event="MouseEnter" Handler="OnButtonMouseEnterLeave"/>
             <EventSetter Event="MouseLeave" Handler="OnButtonMouserEnterLeave"/>-->
 
             <!--Привяка к динамическому ресурсу. Теперь его можно менять для каждой кнопки.-->
@@ -106,20 +108,20 @@
                                VerticalAlignment="Center" Margin="5,0"/>
                 </Grid>
             </Grid>
-            <Button.Resources>
-                <!--Свой персональный ресурс кнопки. И так для каждой.-->
+            <!--<Button.Resources>
+                --><!--Свой персональный ресурс кнопки. И так для каждой.--><!--
                 <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
-            </Button.Resources>
+            </Button.Resources>-->
         </Button>
         <Button Content="Приостановить">
-            <Button.Resources>
+            <!--<Button.Resources>
                 <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
-            </Button.Resources>
+            </Button.Resources>-->
         </Button>
         <Button Content="Выйти">
-            <Button.Resources>
+            <!--<Button.Resources>
                 <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
-            </Button.Resources>
+            </Button.Resources>-->
         </Button>
     </UniformGrid>
 </Window>
