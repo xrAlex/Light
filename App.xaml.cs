@@ -1,4 +1,5 @@
-﻿using Light.Services;
+﻿using System.Windows.Forms.VisualStyles;
+using Light.Services;
 using Light.ViewModels;
 using Light.Views.Main;
 using Light.Views.Settings;
@@ -18,7 +19,7 @@ namespace Light
 
             dialogService.Register<MainWindowViewModel, MainWindowView>();
             dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
-            dialogService.Register<TrayMenuViewModel, TrayMenuView>();
+            dialogService.Register<TrayMenuViewModel, TrayMenuView>(true);
             dialogService.CreateDialog<MainWindowViewModel>();
             dialogService.ShowDialog<MainWindowViewModel>();
         }

@@ -33,11 +33,9 @@ namespace Light.ViewModels
             private set => Set(ref _leftLocation, value);
         }
 
-
         #endregion
 
         #region Commands
-        public ICommand CloseTrayMenuCommand { get; }
         public ICommand PauseCommand { get; }
         public ICommand ShutdownCommand { get; }
 
@@ -45,18 +43,13 @@ namespace Light.ViewModels
         {
             _periodWatcherService.StopWatch();
             ScreenModel.SetDefaultColorTemperatureOnAllScreens();
-            _dialogService.CloseDialog<TrayMenuViewModel>();
+            _dialogService.HideDialog<TrayMenuViewModel>();
         }
 
         private void OnShutdownCommandExecute()
         {
             ScreenModel.SetDefaultColorTemperatureOnAllScreens();
             Application.Current.Shutdown();
-        }
-
-        private void OnCloseTrayMenuCommandExecute()
-        {
-            _dialogService.CloseDialog<TrayMenuViewModel>();
         }
 
         #endregion
@@ -66,7 +59,6 @@ namespace Light.ViewModels
         {
             PauseCommand = new LambdaCommand(p => OnPauseCommandExecute());
             ShutdownCommand = new LambdaCommand(p => OnShutdownCommandExecute());
-            CloseTrayMenuCommand = new LambdaCommand(p => OnCloseTrayMenuCommandExecute());
 
             var serviceLocator = ServiceLocator.Source;
             _dialogService = serviceLocator.DialogService;

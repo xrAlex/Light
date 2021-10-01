@@ -7,9 +7,9 @@ using System;
 namespace Light.Services
 {
     /// <summary>
-    /// Класс представляет из себя хранилище объектов которые должны быть созданы в одном экземпляре
+    /// Storage of objects that must be created in one instance
     /// </summary>
-    /// <remarks> [Нужно заменить на DI контeйнер] </remarks>
+    /// <remarks> [Need to replace with DI container] </remarks>
     public class ServiceLocator
     {
         private PeriodWatcherService _periodWatcherService;

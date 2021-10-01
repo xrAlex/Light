@@ -10,7 +10,7 @@
         <ResourceDictionary>
             
             <DataTemplate DataType="{x:Type viewmodels:MainWindowViewModel}">
-                <main:MainWindowUserControl/>
+                <main:MainWindowView/>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type viewmodels:OtherSettingsPageViewModel}">
@@ -26,11 +26,11 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:SettingsWindowViewModel}">
-                <settings:SettingsUserControl/>
+                <settings:SettingsWindowView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:TrayMenuViewModel}">
-                <tray:TrayMenuUserControl/>
+                <tray:TrayMenuView/>
             </DataTemplate>
 
             <converters:MinConverter x:Key="MinConverter"></converters:MinConverter>

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
 using Light.Templates.Entities;
 using Light.ViewModels.Base;
@@ -20,9 +21,9 @@ namespace Light.Services
         /// <summary>
         /// Метод регестрирует типы ViewModel и View для дальнейшего создания экземпляра
         /// </summary>
-        public void Register<TViewModel, TView>(Window owner = null) where TViewModel : ViewModelBase where TView : Window
+        public void Register<TViewModel, TView>(bool CanBeDeactivable = false) where TViewModel : ViewModelBase where TView : Window
         {
-            _mappings.Add(typeof(TViewModel), new DialogStorage(null, owner, typeof(TView)));
+            _mappings.Add(typeof(TViewModel), new DialogStorage(typeof(TView), CanBeDeactivable));
         }
 
         /// <summary>

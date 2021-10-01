@@ -112,9 +112,6 @@
     <Compile Include="Infrastructure\TrayNotifier.cs" />
     <Compile Include="Templates\EventHandlers\TrayLocationEventArgs.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
-    <Compile Include="Views\Tray\TrayMenuUserControl.xaml.cs">
-      <DependentUpon>TrayMenuUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Tray\TrayMenuView.xaml.cs">
       <DependentUpon>TrayMenuView.xaml</DependentUpon>
     </Compile>
@@ -134,9 +131,6 @@
     <Compile Include="ViewModels\ProcessPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsMainPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
-    <Compile Include="Views\Main\MainWindowUserControl.xaml.cs">
-      <DependentUpon>MainWindowUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Settings\OtherSettingsPageUserControl.xaml.cs">
       <DependentUpon>OtherSettingsPageUserControl.xaml</DependentUpon>
     </Compile>
@@ -145,9 +139,6 @@
     </Compile>
     <Compile Include="Views\Settings\SettingsMainPageUserControl.xaml.cs">
       <DependentUpon>SettingsMainPageUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\SettingsUserControl.xaml.cs">
-      <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\SettingsWindowView.xaml.cs">
       <DependentUpon>SettingsWindowView.xaml</DependentUpon>
@@ -196,10 +187,6 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Main\MainWindowUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Settings\OtherSettingsPageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,15 +199,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Settings\SettingsUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Settings\SettingsWindowView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Tray\TrayMenuUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

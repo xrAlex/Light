@@ -48,7 +48,7 @@ namespace Light.Infrastructure
             {
                 _dialogService.ShowDialog<MainWindowViewModel>();
                 _dialogService.CloseDialog<TrayMenuViewModel>();
-                this.Dispose();
+                Dispose();
             }
             else
             {
@@ -63,18 +63,16 @@ namespace Light.Infrastructure
         private TaskBarLocation GetTaskBarLocation()
         {
             var taskBarLocation = TaskBarLocation.Bottom;
+            var screen = Screen.PrimaryScreen;
+            var taskBarOnTopOrBottom = screen.WorkingArea.Width == screen.Bounds.Width;
 
-            foreach (var screen in Screen.AllScreens)
+            if (taskBarOnTopOrBottom)
             {
-                var taskBarOnTopOrBottom = screen.WorkingArea.Width == screen.Bounds.Width;
-                if (taskBarOnTopOrBottom)
-                {
-                    if (screen.WorkingArea.Top > 0) taskBarLocation = TaskBarLocation.Top;
-                }
-                else
-                {
-                    taskBarLocation = screen.WorkingArea.Left > 0 ? TaskBarLocation.Left : TaskBarLocation.Right;
-                }
+                if (screen.WorkingArea.Top > 0) taskBarLocation = TaskBarLocation.Top;
+            }
+            else
+            {
+                taskBarLocation = screen.WorkingArea.Left > 0 ? TaskBarLocation.Left : TaskBarLocation.Right;
             }
             return taskBarLocation;
         }
@@ -83,21 +81,29 @@ namespace Light.Infrastructure
         {
             var cursorPos = Cursor.Position;
             var taskBarLocation = GetTaskBarLocation();
-            var position = new Point(cursorPos.X + 5, cursorPos.Y - 140);
+            var x = cursorPos.X;
+            var y = cursorPos.Y;
 
             switch (taskBarLocation)
             {
+                case TaskBarLocation.Bottom:
+                    x += 10;
+                    y -= 90;
+                    break;
                 case TaskBarLocation.Top:
-                    position.X = cursorPos.X + 10;
-                    position.Y = cursorPos.Y;
+                    x += 10;
+                    break;
+                case TaskBarLocation.Left:
+                    x += 10;
+                    y += 5;
                     break;
                 case TaskBarLocation.Right:
-                    position.X = cursorPos.X - 160;
-                    position.Y = cursorPos.Y - 90;
+                    x -= 100;
+                    y += 10;
                     break;
             }
 
-            TrayMenuLocation = position;
+            TrayMenuLocation = new Point(x,y);
         }
 
         public void Dispose()
@@ -120,6 +126,7 @@ namespace Light.Infrastructure
                 Text = $@"{AppDomain.CurrentDomain.FriendlyName}",
                 Visible = true
             };
+            _notifier.ShowBalloonTip(300, $"{AppDomain.CurrentDomain.FriendlyName}", "Приложение продолжит работу в фоновом режиме", ToolTipIcon.Info);
             _notifier.MouseClick += TrayIcon_Click;
         }
     }
