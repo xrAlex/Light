@@ -27,9 +27,9 @@
         <Style TargetType="{x:Type Button}">
 
             <!--Точно не уверен будут ли в этом случае работать сеттеры событий
-            Если не будут, то придётся для каждой кнопки индивидуально задавать-->
+            Если не будут, то придётся для каждой кнопки индивидуально задавать--><!--
             <EventSetter Event="MouseEnter" Handler="OnButtonMouseEnterLeave"/>
-            <EventSetter Event="MouseLeave" Handler="OnButtonMouserEnterLeave"/>
+            <EventSetter Event="MouseLeave" Handler="OnButtonMouserEnterLeave"/>-->
 
             <!--Привяка к динамическому ресурсу. Теперь его можно менять для каждой кнопки.-->
             <Setter Property="Background" Value="{DynamicResource Border.Background}"/>
@@ -56,6 +56,25 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMouseOver, ElementName=Border}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="1" Duration="0:0:0.3" Storyboard.TargetProperty="Background.Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="0" Duration="0:0:0.3" Storyboard.TargetProperty="Background.Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+
         </Style>
     </FrameworkElement.Resources>
     <UniformGrid Columns="1" Rows="4">
