@@ -16,56 +16,91 @@
     <Window.DataContext>
         <viewModels:TrayMenuViewModel/>
     </Window.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-        <RowDefinition Height="16*" />
-        <RowDefinition Height="16*"/>
-        <RowDefinition Height="9*" />
-        <RowDefinition Height="24*" />
-        <RowDefinition Height="4*"/>
-        <RowDefinition Height="24*"/>
-        <RowDefinition Height="4*"/>
-        <RowDefinition Height="24*"/>
-        <RowDefinition Height="9*" />
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition />
-        <ColumnDefinition Width="8*" />
-        <ColumnDefinition Width="8*" />
-        <ColumnDefinition Width="3*" />
-        <ColumnDefinition Width="5*"/>
-        <ColumnDefinition />
-    </Grid.ColumnDefinitions>
-    <Rectangle
-            Fill="{StaticResource Black}"
-            Grid.ColumnSpan="6" Grid.RowSpan="2" />
-    <Button
-            Style="{StaticResource LightGrayButton}"
-            Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4">
-        <Grid Height="20" Width="116">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="24*"/>
-            </Grid.ColumnDefinitions>
-            <Image
-                    Source="{StaticResource TurnOff}" Width="20" Height="20"/>
-            <TextBlock 
-                    HorizontalAlignment="Center"
-                    Text="Завершить" Grid.ColumnSpan="2"/>
-        </Grid>
-    </Button>
-    <Button
-            Style="{StaticResource LightGrayButton}"
-            Content="Приостановить"
-            Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4"/>
-    <Button
-            Style="{StaticResource LightGrayButton}"
-            Content="Выйти"
-            Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="4"/>
-    <TextBlock
-            FontSize="20"
-            Text="Light"
-            HorizontalAlignment="Center"
-            Foreground="White" Grid.Column="1" Grid.ColumnSpan="3" Margin="38,0,12,0" Grid.RowSpan="2" />
-    </Grid>
+    <FrameworkElement.Resources>
+
+        <!--Вот этот ресурс должем быть индивидуальным для каждой кнопки.
+        Вы обращаетесь к свойству кнопки, на в ней ссылка на ресурс.
+        Поэтому вы меняете сам ресурс, а не только свойство одной кнопки.-->
+        <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
+
+        <!--Ключ не задавал, чтобы стиль применялся автоматом ко всем кнопкам.-->
+        <Style TargetType="{x:Type Button}">
+
+            <!--Точно не уверен будут ли в этом случае работать сеттеры событий
+            Если не будут, то придётся для каждой кнопки индивидуально задавать-->
+            <EventSetter Event="MouseEnter" Handler="OnButtonMouseEnterLeave"/>
+            <EventSetter Event="MouseLeave" Handler="OnButtonMouserEnterLeave"/>
+
+            <!--Привяка к динамическому ресурсу. Теперь его можно менять для каждой кнопки.-->
+            <Setter Property="Background" Value="{DynamicResource Border.Background}"/>
+
+            <!--Задал Margin и Padding чтобы убрать сложный Grid в контенте Окна.-->
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--Немного исправил шаблон и убрал анимацию.-->
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name ="Border"
+                                CornerRadius="5"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </FrameworkElement.Resources>
+    <UniformGrid Columns="1" Rows="4">
+        <!--Чем наложение Rectangle и TextBlock, гораздо проще использовать вложение в Border.-->
+        <Border
+            Background="{StaticResource Black}">
+            <TextBlock
+                FontSize="20"
+                Text="Light"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="White"/>
+        </Border>
+        <Button>
+            <Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="24*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Без фона не видно изображения. Поэтому задал дополнительный Border.-->
+                    <Border Background="LightGray" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image  Source="/Light;component/Resources/Images/turnoff.png"
+                                Stretch="Uniform"/>
+                    </Border>
+                    <TextBlock HorizontalAlignment="Center"
+                               Text="Завершить"
+                               Grid.Column="2"
+                               VerticalAlignment="Center" Margin="5,0"/>
+                </Grid>
+            </Grid>
+            <Button.Resources>
+                <!--Свой персональный ресурс кнопки. И так для каждой.-->
+                <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
+            </Button.Resources>
+        </Button>
+        <Button Content="Приостановить">
+            <Button.Resources>
+                <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
+            </Button.Resources>
+        </Button>
+        <Button Content="Выйти">
+            <Button.Resources>
+                <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
+            </Button.Resources>
+        </Button>
+    </UniformGrid>
 </Window>
