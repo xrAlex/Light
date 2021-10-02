@@ -40,7 +40,7 @@
             Grid.Column="1" Grid.Row="5"/>
         <Button
             Style="{StaticResource DynamicBackgroundButton}"
-            Content="Приостановить"
+            Content="{Binding WorkTimeKeyText}"
             Command="{Binding PauseCommand}"
             Grid.Column="1" Grid.Row="3"/>
         <TextBlock

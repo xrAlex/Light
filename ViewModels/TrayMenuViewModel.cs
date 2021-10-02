@@ -14,6 +14,8 @@ namespace Light.ViewModels
 
         private readonly DialogService _dialogService;
         private readonly PeriodWatcherService _periodWatcherService;
+        private bool _isAppPaused;
+        private string _workTimeKeyText = "Приостановить";
         private double _topLocation;
         private double _leftLocation;
 
@@ -21,6 +23,11 @@ namespace Light.ViewModels
 
         #region Constructors
 
+        public string WorkTimeKeyText
+        {
+            get => _workTimeKeyText;
+            private set => Set(ref _workTimeKeyText, value);
+        }
         public double TopLocation
         {
             get => _topLocation;
@@ -41,8 +48,18 @@ namespace Light.ViewModels
 
         private void OnPauseCommandExecute()
         {
-            _periodWatcherService.StopWatch();
-            ScreenModel.SetDefaultColorTemperatureOnAllScreens();
+            if (_isAppPaused)
+            {
+                _periodWatcherService.StartWatch();
+                WorkTimeKeyText = "Приостановить";
+            }
+            else
+            {
+                _periodWatcherService.StopWatch();
+                ScreenModel.SetDefaultColorTemperatureOnAllScreens();
+                WorkTimeKeyText = "Продолжить";
+            }
+            _isAppPaused = !_isAppPaused;
             _dialogService.HideDialog<TrayMenuViewModel>();
         }
 

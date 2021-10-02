@@ -110,6 +110,7 @@
     <Compile Include="Templates\Entities\GammaRamp.cs" />
     <Compile Include="Infrastructure\SystemProcess.cs" />
     <Compile Include="Infrastructure\TrayNotifier.cs" />
+    <Compile Include="Templates\Entities\TaskBarData.cs" />
     <Compile Include="Templates\EventHandlers\TrayLocationEventArgs.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
     <Compile Include="Views\Tray\TrayMenuView.xaml.cs">
@@ -118,6 +119,7 @@
     <Compile Include="WinApi\Gdi32.cs" />
     <Compile Include="WinApi\Kernel32.cs" />
     <Compile Include="Templates\Entities\Rect.cs" />
+    <Compile Include="WinApi\Shell32.cs" />
     <Compile Include="WinApi\User32.cs" />
     <Compile Include="Services\PeriodWatcherService.cs" />
     <Compile Include="Services\SettingsService.cs" />

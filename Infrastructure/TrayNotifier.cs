@@ -2,8 +2,13 @@
 using Light.Templates.EventHandlers;
 using Light.ViewModels;
 using System;
-using System.Windows;
+using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Light.Templates.Entities;
+using Light.WinApi;
+using Point = System.Windows.Point;
 
 namespace Light.Infrastructure
 {
@@ -62,19 +67,35 @@ namespace Light.Infrastructure
 
         private TaskBarLocation GetTaskBarLocation()
         {
-            var taskBarLocation = TaskBarLocation.Bottom;
+            var taskBarPos = GetTaskBarPosition();
+            if (taskBarPos == Rectangle.Empty) return TaskBarLocation.Bottom;
+
+            var taskBarLocation = TaskBarLocation.Top;
             var screen = Screen.PrimaryScreen;
-            var taskBarOnTopOrBottom = screen.WorkingArea.Width == screen.Bounds.Width;
+
+            var taskBarOnTopOrBottom = taskBarPos.Width == screen.Bounds.Width;
 
             if (taskBarOnTopOrBottom)
             {
-                if (screen.WorkingArea.Top > 0) taskBarLocation = TaskBarLocation.Top;
+                if (taskBarPos.Top > 0) taskBarLocation = TaskBarLocation.Bottom;
             }
             else
             {
-                taskBarLocation = screen.WorkingArea.Left > 0 ? TaskBarLocation.Left : TaskBarLocation.Right;
+                taskBarLocation = taskBarPos.Left > 0 ? TaskBarLocation.Right : TaskBarLocation.Left;
             }
+
             return taskBarLocation;
+        }
+
+        private Rectangle GetTaskBarPosition()
+        {
+            const uint dwMessage = 5;
+            var data = new TaskBarData();
+            data.CbSize = Marshal.SizeOf(data);
+            var shellMessage = Native.SHAppBarMessage(dwMessage, ref data);
+            return shellMessage == 0
+                ? Rectangle.Empty
+                : new Rectangle(data.Rc.Left, data.Rc.Top, data.Rc.Right - data.Rc.Left, data.Rc.Bottom - data.Rc.Top);
         }
 
         private void RefreshTrayMenuPos()
@@ -103,7 +124,7 @@ namespace Light.Infrastructure
                     break;
             }
 
-            TrayMenuLocation = new Point(x,y);
+            TrayMenuLocation = new Point(x, y);
         }
 
         public void Dispose()
