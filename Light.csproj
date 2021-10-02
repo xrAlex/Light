@@ -93,6 +93,7 @@
     <Compile Include="Templates\Entities\Base\NotifyingEntity.cs" />
     <Compile Include="Templates\Entities\DialogStorage.cs" />
     <Compile Include="Infrastructure\TrayNotifier.cs" />
+    <Compile Include="Templates\Entities\Rect.cs" />
     <Compile Include="Templates\Entities\TaskBarData.cs" />
     <Compile Include="Templates\EventHandlers\TrayLocationEventArgs.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Views\Main\MainWindowUserControl.xaml.cs">
       <DependentUpon>MainWindowUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinApi\Shell32.cs" />
     <Page Include="Resources\Brushes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

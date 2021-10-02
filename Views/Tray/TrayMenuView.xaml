@@ -12,7 +12,7 @@
         Left="{Binding LeftLocation, UpdateSourceTrigger=PropertyChanged}"
         Top="{Binding TopLocation, UpdateSourceTrigger=PropertyChanged}"
         Background="White"
-        Height="130" Width="130">
+        Height="74.417" Width="100">
     <Window.DataContext>
         <viewModels:TrayMenuViewModel/>
     </Window.DataContext>
@@ -90,35 +90,12 @@
                 VerticalAlignment="Center"
                 Foreground="White"/>
         </Border>
-        <Button>
-            <Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="24*"/>
-                    </Grid.ColumnDefinitions>
-                    <!--Без фона не видно изображения. Поэтому задал дополнительный Border.-->
-                    <Border Background="LightGray" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Image  Source="/Light;component/Resources/Images/turnoff.png"
-                                Stretch="Uniform"/>
-                    </Border>
-                    <TextBlock HorizontalAlignment="Center"
-                               Text="Завершить"
-                               Grid.Column="2"
-                               VerticalAlignment="Center" Margin="5,0"/>
-                </Grid>
-            </Grid>
-            <!--<Button.Resources>
-                --><!--Свой персональный ресурс кнопки. И так для каждой.--><!--
-                <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
-            </Button.Resources>-->
-        </Button>
-        <Button Content="Приостановить">
+        <Button Content="Приостановить" Margin="4,4,4,-10">
             <!--<Button.Resources>
                 <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
             </Button.Resources>-->
         </Button>
-        <Button Content="Выйти">
+        <Button Content="Выйти" Margin="4,9,4,-14">
             <!--<Button.Resources>
                 <SolidColorBrush x:Key="Border.Background" Color="LightGray" Opacity="0"/>
             </Button.Resources>-->

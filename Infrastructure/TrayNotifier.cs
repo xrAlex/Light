@@ -2,8 +2,13 @@
 using Light.Templates.EventHandlers;
 using Light.ViewModels;
 using System;
-using System.Windows;
+using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Light.Templates.Entities;
+using Light.WinApi;
+using Point = System.Windows.Point;
 
 namespace Light.Infrastructure
 {
@@ -48,7 +53,7 @@ namespace Light.Infrastructure
             {
                 _dialogService.ShowDialog<MainWindowViewModel>();
                 _dialogService.CloseDialog<TrayMenuViewModel>();
-                this.Dispose();
+                Dispose();
             }
             else
             {
@@ -62,42 +67,64 @@ namespace Light.Infrastructure
 
         private TaskBarLocation GetTaskBarLocation()
         {
-            var taskBarLocation = TaskBarLocation.Bottom;
+            var taskBarPos = GetTaskBarPosition();
+            if (taskBarPos == Rectangle.Empty) return TaskBarLocation.Bottom;
 
-            foreach (var screen in Screen.AllScreens)
+            var taskBarLocation = TaskBarLocation.Top;
+            var screen = Screen.PrimaryScreen;
+
+            var taskBarOnTopOrBottom = taskBarPos.Width == screen.Bounds.Width;
+
+            if (taskBarOnTopOrBottom)
             {
-                var taskBarOnTopOrBottom = screen.WorkingArea.Width == screen.Bounds.Width;
-                if (taskBarOnTopOrBottom)
-                {
-                    if (screen.WorkingArea.Top > 0) taskBarLocation = TaskBarLocation.Top;
-                }
-                else
-                {
-                    taskBarLocation = screen.WorkingArea.Left > 0 ? TaskBarLocation.Left : TaskBarLocation.Right;
-                }
+                if (taskBarPos.Top > 0) taskBarLocation = TaskBarLocation.Bottom;
             }
+            else
+            {
+                taskBarLocation = taskBarPos.Left > 0 ? TaskBarLocation.Right : TaskBarLocation.Left;
+            }
+
             return taskBarLocation;
+        }
+
+        private Rectangle GetTaskBarPosition()
+        {
+            const uint dwMessage = 5;
+            var data = new TaskBarData();
+            data.CbSize = Marshal.SizeOf(data);
+            var shellMessage = Native.SHAppBarMessage(dwMessage, ref data);
+            return shellMessage == 0
+                ? Rectangle.Empty
+                : new Rectangle(data.Rc.Left, data.Rc.Top, data.Rc.Right - data.Rc.Left, data.Rc.Bottom - data.Rc.Top);
         }
 
         private void RefreshTrayMenuPos()
         {
             var cursorPos = Cursor.Position;
             var taskBarLocation = GetTaskBarLocation();
-            var position = new Point(cursorPos.X + 5, cursorPos.Y - 140);
+            var x = cursorPos.X;
+            var y = cursorPos.Y;
 
             switch (taskBarLocation)
             {
+                case TaskBarLocation.Bottom:
+                    x += 10;
+                    y -= 90;
+                    break;
                 case TaskBarLocation.Top:
-                    position.X = cursorPos.X + 10;
-                    position.Y = cursorPos.Y;
+                    x += 10;
+                    break;
+                case TaskBarLocation.Left:
+                    x += 10;
+                    y += 5;
                     break;
                 case TaskBarLocation.Right:
-                    position.X = cursorPos.X - 160;
-                    position.Y = cursorPos.Y - 90;
+                    x -= 100;
+                    y += 10;
                     break;
             }
 
-            TrayMenuLocation = position;
+            TrayMenuLocation = new Point(x, y);
         }
 
         public void Dispose()
@@ -120,6 +147,7 @@ namespace Light.Infrastructure
                 Text = $@"{AppDomain.CurrentDomain.FriendlyName}",
                 Visible = true
             };
+            _notifier.ShowBalloonTip(300, $"{AppDomain.CurrentDomain.FriendlyName}", "Приложение продолжит работу в фоновом режиме", ToolTipIcon.Info);
             _notifier.MouseClick += TrayIcon_Click;
         }
     }
