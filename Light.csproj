@@ -93,6 +93,7 @@
     <Compile Include="Templates\Entities\Base\NotifyingEntity.cs" />
     <Compile Include="Templates\Entities\DialogStorage.cs" />
     <Compile Include="Infrastructure\TrayNotifier.cs" />
+    <Compile Include="Templates\Entities\TaskBarData.cs" />
     <Compile Include="Templates\EventHandlers\TrayLocationEventArgs.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
     <Compile Include="Views\Tray\TrayMenuView.xaml.cs">
