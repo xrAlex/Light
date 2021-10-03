@@ -20,6 +20,7 @@ namespace Light
             dialogService.Register<MainWindowViewModel, MainWindowView>();
             dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
             dialogService.Register<TrayMenuViewModel, TrayMenuView>(true);
+            dialogService.CreateDialog<TrayMenuViewModel>();
 
             if (!appSettings.StartMinimized)
             {

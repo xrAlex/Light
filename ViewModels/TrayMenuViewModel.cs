@@ -34,6 +34,7 @@ namespace Light.ViewModels
         #region Commands
         public ICommand PauseCommand { get; }
         public ICommand ShutdownCommand { get; }
+        public ICommand ShowMainWindow { get; }
 
         private void OnPauseCommandExecute()
         {
@@ -58,6 +59,11 @@ namespace Light.ViewModels
             Application.Current.Shutdown();
         }
 
+        private void OnShowMainWindowExecute()
+        {
+            _dialogService.ShowDialog<MainWindowViewModel>();
+        }
+
         #endregion
 
 
@@ -65,6 +71,7 @@ namespace Light.ViewModels
         {
             PauseCommand = new LambdaCommand(p => OnPauseCommandExecute());
             ShutdownCommand = new LambdaCommand(p => OnShutdownCommandExecute());
+            ShowMainWindow = new LambdaCommand(p => OnShowMainWindowExecute());
 
             var serviceLocator = ServiceLocator.Source;
             _dialogService = serviceLocator.DialogService;

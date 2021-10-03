@@ -5,6 +5,7 @@ using Light.Templates.Entities;
 using Light.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Hardcodet.Wpf.TaskbarNotification;
 using Application = System.Windows.Application;
 
 namespace Light.ViewModels
@@ -45,7 +46,6 @@ namespace Light.ViewModels
         private void OnAppToTrayCommandExecute()
         {
             _dialogService.HideDialog<MainWindowViewModel>();
-            _dialogService.CreateDialog<TrayMenuViewModel>();
         }
 
         private void OnOpenSettingsWindowCommandExecute()

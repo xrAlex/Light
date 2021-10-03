@@ -10,8 +10,6 @@
         AllowsTransparency="True"
         Title="TrayMenu" 
         Topmost="True"
-        Left="{Binding LeftLocation, UpdateSourceTrigger=PropertyChanged}"
-        Top="{Binding TopLocation, UpdateSourceTrigger=PropertyChanged}"
         Background="White"
         Height="75" Width="100">
     <Window.DataContext>
@@ -20,6 +18,8 @@
     <Grid>
         <tb:TaskbarIcon
             IconSource="/Resources/Images/Icon1.ico"
+            PopupActivation="RightClick"
+            LeftClickCommand="{Binding ShowMainWindow}"
             ToolTipText="Light">
             <tb:TaskbarIcon.TrayPopup>
                 <tray:TrayMenuUserControl />

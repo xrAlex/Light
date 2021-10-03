@@ -5,10 +5,10 @@
              xmlns:converters="clr-namespace:Light.Converters"
              xmlns:main="clr-namespace:Light.Views.Main"
              xmlns:tray="clr-namespace:Light.Views.Tray"
-             xmlns:settings="clr-namespace:Light.Views.Settings">
+             xmlns:settings="clr-namespace:Light.Views.Settings"
+             xmlns:tb="http://www.hardcodet.net/taskbar">
     <Application.Resources>
         <ResourceDictionary>
-            
             <DataTemplate DataType="{x:Type viewmodels:MainWindowViewModel}">
                 <main:MainWindowView/>
             </DataTemplate>
