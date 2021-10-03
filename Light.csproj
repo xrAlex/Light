@@ -91,6 +91,7 @@
     <Compile Include="DebugConsole.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Infrastructure\SystemWindow.cs" />
+    <Compile Include="Infrastructure\TrayMenuPosition.cs" />
     <Compile Include="Infrastructure\WorkTime.cs" />
     <Compile Include="Models\RegistryModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -109,9 +110,8 @@
     <Compile Include="Infrastructure\INIManager.cs" />
     <Compile Include="Templates\Entities\GammaRamp.cs" />
     <Compile Include="Infrastructure\SystemProcess.cs" />
-    <Compile Include="Infrastructure\TrayNotifier.cs" />
+    <Compile Include="Services\TrayNotifierService.cs" />
     <Compile Include="Templates\Entities\TaskBarData.cs" />
-    <Compile Include="Templates\EventHandlers\TrayLocationEventArgs.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
     <Compile Include="Views\Tray\TrayMenuView.xaml.cs">
       <DependentUpon>TrayMenuView.xaml</DependentUpon>

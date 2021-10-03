@@ -18,7 +18,7 @@ namespace Light.Models
 
         public bool IsAppStartupKeyFounded() => IsRegistryKeyFounded(Registry.CurrentUser, StartupPath, AppNameKey) != null;
         public void DeleteAppStartupKey() => DeleteKey(Registry.CurrentUser, StartupPath, AppNameKey);
-        public void AddAppStartupKey() => AddKey(Registry.CurrentUser, StartupPath, AppNameKey, GetAppExecutingLocation);
+        public void AddAppStartupKey() => AddKey(Registry.CurrentUser, StartupPath, AppNameKey, GetAppExecutingLocation + "-silent");
 
         public bool IsExtendedGammaRangeActive() 
         {

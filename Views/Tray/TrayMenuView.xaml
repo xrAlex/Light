@@ -4,23 +4,22 @@
         xmlns:viewModels="clr-namespace:Light.ViewModels"
         ResizeMode="NoResize"
         WindowStartupLocation="Manual"
+        Left="{Binding LeftLocation, Mode = TwoWay}"
+        Top="{Binding TopLocation, Mode = TwoWay}"
         WindowStyle="None"
         AllowsTransparency="True"
         Title="TrayMenu" 
         Topmost="True"
-        Left="{Binding LeftLocation, UpdateSourceTrigger=PropertyChanged}"
-        Top="{Binding TopLocation, UpdateSourceTrigger=PropertyChanged}"
         Background="White"
-        Height="74.417" Width="100">
+        Height="75" Width="100">
     <Window.DataContext>
         <viewModels:TrayMenuViewModel/>
     </Window.DataContext>
-    <Grid Height="74" VerticalAlignment="Top">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="4*" />
+            <RowDefinition Height="19*" />
             <RowDefinition Height="5*" />
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="21*"/>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="5*" />
@@ -32,20 +31,22 @@
         </Grid.ColumnDefinitions>
         <Rectangle
             Fill="{StaticResource Black}"
-            Grid.ColumnSpan="3" Grid.RowSpan="2" />
+            Grid.ColumnSpan="3" />
         <Button
             Style="{StaticResource DynamicBackgroundButton}"
             Content="Закрыть Light"
             Command="{Binding ShutdownCommand}"
-            Grid.Column="1" Grid.Row="5"/>
+            Grid.Column="1" Grid.Row="4"/>
         <Button
             Style="{StaticResource DynamicBackgroundButton}"
             Content="{Binding WorkTimeKeyText}"
             Command="{Binding PauseCommand}"
-            Grid.Column="1" Grid.Row="3"/>
+            Grid.Column="1" Grid.Row="2"/>
         <TextBlock
             FontSize="14"
             Text="Light"
-            Foreground="White" Grid.Column="1" HorizontalAlignment="Center" Padding="0" Margin="30,0" Width="32" Grid.RowSpan="2"/>
+            Foreground="White" 
+            Grid.Column="1"
+            HorizontalAlignment="Center" Margin="30,0" Width="32"/>
     </Grid>
 </Window>

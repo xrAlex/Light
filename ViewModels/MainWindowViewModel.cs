@@ -16,6 +16,7 @@ namespace Light.ViewModels
         private string _currentTime = "12:00";
         public ObservableCollection<ScreenEntity> Screens { get; }
         private readonly DialogService _dialogService;
+        private readonly TrayNotifierService _trayNotifier;
 
         #endregion
 
@@ -37,6 +38,7 @@ namespace Light.ViewModels
 
         private void OnCloseAppCommandExecute()
         {
+            _trayNotifier.Dispose();
             ScreenModel.SetDefaultColorTemperatureOnAllScreens();
             _dialogService.CloseDialog<MainWindowViewModel>();
             Application.Current.Shutdown();
@@ -44,8 +46,8 @@ namespace Light.ViewModels
 
         private void OnAppToTrayCommandExecute()
         {
+            _trayNotifier.ShowTip("Приложение продолжит работу всвернутом состоянии");
             _dialogService.HideDialog<MainWindowViewModel>();
-            _dialogService.CreateDialog<TrayMenuViewModel>();
         }
 
         private void OnOpenSettingsWindowCommandExecute()
@@ -65,6 +67,7 @@ namespace Light.ViewModels
             var screenModel = new ScreenModel();
             var serviceLocator = ServiceLocator.Source;
             _dialogService = serviceLocator.DialogService;
+            _trayNotifier = serviceLocator.TrayNotifier;
             var currentTimeService = serviceLocator.CurrentTimeService;
             var colorTemperatureWatcher = serviceLocator.PeriodWatcherService;
 

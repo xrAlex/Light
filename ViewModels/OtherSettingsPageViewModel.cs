@@ -8,7 +8,8 @@ namespace Light.ViewModels
     {
         private readonly RegistryModel _registryModel;
         private readonly SettingsService _settings;
- 
+        private readonly TrayNotifierService _trayNotifier;
+
         public bool StartMinimized
         {
             get => _settings.StartMinimized;
@@ -36,6 +37,7 @@ namespace Light.ViewModels
             get => _registryModel.IsExtendedGammaRangeActive();
             set
             {
+                _trayNotifier.ShowTip("Для применения параметров требуется перезагрузка");
                 if (value)
                 {
                     _registryModel.SetExtendedGammaRangeKey();
@@ -50,6 +52,7 @@ namespace Light.ViewModels
         public OtherSettingsPageViewModel()
         {
             var serviceLocator = ServiceLocator.Source;
+            _trayNotifier = serviceLocator.TrayNotifier;
             _settings = serviceLocator.Settings;
             _registryModel = new();
         }

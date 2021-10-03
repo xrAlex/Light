@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms.VisualStyles;
+﻿using System;
+using System.Linq;
+using System.Windows.Forms.VisualStyles;
+using Light.Infrastructure;
 using Light.Services;
 using Light.ViewModels;
 using Light.Views.Main;
@@ -17,13 +20,24 @@ namespace Light
             var dialogService = serviceLocator.DialogService;
             appSettings.Load();
 
+
+            _ = serviceLocator.TrayNotifier;
             dialogService.Register<MainWindowViewModel, MainWindowView>();
             dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
             dialogService.Register<TrayMenuViewModel, TrayMenuView>(true);
+            dialogService.CreateDialog<MainWindowViewModel>();
 
-            if (!appSettings.StartMinimized)
+            var silentLaunch = Environment.GetCommandLineArgs().Contains("-silent");
+
+            if (appSettings.StartMinimized)
+            {   
+                if (!silentLaunch)
+                {
+                    dialogService.ShowDialog<MainWindowViewModel>();
+                }
+            }
+            else
             {
-                dialogService.CreateDialog<MainWindowViewModel>();
                 dialogService.ShowDialog<MainWindowViewModel>();
             }
         }

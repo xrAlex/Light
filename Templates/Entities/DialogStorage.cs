@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using Light.Infrastructure;
 
 namespace Light.Templates.Entities
 {
@@ -35,20 +36,18 @@ namespace Light.Templates.Entities
 
         private void InstanceOnDeactivated(object sender, EventArgs e)
         {
-            HideInstance();
+            CloseInstance();
         }
 
         public void CloseInstance()
         {
-            Instance.MouseLeftButtonDown -= InstanceOnMouseLeftButtonDown;
-            Instance.Close();
-            Instance = null;
+            Instance?.Close();
         }
 
         public void ShowInstance()
         {
-            Instance.Show();
-            Instance.Activate();
+            Instance?.Show();
+            Instance?.Activate();
         }
 
         public void HideInstance() => Instance.Hide();

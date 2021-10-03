@@ -24,7 +24,7 @@ namespace Light.Services
         public void Save()
         {
             INIManager.WriteValue("Main", "SelectedScreen", SelectedScreen.ToString());
-            INIManager.WriteValue("Main", "StartMinimized", SelectedScreen.ToString());
+            INIManager.WriteValue("Main", "StartMinimized", StartMinimized.ToString());
             INIManager.WriteValue("Main", "CheckFullScreenApps", CheckFullScreenApps.ToString());
 
             SaveScreens();

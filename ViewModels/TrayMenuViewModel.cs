@@ -16,8 +16,6 @@ namespace Light.ViewModels
         private readonly PeriodWatcherService _periodWatcherService;
         private bool _isAppPaused;
         private string _workTimeKeyText = "Приостановить";
-        private double _topLocation;
-        private double _leftLocation;
 
         #endregion
 
@@ -28,17 +26,9 @@ namespace Light.ViewModels
             get => _workTimeKeyText;
             private set => Set(ref _workTimeKeyText, value);
         }
-        public double TopLocation
-        {
-            get => _topLocation;
-            private set => Set(ref _topLocation, value);
-        }
+        public int TopLocation { get; set; }
 
-        public double LeftLocation
-        {
-            get => _leftLocation;
-            private set => Set(ref _leftLocation, value);
-        }
+        public int LeftLocation { get; set; }
 
         #endregion
 
@@ -71,7 +61,6 @@ namespace Light.ViewModels
 
         #endregion
 
-
         public TrayMenuViewModel()
         {
             PauseCommand = new LambdaCommand(p => OnPauseCommandExecute());
@@ -80,13 +69,11 @@ namespace Light.ViewModels
             var serviceLocator = ServiceLocator.Source;
             _dialogService = serviceLocator.DialogService;
             _periodWatcherService = serviceLocator.PeriodWatcherService;
-            var trayNotifier = new TrayNotifier();
+            var tray = new TrayMenuPosition();
+            var pos = tray.GetTrayMenuPos();
 
-            trayNotifier.OnLocationChanged += (_, args) =>
-            {
-                LeftLocation = args.Location.X;
-                TopLocation = args.Location.Y;
-            };
+            LeftLocation = pos.X;
+            TopLocation = pos.Y;
         }
 #if DEBUG
         ~TrayMenuViewModel()
