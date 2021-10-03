@@ -30,7 +30,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:TrayMenuViewModel}">
-                <tray:TrayMenuView/>
+                <tray:TrayMenuUserControl/>
             </DataTemplate>
 
             <converters:MinConverter x:Key="MinConverter"></converters:MinConverter>

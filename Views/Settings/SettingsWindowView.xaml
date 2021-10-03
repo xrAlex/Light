@@ -43,7 +43,7 @@
         <ContentControl
             Content="{Binding SelectedViewModel}" Grid.ColumnSpan="10" Grid.RowSpan="9" />
         <Rectangle
-            Fill="#FF292929"
+            Fill="{StaticResource  Black}"
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="500" Width="60" Grid.RowSpan="9" Grid.ColumnSpan="3" />
         <Button

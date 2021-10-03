@@ -4,6 +4,8 @@ using Light.Models;
 using Light.Services;
 using Light.ViewModels.Base;
 using System.Windows.Input;
+using Hardcodet.Wpf.TaskbarNotification;
+using Light.Properties;
 using Application = System.Windows.Application;
 
 namespace Light.ViewModels
@@ -16,8 +18,6 @@ namespace Light.ViewModels
         private readonly PeriodWatcherService _periodWatcherService;
         private bool _isAppPaused;
         private string _workTimeKeyText = "Приостановить";
-        private double _topLocation;
-        private double _leftLocation;
 
         #endregion
 
@@ -27,17 +27,6 @@ namespace Light.ViewModels
         {
             get => _workTimeKeyText;
             private set => Set(ref _workTimeKeyText, value);
-        }
-        public double TopLocation
-        {
-            get => _topLocation;
-            private set => Set(ref _topLocation, value);
-        }
-
-        public double LeftLocation
-        {
-            get => _leftLocation;
-            private set => Set(ref _leftLocation, value);
         }
 
         #endregion
@@ -80,13 +69,6 @@ namespace Light.ViewModels
             var serviceLocator = ServiceLocator.Source;
             _dialogService = serviceLocator.DialogService;
             _periodWatcherService = serviceLocator.PeriodWatcherService;
-            var trayNotifier = new TrayNotifier();
-
-            trayNotifier.OnLocationChanged += (_, args) =>
-            {
-                LeftLocation = args.Location.X;
-                TopLocation = args.Location.Y;
-            };
         }
 #if DEBUG
         ~TrayMenuViewModel()
