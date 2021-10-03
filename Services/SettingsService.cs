@@ -19,10 +19,12 @@ namespace Light.Services
 
         public int SelectedScreen { get; set; }
         public bool CheckFullScreenApps { get; set; }
+        public bool StartMinimized { get; set; }
 
         public void Save()
         {
             INIManager.WriteValue("Main", "SelectedScreen", SelectedScreen.ToString());
+            INIManager.WriteValue("Main", "StartMinimized", SelectedScreen.ToString());
             INIManager.WriteValue("Main", "CheckFullScreenApps", CheckFullScreenApps.ToString());
 
             SaveScreens();
@@ -32,6 +34,7 @@ namespace Light.Services
         public void Load()
         {
             SelectedScreen = INIManager.GetValue<int>("Main", "SelectedScreen", "0");
+            StartMinimized = INIManager.GetValue<bool>("Main", "StartMinimized", "false");
             CheckFullScreenApps = INIManager.GetValue<bool>("Main", "CheckFullScreenApps", "false");
 
             LoadScreens();

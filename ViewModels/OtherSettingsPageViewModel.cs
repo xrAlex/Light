@@ -1,4 +1,5 @@
 ﻿using Light.Models;
+using Light.Services;
 using Light.ViewModels.Base;
 
 namespace Light.ViewModels
@@ -6,6 +7,13 @@ namespace Light.ViewModels
     internal sealed class OtherSettingsPageViewModel : ViewModelBase
     {
         private readonly RegistryModel _registryModel;
+        private readonly SettingsService _settings;
+ 
+        public bool StartMinimized
+        {
+            get => _settings.StartMinimized;
+            set => _settings.StartMinimized = value;
+        }
 
         public bool LaunchOnStartup
         {
@@ -41,6 +49,8 @@ namespace Light.ViewModels
 
         public OtherSettingsPageViewModel()
         {
+            var serviceLocator = ServiceLocator.Source;
+            _settings = serviceLocator.Settings;
             _registryModel = new();
         }
 

@@ -21,7 +21,7 @@ namespace Light.WinApi
         QueryLimitedInformation = 0x00001000,
         Synchronize = 0x00100000
     }
-    //ProcessAccessFlags.QueryLimitedInformation
+
     internal static partial class Native
     {
         [DllImport("Kernel32.dll", SetLastError = true)]

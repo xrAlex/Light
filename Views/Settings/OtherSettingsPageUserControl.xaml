@@ -12,9 +12,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="28*" />
             <RowDefinition Height="25*" />
-            <RowDefinition Height="26*" />
-            <RowDefinition Height="27*" />
-            <RowDefinition Height="394*" />
+            <RowDefinition Height="25*" />
+            <RowDefinition Height="25*" />
+            <RowDefinition Height="25*" />
+            <RowDefinition Height="372*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*" />
@@ -33,7 +34,12 @@
             Grid.Column="1" Grid.Row="2" />
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
-            Content="Плавное изменение яркости"
+            Content="Плавное изменение яркости (не работает)"
             Grid.Column="1" Grid.Row="3" />
+        <CheckBox
+            Style="{StaticResource SliderCheckBox}"
+            IsChecked="{Binding StartMinimized}"
+            Content="Запускаться в свернутом состоянии"
+            Grid.Column="1" Grid.Row="4" />
     </Grid>
 </UserControl>
