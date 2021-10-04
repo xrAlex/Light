@@ -38,22 +38,19 @@ namespace Light.ViewModels
 
         private void OnCloseAppCommandExecute()
         {
-            _trayNotifier.Dispose();
             ScreenModel.SetDefaultColorTemperatureOnAllScreens();
-            _dialogService.CloseDialog<MainWindowViewModel>();
             Application.Current.Shutdown();
         }
 
         private void OnAppToTrayCommandExecute()
         {
-            _trayNotifier.ShowTip("Приложение продолжит работу всвернутом состоянии");
-            _dialogService.HideDialog<MainWindowViewModel>();
+            _trayNotifier.ShowTip("Приложение продолжит работу в свернутом состоянии");
+            _dialogService.CloseDialog<MainWindowViewModel>();
         }
 
         private void OnOpenSettingsWindowCommandExecute()
         {
-            _dialogService.CreateDialog<SettingsWindowViewModel, MainWindowViewModel>();
-            _dialogService.ShowDialog<SettingsWindowViewModel>();
+            _dialogService.ShowDialog<SettingsWindowViewModel>(typeof(MainWindowViewModel));
         }
 
         #endregion
@@ -69,15 +66,11 @@ namespace Light.ViewModels
             _dialogService = serviceLocator.DialogService;
             _trayNotifier = serviceLocator.TrayNotifier;
             var currentTimeService = serviceLocator.CurrentTimeService;
-            var colorTemperatureWatcher = serviceLocator.PeriodWatcherService;
 
             Screens = screenModel.Screens;
             CurrentTime = currentTimeService.GetCurrentTime();
 
             currentTimeService.OnCurrTimeChanged += (_, args) => { CurrentTime = args.CurrTime; };
-
-            screenModel.ForceColorTemperature();
-            colorTemperatureWatcher.StartWatch();
         }
 
 #if DEBUG

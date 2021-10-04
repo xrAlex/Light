@@ -14,7 +14,6 @@ namespace Light.Services
         private DialogService _dialogService;
         private TrayNotifierService _trayNotifier;
         
-
         public SettingsService Settings => _settings ??= new();
         public PeriodWatcherService PeriodWatcherService => _periodWatcherService ??= new();
         public CurrentTimeService CurrentTimeService => _currentTimeService ??= new();

@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:Light.ViewModels"
-        xmlns:views="clr-namespace:Light.Views.Main"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="330" Width="440"
@@ -67,7 +66,7 @@
             Style="{StaticResource DeepGrayButton}"
             Content="—"
             FontSize="20"
-            Command="{Binding AppToTrayCommand}"
+            Command="{Binding AppToTrayCommand, Mode=OneWay}"
             HorizontalAlignment="Center" VerticalAlignment="Top"
             Foreground="#FFF1F1F1"
             VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
@@ -147,7 +146,7 @@
                                 FontSize="12"
                                 Grid.Row="5" Grid.Column="4" Height="Auto" Grid.RowSpan="2" />
                             <TextBlock
-                                Text="{Binding  ColorConfiguration.NightBrightness, Mode=TwoWay, StringFormat=NBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding  ColorConfiguration.NightBrightness, Mode=OneWay, StringFormat=NBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                 FontSize="12"
                                 Grid.Row="5" Grid.Column="5" Height="Auto" Grid.RowSpan="2" />
                         </Grid>

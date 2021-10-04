@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
 using Light.Templates.Entities;
@@ -21,31 +22,15 @@ namespace Light.Services
         /// <summary>
         /// Метод регестрирует типы ViewModel и View для дальнейшего создания экземпляра
         /// </summary>
-        public void Register<TViewModel, TView>(bool CanBeDeactivable = false) where TViewModel : ViewModelBase where TView : Window
+        public void Register<TViewModel, TView>(bool isTrayMenu = false) where TViewModel : ViewModelBase where TView : Window
         {
-            _mappings.Add(typeof(TViewModel), new DialogStorage(typeof(TView), CanBeDeactivable));
+            _mappings.Add(typeof(TViewModel), new DialogStorage(typeof(TView), isTrayMenu));
         }
 
         /// <summary>
-        /// Метод создает экземпляр диалогового окна и отображает его, принимает вторым параметром Owner окна
+        /// Метод отображает диалоговое окно, если экземпляр окна не создан, то создает его
         /// </summary>
-        public void CreateDialog<TViewModel, TOwner>() where TViewModel : ViewModelBase where TOwner : ViewModelBase
-        {
-            var dialogStorage = _mappings[typeof(TViewModel)];
-            var dialogOwner = _mappings[typeof(TOwner)];
-            var dialog = dialogStorage.Instance;
-            if (dialog == null)
-            {
-                dialog = (Window)Activator.CreateInstance(dialogStorage.Type);
-                dialogStorage.Instance = dialog;
-            }
-            dialog.Owner = dialogOwner.Instance;
-        }
-
-        /// <summary>
-        /// Метод создает экземпляр диалогового окна
-        /// </summary>
-        public void CreateDialog<TViewModel>() where TViewModel : ViewModelBase
+        public void ShowDialog<TViewModel>(Type owner = null) where TViewModel : ViewModelBase
         {
             var dialogStorage = _mappings[typeof(TViewModel)];
             var dialog = dialogStorage.Instance;
@@ -53,20 +38,11 @@ namespace Light.Services
             {
                 dialog = (Window)Activator.CreateInstance(dialogStorage.Type);
                 dialogStorage.Instance = dialog;
-            }
-        }
-
-        /// <summary>
-        /// Метод отображает диалогового окна, если экземпляр окна не создан, то создает его
-        /// </summary>
-        public void ShowDialog<TViewModel>() where TViewModel : ViewModelBase
-        {
-            var dialogStorage = _mappings[typeof(TViewModel)];
-            var dialog = dialogStorage.Instance;
-            if (dialog == null)
-            {
-                dialog = (Window)Activator.CreateInstance(dialogStorage.Type);
-                dialogStorage.Instance = dialog;
+                if (owner != null)
+                {
+                    var dialogOwner = _mappings[owner];
+                    dialog.Owner = dialogOwner.Instance;
+                }
             }
             dialogStorage.ShowInstance();
         }

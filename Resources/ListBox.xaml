@@ -57,14 +57,14 @@
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="0.3" Duration="0:0:0.3" Storyboard.TargetName="BorderSelected" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="0.3" Duration="0:0:0.2" Storyboard.TargetName="BorderSelected" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="0" Duration="0:0:0.3" Storyboard.TargetName="BorderSelected" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="BorderSelected" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.ExitActions>
@@ -77,14 +77,14 @@
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="0.5" Duration="0:0:0.3" Storyboard.TargetName="BorderNavi" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="0.5" Duration="0:0:0.2" Storyboard.TargetName="BorderNavi" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="0" Duration="0:0:0.3" Storyboard.TargetName="BorderNavi" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="BorderNavi" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.ExitActions>
@@ -97,14 +97,14 @@
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="0.7" Duration="0:0:0.3" Storyboard.TargetName="BorderSelectedFocused" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="0.7" Duration="0:0:0.2" Storyboard.TargetName="BorderSelectedFocused" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="0" Duration="0:0:0.3" Storyboard.TargetName="BorderSelectedFocused" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="BorderSelectedFocused" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.ExitActions>

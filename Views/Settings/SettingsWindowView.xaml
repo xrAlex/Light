@@ -49,14 +49,14 @@
         <Button
             Style="{StaticResource BlackButton}"
             Grid.Column="1" Grid.RowSpan="2" Grid.Row="3"
-            Command="{Binding ToProcessPageCommand}">
+            Command="{Binding ToProcessPageCommand, Mode=OneWay}">
             <Image
                 Width="37" Height="37"
                 Source="{StaticResource Process}" Stretch="Fill" />
         </Button>
         <Button
             Style="{StaticResource BlackButton}"
-            Command="{Binding ToSettingsMainPageCommand}" Grid.Column="1" Grid.Row="1">
+            Command="{Binding ToSettingsMainPageCommand, Mode=OneWay}" Grid.Column="1" Grid.Row="1">
             <Image
                 Width="37" Height="37"
                 Source="{StaticResource Main}" Stretch="Fill" />
@@ -64,7 +64,7 @@
         <Button
             Style="{StaticResource BlackButton}"
             Grid.Column="1"
-            Command="{Binding ToOtherSettingsPageCommand}" Height="45" VerticalAlignment="Top" Grid.Row="5">
+            Command="{Binding ToOtherSettingsPageCommand, Mode=OneWay}" Height="45" VerticalAlignment="Top" Grid.Row="5">
             <Image
                 Width="37" Height="37"
                 Source="{StaticResource Other}" Stretch="Fill" />
@@ -72,17 +72,17 @@
         <Button
             Style="{StaticResource LightGrayButton}"
             Content="Сбросить"
-            Command="{Binding ResetSettingsCommand}"
+            Command="{Binding ResetSettingsCommand, Mode=OneWay}"
             Grid.Row="7" Grid.Column="4" />
         <Button
             Style="{StaticResource LightGrayButton}"
             Content="Отменить"
-            Command="{Binding CloseSettingsCommand}"
+            Command="{Binding CloseSettingsCommand, Mode=OneWay}"
             Grid.Row="7" Grid.Column="6" />
         <Button
             Style="{StaticResource LightGrayButton}"
             Content="Применить"
-            Command="{Binding ApplySettingsCommand}"
+            Command="{Binding ApplySettingsCommand, Mode=OneWay}"
             Grid.Row="7" Grid.Column="8" />
     </Grid>
 </Window>

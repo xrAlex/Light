@@ -11,11 +11,11 @@ namespace Light.Templates.Entities
     internal struct TaskBarData
     {
         public int CbSize { get; set; }
-        public nint HWnd { get; set; }
-        public int UCallbackMessage { get; set; }
-        public int UEdge { get; set; }
+        private nint HWnd { get; set; }
+        private int UCallbackMessage { get; set; }
+        private int UEdge { get; set; }
         public Rect Rc { get; set; }
-        public nint LParam { get; set; }
+        private nint LParam { get; set; }
 
         public TaskBarData(int cbSize, nint hWnd, int uCallbackMessage, int uEdge, Rect rc, nint lParam)
         {

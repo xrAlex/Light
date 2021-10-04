@@ -10,24 +10,49 @@ namespace Light.Models
     /// </summary>
     internal sealed class RegistryModel
     {
-        private static readonly string AppNameKey = $"{AppDomain.CurrentDomain.FriendlyName}";
-        private const string StartupPath = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
-        private const string GetGammaRangeValue = "REG QUERY \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\ICM\" /v GdiICMGammaRange";
-        private const string SetDefaultGammaRangeValue = "REG ADD \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\ICM\" /v GdiICMGammaRange /t REG_DWORD /d 0 /f";
-        private const string SetExtendedGammaRangeValue = "REG ADD \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\ICM\" /v GdiICMGammaRange /t REG_DWORD /d 256 /f";
+        private const string StartupPath = "\"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" ";
+        private static readonly string AppNameKey = $"/v {AppDomain.CurrentDomain.FriendlyName} ";
+        private static readonly string AppNameParam = $"/t REG_SZ /d \"{Assembly.GetExecutingAssembly().Location} -silent\" /f";
 
-        public bool IsAppStartupKeyFounded() => IsRegistryKeyFounded(Registry.CurrentUser, StartupPath, AppNameKey) != null;
-        public void DeleteAppStartupKey() => DeleteKey(Registry.CurrentUser, StartupPath, AppNameKey);
-        public void AddAppStartupKey() => AddKey(Registry.CurrentUser, StartupPath, AppNameKey, GetAppExecutingLocation + "-silent");
+        private const string AddCommand = "REG ADD ";
+        private const string CheckCommand = "REG QUERY ";
+        private const string DeleteCommand = "REG DELETE ";
 
-        public bool IsExtendedGammaRangeActive() 
+        private const string GammaRangePath = "\"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\ICM\" ";
+        private const string GammaRangeKey = "/v GdiICMGammaRange ";
+        private const string GammaRangeDefaultParam = "/t REG_DWORD /d 0 /f";
+        private const string GammaRangeExtendedParam = "/t REG_DWORD /d 256 /f";
+
+        public bool IsAppStartupKeyFounded()
         {
-            var output = ExecuteFromCMD(GetGammaRangeValue, false, true);
+            var output = ExecuteFromCMD(CheckCommand + StartupPath + AppNameKey, false, true);
+            return output.Contains("Light.exe");
+        }
+
+        public bool IsExtendedGammaRangeActive()
+        {
+            var output = ExecuteFromCMD(CheckCommand + GammaRangePath + GammaRangeKey, false, true);
             return output.Contains("0x100");
         }
 
-        public void SetDefaultGammaRangeKey() => ExecuteFromCMD(SetDefaultGammaRangeValue, true, false);
-        public void SetExtendedGammaRangeKey() => ExecuteFromCMD(SetExtendedGammaRangeValue, true, false);
+        public void AddAppStartupKey()
+        {
+            ExecuteFromCMD(AddCommand + StartupPath + AppNameKey + AppNameParam, true, false);
+        }
+
+        public void DeleteAppStartupKey()
+        {
+            ExecuteFromCMD(DeleteCommand + StartupPath + AppNameKey + "/f", true, false);
+        }
+
+        public void SetDefaultGammaRangeKey()
+        {
+            ExecuteFromCMD(AddCommand + GammaRangePath + GammaRangeKey + GammaRangeDefaultParam, true, false);
+        }
+        public void SetExtendedGammaRangeKey()
+        {
+            ExecuteFromCMD(AddCommand + GammaRangePath + GammaRangeKey + GammaRangeExtendedParam, true, false);
+        }
 
         /// <summary>
         /// Executes the command using CMD
@@ -58,33 +83,11 @@ namespace Light.Models
 
             return output;
         }
-        private RegistryKey GetSubKey(RegistryKey key, string subKey) => key.OpenSubKey(subKey, true);
-
-        private object IsRegistryKeyFounded(RegistryKey key, string subKey, string valueName)
-        {
-            using var registryKey = key.OpenSubKey(subKey, true);
-            var value = registryKey?.GetValue(valueName);
-            return value;
-        }
-
-        private void AddKey<T>(RegistryKey key, string subKey, string valueName, T value)
-        {
-            using var registryKey = GetSubKey(key, subKey);
-            registryKey?.SetValue(valueName, value);
-        }
-
-        private void DeleteKey(RegistryKey key, string subKey, string valueName)
-        {
-            using var registryKey = GetSubKey(key, subKey);
-            registryKey?.DeleteValue(valueName, true);
-        }
-
-        private string GetAppExecutingLocation => $"\"{Assembly.GetExecutingAssembly().Location}\"";
 
 #if DEBUG
         ~RegistryModel()
         {
-            Debug.Print("RegistryModel Disposed");
+            DebugConsole.Print("RegistryModel Disposed");
         }
 #endif
     }

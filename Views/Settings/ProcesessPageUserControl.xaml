@@ -29,7 +29,7 @@
             x:Name="Checkbox1"
             Content="Не работать в полноэкранных приложениях"
             HorizontalAlignment="Left" Width="360"
-            IsChecked="{Binding CheckFullScreenApps}"
+            IsChecked="{Binding CheckFullScreenApps, Mode=TwoWay}"
             Grid.Column="1" Grid.Row="1"
             VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
         <ListBox
@@ -54,8 +54,8 @@
                         Height="20"
                         VerticalContentAlignment="Center"
                         IsChecked="{Binding IsSelected}"
-                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.MoveToIgnoredProcessesCommand }"
-                        Content="{Binding DisplayedText}" />
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.MoveToIgnoredProcessesCommand, Mode=OneWay}"
+                        Content="{Binding DisplayedText, Mode=OneWay}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

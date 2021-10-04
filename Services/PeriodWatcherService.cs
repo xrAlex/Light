@@ -52,7 +52,7 @@ namespace Light.Services
                     {
                         if (_settings.CheckFullScreenApps)
                         {
-                            if (IsFullScreenProcessFounded(screen))
+                            if (_screenModel.IsFullScreenProcessFounded(screen))
                             {
                                 _screenModel.SetDayPeriod(screen);
                             }
@@ -74,23 +74,6 @@ namespace Light.Services
 
                 await Task.Delay(1000, token);
             }
-        }
-
-        /// <summary>
-        /// Метод проверяет для устройства отображения развернуто ли окно на переднем плане во весь экран
-        /// </summary>
-        /// <returns> true если окно работает в полноэкранном режиме </returns>
-        private bool IsFullScreenProcessFounded(ScreenEntity screen)
-        {
-            var handle = Native.GetForegroundWindow();
-            if (!SystemWindow.IsWindowValid(handle) || !SystemWindow.IsWindowOnFullScreen(screen, handle)) return false;
-
-            var pId = SystemProcess.GetId(handle);
-            using var process = SystemProcess.TryOpenProcess(pId);
-            var processPath = process?.TryGetProcessPath();
-            var processFileName = Path.GetFileNameWithoutExtension(processPath);
-
-            return _settings.IgnoredApplications.Count == 0 || _settings.IgnoredApplications.All(p => p != processFileName);
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Light.Infrastructure;
 using Light.Services;
 using Light.Templates.Entities;
+using Light.WinApi;
 
 namespace Light.Models
 {
@@ -11,6 +14,7 @@ namespace Light.Models
         #region Fields
 
         public ObservableCollection<ScreenEntity> Screens { get; }
+        private readonly SettingsService _settings; 
 
         #endregion
 
@@ -41,6 +45,23 @@ namespace Light.Models
         {
             screen.IsDayTimePeriod = false;
             ApplyColorConfiguration(screen);
+        }
+
+        /// <summary>
+        /// Метод проверяет для устройства отображения развернуто ли окно на переднем плане во весь экран
+        /// </summary>
+        /// <returns> true если окно работает в полноэкранном режиме </returns>
+        public bool IsFullScreenProcessFounded(ScreenEntity screen)
+        {
+            var handle = Native.GetForegroundWindow();
+            if (!SystemWindow.IsWindowValid(handle) || !SystemWindow.IsWindowOnFullScreen(screen, handle)) return false;
+
+            var pId = SystemProcess.GetId(handle);
+            using var process = SystemProcess.TryOpenProcess(pId);
+            var processPath = process?.TryGetProcessPath();
+            var processFileName = Path.GetFileNameWithoutExtension(processPath);
+
+            return _settings.IgnoredApplications.Count == 0 || _settings.IgnoredApplications.All(p => p != processFileName);
         }
 
         public void ApplyColorConfiguration(ScreenEntity screen)
@@ -108,6 +129,7 @@ namespace Light.Models
             var serviceLocator = ServiceLocator.Source;
             var settingsService = serviceLocator.Settings;
             Screens = settingsService.Screens;
+            _settings = serviceLocator.Settings;
         }
 
 #if DEBUG

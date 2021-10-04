@@ -17,37 +17,44 @@ namespace Light.Templates.Entities
             set
             {
                 _instance = value;
-
-                if (_instance != null)
+                if (value != null)
                 {
-                    if (_isTrayMenu)
-                    {
-                        _instance.Deactivated += InstanceOnDeactivated;
-                    }
-                    else
-                    {
-                        _instance.MouseLeftButtonDown += InstanceOnMouseLeftButtonDown;
-                    }
+                    InstanceOnCreated(value);
                 }
             }
         }
 
+        private void InstanceOnCreated(Window instance)
+        {
+            if (_isTrayMenu)
+            {
+                _instance.Deactivated += InstanceOnDeactivated;
+            }
+            else
+            {
+                _instance.MouseLeftButtonDown += InstanceOnMouseLeftButtonDown;
+            }
+        }
         private void InstanceOnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => Instance.DragMove();
 
-        private void InstanceOnDeactivated(object sender, EventArgs e)
-        {
-            CloseInstance();
-        }
+        private void InstanceOnDeactivated(object sender, EventArgs e) => CloseInstance();
 
         public void CloseInstance()
         {
-            Instance?.Close();
+            if (Instance != null)
+            {
+                Instance.Close();
+                Instance = null;
+            }
         }
 
         public void ShowInstance()
         {
-            Instance?.Show();
-            Instance?.Activate();
+            if (Instance != null)
+            {
+                Instance.Show();
+                Instance.Activate();
+            }
         }
 
         public void HideInstance() => Instance.Hide();

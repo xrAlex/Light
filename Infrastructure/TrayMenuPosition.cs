@@ -24,19 +24,19 @@ namespace Light.Infrastructure
             switch (taskBarLocation)
             {
                 case TaskBarLocation.Bottom:
-                    cursorPos.X += 10;
+                    cursorPos.X += 5;
                     cursorPos.Y -= 90;
                     break;
                 case TaskBarLocation.Top:
-                    cursorPos.X += 10;
+                    cursorPos.X += 5;
                     break;
                 case TaskBarLocation.Left:
-                    cursorPos.X += 10;
+                    cursorPos.X += 5;
                     cursorPos.Y += 5;
                     break;
                 case TaskBarLocation.Right:
                     cursorPos.X -= 100;
-                    cursorPos.Y += 10;
+                    cursorPos.Y += 5;
                     break;
             }
 

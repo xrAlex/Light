@@ -19,42 +19,18 @@
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="1" Duration="0:0:0.3" Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
                             <DataTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="0" Duration="0:0:0.3" Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
                         </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="DynamicBackgroundButton" TargetType="{x:Type Button}">
-        <Setter Property="BorderThickness" Value="0"></Setter>
-        <Setter Property="Cursor" Value="Hand"></Setter>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border 
-                        CornerRadius="5"
-                        Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value ="{StaticResource LightGray}"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="False">
-                            <Setter Property="Background" Value ="Transparent"/>
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -33,14 +33,14 @@
             Fill="{StaticResource Black}"
             Grid.ColumnSpan="3" />
         <Button
-            Style="{StaticResource DynamicBackgroundButton}"
+            Style="{StaticResource LightGrayButton}"
             Content="Закрыть Light"
-            Command="{Binding ShutdownCommand}"
+            Command="{Binding ShutdownCommand, Mode=OneWay}"
             Grid.Column="1" Grid.Row="4"/>
         <Button
-            Style="{StaticResource DynamicBackgroundButton}"
-            Content="{Binding WorkTimeKeyText}"
-            Command="{Binding PauseCommand}"
+            Style="{StaticResource LightGrayButton}"
+            Content="{Binding WorkTimeKeyText, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+            Command="{Binding PauseCommand, Mode=OneWay}"
             Grid.Column="1" Grid.Row="2"/>
         <TextBlock
             FontSize="14"

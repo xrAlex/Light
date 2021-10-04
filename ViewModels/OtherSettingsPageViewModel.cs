@@ -54,7 +54,7 @@ namespace Light.ViewModels
             var serviceLocator = ServiceLocator.Source;
             _trayNotifier = serviceLocator.TrayNotifier;
             _settings = serviceLocator.Settings;
-            _registryModel = new();
+            _registryModel = new RegistryModel();
         }
 
 #if DEBUG

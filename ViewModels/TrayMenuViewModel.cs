@@ -12,7 +12,6 @@ namespace Light.ViewModels
     {
         #region Fields
 
-        private readonly DialogService _dialogService;
         private readonly PeriodWatcherService _periodWatcherService;
         private bool _isAppPaused;
         private string _workTimeKeyText = "Приостановить";
@@ -50,7 +49,6 @@ namespace Light.ViewModels
                 WorkTimeKeyText = "Продолжить";
             }
             _isAppPaused = !_isAppPaused;
-            _dialogService.HideDialog<TrayMenuViewModel>();
         }
 
         private void OnShutdownCommandExecute()
@@ -67,7 +65,6 @@ namespace Light.ViewModels
             ShutdownCommand = new LambdaCommand(p => OnShutdownCommandExecute());
 
             var serviceLocator = ServiceLocator.Source;
-            _dialogService = serviceLocator.DialogService;
             _periodWatcherService = serviceLocator.PeriodWatcherService;
             var tray = new TrayMenuPosition();
             var pos = tray.GetTrayMenuPos();

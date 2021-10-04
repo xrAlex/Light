@@ -62,7 +62,7 @@ namespace Light.Infrastructure
             );
 
 #if DEBUG
-            DebugConsole.Print($"Kelvin = {kelvinValue} /nRGB Mask [R: {mask.Red} G:{mask.Green} B: {mask.Blue}]");
+            //DebugConsole.Print($"Kelvin = {kelvinValue} /nRGB Mask [R: {mask.Red} G:{mask.Green} B: {mask.Blue}]");
 #endif
 
             return mask;

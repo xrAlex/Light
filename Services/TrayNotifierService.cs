@@ -1,5 +1,6 @@
 ﻿using Light.ViewModels;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Light.Services
