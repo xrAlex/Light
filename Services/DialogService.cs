@@ -41,7 +41,7 @@ namespace Light.Services
                 if (owner != null)
                 {
                     var dialogOwner = _mappings[owner];
-                    dialog.Owner = dialogOwner.Instance;
+                    dialog.Owner = dialogOwner?.Instance;
                 }
             }
             dialogStorage.ShowInstance();

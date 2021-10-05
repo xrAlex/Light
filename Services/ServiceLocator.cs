@@ -14,11 +14,11 @@ namespace Light.Services
         private DialogService _dialogService;
         private TrayNotifierService _trayNotifier;
         
-        public SettingsService Settings => _settings ??= new();
-        public PeriodWatcherService PeriodWatcherService => _periodWatcherService ??= new();
-        public CurrentTimeService CurrentTimeService => _currentTimeService ??= new();
-        public DialogService DialogService => _dialogService ??= new();
-        public TrayNotifierService TrayNotifier => _trayNotifier ??= new();
+        public SettingsService Settings => _settings ??= new SettingsService();
+        public PeriodWatcherService PeriodWatcherService => _periodWatcherService ??= new PeriodWatcherService();
+        public CurrentTimeService CurrentTimeService => _currentTimeService ??= new CurrentTimeService();
+        public DialogService DialogService => _dialogService ??= new DialogService();
+        public TrayNotifierService TrayNotifier => _trayNotifier ??= new TrayNotifierService();
 
         private ServiceLocator() {}
         private static readonly Lazy<ServiceLocator> Lazy = new(() => new ServiceLocator());

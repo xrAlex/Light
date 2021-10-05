@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-
 namespace Light.Converters
 {
     [ValueConversion(typeof(int), typeof(string))]

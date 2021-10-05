@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Windows.Data;
 
-
 namespace Light.Converters
 {
     [ValueConversion(typeof(double), typeof(string))]

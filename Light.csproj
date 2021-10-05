@@ -113,6 +113,7 @@
     <Compile Include="Services\TrayNotifierService.cs" />
     <Compile Include="Templates\Entities\TaskBarData.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Tray\TrayMenuView.xaml.cs">
       <DependentUpon>TrayMenuView.xaml</DependentUpon>
     </Compile>
