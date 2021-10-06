@@ -11,7 +11,7 @@ namespace Light.Services
     /// <summary>
     /// Класс выполняет загрузку и сохранение настроек приложения
     /// </summary>
-    public sealed class SettingsService
+    public sealed partial class SettingsService
     {
         public ObservableCollection<ApplicationEntity> Application { get; }
         public ObservableCollection<ScreenEntity> Screens { get; }
@@ -21,6 +21,16 @@ namespace Light.Services
         public bool CheckFullScreenApps { get; set; }
         public bool StartMinimized { get; set; }
 
+        public SettingsService()
+        {
+            IgnoredApplications = new List<string>();
+            Screens = new ObservableCollection<ScreenEntity>();
+            Application = new ObservableCollection<ApplicationEntity>();
+        }
+    }
+
+    public sealed partial class SettingsService
+    {
         public void Save()
         {
             INIManager.WriteValue("Main", "SelectedScreen", SelectedScreen.ToString());
@@ -110,13 +120,6 @@ namespace Light.Services
             {
                 IgnoredApplications.Add($"{processName}");
             }
-        }
-
-        public SettingsService()
-        {
-            IgnoredApplications = new List<string>();
-            Screens = new ObservableCollection<ScreenEntity>();
-            Application = new ObservableCollection<ApplicationEntity>();
         }
     }
 }

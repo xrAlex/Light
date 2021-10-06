@@ -117,98 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Accept.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Apply" xml:space="preserve">
-    <value>Apply</value>
+    <value>Применить</value>
   </data>
   <data name="AutoLaunch" xml:space="preserve">
-    <value>Start with Windows</value>
-  </data>
-  <data name="BlueReduce" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\BlueReduce.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Запускать вместе с Windows</value>
   </data>
   <data name="Brightness" xml:space="preserve">
-    <value>Brightness</value>
+    <value>Яркость</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отменить</value>
   </data>
   <data name="ColorTemperature" xml:space="preserve">
-    <value>Color temperature</value>
+    <value>Цветовая температура</value>
   </data>
   <data name="Day" xml:space="preserve">
-    <value>Day</value>
+    <value>День</value>
   </data>
   <data name="DontWorkInFullScreen" xml:space="preserve">
-    <value>Dont work in full screen apllications</value>
+    <value>Не работать в полноэкранных процессах</value>
   </data>
   <data name="ExtendedGammaRange" xml:space="preserve">
-    <value>Enable extended gamma range</value>
-  </data>
-  <data name="Gamma" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Gamma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Icon1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Main" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Main.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MonitorBlack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\MonitorBlack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Разблокировать расширенный диапозон гаммы</value>
   </data>
   <data name="Monitors" xml:space="preserve">
-    <value>Monitors</value>
-  </data>
-  <data name="MonitorWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\MonitorWhite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Мониторы</value>
   </data>
   <data name="Night" xml:space="preserve">
-    <value>Night</value>
-  </data>
-  <data name="Other" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Other.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Processes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Processes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Ночь</value>
   </data>
   <data name="ProcessesWhiteList" xml:space="preserve">
-    <value>Applications whitelist</value>
+    <value>Исключения</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Reser</value>
+    <value>Сбросить</value>
   </data>
   <data name="RestartNotification" xml:space="preserve">
-    <value>Restart required to apply parameters</value>
-  </data>
-  <data name="Settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Для применения параметров требуется перезагрузка</value>
   </data>
   <data name="SmoothBrightnessChange" xml:space="preserve">
-    <value>Smooth brightness change</value>
+    <value>Плавное изменение яркости</value>
   </data>
   <data name="Sunrise" xml:space="preserve">
-    <value>Sunrise</value>
+    <value>Восход</value>
   </data>
   <data name="Sunset" xml:space="preserve">
-    <value>Sunset</value>
+    <value>Заход</value>
   </data>
   <data name="ToTrayNotification" xml:space="preserve">
-    <value>Application will continue to work in a collapsed state</value>
+    <value>Приложение продолжит работу в свернутом состоянии</value>
   </data>
   <data name="TrayClose" xml:space="preserve">
-    <value>Close</value>
+    <value>Закрыть</value>
   </data>
   <data name="TrayPause" xml:space="preserve">
-    <value>Pause</value>
+    <value>Приостановить</value>
   </data>
   <data name="TrayUnpause" xml:space="preserve">
-    <value>Unpause</value>
-  </data>
-  <data name="turnoff" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\turnoff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Возобновить</value>
   </data>
 </root>

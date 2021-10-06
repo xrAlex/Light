@@ -155,8 +155,7 @@ namespace Light.ViewModels
 
             _screenModel = new();
             _registryModel = new();
-            var services = ServiceLocator.Source;
-            _settings = services.Settings;
+            _settings = ServiceLocator.Settings;
             Screens = _screenModel.Screens;
             SelectedScreenIndex = _settings.SelectedScreen;
             _screenModel.ForceColorTemperature();

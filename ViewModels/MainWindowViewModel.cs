@@ -44,7 +44,7 @@ namespace Light.ViewModels
 
         private void OnAppToTrayCommandExecute()
         {
-            _trayNotifier.ShowTip("Приложение продолжит работу в свернутом состоянии");
+            _trayNotifier.ShowTip(Properties.Resources.ToTrayNotification);
             _dialogService.CloseDialog<MainWindowViewModel>();
         }
 
@@ -62,10 +62,9 @@ namespace Light.ViewModels
             AppToTrayCommand = new LambdaCommand(p => OnAppToTrayCommandExecute());
 
             var screenModel = new ScreenModel();
-            var serviceLocator = ServiceLocator.Source;
-            _dialogService = serviceLocator.DialogService;
-            _trayNotifier = serviceLocator.TrayNotifier;
-            var currentTimeService = serviceLocator.CurrentTimeService;
+            _dialogService = ServiceLocator.DialogService;
+            _trayNotifier = ServiceLocator.TrayNotifier;
+            var currentTimeService = ServiceLocator.CurrentTimeService;
 
             Screens = screenModel.Screens;
             CurrentTime = currentTimeService.GetCurrentTime();

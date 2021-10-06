@@ -37,15 +37,15 @@ namespace Light.ViewModels
 
         private void OnToOtherSettingsPageCommandExecute()
         {
-            SelectedViewModel = new OtherSettingsPageViewModel();
+            SelectedViewModel = ViewModelLocator.OtherSettingsPageViewModel;
         }
         private void OnToSettingsMainPageCommandExecute()
         {
-            SelectedViewModel = new SettingsMainPageViewModel();
+            SelectedViewModel = ViewModelLocator.SettingsMainPageViewModel;
         }
         private void OnToProcessPageCommandExecute()
         {
-            SelectedViewModel = new ProcessPageViewModel();
+            SelectedViewModel = ViewModelLocator.ProcessPageViewModel;
         }
 
         private void OnResetSettingsCommandExecute()
@@ -79,10 +79,9 @@ namespace Light.ViewModels
             ToSettingsMainPageCommand = new LambdaCommand(p => OnToSettingsMainPageCommandExecute());
             ToProcessPageCommand = new LambdaCommand(p => OnToProcessPageCommandExecute());
 
-            var serviceLocator = ServiceLocator.Source;
-            _settings = serviceLocator.Settings;
-            _dialogService = serviceLocator.DialogService;
-            _colorTemperatureWatcher = serviceLocator.PeriodWatcherService;
+            _settings = ServiceLocator.Settings;
+            _dialogService = ServiceLocator.DialogService;
+            _colorTemperatureWatcher = ServiceLocator.PeriodWatcherService;
             _colorTemperatureWatcher.StopWatch();
 
             SelectedViewModel = new SettingsMainPageViewModel();

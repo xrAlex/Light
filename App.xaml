@@ -32,13 +32,13 @@
             <DataTemplate DataType="{x:Type viewmodels:TrayMenuViewModel}">
                 <tray:TrayMenuView/>
             </DataTemplate>
-
+            <viewmodels:ViewModelLocator x:Key="Locator"/>
             <converters:MinConverter x:Key="MinConverter"></converters:MinConverter>
             <converters:HourConverter x:Key="HourConverter"></converters:HourConverter>
             <converters:BrightnessToDouble x:Key="BrightnessToDouble"></converters:BrightnessToDouble>
             <converters:BrightnessToPercent x:Key="BrightnessToPercent"></converters:BrightnessToPercent>
             <converters:TemperatureToKelvin x:Key="TemperatureToKelvin"></converters:TemperatureToKelvin>
-            
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
                 <ResourceDictionary Source="Resources/Button.xaml" />
@@ -49,7 +49,6 @@
                 <ResourceDictionary Source="Resources/CheckBox.xaml" />
                 <ResourceDictionary Source="Resources/GlobalStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

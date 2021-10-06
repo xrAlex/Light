@@ -40,8 +40,7 @@ namespace Light.ViewModels
             MoveToIgnoredProcessesCommand = new LambdaCommand(p => OnMoveToIgnoredProcessesCommandExecute());
 
             _processModel = new ApplicationModel();
-            var serviceLocator = ServiceLocator.Source;
-            _settings = serviceLocator.Settings;
+            _settings = ServiceLocator.Settings;
             Processes = _settings.Application;
         }
 

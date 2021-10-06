@@ -1,27 +1,17 @@
 ﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Light.Services
 {
     /// <summary>
     /// Storage of objects that must be created in one instance
     /// </summary>
-    /// <remarks> [Need to replace with DI container] </remarks>
-    public class ServiceLocator
+    public static class ServiceLocator
     {
-        private PeriodWatcherService _periodWatcherService;
-        private SettingsService _settings;
-        private CurrentTimeService _currentTimeService;
-        private DialogService _dialogService;
-        private TrayNotifierService _trayNotifier;
-        
-        public SettingsService Settings => _settings ??= new SettingsService();
-        public PeriodWatcherService PeriodWatcherService => _periodWatcherService ??= new PeriodWatcherService();
-        public CurrentTimeService CurrentTimeService => _currentTimeService ??= new CurrentTimeService();
-        public DialogService DialogService => _dialogService ??= new DialogService();
-        public TrayNotifierService TrayNotifier => _trayNotifier ??= new TrayNotifierService();
-
-        private ServiceLocator() {}
-        private static readonly Lazy<ServiceLocator> Lazy = new(() => new ServiceLocator());
-        public static ServiceLocator Source => Lazy.Value;
+        public static SettingsService Settings => App.ServicesHost.Services.GetRequiredService<SettingsService>();
+        public static PeriodWatcherService PeriodWatcherService => App.ServicesHost.Services.GetRequiredService<PeriodWatcherService>();
+        public static CurrentTimeService CurrentTimeService => App.ServicesHost.Services.GetRequiredService<CurrentTimeService>();
+        public static DialogService DialogService => App.ServicesHost.Services.GetRequiredService<DialogService>();
+        public static TrayNotifierService TrayNotifier => App.ServicesHost.Services.GetRequiredService<TrayNotifierService>();
     }
 }

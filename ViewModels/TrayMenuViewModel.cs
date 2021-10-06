@@ -64,8 +64,7 @@ namespace Light.ViewModels
             PauseCommand = new LambdaCommand(p => OnPauseCommandExecute());
             ShutdownCommand = new LambdaCommand(p => OnShutdownCommandExecute());
 
-            var serviceLocator = ServiceLocator.Source;
-            _periodWatcherService = serviceLocator.PeriodWatcherService;
+            _periodWatcherService = ServiceLocator.PeriodWatcherService;
             var tray = new TrayMenuPosition();
             var pos = tray.GetTrayMenuPos();
 

@@ -10,14 +10,12 @@ namespace Light.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = System.Convert.ToDouble(value);
-            return $"Температура: {Math.Round(val)} К";
+            return $"{Properties.Resources.ColorTemperature}: {Math.Round(val)} К";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = (string)value;
-            var convertedStr = System.Convert.ToDouble(val.Trim('K', ' '));
-            return convertedStr;
+            return value;
         }
     }
 }

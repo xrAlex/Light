@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:Light.ViewModels"
+             xmlns:prop="clr-namespace:Light.Properties"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:SettingsMainPageViewModel}}"
@@ -24,7 +25,7 @@
             <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
         <GroupBox
-            Header="Мониторы"
+            Header="{x:Static prop:Resources.Monitors}"
             Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
@@ -67,7 +68,7 @@
                                         Source="{StaticResource MonitorBlack}"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Stretch"
-                                        Width="Auto" Height="49"
+                                        Width="Auto" Height="Auto"
                                         Stretch="Uniform"
                                         Opacity="{Binding Opacity, Mode=OneWay}" Grid.Row="1" Margin="0" />
                                     <TextBox
@@ -86,7 +87,7 @@
             </Grid>
         </GroupBox>
         <GroupBox
-            Header="День"
+            Header="{x:Static prop:Resources.Day}"
             Grid.Row="3"
             FontSize="14"
             Grid.ColumnSpan="2" Grid.Column="1" Height="154" VerticalAlignment="Bottom">
@@ -158,14 +159,16 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         Text="{Binding Value, ElementName=DayTemperatureSlider, Converter={StaticResource TemperatureToKelvin}, Mode=OneWay }"
-                        Grid.Row="2" Grid.ColumnSpan="3" />
+                        Grid.Row="2" Grid.ColumnSpan="4" />
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
                         FontSize="15"
                         Background="Transparent"
-                        Text="Восход" Grid.ColumnSpan="5" Grid.Column="2" HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center" Padding="0,-4,0,0" UseLayoutRounding="False" />
+                        Text="{x:Static prop:Resources.Sunrise}" 
+                        Grid.ColumnSpan="5" Grid.Column="2" 
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center" Padding="0,-4,0,0"/>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
@@ -198,7 +201,7 @@
             </StackPanel>
         </GroupBox>
         <GroupBox
-            Header="Ночь"
+            Header="{x:Static prop:Resources.Night}"
             Grid.Row="4"
             FontSize="14"
             Grid.ColumnSpan="2" Grid.Column="1" Height="155" VerticalAlignment="Bottom">
@@ -270,14 +273,15 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         Text="{Binding Value, ElementName=NightTemperatureSlider, Converter={StaticResource TemperatureToKelvin} , Mode=OneWay }"
-                        Grid.Row="2" Grid.ColumnSpan="3" />
+                        Grid.Row="2" Grid.ColumnSpan="4" />
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
                         FontSize="15"
                         Background="Transparent"
-                        Text="Заход" Grid.ColumnSpan="5" Grid.Column="2" HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center" Padding="0,-4,0,0" UseLayoutRounding="False" />
+                        Text="{x:Static prop:Resources.Sunset}" 
+                        Grid.ColumnSpan="5" Grid.Column="2" HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center" Padding="0,-4,0,0"/>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"

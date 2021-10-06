@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:Light.ViewModels"
+             xmlns:prop="clr-namespace:Light.Properties"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:ProcessPageViewModel}}"
@@ -27,7 +28,7 @@
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             x:Name="Checkbox1"
-            Content="Не работать в полноэкранных приложениях"
+            Content="{x:Static prop:Resources.DontWorkInFullScreen}"
             HorizontalAlignment="Left" Width="360"
             IsChecked="{Binding CheckFullScreenApps, Mode=TwoWay}"
             Grid.Column="1" Grid.Row="1"
@@ -61,7 +62,7 @@
         </ListBox>
         <TextBox
             Grid.Row="3"
-            Text="Whitelist процессов"
+            Text="{x:Static prop:Resources.ProcessesWhiteList}"
             Grid.Column="1" FontSize="14" />
     </Grid>
 </UserControl>

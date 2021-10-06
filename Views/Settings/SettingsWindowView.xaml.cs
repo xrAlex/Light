@@ -8,11 +8,5 @@ namespace Light.Views.Settings
         {
             InitializeComponent();
         }
-
-        private void SettingsUserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            base.OnMouseLeftButtonDown(e);
-            DragMove();
-        }
     }
 }

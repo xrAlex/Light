@@ -66,8 +66,7 @@ namespace Light.Models
 
         private bool IsFullScreenProcess(nint handle)
         {
-            var serviceLocator = ServiceLocator.Source;
-            var settings = serviceLocator.Settings;
+            var settings = ServiceLocator.Settings;
 
             return settings.Screens.Select(screen => SystemWindow.IsWindowOnFullScreen(screen, handle)).FirstOrDefault();
         }
@@ -76,8 +75,7 @@ namespace Light.Models
 
         public ApplicationModel()
         {
-            var serviceLocator = ServiceLocator.Source;
-            var settingsService = serviceLocator.Settings;
+            var settingsService = ServiceLocator.Settings;
             IgnoredApplications = settingsService.IgnoredApplications;
             Applications = settingsService.Application;
             FillApplicationsCollection();

@@ -22,7 +22,7 @@ namespace Light.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Light.Properties {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Light.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Light.Properties {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Accept {
+        public static System.Drawing.Bitmap Accept {
             get {
                 object obj = ResourceManager.GetObject("Accept", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -71,9 +71,27 @@ namespace Light.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Apply.
+        /// </summary>
+        public static string Apply {
+            get {
+                return ResourceManager.GetString("Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Start with Windows.
+        /// </summary>
+        public static string AutoLaunch {
+            get {
+                return ResourceManager.GetString("AutoLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BlueReduce {
+        public static System.Drawing.Bitmap BlueReduce {
             get {
                 object obj = ResourceManager.GetObject("BlueReduce", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -81,9 +99,63 @@ namespace Light.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Brightness.
+        /// </summary>
+        public static string Brightness {
+            get {
+                return ResourceManager.GetString("Brightness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Color temperature.
+        /// </summary>
+        public static string ColorTemperature {
+            get {
+                return ResourceManager.GetString("ColorTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Day.
+        /// </summary>
+        public static string Day {
+            get {
+                return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Dont work in full screen apllications.
+        /// </summary>
+        public static string DontWorkInFullScreen {
+            get {
+                return ResourceManager.GetString("DontWorkInFullScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Enable extended gamma range.
+        /// </summary>
+        public static string ExtendedGammaRange {
+            get {
+                return ResourceManager.GetString("ExtendedGammaRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gamma {
+        public static System.Drawing.Bitmap Gamma {
             get {
                 object obj = ResourceManager.GetObject("Gamma", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +165,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
         /// </summary>
-        internal static System.Drawing.Icon Icon1 {
+        public static System.Drawing.Icon Icon1 {
             get {
                 object obj = ResourceManager.GetObject("Icon1", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -103,7 +175,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Main {
+        public static System.Drawing.Bitmap Main {
             get {
                 object obj = ResourceManager.GetObject("Main", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +185,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MonitorBlack {
+        public static System.Drawing.Bitmap MonitorBlack {
             get {
                 object obj = ResourceManager.GetObject("MonitorBlack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -121,9 +193,18 @@ namespace Light.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Monitors.
+        /// </summary>
+        public static string Monitors {
+            get {
+                return ResourceManager.GetString("Monitors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MonitorWhite {
+        public static System.Drawing.Bitmap MonitorWhite {
             get {
                 object obj = ResourceManager.GetObject("MonitorWhite", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -131,9 +212,18 @@ namespace Light.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Night.
+        /// </summary>
+        public static string Night {
+            get {
+                return ResourceManager.GetString("Night", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Other {
+        public static System.Drawing.Bitmap Other {
             get {
                 object obj = ResourceManager.GetObject("Other", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +233,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Processes {
+        public static System.Drawing.Bitmap Processes {
             get {
                 object obj = ResourceManager.GetObject("Processes", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -151,9 +241,36 @@ namespace Light.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Applications whitelist.
+        /// </summary>
+        public static string ProcessesWhiteList {
+            get {
+                return ResourceManager.GetString("ProcessesWhiteList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Reser.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Restart required to apply parameters.
+        /// </summary>
+        public static string RestartNotification {
+            get {
+                return ResourceManager.GetString("RestartNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Settings {
+        public static System.Drawing.Bitmap Settings {
             get {
                 object obj = ResourceManager.GetObject("Settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -161,9 +278,72 @@ namespace Light.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Smooth brightness change.
+        /// </summary>
+        public static string SmoothBrightnessChange {
+            get {
+                return ResourceManager.GetString("SmoothBrightnessChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Sunrise.
+        /// </summary>
+        public static string Sunrise {
+            get {
+                return ResourceManager.GetString("Sunrise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Sunset.
+        /// </summary>
+        public static string Sunset {
+            get {
+                return ResourceManager.GetString("Sunset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Application will continue to work in a collapsed state.
+        /// </summary>
+        public static string ToTrayNotification {
+            get {
+                return ResourceManager.GetString("ToTrayNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Close.
+        /// </summary>
+        public static string TrayClose {
+            get {
+                return ResourceManager.GetString("TrayClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Pause.
+        /// </summary>
+        public static string TrayPause {
+            get {
+                return ResourceManager.GetString("TrayPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unpause.
+        /// </summary>
+        public static string TrayUnpause {
+            get {
+                return ResourceManager.GetString("TrayUnpause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap turnoff {
+        public static System.Drawing.Bitmap turnoff {
             get {
                 object obj = ResourceManager.GetObject("turnoff", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

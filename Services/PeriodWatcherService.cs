@@ -23,8 +23,7 @@ namespace Light.Services
         {
             _screenModel = new ScreenModel();
             _workTime = new WorkTime();
-            var serviceLocator = ServiceLocator.Source;
-            _settings = serviceLocator.Settings;
+            _settings = ServiceLocator.Settings;
         }
 
         public void StartWatch()

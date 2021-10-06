@@ -37,7 +37,7 @@ namespace Light.ViewModels
             get => _registryModel.IsExtendedGammaRangeActive();
             set
             {
-                _trayNotifier.ShowTip("Для применения параметров требуется перезагрузка");
+                _trayNotifier.ShowTip(Properties.Resources.RestartNotification);
                 if (value)
                 {
                     _registryModel.SetExtendedGammaRangeKey();
@@ -51,9 +51,8 @@ namespace Light.ViewModels
 
         public OtherSettingsPageViewModel()
         {
-            var serviceLocator = ServiceLocator.Source;
-            _trayNotifier = serviceLocator.TrayNotifier;
-            _settings = serviceLocator.Settings;
+            _trayNotifier = ServiceLocator.TrayNotifier;
+            _settings = ServiceLocator.Settings;
             _registryModel = new RegistryModel();
         }
 

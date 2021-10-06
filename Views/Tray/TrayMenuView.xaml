@@ -10,11 +10,9 @@
         AllowsTransparency="True"
         Title="TrayMenu" 
         Topmost="True"
+        DataContext ="{Binding TrayMenuViewModel, Source={StaticResource Locator}}"
         Background="White"
         Height="75" Width="100">
-    <Window.DataContext>
-        <viewModels:TrayMenuViewModel/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="19*" />

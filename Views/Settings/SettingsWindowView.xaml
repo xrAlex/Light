@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:Light.ViewModels"
+        xmlns:prop="clr-namespace:Light.Properties"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="500" Width="450"
@@ -12,10 +13,8 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Topmost="True"
+        DataContext ="{Binding SettingsWindowViewModel, Source={StaticResource Locator}}"
         Background="White">
-    <Window.DataContext>
-        <viewmodels:SettingsWindowViewModel />
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="174*" />
@@ -71,17 +70,17 @@
         </Button>
         <Button
             Style="{StaticResource LightGrayButton}"
-            Content="Сбросить"
+            Content="{x:Static prop:Resources.Reset}"
             Command="{Binding ResetSettingsCommand, Mode=OneWay}"
             Grid.Row="7" Grid.Column="4" />
         <Button
             Style="{StaticResource LightGrayButton}"
-            Content="Отменить"
+            Content="{x:Static prop:Resources.Cancel}"
             Command="{Binding CloseSettingsCommand, Mode=OneWay}"
             Grid.Row="7" Grid.Column="6" />
         <Button
             Style="{StaticResource LightGrayButton}"
-            Content="Применить"
+            Content="{x:Static prop:Resources.Apply}"
             Command="{Binding ApplySettingsCommand, Mode=OneWay}"
             Grid.Row="7" Grid.Column="8" />
     </Grid>

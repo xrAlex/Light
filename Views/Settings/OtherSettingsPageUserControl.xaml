@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:Light.ViewModels"
+             xmlns:prop="clr-namespace:Light.Properties"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:OtherSettingsPageViewModel}}"
@@ -24,17 +25,17 @@
         </Grid.ColumnDefinitions>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
-            Content="Автозапуск"
+            Content="{x:Static prop:Resources.AutoLaunch}"
             IsChecked="{Binding LaunchOnStartup, Mode=TwoWay}"
             Grid.Column="1" Grid.Row="1" />
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             IsChecked="{Binding ExtendedGammaRange, Mode=TwoWay}"
-            Content="Разблокировать расширенный диапозон гаммы"
+            Content="{x:Static prop:Resources.ExtendedGammaRange}"
             Grid.Column="1" Grid.Row="2" />
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
-            Content="Плавное изменение яркости (не работает)"
+            Content="{x:Static prop:Resources.SmoothBrightnessChange}"
             Grid.Column="1" Grid.Row="3" />
     </Grid>
 </UserControl>

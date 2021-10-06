@@ -45,8 +45,7 @@ namespace Light.Services
 
         public TrayNotifierService()
         {
-            var serviceLocator = ServiceLocator.Source;
-            _dialogService = serviceLocator.DialogService;
+            _dialogService = ServiceLocator.DialogService;
 
             _notifier = new NotifyIcon
             {

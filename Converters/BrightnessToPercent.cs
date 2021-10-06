@@ -10,14 +10,12 @@ namespace Light.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = System.Convert.ToDouble(value);
-            return $"Яркость: {Math.Round(val)} %";
+            return $"{Properties.Resources.Brightness}: {Math.Round(val)} %";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = (string)value;
-            var convertedStr = System.Convert.ToDouble(val.Trim('%', ' '));
-            return convertedStr;
+            return value;
         }
     }
 }

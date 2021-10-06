@@ -126,10 +126,8 @@ namespace Light.Models
 
         public ScreenModel()
         {
-            var serviceLocator = ServiceLocator.Source;
-            var settingsService = serviceLocator.Settings;
-            Screens = settingsService.Screens;
-            _settings = serviceLocator.Settings;
+            _settings = ServiceLocator.Settings;
+            Screens = _settings.Screens;
         }
 
 #if DEBUG

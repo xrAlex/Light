@@ -12,10 +12,8 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Topmost="True"
+        DataContext ="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
         Background="White">
-    <Window.DataContext>
-        <viewmodels:MainWindowViewModel />
-    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
