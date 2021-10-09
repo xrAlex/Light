@@ -10,5 +10,6 @@
     <BitmapImage x:Key="Settings" UriSource="/Light;component/Resources/Images/Settings.png"/>
     <BitmapImage x:Key="Day" UriSource="/Light;component/Resources/Images/Gamma.png"/>
     <BitmapImage x:Key="Night" UriSource="/Light;component/Resources/Images/BlueReduce.png"/>
+    <BitmapImage x:Key="Lang" UriSource="/Light;component/Resources/Images/Lang.png"/>
 
 </ResourceDictionary>

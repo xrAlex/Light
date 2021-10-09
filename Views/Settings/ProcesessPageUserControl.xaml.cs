@@ -6,5 +6,11 @@
         {
             InitializeComponent();
         }
+#if DEBUG
+        ~ProcessesPageUserControl()
+        {
+            DebugConsole.Print("[UC] ProcessesPageUserControl  Disposed");
+        }
+#endif
     }
 }

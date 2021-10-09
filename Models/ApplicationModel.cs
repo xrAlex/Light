@@ -77,14 +77,14 @@ namespace Light.Models
         {
             var settingsService = ServiceLocator.Settings;
             IgnoredApplications = settingsService.IgnoredApplications;
-            Applications = settingsService.Application;
+            Applications = settingsService.Applications;
             FillApplicationsCollection();
         }
 
 #if DEBUG
         ~ApplicationModel()
         {
-            DebugConsole.Print("ProcessModel Disposed");
+            DebugConsole.Print("[Model] ProcessModel Disposed");
         }
 #endif
     }

@@ -22,9 +22,9 @@ namespace Light.Services
         /// <summary>
         /// Метод регестрирует типы ViewModel и View для дальнейшего создания экземпляра
         /// </summary>
-        public void Register<TViewModel, TView>(bool isTrayMenu = false) where TViewModel : ViewModelBase where TView : Window
+        public void Register<TViewModel, TView>() where TViewModel : ViewModelBase where TView : Window
         {
-            _mappings.Add(typeof(TViewModel), new DialogStorage(typeof(TView), isTrayMenu));
+            _mappings.Add(typeof(TViewModel), new DialogStorage(typeof(TView)));
         }
 
         /// <summary>
@@ -69,5 +69,12 @@ namespace Light.Services
         {
             _mappings = new();
         }
+
+#if DEBUG
+        ~DialogService()
+        {
+            DebugConsole.Print("[Service] DialogService Disposed");
+        }
+#endif
     }
 }

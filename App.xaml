@@ -5,7 +5,8 @@
              xmlns:converters="clr-namespace:Light.Converters"
              xmlns:main="clr-namespace:Light.Views.Main"
              xmlns:tray="clr-namespace:Light.Views.Tray"
-             xmlns:settings="clr-namespace:Light.Views.Settings">
+             xmlns:settings="clr-namespace:Light.Views.Settings"
+             xmlns:language="clr-namespace:Light.Localization">
     <Application.Resources>
         <ResourceDictionary>
             
@@ -40,6 +41,7 @@
             <converters:TemperatureToKelvin x:Key="TemperatureToKelvin"></converters:TemperatureToKelvin>
 
             <ResourceDictionary.MergedDictionaries>
+                <x:Static Member="language:LangDictionary.Instance"/>
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
                 <ResourceDictionary Source="Resources/Button.xaml" />
                 <ResourceDictionary Source="Resources/Images.xaml" />

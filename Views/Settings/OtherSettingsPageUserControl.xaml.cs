@@ -6,5 +6,11 @@
         {
             InitializeComponent();
         }
+#if DEBUG
+        ~OtherSettingsPageUserControl()
+        {
+            DebugConsole.Print("[UC] OtherSettingsPageUserControl Disposed");
+        }
+#endif
     }
 }

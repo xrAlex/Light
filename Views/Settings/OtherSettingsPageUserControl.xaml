@@ -25,17 +25,17 @@
         </Grid.ColumnDefinitions>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
-            Content="{x:Static prop:Resources.AutoLaunch}"
+            Content="{StaticResource Loc_AutoLaunch}"
             IsChecked="{Binding LaunchOnStartup, Mode=TwoWay}"
             Grid.Column="1" Grid.Row="1" />
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             IsChecked="{Binding ExtendedGammaRange, Mode=TwoWay}"
-            Content="{x:Static prop:Resources.ExtendedGammaRange}"
+            Content="{DynamicResource Loc_ExtendedGammaRange}"
             Grid.Column="1" Grid.Row="2" />
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
-            Content="{x:Static prop:Resources.SmoothBrightnessChange}"
+            Content="{DynamicResource Loc_SmoothBrightnessChange}"
             Grid.Column="1" Grid.Row="3" />
     </Grid>
 </UserControl>

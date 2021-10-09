@@ -6,5 +6,11 @@
         {
             InitializeComponent();
         }
+#if DEBUG
+        ~SettingsMainPageUserControl()
+        {
+            DebugConsole.Print("[UC] SettingsMainPageUserControl Disposed");
+        }
+#endif
     }
 }

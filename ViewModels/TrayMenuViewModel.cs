@@ -74,7 +74,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~TrayMenuViewModel()
         {
-            DebugConsole.Print("TrayMenuViewModel Disposed");
+            DebugConsole.Print("[View Model] TrayMenuViewModel Disposed");
         }
 #endif
     }

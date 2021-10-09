@@ -41,13 +41,13 @@ namespace Light.ViewModels
 
             _processModel = new ApplicationModel();
             _settings = ServiceLocator.Settings;
-            Processes = _settings.Application;
+            Processes = _settings.Applications;
         }
 
 #if DEBUG
         ~ProcessPageViewModel()
         {
-            DebugConsole.Print("ProcessPageViewModel Disposed");
+            DebugConsole.Print("[View Model] ProcessPageViewModel Disposed");
         }
 #endif
     }

@@ -90,7 +90,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~SettingsWindowViewModel()
         {
-            DebugConsole.Print("SettingsWindowViewModel Disposed");
+            DebugConsole.Print("[View Model] SettingsWindowViewModel Disposed");
         }
 #endif
     }

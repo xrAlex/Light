@@ -27,5 +27,11 @@ namespace Light.Services
         {
             OnCurrTimeChanged?.Invoke(this, new TimeEventArgs(GetCurrentTime()));
         }
+#if DEBUG
+        ~CurrentTimeService()
+        {
+            DebugConsole.Print("[Service] CurrentTimeService Disposed");
+        }
+#endif
     }
 }

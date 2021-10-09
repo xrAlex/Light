@@ -10,7 +10,7 @@ namespace Light.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = System.Convert.ToDouble(value);
-            return $"{Properties.Resources.Brightness}: {Math.Round(val)} %";
+            return $"{Localization.LangDictionary.GetString("Loc_Brightness")}: {Math.Round(val)} %";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

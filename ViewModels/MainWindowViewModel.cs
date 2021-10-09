@@ -44,7 +44,7 @@ namespace Light.ViewModels
 
         private void OnAppToTrayCommandExecute()
         {
-            _trayNotifier.ShowTip(Properties.Resources.ToTrayNotification);
+            _trayNotifier.ShowTip(Localization.LangDictionary.GetString("Loc_ToTrayNotificatio"));
             _dialogService.CloseDialog<MainWindowViewModel>();
         }
 
@@ -75,7 +75,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~MainWindowViewModel()
         {
-            DebugConsole.Print("MainWindowViewModel Disposed");
+            DebugConsole.Print("[View Model] MainWindowViewModel Disposed");
         }
 #endif
     }

@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="Light.Localization.LangDictionary"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="Loc_Apply">?</system:String>
+    <system:String x:Key="Loc_AutoLaunch">?</system:String>
+    <system:String x:Key="Loc_Brightness">?</system:String>
+    <system:String x:Key="Loc_Cancel">?</system:String>
+    <system:String x:Key="Loc_Day">?</system:String>
+    <system:String x:Key="Loc_DontWorkInFullScreen">?</system:String>
+    <system:String x:Key="Loc_ExtendedGammaRange">?</system:String>
+    <system:String x:Key="Loc_Monitors">?</system:String>
+    <system:String x:Key="Loc_Night">?</system:String>
+    <system:String x:Key="Loc_ProcessesWhiteList">?</system:String>
+    <system:String x:Key="Loc_Reset">?</system:String>
+    <system:String x:Key="Loc_SmoothBrightnessChange">?</system:String>
+    <system:String x:Key="Loc_Sunrise">?</system:String>
+    <system:String x:Key="Loc_Sunset">?</system:String>
+    <system:String x:Key="Loc_TrayClose">?</system:String>
+    <system:String x:Key="Loc_TrayPause">?</system:String>
+    <system:String x:Key="Loc_TrayUnpause">?</system:String>
+
+</ResourceDictionary>

@@ -74,5 +74,11 @@ namespace Light.Services
                 await Task.Delay(1000, token);
             }
         }
+#if DEBUG
+        ~PeriodWatcherService()
+        {
+            DebugConsole.Print("[Service] PeriodWatcherService Disposed");
+        }
+#endif
     }
 }

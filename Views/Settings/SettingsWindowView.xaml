@@ -14,7 +14,7 @@
         AllowsTransparency="True"
         Topmost="True"
         DataContext ="{Binding SettingsWindowViewModel, Source={StaticResource Locator}}"
-        Background="White">
+        Background="White" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="174*" />
@@ -70,17 +70,17 @@
         </Button>
         <Button
             Style="{StaticResource LightGrayButton}"
-            Content="{x:Static prop:Resources.Reset}"
+            Content="{DynamicResource Loc_Reset}"
             Command="{Binding ResetSettingsCommand, Mode=OneWay}"
             Grid.Row="7" Grid.Column="4" />
         <Button
             Style="{StaticResource LightGrayButton}"
-            Content="{x:Static prop:Resources.Cancel}"
+            Content="{DynamicResource Loc_Cancel}"
             Command="{Binding CloseSettingsCommand, Mode=OneWay}"
             Grid.Row="7" Grid.Column="6" />
         <Button
             Style="{StaticResource LightGrayButton}"
-            Content="{x:Static prop:Resources.Apply}"
+            Content="{DynamicResource Loc_Apply}"
             Command="{Binding ApplySettingsCommand, Mode=OneWay}"
             Grid.Row="7" Grid.Column="8" />
     </Grid>

@@ -13,7 +13,7 @@ namespace Light.Services
     /// </summary>
     public sealed partial class SettingsService
     {
-        public ObservableCollection<ApplicationEntity> Application { get; }
+        public ObservableCollection<ApplicationEntity> Applications { get; }
         public ObservableCollection<ScreenEntity> Screens { get; }
         public List<string> IgnoredApplications { get; }
 
@@ -25,7 +25,7 @@ namespace Light.Services
         {
             IgnoredApplications = new List<string>();
             Screens = new ObservableCollection<ScreenEntity>();
-            Application = new ObservableCollection<ApplicationEntity>();
+            Applications = new ObservableCollection<ApplicationEntity>();
         }
     }
 
@@ -121,5 +121,11 @@ namespace Light.Services
                 IgnoredApplications.Add($"{processName}");
             }
         }
+#if DEBUG
+        ~SettingsService()
+        {
+            DebugConsole.Print("[Service] SettingsService Disposed");
+        }
+#endif
     }
 }

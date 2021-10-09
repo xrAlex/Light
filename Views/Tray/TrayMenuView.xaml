@@ -12,7 +12,7 @@
         Topmost="True"
         DataContext ="{Binding TrayMenuViewModel, Source={StaticResource Locator}}"
         Background="White"
-        Height="75" Width="100">
+        Height="75" Width="100" Deactivated="Window_Deactivated" Closed="Window_Closed" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="19*" />

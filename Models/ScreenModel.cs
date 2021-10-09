@@ -133,7 +133,7 @@ namespace Light.Models
 #if DEBUG
         ~ScreenModel()
         {
-            DebugConsole.Print("ScreenModel Disposed");
+            DebugConsole.Print("[Model] ScreenModel Disposed");
         }
 #endif
     }

@@ -8,5 +8,17 @@ namespace Light.Views.Settings
         {
             InitializeComponent();
         }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+#if DEBUG
+        ~SettingsWindowView()
+        {
+            DebugConsole.Print("[Window] SettingsWindowView Disposed");
+        }
+#endif
     }
 }

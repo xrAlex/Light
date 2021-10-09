@@ -56,5 +56,11 @@ namespace Light.Services
             
             _notifier.MouseClick += TrayIcon_Click;
         }
+#if DEBUG
+        ~TrayNotifierService()
+        {
+            DebugConsole.Print("[Service] TrayNotifierService Disposed");
+        }
+#endif
     }
 }

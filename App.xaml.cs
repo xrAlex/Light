@@ -38,7 +38,7 @@ namespace Light
 
             dialogService.Register<MainWindowViewModel, MainWindowView>();
             dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
-            dialogService.Register<TrayMenuViewModel, TrayMenuView>(true);
+            dialogService.Register<TrayMenuViewModel, TrayMenuView>();
 
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
             _trayNotifier = ServicesHost.Services.GetRequiredService<TrayNotifierService>();
@@ -89,11 +89,11 @@ namespace Light
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
             //Services
-            services.AddSingleton<PeriodWatcherService>();
-            services.AddSingleton<SettingsService>();
-            services.AddSingleton<CurrentTimeService>();
-            services.AddSingleton<DialogService>();
-            services.AddSingleton<TrayNotifierService>();
+            services.AddScoped<PeriodWatcherService>();
+            services.AddScoped<SettingsService>();
+            services.AddScoped<DialogService>();
+            services.AddScoped<TrayNotifierService>();
+            services.AddTransient<CurrentTimeService>();
 
             //ViewModels
             services.AddTransient<MainWindowViewModel>();

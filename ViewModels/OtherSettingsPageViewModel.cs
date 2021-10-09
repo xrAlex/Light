@@ -1,4 +1,5 @@
-﻿using Light.Models;
+﻿using System.CodeDom.Compiler;
+using Light.Models;
 using Light.Services;
 using Light.ViewModels.Base;
 
@@ -37,7 +38,7 @@ namespace Light.ViewModels
             get => _registryModel.IsExtendedGammaRangeActive();
             set
             {
-                _trayNotifier.ShowTip(Properties.Resources.RestartNotification);
+                _trayNotifier.ShowTip(Localization.LangDictionary.GetString("Loc_RestartNotification"));
                 if (value)
                 {
                     _registryModel.SetExtendedGammaRangeKey();
@@ -59,7 +60,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~OtherSettingsPageViewModel()
         {
-            DebugConsole.Print("OtherSettingsPageViewModel Disposed");
+            DebugConsole.Print("[View Model] OtherSettingsPageViewModel Disposed");
         }
 #endif
     }

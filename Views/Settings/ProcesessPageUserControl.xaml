@@ -28,7 +28,7 @@
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             x:Name="Checkbox1"
-            Content="{x:Static prop:Resources.DontWorkInFullScreen}"
+            Content="{DynamicResource Loc_DontWorkInFullScreen}"
             HorizontalAlignment="Left" Width="360"
             IsChecked="{Binding CheckFullScreenApps, Mode=TwoWay}"
             Grid.Column="1" Grid.Row="1"
@@ -62,7 +62,7 @@
         </ListBox>
         <TextBox
             Grid.Row="3"
-            Text="{x:Static prop:Resources.ProcessesWhiteList}"
+            Text="{DynamicResource Loc_ProcessesWhiteList}"
             Grid.Column="1" FontSize="14" />
     </Grid>
 </UserControl>
