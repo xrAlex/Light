@@ -26,61 +26,57 @@
         </Grid.ColumnDefinitions>
         <GroupBox
             Header="{DynamicResource Loc_Monitors}"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="4*" />
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="73*"/>
+                    <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80*" />
                 </Grid.ColumnDefinitions>
                 <ListBox
-                    HorizontalAlignment="Center"
                     BorderThickness="0"
                     SelectionMode="Single"
                     SelectedIndex="{Binding SelectedScreenIndex, Mode=TwoWay}"
-                    VerticalAlignment="Top"
                     ItemsSource="{Binding Screens, Mode=OneWay}"
-                    ItemContainerStyle="{StaticResource MonitorListBox}">
+                    ItemContainerStyle="{StaticResource MonitorListBox}" 
+                    Grid.Row="1">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" />
+                            <StackPanel 
+                                Orientation="Horizontal" HorizontalAlignment="Stretch" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel
-                                Orientation="Horizontal"
+                            <Grid
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Cursor="Hand"
-                                Width="65" Height="65">
-                                <StackPanel.InputBindings>
+                                VerticalAlignment="Top"
+                                Cursor="Hand">
+                                <Grid.InputBindings>
                                     <MouseBinding Gesture="LeftDoubleClick"
-                                                  Command="{Binding DataContext.MonitorDoubleClickCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
-                                </StackPanel.InputBindings>
-                                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="65" Height="65">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="16*" />
-                                        <RowDefinition Height="49*" />
-                                    </Grid.RowDefinitions>
-                                    <Image
+                                        Command="{Binding DataContext.MonitorDoubleClickCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
+                                </Grid.InputBindings>
+                                <Image
                                         Source="{StaticResource MonitorBlack}"
-                                        VerticalAlignment="Bottom"
-                                        HorizontalAlignment="Stretch"
-                                        Width="Auto" Height="Auto"
-                                        Stretch="Uniform"
-                                        Opacity="{Binding Opacity, Mode=OneWay}" Grid.Row="1" Margin="0" />
-                                    <TextBox
-                                        Text="{Binding Name, Mode=OneWay, StringFormat=Monitor \{0\}}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Width="60" Height="60"
+                                        Stretch="Fill"
+                                        Opacity="{Binding Opacity, Mode=OneWay}" Grid.Row="0" 
+                                        Grid.RowSpan="1" />
+                                <TextBox
+                                        Text="{Binding Name, Mode=OneWay}"
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"
+                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                         Background="Transparent"
                                         Cursor="Hand"
-                                        FontSize="12"
-                                        Width="65" />
-                                </Grid>
-                            </StackPanel>
+                                        FontSize="10" Margin="0" Grid.Row="0" Height="60" Width="60"/>
+                            </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

@@ -23,7 +23,7 @@ namespace Light.Infrastructure
         public static bool IsWindowOnFullScreen(ScreenEntity screen, nint handler)
         {
             Native.GetWindowRect(new HandleRef(null, handler), out var rect);
-            return screen.Bounds["Width"] == rect.Right + rect.Left && screen.Bounds["Height"] == rect.Bottom + rect.Top;
+            return screen.Width == rect.Right + rect.Left && screen.Height == rect.Bottom + rect.Top;
         }
 
         /// <summary>

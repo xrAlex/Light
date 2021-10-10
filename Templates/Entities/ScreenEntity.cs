@@ -27,10 +27,12 @@ namespace Light.Templates.Entities
         #endregion
 
         #region Propeties
-
-        public Dictionary<string,int> Bounds { get; set; }
         public string SysName { get; set; }
         public string Name { get; set; }
+
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int DisplayCode { get; set; }
 
         public BitmapImage CurrentTimePeriodImage
         {
