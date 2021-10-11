@@ -21,7 +21,6 @@ namespace Light.Services
 
         private bool _legacyMode;
         public int SelectedScreen { get; set; }
-
         public int SelectedLang { get; set; }
         public bool CheckFullScreenApps { get; set; }
         public SettingsService()

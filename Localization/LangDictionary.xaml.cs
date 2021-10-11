@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Light.Services;
 
 namespace Light.Localization
 {
     public partial class LangDictionary
     {
-        public static LangDictionary Instance { get; } = new();
+        public static LangDictionary Instance { get; private set; } = new();
 
         public LangDictionary()
         {
-            Eng(this);
+            if (Instance == null)
+            {
+                Instance = this;
+                var settings = ServiceLocator.Settings;
+                SetLang(settings.SelectedLang);
+            }
         }
 
         public static void SetLang(int langIndex)
@@ -20,13 +26,13 @@ namespace Light.Localization
             switch (langIndex)
             {
                 case 0:
-                    Eng(Instance);
+                    Eng();
                     break;
                 case 1:
-                    Rus(Instance);
+                    Rus();
                     break;
                 case 2:
-                    Chn(Instance);
+                    Chn();
                     break;
             }
         }
@@ -36,9 +42,9 @@ namespace Light.Localization
             return Instance[$"{param}"] != null ? Instance[$"{param}"].ToString() : "Localization error";
         }
 
-        public static void Rus(LangDictionary dict = null)
+        private static void Rus()
         {
-            dict ??= Instance;
+            var dict = Instance;
 
             dict
                 ["Loc_Apply"] = "Применить";
@@ -81,9 +87,10 @@ namespace Light.Localization
             dict
                 ["Loc_TrayUnPause"] = "Продолжить";
         }
-        public static void Eng(LangDictionary dict = null)
+
+        private static void Eng()
         {
-            dict ??= Instance;
+            var dict = Instance;
 
             dict
                 ["Loc_Apply"] = "Apply";
@@ -126,9 +133,10 @@ namespace Light.Localization
             dict
                 ["Loc_TrayUnPause"] = "Unpause";
         }
-        public static void Chn(LangDictionary dict = null)
+
+        private static void Chn()
         {
-            dict ??= Instance;
+            var dict = Instance;
 
             dict
                 ["Loc_Apply"] = "申请";

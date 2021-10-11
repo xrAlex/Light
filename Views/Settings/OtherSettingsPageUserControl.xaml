@@ -13,52 +13,50 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="28*" />
             <RowDefinition Height="25*" />
-            <RowDefinition Height="25*" />
+            <RowDefinition Height="17*" />
+            <RowDefinition Height="8*"/>
             <RowDefinition Height="25*" />
             <RowDefinition Height="25*" />
             <RowDefinition Height="372*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*" />
-            <ColumnDefinition Width="36*" />
+            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="6*"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             Content="{DynamicResource Loc_AutoLaunch}"
             IsChecked="{Binding LaunchOnStartup, Mode=TwoWay}"
-            Grid.Column="1" Grid.Row="1" />
+            Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             IsChecked="{Binding ExtendedGammaRange, Mode=TwoWay}"
             Content="{DynamicResource Loc_ExtendedGammaRange}"
-            Grid.Column="1" Grid.Row="2" />
+            Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" />
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             Content="{DynamicResource Loc_SmoothBrightnessChange}"
-            Grid.Column="1" Grid.Row="3" />
+            Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" />
         <ComboBox
             HorizontalAlignment="Left" 
-            Margin="290,0,0,0"
-            Grid.Row="1" 
             VerticalAlignment="Top"
             SelectedIndex="{Binding SelectedLangIndex}"
-            Width="60" Height="41" Grid.Column="1"
-            ItemContainerStyle="{DynamicResource PictureComboBoxItemStyle}" 
-            Style="{DynamicResource PictureComboBoxStyle}" 
-            Grid.RowSpan="2" Padding="6,3,5,5">
+            Width="60" Height="42"
+            ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
+            Style="{StaticResource PictureComboBoxStyle}" 
+            Grid.RowSpan="2" Grid.Row="1" Grid.Column="2">
             <ComboBoxItem Width="66" Height="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Image 
                     RenderOptions.BitmapScalingMode ="HighQuality"
-                    Width="41"
-                    Height="26"
+                    Width="41" Height="26"
                     Source="{StaticResource FlagEng}"/>
             </ComboBoxItem>
             <ComboBoxItem Width="66" Height="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Image 
                     RenderOptions.BitmapScalingMode ="HighQuality"
-                    Width="41"
-                    Height="26"
+                    Width="41" Height="26"
                     Source="{StaticResource FlagRus}"/>
             </ComboBoxItem>
         </ComboBox>

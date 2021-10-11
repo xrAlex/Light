@@ -27,13 +27,14 @@ namespace Light
                 return;
             }
 
+            var appSettings = ServiceLocator.Settings;
+            appSettings.Load();
+
             InitializeComponent();
 
-            var appSettings = ServiceLocator.Settings;
             var dialogService = ServiceLocator.DialogService;
             var periodWatcherService = ServiceLocator.PeriodWatcherService;
             var silentLaunch = Environment.GetCommandLineArgs().Contains("-silent");
-            appSettings.Load();
             periodWatcherService.StartWatch();
 
             dialogService.Register<MainWindowViewModel, MainWindowView>();
