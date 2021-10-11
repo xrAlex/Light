@@ -50,6 +50,7 @@
                 <ResourceDictionary Source="Resources/Slider.xaml" />
                 <ResourceDictionary Source="Resources/CheckBox.xaml" />
                 <ResourceDictionary Source="Resources/GlobalStyles.xaml" />
+                <ResourceDictionary Source="Resources/ComboBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

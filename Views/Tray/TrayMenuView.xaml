@@ -32,7 +32,7 @@
             Grid.ColumnSpan="3" />
         <Button
             Style="{StaticResource LightGrayButton}"
-            Content="Закрыть Light"
+            Content="{DynamicResource Loc_TrayClose}"
             Command="{Binding ShutdownCommand, Mode=OneWay}"
             Grid.Column="1" Grid.Row="4"/>
         <Button

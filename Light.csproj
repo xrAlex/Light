@@ -304,6 +304,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\GlobalStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -433,6 +437,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Lang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Flags\russia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Flags\united-states.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

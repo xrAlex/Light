@@ -14,7 +14,7 @@ namespace Light.ViewModels
 
         private readonly PeriodWatcherService _periodWatcherService;
         private bool _isAppPaused;
-        private string _workTimeKeyText = "Приостановить";
+        private string _workTimeKeyText = Localization.LangDictionary.GetString("Loc_TrayPause");
 
         #endregion
 
@@ -40,13 +40,13 @@ namespace Light.ViewModels
             if (_isAppPaused)
             {
                 _periodWatcherService.StartWatch();
-                WorkTimeKeyText = "Приостановить";
+                WorkTimeKeyText = Localization.LangDictionary.GetString("Loc_TrayPause"); ;
             }
             else
             {
                 _periodWatcherService.StopWatch();
                 ScreenModel.SetDefaultColorTemperatureOnAllScreens();
-                WorkTimeKeyText = "Продолжить";
+                WorkTimeKeyText = Localization.LangDictionary.GetString("Loc_TrayUnPause"); ;
             }
             _isAppPaused = !_isAppPaused;
         }

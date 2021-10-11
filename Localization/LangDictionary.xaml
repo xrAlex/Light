@@ -19,6 +19,6 @@
     <system:String x:Key="Loc_Sunset">?</system:String>
     <system:String x:Key="Loc_TrayClose">?</system:String>
     <system:String x:Key="Loc_TrayPause">?</system:String>
-    <system:String x:Key="Loc_TrayUnpause">?</system:String>
+    <system:String x:Key="Loc_TrayUnPause">?</system:String>
 
 </ResourceDictionary>

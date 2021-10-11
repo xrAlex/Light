@@ -13,7 +13,7 @@
         AllowsTransparency="True"
         Topmost="True"
         DataContext ="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
-        Background="White">
+        Background="White" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
@@ -152,17 +152,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="Rus" Grid.Column="1" HorizontalAlignment="Left" Margin="17,22,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Click="Button_Click_1" MouseLeftButtonDown="Button_MouseLeftButtonDown"/>
-        <Button Content="Eng" Grid.Column="1" HorizontalAlignment="Left" Margin="97,22,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="3" Click="Button_Click"/>
-        <ComboBox 
-            HorizontalAlignment="Left" 
-            Margin="70,20,0,0" 
-            Grid.Row="4" 
-            VerticalAlignment="Top"
-            Width="66" Height="41" Grid.Column="3" Grid.ColumnSpan="2" ItemContainerStyle="{DynamicResource ComboBoxItemStyle1}" Style="{DynamicResource ComboBoxStyle1}">
-            <ComboBoxItem>
-                <TextBlock>LG Nexus 5X</TextBlock>
-            </ComboBoxItem>
-        </ComboBox>
     </Grid>
 </Window>

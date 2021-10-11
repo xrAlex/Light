@@ -6,7 +6,10 @@
 
     <SolidColorBrush x:Key="MiddleGray" Color="#FFD6D6D6"/>
     <SolidColorBrush x:Key="TMiddleGray" Color="#FFD6D6D6" Opacity="0"/>
-    
+
+    <SolidColorBrush x:Key="LowGray" Color="#FFAAAAAA"/>
+    <SolidColorBrush x:Key="TLowGray" Color="#FFAAAAAA" Opacity="0"/>
+
     <SolidColorBrush x:Key="Gray" Color="#FFBBBBBB"/>
     <SolidColorBrush x:Key="TGray" Color="#FFBBBBBB" Opacity="0"/>
     

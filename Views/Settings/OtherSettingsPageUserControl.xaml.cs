@@ -6,6 +6,7 @@
         {
             InitializeComponent();
         }
+
 #if DEBUG
         ~OtherSettingsPageUserControl()
         {

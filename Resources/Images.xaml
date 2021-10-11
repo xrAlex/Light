@@ -11,5 +11,7 @@
     <BitmapImage x:Key="Day" UriSource="/Light;component/Resources/Images/Gamma.png"/>
     <BitmapImage x:Key="Night" UriSource="/Light;component/Resources/Images/BlueReduce.png"/>
     <BitmapImage x:Key="Lang" UriSource="/Light;component/Resources/Images/Lang.png"/>
+    <BitmapImage x:Key="FlagRus" UriSource="/Light;component/Resources/Images/Flags/russia.png"/>
+    <BitmapImage x:Key="FlagEng" UriSource="/Light;component/Resources/Images/Flags/united-states.png"/>
 
 </ResourceDictionary>

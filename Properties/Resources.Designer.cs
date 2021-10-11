@@ -83,6 +83,16 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap eng {
+            get {
+                object obj = ResourceManager.GetObject("eng", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Gamma {
             get {
                 object obj = ResourceManager.GetObject("Gamma", resourceCulture);
@@ -156,6 +166,16 @@ namespace Light.Properties {
         public static System.Drawing.Bitmap Processes {
             get {
                 object obj = ResourceManager.GetObject("Processes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap rus {
+            get {
+                object obj = ResourceManager.GetObject("rus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

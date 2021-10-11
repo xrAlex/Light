@@ -11,10 +11,14 @@ namespace Light.ViewModels
         private readonly SettingsService _settings;
         private readonly TrayNotifierService _trayNotifier;
 
-        public bool StartMinimized
+        public int SelectedLangIndex
         {
-            get => _settings.StartMinimized;
-            set => _settings.StartMinimized = value;
+            get => _settings.SelectedLang;
+            set
+            {
+                _settings.SelectedLang = value;
+                Localization.LangDictionary.SetLang(value);
+            }
         }
 
         public bool LaunchOnStartup

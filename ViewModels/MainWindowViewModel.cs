@@ -44,7 +44,7 @@ namespace Light.ViewModels
 
         private void OnAppToTrayCommandExecute()
         {
-            _trayNotifier.ShowTip(Localization.LangDictionary.GetString("Loc_ToTrayNotificatio"));
+            _trayNotifier.ShowTip(Localization.LangDictionary.GetString("Loc_ToTrayNotification"));
             _dialogService.CloseDialog<MainWindowViewModel>();
         }
 

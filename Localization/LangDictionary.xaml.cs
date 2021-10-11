@@ -12,7 +12,23 @@ namespace Light.Localization
 
         public LangDictionary()
         {
-            Eng(this); // default
+            Eng(this);
+        }
+
+        public static void SetLang(int langIndex)
+        {
+            switch (langIndex)
+            {
+                case 0:
+                    Eng(Instance);
+                    break;
+                case 1:
+                    Rus(Instance);
+                    break;
+                case 2:
+                    Chn(Instance);
+                    break;
+            }
         }
 
         public static string GetString(string param)
@@ -39,7 +55,7 @@ namespace Light.Localization
             dict
                 ["Loc_DontWorkInFullScreen"] = "Не работать в полноэкранных приложениях";
             dict
-                ["Loc_ExtendedGammaRange"] = "Активирвоать расширенный диапозон гаммы";
+                ["Loc_ExtendedGammaRange"] = "Расширенный диапозон гаммы";
             dict
                 ["Loc_Monitors"] = "Мониторы";
             dict
@@ -63,7 +79,7 @@ namespace Light.Localization
             dict
                 ["Loc_TrayPause"] = "Приостановить";
             dict
-                ["Loc_TrayUnpause"] = "Продолжить";
+                ["Loc_TrayUnPause"] = "Продолжить";
         }
         public static void Eng(LangDictionary dict = null)
         {
@@ -84,7 +100,7 @@ namespace Light.Localization
             dict
                 ["Loc_DontWorkInFullScreen"] = "Dont work in full screen apllications";
             dict
-                ["Loc_ExtendedGammaRange"] = "Enable extended gamma range";
+                ["Loc_ExtendedGammaRange"] = "Extended gamma range";
             dict
                 ["Loc_Monitors"] = "Monitors";
             dict
@@ -108,7 +124,52 @@ namespace Light.Localization
             dict
                 ["Loc_TrayPause"] = "Pause";
             dict
-                ["Loc_TrayUnpause"] = "Unpause";
+                ["Loc_TrayUnPause"] = "Unpause";
+        }
+        public static void Chn(LangDictionary dict = null)
+        {
+            dict ??= Instance;
+
+            dict
+                ["Loc_Apply"] = "申请";
+            dict
+                ["Loc_AutoLaunch"] = "与 Windows 同时运行应用程序";
+            dict
+                ["Loc_Brightness"] = "亮度";
+            dict
+                ["Loc_Cancel"] = "取消";
+            dict
+                ["Loc_ColorTemperature"] = "色温";
+            dict
+                ["Loc_Day"] = "日";
+            dict
+                ["Loc_DontWorkInFullScreen"] = "不要在全屏应用程序中工作";
+            dict
+                ["Loc_ExtendedGammaRange"] = "扩展伽马范围";
+            dict
+                ["Loc_Monitors"] = "监视器";
+            dict
+                ["Loc_Night"] = "夜晚";
+            dict
+                ["Loc_ProcessesWhiteList"] = "应用白名单";
+            dict
+                ["Loc_Reset"] = "重启";
+            dict
+                ["Loc_RestartNotification"] = "需要重新启动系统才能应用应用程序设置";
+            dict
+                ["Loc_SmoothBrightnessChange"] = "平滑的亮度变化";
+            dict
+                ["Loc_Sunrise"] = "日出";
+            dict
+                ["Loc_Sunset"] = "日落";
+            dict
+                ["Loc_ToTrayNotification"] = "应用程序将在折叠状态下继续工作";
+            dict
+                ["Loc_TrayClose"] = "关闭";
+            dict
+                ["Loc_TrayPause"] = "暂停";
+            dict
+                ["Loc_TrayUnPause"] = "取消暂停";
         }
     }
 }
