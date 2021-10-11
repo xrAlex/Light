@@ -8,16 +8,19 @@
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:OtherSettingsPageViewModel}}"
-             Background="White">
+             Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="28*" />
             <RowDefinition Height="25*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="25*"/>
             <RowDefinition Height="17*" />
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="25*" />
-            <RowDefinition Height="25*" />
-            <RowDefinition Height="372*"/>
+            <RowDefinition Height="312*"/>
+            <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*" />
@@ -34,19 +37,16 @@
             Style="{StaticResource SliderCheckBox}"
             IsChecked="{Binding ExtendedGammaRange, Mode=TwoWay}"
             Content="{DynamicResource Loc_ExtendedGammaRange}"
-            Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+            Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2" />
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             Content="{DynamicResource Loc_SmoothBrightnessChange}"
-            Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" />
+            Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" />
         <ComboBox
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top"
             SelectedIndex="{Binding SelectedLangIndex}"
-            Width="60" Height="42"
             ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
             Style="{StaticResource PictureComboBoxStyle}" 
-            Grid.RowSpan="2" Grid.Row="1" Grid.Column="2">
+            Grid.RowSpan="3" Grid.Row="1" Grid.Column="2">
             <ComboBoxItem Width="66" Height="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Image 
                     RenderOptions.BitmapScalingMode ="HighQuality"

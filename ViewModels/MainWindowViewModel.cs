@@ -14,7 +14,7 @@ namespace Light.ViewModels
         #region Fields
 
         private string _currentTime = "12:00";
-        public ObservableCollection<ScreenEntity> Screens { get; }
+        public ObservableCollection<ScreenEntity> Screens { get; } = new();
         private readonly DialogService _dialogService;
         private readonly TrayNotifierService _trayNotifier;
 
@@ -66,7 +66,7 @@ namespace Light.ViewModels
             _trayNotifier = ServiceLocator.TrayNotifier;
             var currentTimeService = ServiceLocator.CurrentTimeService;
 
-            Screens = screenModel.Screens;
+            Screens = ServiceLocator.Settings.Screens;
             CurrentTime = currentTimeService.GetCurrentTime();
 
             currentTimeService.OnCurrTimeChanged += (_, args) => { CurrentTime = args.CurrentTime; };

@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:ProcessPageViewModel}}"
-             Background="White">
+             Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="29*" />
@@ -18,7 +18,8 @@
             <RowDefinition Height="35*" />
             <RowDefinition Height="57*" />
             <RowDefinition Height="253*" />
-            <RowDefinition Height="75*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*" />
