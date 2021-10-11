@@ -3,10 +3,10 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Light.Converters
+namespace Light.Converters.XAMLConverters
 {
     [ValueConversion(typeof(int), typeof(string))]
-    internal class HourConverter : IValueConverter
+    internal sealed class HourConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

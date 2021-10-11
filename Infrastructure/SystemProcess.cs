@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Light.Infrastructure
 {
-    public class SystemProcess : IDisposable
+    internal sealed class SystemProcess : IDisposable
     {
         private nint Handle { get; }
         private SystemProcess(nint handle) => Handle = handle;
@@ -12,7 +12,7 @@ namespace Light.Infrastructure
         /// <summary>
         /// Method tries to get the executable path of the process
         /// </summary>
-        /// <returns> If successful, returns executable path of process </returns>
+        /// <returns> If successful, returns <see cref="string"/> executable path of process </returns>
         public string TryGetProcessPath()
         {
             var buffer = new StringBuilder(1024);
@@ -24,7 +24,7 @@ namespace Light.Infrastructure
         /// <summary>
         /// Gets process id by window handle
         /// </summary>
-        /// <returns> Process id </returns>
+        /// <returns> Process <see cref="uint"/> id </returns>
         public static uint GetId(nint handle)
         {
             Native.GetWindowThreadProcessId(handle, out var pId);
@@ -34,7 +34,7 @@ namespace Light.Infrastructure
         /// <summary>
         /// Method tries to get system process object
         /// </summary>
-        /// <returns> If successful, returns an object of type SystemProcess </returns>
+        /// <returns> If successful, returns an object of type <see cref="SystemProcess"/> </returns>
         public static SystemProcess TryOpenProcess(uint pId)
         {
             var handle = Native.OpenProcess(ProcessAccessFlags.QueryLimitedInformation, false, pId);

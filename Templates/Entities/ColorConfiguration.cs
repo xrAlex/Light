@@ -2,7 +2,7 @@
 
 namespace Light.Templates.Entities
 {
-    public class ColorConfiguration : NotifyingEntity
+    internal sealed class ColorConfiguration : NotifyingEntity
     {
         #region Fields
 

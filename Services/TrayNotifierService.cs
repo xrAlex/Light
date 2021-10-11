@@ -5,7 +5,10 @@ using System.Windows.Forms;
 
 namespace Light.Services
 {
-    public sealed class TrayNotifierService : IDisposable
+    /// <summary>
+    /// Creates TrayIcon and gives it functionality
+    /// </summary>
+    internal sealed class TrayNotifierService : IDisposable
     {
         #region Fields
 

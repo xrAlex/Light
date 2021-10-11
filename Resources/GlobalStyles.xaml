@@ -15,5 +15,8 @@
         <Setter Property="IsReadOnly" Value ="True"/>
         <Setter Property="Focusable" Value ="False"/>
         <Setter Property="Cursor" Value ="Arrow"/>
+        <Setter Property="HorizontalContentAlignment" Value ="Center"/>
+        <Setter Property="VerticalContentAlignment" Value ="Center"/>
+        <Setter Property="Background" Value ="Transparent"/>
     </Style>
 </ResourceDictionary>

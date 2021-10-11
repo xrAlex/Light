@@ -44,7 +44,8 @@
         <Rectangle
             Fill="#FF292929"
             HorizontalAlignment="Left" VerticalAlignment="Top"
-            Height="500" Width="60" Grid.RowSpan="9" Grid.ColumnSpan="3" />
+            Height="500" Width="60"
+            Grid.RowSpan="9" Grid.ColumnSpan="3" />
         <Button
             Style="{StaticResource BlackButton}"
             Grid.Column="1" Grid.RowSpan="2" Grid.Row="3"

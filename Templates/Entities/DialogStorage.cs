@@ -5,15 +5,10 @@ using Light.Infrastructure;
 
 namespace Light.Templates.Entities
 {
-    public class DialogStorage
+    internal sealed class DialogStorage
     {
         public Type Type { get; }
-
         public Window Instance { get; set; }
-
-        private void InstanceOnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => Instance.DragMove();
-
-        private void InstanceOnDeactivated(object sender, EventArgs e) => CloseInstance();
 
         public void CloseInstance()
         {
@@ -35,7 +30,7 @@ namespace Light.Templates.Entities
 
         public void HideInstance() => Instance.Hide();
 
-        public DialogStorage(Type type = null)
+        public DialogStorage(Type type)
         {
             Type = type;
         }

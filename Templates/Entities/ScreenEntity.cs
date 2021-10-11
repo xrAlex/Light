@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 
 namespace Light.Templates.Entities
 {
-    public sealed class ScreenEntity : NotifyingEntity
+    internal sealed class ScreenEntity : NotifyingEntity
     {
         #region Fields
 

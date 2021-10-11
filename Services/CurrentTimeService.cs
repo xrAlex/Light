@@ -5,9 +5,9 @@ using Light.Templates.EventHandlers;
 namespace Light.Services
 {
     /// <summary>
-    /// Класс обновляет текущее время отображаемоена главном окне приложения
+    /// Updates current time
     /// </summary>
-    public class CurrentTimeService
+    internal sealed class CurrentTimeService
     {
         public CurrentTimeService()
         {
@@ -21,6 +21,11 @@ namespace Light.Services
 
         public event EventHandler<TimeEventArgs> OnCurrTimeChanged;
 
+        /// <summary>
+        /// Gets current time
+        /// <remarks> 24 hrs time format 00:00 </remarks>
+        /// </summary>
+        /// <returns> Current time <see cref="string"/></returns>
         public string GetCurrentTime() => DateTime.Now.ToString("HH:mm");
 
         private void Tick()

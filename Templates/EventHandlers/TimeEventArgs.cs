@@ -2,13 +2,13 @@
 
 namespace Light.Templates.EventHandlers
 {
-    public class TimeEventArgs : EventArgs
+    internal sealed class TimeEventArgs : EventArgs
     { 
-        public string CurrTime { get; }
+        public string CurrentTime { get; }
 
-        public TimeEventArgs(string currTime)
+        public TimeEventArgs(string currentTime)
         {
-            CurrTime = currTime;
+            CurrentTime = currentTime;
         }
     }
 }

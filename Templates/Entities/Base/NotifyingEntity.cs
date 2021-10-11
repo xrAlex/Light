@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Light.Templates.Entities.Base
 {
-    public class NotifyingEntity : INotifyPropertyChanged
+    internal class NotifyingEntity : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

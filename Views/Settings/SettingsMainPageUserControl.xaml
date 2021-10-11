@@ -45,10 +45,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Width="80"
-                                Height="80"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Width="80" Height="80"
                                 Cursor="Hand">
                                 <Grid.InputBindings>
                                     <MouseBinding Gesture="LeftDoubleClick"
@@ -56,22 +54,19 @@
                                 </Grid.InputBindings>
                                 <Image
                                     Source="{StaticResource MonitorBlack}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" HorizontalAlignment="Center"
                                     Width="70" Height="70"
                                     Stretch="Fill"
                                     Opacity="{Binding Opacity, Mode=OneWay}"
-                                    Grid.Row="0" 
-                                    Grid.RowSpan="1" />
+                                    Grid.Row="0"/>
                                 <TextBox
                                     Text="{Binding Name, Mode=OneWay}"
                                     HorizontalAlignment="Center" VerticalAlignment="Center"
                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                    Background="Transparent"
                                     Cursor="Hand"
                                     FontSize="12"
                                     Grid.Row="0" 
-                                    Height="70" Width="70" Margin="2,0"/>
+                                    Height="68" Width="68"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

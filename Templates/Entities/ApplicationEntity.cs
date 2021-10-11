@@ -1,6 +1,6 @@
 ﻿namespace Light.Templates.Entities
 {
-    public class ApplicationEntity
+    internal sealed class ApplicationEntity
     {
         public string Name { get; set; }
         public string ExecutableFilePath { get; set; }

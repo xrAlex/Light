@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace Light.Services
 {
     /// <summary>
-    /// Класс циклически проверяет какая цветовая конфигурация должна быть быть установлена
+    /// Checks which color configuration should be set
     /// </summary>
-    public class PeriodWatcherService
+    internal sealed class PeriodWatcherService
     {
         private readonly ScreenModel _screenModel;
         private readonly SettingsService _settings;

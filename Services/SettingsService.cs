@@ -11,9 +11,9 @@ using WindowsDisplayAPI.DisplayConfig;
 namespace Light.Services
 {
     /// <summary>
-    /// Класс выполняет загрузку и сохранение настроек приложения
+    /// Loads, saves and storage application settings
     /// </summary>
-    public sealed partial class SettingsService
+    internal sealed partial class SettingsService
     {
         public ObservableCollection<ApplicationEntity> Applications { get; }
         public ObservableCollection<ScreenEntity> Screens { get; }
@@ -31,7 +31,7 @@ namespace Light.Services
         }
     }
 
-    public sealed partial class SettingsService
+    internal sealed partial class SettingsService
     {
         public void Save()
         {
@@ -61,7 +61,7 @@ namespace Light.Services
         }
     }
 
-    public sealed partial class SettingsService
+    internal sealed partial class SettingsService
     {
         private void LoadScreens()
         {
@@ -183,7 +183,7 @@ namespace Light.Services
         }
     }
 
-    public sealed partial class SettingsService
+    internal sealed partial class SettingsService
     {
         private void LoadProcesses()
         {

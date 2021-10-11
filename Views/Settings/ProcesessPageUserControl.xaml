@@ -27,7 +27,7 @@
         </Grid.ColumnDefinitions>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
-            x:Name="Checkbox1"
+            x:Name="FullScreenCheckBox"
             Content="{DynamicResource Loc_DontWorkInFullScreen}"
             HorizontalAlignment="Left" Width="360"
             IsChecked="{Binding CheckFullScreenApps, Mode=TwoWay}"
@@ -37,22 +37,19 @@
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="345" Width="350"
             BorderThickness="0"
-            IsEnabled="{Binding IsChecked, ElementName=Checkbox1}"
+            IsEnabled="{Binding IsChecked, ElementName=FullScreenCheckBox}"
             SelectionMode="Multiple"
             ItemsSource="{Binding Processes, Mode=OneWay}"
             Grid.Column="1" Grid.Row="4" Grid.RowSpan="3">
             <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem" BasedOn="{StaticResource ProcessListBox}">
-                    <Setter
-                        Property="IsSelected"
-                        Value="{Binding IsSelected, Mode=TwoWay}" />
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource ProcessListBoxItem}">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
                 </Style>
             </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox
-                        Width="340"
-                        Height="20"
+                        Width="340" Height="20"
                         VerticalContentAlignment="Center"
                         IsChecked="{Binding IsSelected}"
                         Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.MoveToIgnoredProcessesCommand, Mode=OneWay}"

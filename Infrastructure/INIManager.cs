@@ -7,7 +7,7 @@ namespace Light.Infrastructure
     /// <summary>
     /// Contains methods for working with .ini files
     /// </summary>
-    public static class INIManager
+    internal static class INIManager
     {
         private const string Path = ".\\config.ini";
         private const int MaxStringSize = 1024;
@@ -15,7 +15,7 @@ namespace Light.Infrastructure
         /// <summary>
         /// Converts a string from .ini file to specified type
         /// </summary>
-        /// <returns>Converted value</returns>
+        /// <returns> Converted value <typeparamref name="T">The type returned from this method</typeparamref></returns>
         public static T GetValue<T>(string section, string key, string defaultValue) where T : IConvertible
         {
             StringBuilder buffer = new(MaxStringSize);

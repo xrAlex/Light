@@ -6,7 +6,7 @@ namespace Light.Services
     /// <summary>
     /// Storage of objects that must be created in one instance
     /// </summary>
-    public static class ServiceLocator
+    internal static class ServiceLocator
     {
         public static SettingsService Settings => App.ServicesHost.Services.GetRequiredService<SettingsService>();
         public static PeriodWatcherService PeriodWatcherService => App.ServicesHost.Services.GetRequiredService<PeriodWatcherService>();

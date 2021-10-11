@@ -6,7 +6,8 @@
              xmlns:main="clr-namespace:Light.Views.Main"
              xmlns:tray="clr-namespace:Light.Views.Tray"
              xmlns:settings="clr-namespace:Light.Views.Settings"
-             xmlns:language="clr-namespace:Light.Localization">
+             xmlns:language="clr-namespace:Light.Localization"
+             xmlns:xamlConverters="clr-namespace:Light.Converters.XAMLConverters">
     <Application.Resources>
         <ResourceDictionary>
             
@@ -34,11 +35,11 @@
                 <tray:TrayMenuView/>
             </DataTemplate>
             <viewmodels:ViewModelLocator x:Key="Locator"/>
-            <converters:MinConverter x:Key="MinConverter"></converters:MinConverter>
-            <converters:HourConverter x:Key="HourConverter"></converters:HourConverter>
-            <converters:BrightnessToDouble x:Key="BrightnessToDouble"></converters:BrightnessToDouble>
-            <converters:BrightnessToPercent x:Key="BrightnessToPercent"></converters:BrightnessToPercent>
-            <converters:TemperatureToKelvin x:Key="TemperatureToKelvin"></converters:TemperatureToKelvin>
+            <xamlConverters:MinConverter x:Key="MinConverter"></xamlConverters:MinConverter>
+            <xamlConverters:HourConverter x:Key="HourConverter"></xamlConverters:HourConverter>
+            <xamlConverters:BrightnessToDouble x:Key="BrightnessToDouble"></xamlConverters:BrightnessToDouble>
+            <xamlConverters:BrightnessToPercent x:Key="BrightnessToPercent"></xamlConverters:BrightnessToPercent>
+            <xamlConverters:TemperatureToKelvin x:Key="TemperatureToKelvin"></xamlConverters:TemperatureToKelvin>
 
             <ResourceDictionary.MergedDictionaries>
                 <x:Static Member="language:LangDictionary.Instance"/>

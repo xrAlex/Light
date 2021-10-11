@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Light.ViewModels
 {
-    internal class ViewModelLocator
+    internal sealed class ViewModelLocator
     {
         public static MainWindowViewModel MainWindowViewModel => App.ServicesHost.Services.GetRequiredService<MainWindowViewModel>();
         public static OtherSettingsPageViewModel OtherSettingsPageViewModel => App.ServicesHost.Services.GetRequiredService<OtherSettingsPageViewModel>();

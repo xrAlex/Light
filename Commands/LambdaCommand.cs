@@ -2,7 +2,7 @@
 
 namespace Light.Commands
 {
-    internal class LambdaCommand : Command
+    internal sealed class LambdaCommand : Command
     {
         private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;

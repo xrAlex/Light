@@ -8,7 +8,7 @@ namespace Light.Infrastructure
     /// <summary>
     /// Implements methods for working with system windows
     /// </summary>
-    public static class SystemWindow
+    internal static class SystemWindow
     {
         /// <summary>
         /// Checks if the application window is displayed
@@ -19,7 +19,7 @@ namespace Light.Infrastructure
         /// <summary>
         /// Checks if the window works in full screen, given a task bar
         /// </summary>
-        /// <returns> true, when window expanded on full screen</returns>
+        /// <returns> <see cref="bool"/> true, when window expanded on full screen</returns>
         public static bool IsWindowOnFullScreen(ScreenEntity screen, nint handler)
         {
             Native.GetWindowRect(new HandleRef(null, handler), out var rect);
@@ -30,11 +30,11 @@ namespace Light.Infrastructure
         /// Method gets all window handlers in system
         /// </summary>
         /// <returns> List of window handlers </returns>
-        public static IEnumerable<nint> GetAllWindows()
+        public static List<nint> GetAllWindows()
         {
             var windows = new List<nint>();
 
-            var callback = new Native.EnumWindowsProc((hWnd, lParam) =>
+            var callback = new Native.EnumWindowsProc((hWnd, _) =>
             {
                 if (IsWindowValid(hWnd))
                 {

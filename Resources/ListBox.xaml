@@ -117,9 +117,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
 
-    <Style x:Key="ProcessListBox" TargetType="{x:Type ListBoxItem}">
+
+    <Style x:Key="ProcessListBoxItem" TargetType="{x:Type ListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>

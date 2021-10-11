@@ -6,7 +6,7 @@ namespace Light.Infrastructure
     /// <summary>
     /// Checks which working period needs to be set for screen
     /// </summary>
-    public class WorkTime
+    internal sealed class WorkTime
     {
         public bool IsDayPeriod(ScreenEntity screen)
         {

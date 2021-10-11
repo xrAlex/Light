@@ -13,14 +13,14 @@ using Light.ViewModels.Base;
 namespace Light.Services
 {
     /// <summary>
-    /// Класс для работы с диалоговыми окнами программы
+    /// Class for working with program dialog windows
     /// </summary>
-    public class DialogService
+    internal sealed class DialogService
     {
         private readonly Dictionary<Type, DialogStorage> _mappings;
 
         /// <summary>
-        /// Метод регестрирует типы ViewModel и View для дальнейшего создания экземпляра
+        /// Registers View Model and View types for further instantiation
         /// </summary>
         public void Register<TViewModel, TView>() where TViewModel : ViewModelBase where TView : Window
         {
@@ -28,7 +28,7 @@ namespace Light.Services
         }
 
         /// <summary>
-        /// Метод отображает диалоговое окно, если экземпляр окна не создан, то создает его
+        /// Method displays a dialog window, if the window is not instantiated, then it creates it
         /// </summary>
         public void ShowDialog<TViewModel>(Type owner = null) where TViewModel : ViewModelBase
         {
@@ -48,7 +48,7 @@ namespace Light.Services
         }
 
         /// <summary>
-        /// Метод закрывает диалоговое окно
+        /// Closing dialog window
         /// </summary>
         public void CloseDialog<TViewModel>() where TViewModel : ViewModelBase
         {
@@ -57,7 +57,7 @@ namespace Light.Services
         }
 
         /// <summary>
-        /// Метод скрывает диалоговое окно
+        /// Hiding dialog window
         /// </summary>
         public void HideDialog<TViewModel>() where TViewModel : ViewModelBase
         {

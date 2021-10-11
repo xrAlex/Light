@@ -69,7 +69,7 @@ namespace Light.ViewModels
             Screens = screenModel.Screens;
             CurrentTime = currentTimeService.GetCurrentTime();
 
-            currentTimeService.OnCurrTimeChanged += (_, args) => { CurrentTime = args.CurrTime; };
+            currentTimeService.OnCurrTimeChanged += (_, args) => { CurrentTime = args.CurrentTime; };
         }
 
 #if DEBUG

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Light.Infrastructure
 {
-    public class TrayMenuPosition
+    internal sealed class TrayMenuPosition
     {
         private enum TaskBarLocation
         {
@@ -16,6 +16,10 @@ namespace Light.Infrastructure
             Left
         }
 
+        /// <summary>
+        /// Method gets tray menu window position on screen
+        /// </summary>
+        /// <returns> Window position <see cref="Point"/></returns>
         public Point GetTrayMenuPos()
         {
             var cursorPos = Cursor.Position;
@@ -43,9 +47,13 @@ namespace Light.Infrastructure
             return cursorPos;
         }
 
+        /// <summary>
+        /// Method gets task bar location on screen
+        /// </summary>
+        /// <returns>Screen <see cref="TaskBarLocation"/></returns>
         private TaskBarLocation GetTaskBarLocation()
         {
-            var taskBarPos = GetTaskBarPosition();
+            var taskBarPos = GetTaskBarDimensions();
             if (taskBarPos == Rectangle.Empty) return TaskBarLocation.Bottom;
 
             var taskBarLocation = TaskBarLocation.Top;
@@ -65,11 +73,14 @@ namespace Light.Infrastructure
             return taskBarLocation;
         }
 
-        private Rectangle GetTaskBarPosition()
+        /// <summary>
+        /// Method gets task bar dimensions
+        /// </summary>
+        /// <returns>Task bar <see cref="Rectangle"/></returns>
+        private Rectangle GetTaskBarDimensions()
         {
             const uint dwMessage = 5;
             var data = new TaskBarData();
-            data.CbSize = Marshal.SizeOf(data);
             var shellMessage = Native.SHAppBarMessage(dwMessage, ref data);
             return shellMessage == 0
                 ? Rectangle.Empty

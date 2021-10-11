@@ -93,7 +93,7 @@ namespace Light
             services.AddScoped<PeriodWatcherService>();
             services.AddScoped<SettingsService>();
             services.AddScoped<DialogService>();
-            services.AddScoped<TrayNotifierService>();
+            services.AddSingleton<TrayNotifierService>();
             services.AddTransient<CurrentTimeService>();
 
             //ViewModels

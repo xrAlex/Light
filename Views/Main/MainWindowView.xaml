@@ -41,24 +41,14 @@
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="60" Width="440" Grid.ColumnSpan="9" Grid.RowSpan="3" />
         <TextBox
-            Background="Transparent" Foreground="White"
+            Foreground="White"
             Text="Light v1.0"
             FontSize="30"
-            IsReadOnly="True"
-            Focusable="False"
-            Cursor="Arrow"
-            BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
             Grid.RowSpan="3" Grid.ColumnSpan="2" />
         <TextBox
-            Background="Transparent" Foreground="White"
+            Foreground="White"
             Text="{Binding CurrentTime}"
             FontSize="30"
-            IsReadOnly="True"
-            Focusable="False"
-            Cursor="Arrow"
-            BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
             Grid.Column="3" Grid.RowSpan="3" />
         <Button
             Style="{StaticResource DeepGrayButton}"
@@ -96,7 +86,7 @@
             Grid.ColumnSpan="6" Grid.Column="1" Grid.RowSpan="2" Grid.Row="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <GroupBox Header="{Binding Name, Mode=OneWay, StringFormat=Monitor: \{0:N0\}}">
+                    <GroupBox Header="{Binding Name, Mode=OneWay}">
                         <Grid Height="67" Width="200">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="15*" />

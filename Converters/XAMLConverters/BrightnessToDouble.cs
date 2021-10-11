@@ -2,10 +2,10 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Light.Converters
+namespace Light.Converters.XAMLConverters
 {
     [ValueConversion(typeof(double), typeof(double))]
-    internal class BrightnessToDouble : IValueConverter
+    internal sealed class BrightnessToDouble : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
