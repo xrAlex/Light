@@ -6,30 +6,54 @@
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
                     <StackPanel Orientation="Horizontal">
-                        <Grid >
-                            <Border Width="45" Height="20" Background="LightGray" CornerRadius="10" Margin="5,0"></Border>
-                            <Border x:Name="button" Height="23" Width="23" CornerRadius="12.5" HorizontalAlignment="Left">
+                        <Grid>
+                            <Border 
+                                Width="45" Height="20" 
+                                Background="LightGray" 
+                                CornerRadius="10" 
+                                Margin="5,0">
+                            </Border>
+                            <Border 
+                                x:Name="button" 
+                                Background="{StaticResource Gray}" 
+                                Height="23" Width="23" 
+                                CornerRadius="12.5" 
+                                HorizontalAlignment="Left">
+                                <Border 
+                                    x:Name="dot" 
+                                    Background="{StaticResource Black}" 
+                                    Height="11.5" Width="11.5" 
+                                    CornerRadius="12.5" 
+                                    HorizontalAlignment="Center">
+                                </Border>
                                 <Border.Effect>
-                                    <DropShadowEffect ShadowDepth="0.5"/>
+                                    <DropShadowEffect ShadowDepth="1"/>
                                 </Border.Effect>
                             </Border>
                         </Grid>
-                        <ContentPresenter x:Name="content" Margin="10,0,0,0" Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+                        <ContentPresenter 
+                            Margin="10,0,0,0" 
+                            Content="{TemplateBinding Content}" 
+                            VerticalAlignment="Center"/>
                     </StackPanel>
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="ToRight">
-                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="button" Duration="0:0:0.4" From="0,0,0,0" To="28,0,0,0" >
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="button" Duration="0:0:0.4" To="28,0,0,0" >
                                 <ThicknessAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </ThicknessAnimation.EasingFunction>
                             </ThicknessAnimation>
+                            <DoubleAnimation Duration="0:0:0.4" To="23" Storyboard.TargetName="dot" Storyboard.TargetProperty="Height" />
+                            <DoubleAnimation Duration="0:0:0.4" To="23" Storyboard.TargetName="dot" Storyboard.TargetProperty="Width" />
                         </Storyboard>
                         <Storyboard x:Key="ToLeft">
-                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="button" Duration="0:0:0.4" From="28,0,0,0" To="0,0,0,0" >
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="button" Duration="0:0:0.4" To="0,0,0,0" >
                                 <ThicknessAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </ThicknessAnimation.EasingFunction>
                             </ThicknessAnimation>
+                            <DoubleAnimation Duration="0:0:0.4" To="11.5" Storyboard.TargetName="dot" Storyboard.TargetProperty="Height" />
+                            <DoubleAnimation Duration="0:0:0.4" To="11.5" Storyboard.TargetName="dot" Storyboard.TargetProperty="Width" />
                         </Storyboard>
                     </ControlTemplate.Resources>
                     <ControlTemplate.Triggers>
@@ -38,14 +62,12 @@
                                 <RemoveStoryboard BeginStoryboardName="ToLeft"></RemoveStoryboard>
                                 <BeginStoryboard Storyboard="{StaticResource ToRight}" x:Name="ToRight"></BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter TargetName="button" Property="Background" Value="{StaticResource Gray}"></Setter>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.ExitActions>
                                 <RemoveStoryboard BeginStoryboardName="ToRight"></RemoveStoryboard>
                                 <BeginStoryboard Storyboard="{StaticResource ToLeft}" x:Name="ToLeft"></BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter TargetName="button" Property="Background" Value="{StaticResource DeepGray}"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -4,8 +4,8 @@
     <Style x:Key="PictureComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="false"/>
         <Setter Property="Padding" Value="4,1"/>
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -14,11 +14,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                     <Border 
+                        Width="50" Height="34"
                         x:Name="Bd" 
                         CornerRadius="5"
                         BorderThickness="{TemplateBinding BorderThickness}" 
                         Background="Transparent" 
-                        Padding="{TemplateBinding Padding}" 
+                        Padding="5,0,4,1" 
                         SnapsToDevicePixels="true">
                         <ContentPresenter 
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
@@ -84,7 +85,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
-                    <Border x:Name="templateRoot" SnapsToDevicePixels="true" CornerRadius="3">
+                    <Border x:Name="templateRoot" Background="{StaticResource TLightBlack}" SnapsToDevicePixels="true" CornerRadius="3" Cursor="Hand">
                         <Grid>
                             <Image 
                                 Width="37" Height="37"
@@ -114,7 +115,7 @@
                                     BorderThickness="0" 
                                     CornerRadius="3"
                                     Background="Transparent">
-                                    <ScrollViewer x:Name="DropDownScrollViewer" Height="80">
+                                    <ScrollViewer x:Name="DropDownScrollViewer" Height="80" Cursor="Hand">
                                         <ItemsPresenter 
                                             x:Name="ItemsPresenter" 
                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
@@ -124,9 +125,22 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource Black}"/>
-                        </Trigger>
+                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=templateRoot}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetName="templateRoot" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="templateRoot" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

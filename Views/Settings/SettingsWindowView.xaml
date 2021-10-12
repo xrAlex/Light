@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:Light.ViewModels"
-        xmlns:prop="clr-namespace:Light.Properties"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="500" Width="450"
@@ -45,36 +44,23 @@
                 <ColumnDefinition Width="19*" />
             </Grid.ColumnDefinitions>
             <Border Background="White" CornerRadius="5" Grid.RowSpan="11" Grid.ColumnSpan="7" Grid.Column="3"/>
-            <ContentControl 
-                Content="{Binding SelectedViewModel}" 
-                Grid.ColumnSpan="10" 
-                Grid.RowSpan="11">
-            </ContentControl>
-            <Button
+            <ContentControl Content="{Binding SelectedViewModel}" Grid.ColumnSpan="10" Grid.RowSpan="11"/>
+             <Button
                 Style="{StaticResource BlackButton}"
                 Grid.Column="1" Grid.Row="5"
                 Command="{Binding ToProcessPageCommand, Mode=OneWay}">
-                <Image
-                    Width="37" Height="37"
-                    Source="{StaticResource Process}" Stretch="Fill">
-                </Image>
+                <Image Width="37" Height="37" Source="{StaticResource Process}"/>
             </Button>
             <Button
                 Style="{StaticResource BlackButton}"
                 Command="{Binding ToSettingsMainPageCommand, Mode=OneWay}" Grid.Column="1" Grid.Row="3">
-                <Image
-                    Width="37" Height="37"
-                    Source="{StaticResource Main}" Stretch="Fill">
-                </Image>
+                <Image  Stretch ="Fill" Width="37" Height="37" Source="{StaticResource Main}"/>
             </Button>
             <Button
                 Style="{StaticResource BlackButton}"
                 Grid.Column="1"
                 Command="{Binding ToOtherSettingsPageCommand, Mode=OneWay}" Height="45" VerticalAlignment="Top" Grid.Row="7">
-                <Image
-                    Width="37" Height="37"
-                    Source="{StaticResource Other}" Stretch="Fill">
-                </Image>
+                <Image Width="37" Height="37" Source="{StaticResource Other}"/>
             </Button>
             <Button
                 Style="{StaticResource LightGrayButton}"
@@ -92,76 +78,29 @@
                 Style="{StaticResource LightGrayButton}"
                 Content="{DynamicResource Loc_Apply}"
                 Command="{Binding ApplySettingsCommand, Mode=OneWay}"
-                Grid.Row="9" Grid.Column="8"></Button>
+                Grid.Row="9" Grid.Column="8">
+            </Button>
             <ComboBox
                 SelectedIndex="{Binding SelectedLangIndex}"
                 ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
                 Style="{StaticResource PictureComboBoxStyle}" Grid.Column="1" Grid.Row="1">
-                <ComboBoxItem 
-                    Width="50" Height="34"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    Padding="2,1,1,1" Margin="0,0,0,-1">
-                    <Image 
-                        RenderOptions.BitmapScalingMode ="HighQuality"
-                        Width="41" Height="26"
-                        Source="{StaticResource FlagEng}">
-                    </Image>
+                <ComboBoxItem>
+                    <Image Width="41" Height="26" Source="{StaticResource FlagEng}"/>
                 </ComboBoxItem>
-                <ComboBoxItem 
-                    Width="50" Height="34"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    Padding="5,1,4,1" Margin="0,2,0,0">
-                    <Image 
-                        RenderOptions.BitmapScalingMode ="HighQuality"
-                        Width="41" Height="26"
-                        Source="{StaticResource FlagRus}">
-                    </Image>
+                <ComboBoxItem>
+                    <Image Width="41" Height="26" Source="{StaticResource FlagRus}"/>
                 </ComboBoxItem>
-                <ComboBoxItem 
-                    Width="50" Height="34"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    Padding="5,1,4,1" Margin="0,2,0,0">
-                    <Image 
-                        RenderOptions.BitmapScalingMode ="HighQuality"
-                        Width="41" Height="26"
-                        Source="{StaticResource FlagChn}">
-                    </Image>
+                <ComboBoxItem>
+                    <Image Width="41" Height="26" Source="{StaticResource FlagChn}"/>
                 </ComboBoxItem>
-                <ComboBoxItem 
-                    Width="50"
-                    Height="34"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    Padding="5,1,4,1" 
-                    Margin="0,2,0,0">
-                    <Image 
-                        RenderOptions.BitmapScalingMode ="HighQuality"
-                        Width="41" Height="26"
-                        Source="{StaticResource FlagSpa}">
-                    </Image>
+                <ComboBoxItem>
+                    <Image Width="41" Height="26" Source="{StaticResource FlagSpa}"/>
                 </ComboBoxItem>
-                <ComboBoxItem 
-                    Width="50"
-                    Height="34"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    Padding="5,1,4,1" 
-                    Margin="0,2,0,0" >
-                    <Image 
-                        RenderOptions.BitmapScalingMode ="HighQuality"
-                        Width="41" Height="26"
-                        Source="{StaticResource FlagUae}">
-                    </Image>
+                <ComboBoxItem>
+                    <Image Width="41" Height="26" Source="{StaticResource FlagUae}"/>
                 </ComboBoxItem>
-                <ComboBoxItem 
-                    Width="50"
-                    Height="34"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    Padding="5,1,4,1" 
-                    Margin="0,2,0,0">
-                    <Image 
-                        RenderOptions.BitmapScalingMode ="HighQuality"
-                        Width="41" Height="26"
-                        Source="{StaticResource FlagFra}">
-                    </Image>
+                <ComboBoxItem>
+                    <Image Width="41" Height="26" Source="{StaticResource FlagFra}"/>
                 </ComboBoxItem>
             </ComboBox>
         </Grid>

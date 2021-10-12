@@ -50,8 +50,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox
-                        Width="325" Height="20"
-                        VerticalContentAlignment="Center"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
                         IsChecked="{Binding IsSelected}"
                         Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.MoveToIgnoredProcessesCommand, Mode=OneWay}"
                         Content="{Binding DisplayedText, Mode=OneWay}">
@@ -60,9 +60,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBox
-            Grid.Row="3"
+            FontSize="14"
             Text="{DynamicResource Loc_ProcessesWhiteList}"
-            Grid.Column="1" FontSize="14">
+            Grid.Row="3" Grid.Column="1">
         </TextBox>
     </Grid>
 </UserControl>

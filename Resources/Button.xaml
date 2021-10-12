@@ -7,26 +7,31 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name ="Border"
-                        CornerRadius="5"
-                        Background="{TemplateBinding Background}">
-                        <Grid>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </Border>
+                    <Grid x:Name ="gr">
+                        <Border x:Name ="br"
+                                CornerRadius="5"
+                                UseLayoutRounding="True"
+                                SnapsToDevicePixels="True"
+                                Background="{TemplateBinding Background}">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="1" Opacity="0.3"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter IsManipulationEnabled="False"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=Border}" Value="True">
+                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=gr}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="1" Duration="0:0:0.15" Storyboard.TargetName="br" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
                             <DataTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
+                                        <DoubleAnimation To="0" Duration="0:0:0.15" Storyboard.TargetName="br" Storyboard.TargetProperty="Background.(SolidColorBrush.Opacity)"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
@@ -104,7 +109,7 @@
     </Style>
 
     <Style x:Key="BlackButton" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonChangableBackgroundOpacity}">
-        <Setter Property="Background" Value="{StaticResource TBlack}"/>
+        <Setter Property="Background" Value="{StaticResource TLightBlack}"/>
     </Style>
 
     <Style x:Key="GrayButton" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonChangableBackgroundOpacity}">

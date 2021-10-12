@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:Light.ViewModels"
-             xmlns:prop="clr-namespace:Light.Properties"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:OtherSettingsPageViewModel}}"

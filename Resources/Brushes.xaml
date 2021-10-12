@@ -18,5 +18,8 @@
 
     <SolidColorBrush x:Key="Black" Color="#FF292929"/>
     <SolidColorBrush x:Key="TBlack" Color="#FF292929" Opacity="0"/>
-    
+
+    <SolidColorBrush x:Key="LightBlack" Color="#FF1F1F1F"/>
+    <SolidColorBrush x:Key="TLightBlack" Color="#FF1F1F1F" Opacity="0"/>
+
 </ResourceDictionary>
