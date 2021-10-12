@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
@@ -35,9 +36,9 @@ namespace Light.Services
     {
         public void Save()
         {
-            INIManager.WriteValue("Main", "SelectedLang", SelectedLang.ToString());
-            INIManager.WriteValue("Main", "SelectedScreen", SelectedScreen.ToString());
-            INIManager.WriteValue("Main", "CheckFullScreenApps", CheckFullScreenApps.ToString());
+            INIManager.WriteValue("Main", "SelectedLang", SelectedLang);
+            INIManager.WriteValue("Main", "SelectedScreen", SelectedScreen);
+            INIManager.WriteValue("Main", "CheckFullScreenApps", CheckFullScreenApps);
 
             SaveScreens();
             SaveProcesses();
@@ -100,7 +101,7 @@ namespace Light.Services
                     {
                         DayColorTemperature = INIManager.GetValue<int>($"{index}", "DayColorTemperature", "6600"),
                         DayBrightness = INIManager.GetValue<float>($"{index}", "DayBrightness", "1"),
-                        NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "4000"),
+                        NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "4200"),
                         NightBrightness = INIManager.GetValue<float>($"{index}", "NightBrightness", "1"),
                     },
                     Height = screen.Bounds.Height,
@@ -133,7 +134,7 @@ namespace Light.Services
                     {
                         DayColorTemperature = INIManager.GetValue<int>($"{displayCode}", "DayColorTemperature", "6600"),
                         DayBrightness = INIManager.GetValue<float>($"{displayCode}", "DayBrightness", "1"),
-                        NightColorTemperature = INIManager.GetValue<int>($"{displayCode}", "NightColorTemperature", "4000"),
+                        NightColorTemperature = INIManager.GetValue<int>($"{displayCode}", "NightColorTemperature", "4200"),
                         NightBrightness = INIManager.GetValue<float>($"{displayCode}", "NightBrightness", "1"),
                     },
 
@@ -153,13 +154,13 @@ namespace Light.Services
         {
             foreach (var screen in Screens)
             {
-                INIManager.WriteValue($"{screen.DisplayCode}", "DayColorTemperature", screen.ColorConfiguration.DayColorTemperature.ToString());
-                INIManager.WriteValue($"{screen.DisplayCode}", "DayBrightness", screen.ColorConfiguration.DayBrightness.ToString());
-                INIManager.WriteValue($"{screen.DisplayCode}", "NightColorTemperature", screen.ColorConfiguration.NightColorTemperature.ToString());
-                INIManager.WriteValue($"{screen.DisplayCode}", "NightBrightness", screen.ColorConfiguration.NightBrightness.ToString());
-                INIManager.WriteValue($"{screen.DisplayCode}", "StartTime", screen.StartTime.ToString());
-                INIManager.WriteValue($"{screen.DisplayCode}", "EndTime", screen.EndTime.ToString());
-                INIManager.WriteValue($"{screen.DisplayCode}", "Active", screen.IsActive.ToString());
+                INIManager.WriteValue($"{screen.DisplayCode}", "DayColorTemperature", screen.ColorConfiguration.DayColorTemperature);
+                INIManager.WriteValue($"{screen.DisplayCode}", "DayBrightness", screen.ColorConfiguration.DayBrightness);
+                INIManager.WriteValue($"{screen.DisplayCode}", "NightColorTemperature", screen.ColorConfiguration.NightColorTemperature);
+                INIManager.WriteValue($"{screen.DisplayCode}", "NightBrightness", screen.ColorConfiguration.NightBrightness);
+                INIManager.WriteValue($"{screen.DisplayCode}", "StartTime", screen.StartTime);
+                INIManager.WriteValue($"{screen.DisplayCode}", "EndTime", screen.EndTime);
+                INIManager.WriteValue($"{screen.DisplayCode}", "Active", screen.IsActive);
                 INIManager.WriteValue($"{screen.DisplayCode}", "Name", screen.Name);
                 INIManager.WriteValue($"{screen.DisplayCode}", "SysName", screen.SysName);
             }
@@ -170,13 +171,13 @@ namespace Light.Services
             for (var i = 0; i < Screens.Count; i++)
             {
                 var screen = Screens[i];
-                INIManager.WriteValue($"{i}", "DayColorTemperature", screen.ColorConfiguration.DayColorTemperature.ToString());
-                INIManager.WriteValue($"{i}", "DayBrightness", screen.ColorConfiguration.DayBrightness.ToString());
-                INIManager.WriteValue($"{i}", "NightColorTemperature", screen.ColorConfiguration.NightColorTemperature.ToString());
-                INIManager.WriteValue($"{i}", "NightBrightness", screen.ColorConfiguration.NightBrightness.ToString());
-                INIManager.WriteValue($"{i}", "StartTime", screen.StartTime.ToString());
-                INIManager.WriteValue($"{i}", "EndTime", screen.EndTime.ToString());
-                INIManager.WriteValue($"{i}", "Active", screen.IsActive.ToString());
+                INIManager.WriteValue($"{i}", "DayColorTemperature", screen.ColorConfiguration.DayColorTemperature);
+                INIManager.WriteValue($"{i}", "DayBrightness", screen.ColorConfiguration.DayBrightness);
+                INIManager.WriteValue($"{i}", "NightColorTemperature", screen.ColorConfiguration.NightColorTemperature);
+                INIManager.WriteValue($"{i}", "NightBrightness", screen.ColorConfiguration.NightBrightness);
+                INIManager.WriteValue($"{i}", "StartTime", screen.StartTime);
+                INIManager.WriteValue($"{i}", "EndTime", screen.EndTime);
+                INIManager.WriteValue($"{i}", "Active", screen.IsActive);
                 INIManager.WriteValue($"{i}", "Name", screen.Name);
                 INIManager.WriteValue($"{i}", "SysName", screen.SysName);
             }

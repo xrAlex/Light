@@ -156,8 +156,8 @@
                         FontSize="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding Value, ElementName=DayTemperatureSlider, Converter={StaticResource TemperatureToKelvin}, Mode=OneWay }"
-                        Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1">
+                        Text="{Binding DayColorTemperature, Converter={StaticResource TemperatureToKelvin}, Mode=OneWay }"
+                        Grid.Row="2" Grid.ColumnSpan="9" Grid.Column="1">
                     </TextBox>
                     <TextBox
                         BorderThickness="0"
@@ -176,11 +176,10 @@
                         FontSize="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding Value, ElementName=DayBrightnessSlider, Converter={StaticResource BrightnessToPercent}, Mode=OneWay }"
-                        Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="1">
+                        Text="{Binding  DayBrightness, Converter={StaticResource BrightnessToPercent}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Row="4" Grid.ColumnSpan="9" Grid.Column="1">
                     </TextBox>
                     <Slider
-                        x:Name="DayTemperatureSlider"
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="12000" Minimum="{Binding MinGammaRange}"
                         TickFrequency="100"
@@ -191,7 +190,6 @@
                         Grid.Row="3" Grid.ColumnSpan="9" Grid.Column="1">
                     </Slider>
                     <Slider
-                        x:Name="DayBrightnessSlider"
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="100" Minimum="{Binding MinBrightnessRange}"
                         Cursor="Hand"
@@ -283,8 +281,8 @@
                         FontSize="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding Value, ElementName=NightTemperatureSlider, Converter={StaticResource TemperatureToKelvin} , Mode=OneWay }"
-                        Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1">
+                        Text="{Binding NightColorTemperature, Converter={StaticResource TemperatureToKelvin}, Mode=OneWay}"
+                        Grid.Row="2" Grid.ColumnSpan="9" Grid.Column="1">
                     </TextBox>
                     <TextBox
                         BorderThickness="0"
@@ -302,11 +300,10 @@
                         FontSize="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding Value, ElementName=NightBrightnessSlider, Converter={StaticResource BrightnessToPercent}, Mode=OneWay }"
-                        Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="1">
+                        Text="{Binding NightBrightness, Converter={StaticResource BrightnessToPercent}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged }"
+                        Grid.Row="4" Grid.ColumnSpan="9" Grid.Column="1">
                     </TextBox>
                     <Slider
-                        x:Name="NightTemperatureSlider"
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="12000" Minimum="{Binding MinGammaRange}"
                         TickFrequency="100"
@@ -317,7 +314,6 @@
                         Grid.Row="3" Grid.ColumnSpan="9" Grid.Column="1">
                     </Slider>
                     <Slider
-                        x:Name="NightBrightnessSlider"
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="100" Minimum="{Binding MinBrightnessRange}"
                         Cursor="Hand"

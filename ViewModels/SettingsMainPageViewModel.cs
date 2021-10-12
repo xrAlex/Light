@@ -23,6 +23,8 @@ namespace Light.ViewModels
                 MinEnd = _screenModel.GetEndMin(SelectedScreenIndex);
                 DayColorTemperature = SelectedScreen.ColorConfiguration.DayColorTemperature;
                 NightColorTemperature = SelectedScreen.ColorConfiguration.NightColorTemperature;
+                DayBrightness = SelectedScreen.ColorConfiguration.DayBrightness;
+                NightBrightness = SelectedScreen.ColorConfiguration.NightBrightness;
             }
         }
 
@@ -61,7 +63,7 @@ namespace Light.ViewModels
             set
             {
                 SelectedScreen.ColorConfiguration.DayColorTemperature = value;
-                _screenModel.ApplyColorConfiguration(SelectedScreen, value, -1f);
+                _screenModel.ApplyColorConfiguration(SelectedScreen, value, -1);
                 OnPropertyChanged();
             }
         }
@@ -83,7 +85,7 @@ namespace Light.ViewModels
             set
             {
                 SelectedScreen.ColorConfiguration.NightColorTemperature = value;
-                _screenModel.ApplyColorConfiguration(SelectedScreen, value, -1f);
+                _screenModel.ApplyColorConfiguration(SelectedScreen, value, -1);
                 OnPropertyChanged();
             }
         }
@@ -153,12 +155,13 @@ namespace Light.ViewModels
         {
             MonitorDoubleClickCommand = new LambdaCommand(p => OnMonitorDoubleClickCommandExecute());
 
-            _screenModel = new();
-            _registryModel = new();
+            _screenModel = new ScreenModel();
+            _registryModel = new RegistryModel();
             _settings = ServiceLocator.Settings;
             Screens = _screenModel.Screens;
             SelectedScreenIndex = _settings.SelectedScreen;
             _screenModel.ForceColorTemperature();
+            Localization.LangDictionary.OnLocalizationChanged += (_,_) => {RefreshUI();};
         }
 
 #if DEBUG

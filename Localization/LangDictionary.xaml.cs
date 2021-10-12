@@ -9,6 +9,7 @@ namespace Light.Localization
 {
     public partial class LangDictionary
     {
+        public static event EventHandler<EventArgs> OnLocalizationChanged;
         public static LangDictionary Instance { get; private set; } = new();
 
         public LangDictionary()
@@ -35,6 +36,8 @@ namespace Light.Localization
                     Chn();
                     break;
             }
+
+            OnLocalizationChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static string GetString(string param)
