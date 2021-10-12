@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:Light.ViewModels"
-             xmlns:prop="clr-namespace:Light.Properties"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="450"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:SettingsMainPageViewModel}}"
@@ -26,8 +25,7 @@
         </Grid.ColumnDefinitions>
         <GroupBox
             Header="{DynamicResource Loc_Monitors}"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
             Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Grid>
                 <ListBox
@@ -35,7 +33,7 @@
                     SelectionMode="Single"
                     SelectedIndex="{Binding SelectedScreenIndex, Mode=TwoWay}"
                     ItemsSource="{Binding Screens, Mode=OneWay}"
-                    ItemContainerStyle="{StaticResource MonitorListBox}" Margin="0,2">
+                    ItemContainerStyle="{StaticResource MonitorListBox}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel 
@@ -56,9 +54,10 @@
                                     Source="{StaticResource MonitorBlack}"
                                     VerticalAlignment="Center" HorizontalAlignment="Center"
                                     Width="68.2" Height="61.6"
-                                    Stretch="Fill"
+                                    Stretch="Uniform"
                                     Opacity="{Binding Opacity, Mode=OneWay}"
-                                    Grid.Row="0"/>
+                                    Grid.Row="0">
+                                </Image>
                                 <TextBox
                                     Text="{Binding Name, Mode=OneWay}"
                                     HorizontalAlignment="Center" VerticalAlignment="Top"
@@ -66,7 +65,9 @@
                                     Cursor="Hand"
                                     FontSize="12"
                                     Grid.Row="0" 
-                                    Height="50" Width="66" Margin="0,3,0,0"/>
+                                    Height="50" Width="66" 
+                                    Margin="0,3,0,0">
+                                </TextBox>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -75,11 +76,11 @@
         </GroupBox>
         <GroupBox
             Header="{DynamicResource Loc_Day}"
-            Grid.Row="3"
             FontSize="14"
-            Grid.ColumnSpan="2" Grid.Column="1" Height="154" VerticalAlignment="Bottom">
+            Height="154"
+            Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1">
             <StackPanel>
-                <Grid Height="129">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*" />
                         <ColumnDefinition Width="108*"/>
@@ -107,17 +108,23 @@
                         HorizontalAlignment="Left" VerticalAlignment="Top"
                         Height="4" Width="4"
                         Margin="0,3,0,0"
-                        Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" />
+                        Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2">
+                    </Ellipse>
                     <Ellipse
                         Fill="Black" Stroke="Black"
-                        HorizontalAlignment="Left" Width="4"
+                        HorizontalAlignment="Left" 
+                        Height="4" Width="4"
                         Margin="0,12,0,6"
-                        Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" />
+                        Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2">
+                    </Ellipse>
                     <Image
                         Source="{StaticResource Day}"
                         Width="124" Height="124"
                         Stretch="Fill"
-                        Opacity="0.03" Grid.RowSpan="7" Grid.ColumnSpan="7" Grid.Column="2" Margin="0,0,0,5" />
+                        Opacity="0.03" 
+                        Margin="0,0,0,5"
+                        Grid.RowSpan="7" Grid.ColumnSpan="7" Grid.Column="2" >
+                    </Image>
                     <TextBox
                         Text="{Binding HourEnd, Converter= {StaticResource HourConverter}, Mode=TwoWay}"
                         MaxLength="2"
@@ -126,9 +133,10 @@
                         FontSize="20"
                         Cursor="IBeam"
                         Background="Transparent"
-                        VerticalContentAlignment="Center"
-                        HorizontalContentAlignment="Right"
-                        Grid.Column="3" Grid.Row="1" Padding="0,-5,0,0" Grid.ColumnSpan="2" />
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
+                        Padding="0,-5,0,0" 
+                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">
+                    </TextBox>
                     <TextBox
                         Text="{Binding MinEnd, Converter= {StaticResource MinConverter}, Mode=TwoWay}"
                         MaxLength="2"
@@ -138,9 +146,10 @@
                         Focusable="True"
                         Cursor="IBeam"
                         Background="Transparent"
-                        VerticalContentAlignment="Center"
-                        HorizontalContentAlignment="Left"
-                        Grid.Column="7" Grid.Row="1" Padding="0,-5,0,0" />
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                        Padding="0,-5,0,0" 
+                        Grid.Column="7" Grid.Row="1">
+                    </TextBox>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
@@ -148,7 +157,8 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         Text="{Binding Value, ElementName=DayTemperatureSlider, Converter={StaticResource TemperatureToKelvin}, Mode=OneWay }"
-                        Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" />
+                        Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1">
+                    </TextBox>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
@@ -157,7 +167,9 @@
                         Text="{DynamicResource Loc_Sunrise}" 
                         Grid.ColumnSpan="5" Grid.Column="3" 
                         HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center" Padding="0,-4,0,0"/>
+                        VerticalContentAlignment="Center" 
+                        Padding="0,-4,0,0">
+                    </TextBox>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
@@ -165,7 +177,8 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         Text="{Binding Value, ElementName=DayBrightnessSlider, Converter={StaticResource BrightnessToPercent}, Mode=OneWay }"
-                        Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="1" />
+                        Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="1">
+                    </TextBox>
                     <Slider
                         x:Name="DayTemperatureSlider"
                         Style="{StaticResource HorizontalSlider}"
@@ -175,7 +188,8 @@
                         Cursor="Hand"
                         IsDirectionReversed="True"
                         Value="{Binding DayColorTemperature, Mode=TwoWay}"
-                        Grid.Row="3" Grid.ColumnSpan="9" Grid.Column="1" />
+                        Grid.Row="3" Grid.ColumnSpan="9" Grid.Column="1">
+                    </Slider>
                     <Slider
                         x:Name="DayBrightnessSlider"
                         Style="{StaticResource HorizontalSlider}"
@@ -183,7 +197,8 @@
                         Cursor="Hand"
                         IsDirectionReversed="True"
                         Value="{Binding DayBrightness, Converter= {StaticResource BrightnessToDouble}, Mode=TwoWay}"
-                        Grid.Row="5" Grid.ColumnSpan="9" Grid.Column="1" />
+                        Grid.Row="5" Grid.ColumnSpan="9" Grid.Column="1">
+                    </Slider>
                 </Grid>
             </StackPanel>
         </GroupBox>
@@ -191,7 +206,7 @@
             Header="{DynamicResource Loc_Night}"
             Grid.Row="4"
             FontSize="14"
-            Grid.ColumnSpan="2" Grid.Column="1" Height="155" VerticalAlignment="Bottom">
+            Grid.ColumnSpan="2" Grid.Column="1">
             <StackPanel>
                 <Grid Height="129">
                     <Grid.ColumnDefinitions>
@@ -221,17 +236,22 @@
                         HorizontalAlignment="Left" VerticalAlignment="Top"
                         Height="4" Width="4"
                         Margin="0,3,0,0"
-                        Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" />
+                        Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2">
+                    </Ellipse>
                     <Ellipse
                         Fill="Black" Stroke="Black"
-                        HorizontalAlignment="Left" Width="4"
+                        HorizontalAlignment="Left" 
+                        Height="4" Width="4"
                         Margin="0,12,0,6"
-                        Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" />
+                        Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2">
+                    </Ellipse>
                     <Image
                         Source="{StaticResource Night}"
                         Width="124" Height="124"
                         Stretch="Fill"
-                        Opacity="0.03" Grid.RowSpan="6" Grid.ColumnSpan="7" Grid.Column="2" />
+                        Opacity="0.03" 
+                        Grid.RowSpan="6" Grid.ColumnSpan="7" Grid.Column="2">
+                    </Image>
                     <TextBox
                         Text="{Binding HourStart, Converter= {StaticResource HourConverter}, Mode=TwoWay}"
                         MaxLength="2"
@@ -240,9 +260,10 @@
                         FontSize="20"
                         Cursor="IBeam"
                         Background="Transparent"
-                        VerticalContentAlignment="Center"
-                        HorizontalContentAlignment="Right"
-                        Grid.Column="3" Grid.Row="1" Padding="0,-5,0,0" Grid.ColumnSpan="2" />
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
+                        Padding="0,-5,0,0" 
+                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">
+                    </TextBox>
                     <TextBox
                         Text="{Binding MinStart, Converter= {StaticResource MinConverter}, Mode=TwoWay}"
                         MaxLength="2"
@@ -252,9 +273,10 @@
                         Focusable="True"
                         Cursor="IBeam"
                         Background="Transparent"
-                        VerticalContentAlignment="Center"
-                        HorizontalContentAlignment="Left"
-                        Grid.Column="7" Grid.Row="1" Padding="0,-5,0,0" />
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                        Padding="0,-5,0,0" 
+                        Grid.Column="7" Grid.Row="1">
+                    </TextBox>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
@@ -262,15 +284,18 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         Text="{Binding Value, ElementName=NightTemperatureSlider, Converter={StaticResource TemperatureToKelvin} , Mode=OneWay }"
-                        Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" />
+                        Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1">
+                    </TextBox>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
                         FontSize="15"
                         Background="Transparent"
                         Text="{DynamicResource Loc_Sunset}" 
-                        Grid.ColumnSpan="5" Grid.Column="3" HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center" Padding="0,-4,0,0"/>
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                        Padding="0,-4,0,0"
+                        Grid.ColumnSpan="5" Grid.Column="3">
+                    </TextBox>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
@@ -278,7 +303,8 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         Text="{Binding Value, ElementName=NightBrightnessSlider, Converter={StaticResource BrightnessToPercent}, Mode=OneWay }"
-                        Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="1" />
+                        Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="1">
+                    </TextBox>
                     <Slider
                         x:Name="NightTemperatureSlider"
                         Style="{StaticResource HorizontalSlider}"
@@ -288,7 +314,8 @@
                         Cursor="Hand"
                         IsDirectionReversed="True"
                         Value="{Binding NightColorTemperature, Mode=TwoWay}"
-                        Grid.Row="3" Grid.ColumnSpan="9" Grid.Column="1" />
+                        Grid.Row="3" Grid.ColumnSpan="9" Grid.Column="1">
+                    </Slider>
                     <Slider
                         x:Name="NightBrightnessSlider"
                         Style="{StaticResource HorizontalSlider}"
@@ -296,7 +323,8 @@
                         Cursor="Hand"
                         IsDirectionReversed="True"
                         Value="{Binding NightBrightness, Converter= {StaticResource BrightnessToDouble} ,Mode=TwoWay}"
-                        Grid.Row="5" Grid.ColumnSpan="9" Grid.Column="1" />
+                        Grid.Row="5" Grid.ColumnSpan="9" Grid.Column="1">
+                    </Slider>
                 </Grid>
             </StackPanel>
         </GroupBox>

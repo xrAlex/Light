@@ -6,18 +6,18 @@ namespace Light.Templates.Entities
     {
         #region Fields
 
-        private float _currentBrightness;
+        private double _currentBrightness;
         private int _currentColorTemperature;
         private int _dayColorTemperature;
-        private float _dayBrightness;
+        private double _dayBrightness;
         private int _nightColorTemperature;
-        private float _nightBrightness;
+        private double _nightBrightness;
 
         #endregion
 
         #region Constructors
 
-        public float CurrentBrightness
+        public double CurrentBrightness
         {
             get => _currentBrightness;
             set
@@ -47,7 +47,7 @@ namespace Light.Templates.Entities
             }
         }
 
-        public float DayBrightness
+        public double DayBrightness
         {
             get => _dayBrightness;
             set
@@ -67,7 +67,7 @@ namespace Light.Templates.Entities
             }
         }
 
-        public float NightBrightness
+        public double NightBrightness
         {
             get => _nightBrightness;
             set

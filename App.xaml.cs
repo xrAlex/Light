@@ -70,29 +70,27 @@ namespace Light
 
         protected override async void OnStartup(StartupEventArgs e)
         {
-            var host = ServicesHost;
             base.OnStartup(e);
-
-            await host.StartAsync().ConfigureAwait(false);
+            await ServicesHost.StartAsync().ConfigureAwait(false);
         }
 
         protected override async void OnExit(ExitEventArgs e)
         {
-            var host = ServicesHost;
+            ServiceLocator.PeriodWatcherService.StopWatch();
             _trayNotifier?.Dispose();
             _mutex?.ReleaseMutex();
             base.OnExit(e);
 
-            await host.StopAsync().ConfigureAwait(false);
+            await ServicesHost.StopAsync().ConfigureAwait(false);
             _servicesHost = null;
         }
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
             //Services
-            services.AddScoped<PeriodWatcherService>();
-            services.AddScoped<SettingsService>();
-            services.AddScoped<DialogService>();
+            services.AddSingleton<PeriodWatcherService>();
+            services.AddSingleton<SettingsService>();
+            services.AddSingleton<DialogService>();
             services.AddSingleton<TrayNotifierService>();
             services.AddTransient<CurrentTimeService>();
 

@@ -32,33 +32,18 @@
             Style="{StaticResource SliderCheckBox}"
             Content="{DynamicResource Loc_AutoLaunch}"
             IsChecked="{Binding LaunchOnStartup, Mode=TwoWay}"
-            Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
+            Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+        </CheckBox>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             IsChecked="{Binding ExtendedGammaRange, Mode=TwoWay}"
             Content="{DynamicResource Loc_ExtendedGammaRange}"
-            Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+            Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        </CheckBox>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             Content="{DynamicResource Loc_SmoothBrightnessChange}"
-            Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" />
-        <ComboBox
-            SelectedIndex="{Binding SelectedLangIndex}"
-            ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
-            Style="{StaticResource PictureComboBoxStyle}" 
-            Grid.RowSpan="3" Grid.Row="1" Grid.Column="2">
-            <ComboBoxItem Width="66" Height="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <Image 
-                    RenderOptions.BitmapScalingMode ="HighQuality"
-                    Width="41" Height="26"
-                    Source="{StaticResource FlagEng}"/>
-            </ComboBoxItem>
-            <ComboBoxItem Width="66" Height="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <Image 
-                    RenderOptions.BitmapScalingMode ="HighQuality"
-                    Width="41" Height="26"
-                    Source="{StaticResource FlagRus}"/>
-            </ComboBoxItem>
-        </ComboBox>
+            Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2">
+        </CheckBox>
     </Grid>
 </UserControl>

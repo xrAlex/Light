@@ -9,12 +9,12 @@ namespace Light.Converters.XAMLConverters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return System.Convert.ToSingle(value) * 100;
+            return System.Convert.ToDouble(value) * 100;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return System.Convert.ToSingle(value) * 0.01;
+            return System.Convert.ToDouble(value) * 0.01;
         }
     }
 }

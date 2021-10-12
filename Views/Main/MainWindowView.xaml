@@ -12,10 +12,14 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Topmost="True"
+        d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}"
         DataContext ="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
         Background="Transparent" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
-    <Border CornerRadius="10" Background="#FF292929" BorderThickness="5" BorderBrush="#FF292929">
+    <Border 
+        CornerRadius="10" 
+        Background="{StaticResource Black}" BorderBrush="{StaticResource Black}"
+        BorderThickness="5" >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*" />
@@ -23,12 +27,12 @@
                 <ColumnDefinition Width="20*" />
                 <ColumnDefinition Width="185*" />
                 <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="6*" />
-                <ColumnDefinition Width="21*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="17*" />
                 <ColumnDefinition Width="18*" />
                 <ColumnDefinition Width="9*" />
-                <ColumnDefinition Width="7*" />
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="6*" />
@@ -43,11 +47,18 @@
                 <RowDefinition Height="50*" />
                 <RowDefinition Height="5*" />
             </Grid.RowDefinitions>
-            <Border Background="White" CornerRadius="5"  Grid.Row="3" Grid.RowSpan="8" Grid.ColumnSpan="11"/>
+            <Border 
+                Background="White" 
+                CornerRadius="5"  
+                Grid.Row="3" Grid.RowSpan="8" Grid.ColumnSpan="11">
+            </Border>
             <TextBox
                 Foreground="White"
                 Text="Light"
-                FontSize="30" Grid.ColumnSpan="3" Margin="0,0,19,0" Padding="0,-9,0,0" Grid.RowSpan="3" />
+                FontSize="30" 
+                Margin="0,0,19,0" Padding="0,-9,0,0"
+                Grid.ColumnSpan="3" Grid.RowSpan="3">
+            </TextBox>
             <Button
                 Style="{StaticResource DeepGrayButton}"
                 Content="—"
@@ -57,22 +68,25 @@
                 Foreground="#FFF1F1F1"
                 VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                 Width="27" Height="24"
-                Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" />
+                Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2">
+            </Button>
             <Button
                 Style="{StaticResource DeepGrayButton}"
                 Command="{Binding CloseAppCommand, Mode=OneWay}"
                 Grid.Column="7" Grid.Row="1" Grid.ColumnSpan="2">
                 <Image
                     Width="20" Height="20"
-                    Source="{StaticResource TurnOff}" Stretch="Fill" />
+                    Source="{StaticResource TurnOff}" >
+                </Image>
             </Button>
             <Button
                 Style="{StaticResource RotaryButton}"
                 Command="{Binding OpenSettingsWindowCommand, Mode=OneWay}"
-                Grid.Row="9" Grid.Column="6" Grid.ColumnSpan="3">
+                Grid.Row="9" Grid.Column="6" Grid.ColumnSpan="4">
                 <Image
                     Width="48" Height="50"
-                    Source="{StaticResource Settings}" />
+                    Source="{StaticResource Settings}">
+                </Image>
             </Button>
             <ListBox
                 HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
@@ -87,64 +101,80 @@
                         <GroupBox Header="{Binding Name, Mode=OneWay}">
                             <Grid Height="67" Width="200">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24*" />
-                                    <ColumnDefinition Width="26*" />
-                                    <ColumnDefinition Width="15*" />
+                                    <ColumnDefinition Width="13*" />
+                                    <ColumnDefinition Width="36*" />
+                                    <ColumnDefinition Width="13*" />
                                     <ColumnDefinition Width="7*" />
-                                    <ColumnDefinition Width="65*" />
-                                    <ColumnDefinition Width="72*" />
+                                    <ColumnDefinition Width="62*" />
+                                    <ColumnDefinition Width="69*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="5*" />
-                                    <RowDefinition Height="10*" />
-                                    <RowDefinition Height="9*" />
-                                    <RowDefinition Height="16*" />
+                                    <RowDefinition Height="7*" />
+                                    <RowDefinition Height="12*" />
+                                    <RowDefinition Height="17*" />
                                     <RowDefinition Height="2*" />
-                                    <RowDefinition Height="19*" />
+                                    <RowDefinition Height="17*" />
                                     <RowDefinition Height="7*" />
                                 </Grid.RowDefinitions>
                                 <Image
                                     Source="{StaticResource MonitorBlack}"
-                                    Height="61.3" Width="55.4"
-                                    Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="3" />
+                                    Height="55" Width="56"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Margin="3,0"
+                                    Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="3" Grid.Row="1">
+                                </Image>
                                 <Image
                                     Source="{Binding CurrentTimePeriodImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="25" Width="26"
-                                    Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" />
+                                    Height="27" Width="Auto"
+                                    HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                                    Margin="8,0,8,1" 
+                                    Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3">
+                                </Image>
                                 <TextBlock
                                     Text="{Binding ColorConfiguration.CurrentColorTemperature, Mode=OneWay, StringFormat=CTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="12"
-                                    Grid.Column="4" Grid.Row="1" Grid.RowSpan="2" />
+                                    Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
+                                </TextBlock>
                                 <TextBlock
                                     Text="{Binding ColorConfiguration.CurrentBrightness, Mode=OneWay, StringFormat=CBT : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="12"
-                                    Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" />
+                                    Grid.Column="5" Grid.Row="1" Grid.RowSpan="2">
+                                </TextBlock>
                                 <TextBlock
                                     Text="{Binding ColorConfiguration.DayColorTemperature, Mode=OneWay, StringFormat=DTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="12"
-                                    Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+                                    Grid.Column="4" Grid.Row="3">
+                                </TextBlock>
                                 <TextBlock
                                     Text="{Binding ColorConfiguration.DayBrightness, Mode=OneWay, StringFormat=DBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="12"
-                                    Grid.Column="5" Grid.Row="3" Grid.RowSpan="2" />
+                                    Grid.Column="5" Grid.Row="3">
+                                </TextBlock>
                                 <TextBlock
                                     Text="{Binding ColorConfiguration.NightColorTemperature, Mode=OneWay, StringFormat=NTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="12"
-                                    Grid.Row="5" Grid.Column="4" Height="Auto" Grid.RowSpan="2" />
+                                    Grid.Row="5" Grid.Column="4">
+                                </TextBlock>
                                 <TextBlock
                                     Text="{Binding ColorConfiguration.NightBrightness, Mode=OneWay, StringFormat=NBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="12"
-                                    Grid.Row="5" Grid.Column="5" Height="Auto" Grid.RowSpan="2" />
+                                    Grid.Row="5" Grid.Column="5">
+                                </TextBlock>
                             </Grid>
                         </GroupBox>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Border Grid.ColumnSpan="6" Grid.RowSpan="3" Grid.Column="4" Grid.Row="4" CornerRadius="5" Background="{StaticResource LightGray}">
+            <Border 
+                Grid.ColumnSpan="6" Grid.RowSpan="3" Grid.Column="4" Grid.Row="4" 
+                CornerRadius="5" 
+                Background="{StaticResource LightGray}">
                 <TextBox
-                    Foreground="#FF292929"
+                    Foreground="{StaticResource Black}"
                     Text="{Binding CurrentTime}"
-                    FontSize="18"/>
+                    FontSize="18">
+                </TextBox>
             </Border>
         </Grid>
     </Border>

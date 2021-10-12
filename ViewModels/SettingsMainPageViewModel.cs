@@ -66,7 +66,7 @@ namespace Light.ViewModels
             }
         }
 
-        public float DayBrightness
+        public double DayBrightness
         {
             get => SelectedScreen.ColorConfiguration.DayBrightness;
             set
@@ -88,7 +88,7 @@ namespace Light.ViewModels
             }
         }
 
-        public float NightBrightness
+        public double NightBrightness
         {
             get => SelectedScreen.ColorConfiguration.NightBrightness;
             set

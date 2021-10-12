@@ -11,16 +11,6 @@ namespace Light.ViewModels
         private readonly SettingsService _settings;
         private readonly TrayNotifierService _trayNotifier;
 
-        public int SelectedLangIndex
-        {
-            get => _settings.SelectedLang;
-            set
-            {
-                _settings.SelectedLang = value;
-                Localization.LangDictionary.SetLang(value);
-            }
-        }
-
         public bool LaunchOnStartup
         {
             get => _registryModel.IsAppStartupKeyFounded();

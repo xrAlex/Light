@@ -10,6 +10,16 @@ namespace Light.ViewModels
     {
         #region Properties
 
+        public int SelectedLangIndex
+        {
+            get => _settings.SelectedLang;
+            set
+            {
+                _settings.SelectedLang = value;
+                Localization.LangDictionary.SetLang(value);
+            }
+        }
+
         public ViewModelBase SelectedViewModel
         {
             get => _selectedViewModel;

@@ -30,13 +30,13 @@
             Style="{StaticResource SliderCheckBox}"
             x:Name="FullScreenCheckBox"
             Content="{DynamicResource Loc_DontWorkInFullScreen}"
-            HorizontalAlignment="Left" Width="360"
+            HorizontalAlignment="Left" 
+            VerticalContentAlignment="Center" 
+            Width="360"
             IsChecked="{Binding CheckFullScreenApps, Mode=TwoWay}"
-            Grid.Column="1" Grid.Row="1"
-            VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
+            Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+        </CheckBox>
         <ListBox
-            HorizontalAlignment="Left" VerticalAlignment="Top"
-            Height="345" Width="350"
             BorderThickness="0"
             IsEnabled="{Binding IsChecked, ElementName=FullScreenCheckBox}"
             SelectionMode="Multiple"
@@ -50,17 +50,19 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox
-                        Width="340" Height="20"
+                        Width="325" Height="20"
                         VerticalContentAlignment="Center"
                         IsChecked="{Binding IsSelected}"
                         Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.MoveToIgnoredProcessesCommand, Mode=OneWay}"
-                        Content="{Binding DisplayedText, Mode=OneWay}" />
+                        Content="{Binding DisplayedText, Mode=OneWay}">
+                    </CheckBox>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBox
             Grid.Row="3"
             Text="{DynamicResource Loc_ProcessesWhiteList}"
-            Grid.Column="1" FontSize="14" />
+            Grid.Column="1" FontSize="14">
+        </TextBox>
     </Grid>
 </UserControl>

@@ -445,6 +445,13 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Flags\united-states.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Flags\china.png" />
+    <Resource Include="Resources\Images\Flags\france.png" />
+    <Resource Include="Resources\Images\Flags\germany.png" />
+    <Resource Include="Resources\Images\Flags\spain.png" />
+    <Resource Include="Resources\Images\Flags\united-arab-emirates.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

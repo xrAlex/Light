@@ -12,7 +12,7 @@ namespace Light.Infrastructure
         /// <summary>
         /// Converts color configuration to RGB colors for work with WinApi
         /// </summary>
-        public static void ApplyColorConfiguration(int colorTemperature, float brightness, string screenName)
+        public static void ApplyColorConfiguration(int colorTemperature, double brightness, string screenName)
         {
             var dc = Native.CreateDC(screenName, null, null, 0);
             const int maxChannelValue = 256;

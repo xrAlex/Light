@@ -13,5 +13,10 @@
     <BitmapImage x:Key="Lang" UriSource="/Light;component/Resources/Images/Lang.png"/>
     <BitmapImage x:Key="FlagRus" UriSource="/Light;component/Resources/Images/Flags/russia.png"/>
     <BitmapImage x:Key="FlagEng" UriSource="/Light;component/Resources/Images/Flags/united-states.png"/>
+    <BitmapImage x:Key="FlagChn" UriSource="/Light;component/Resources/Images/Flags/china.png"/>
+    <BitmapImage x:Key="FlagFra" UriSource="/Light;component/Resources/Images/Flags/france.png"/>
+    <BitmapImage x:Key="FlagGer" UriSource="/Light;component/Resources/Images/Flags/germany.png"/>
+    <BitmapImage x:Key="FlagSpa" UriSource="/Light;component/Resources/Images/Flags/spain.png"/>
+    <BitmapImage x:Key="FlagUae" UriSource="/Light;component/Resources/Images/Flags/united-arab-emirates.png"/>
 
 </ResourceDictionary>

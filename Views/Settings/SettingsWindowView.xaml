@@ -13,12 +13,16 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Topmost="True"
+        d:DataContext="{d:DesignInstance Type={x:Type viewmodels:SettingsWindowViewModel}}"
         DataContext ="{Binding SettingsWindowViewModel, Source={StaticResource Locator}}"
-        Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Background="Transparent" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Border CornerRadius="10" Background="#FF292929" BorderThickness="5" BorderBrush="#FF292929">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="171*" />
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="111*"/>
                 <RowDefinition Height="45*" />
                 <RowDefinition Height="4*" />
                 <RowDefinition Height="45*" />
@@ -40,47 +44,126 @@
                 <ColumnDefinition Width="78*" />
                 <ColumnDefinition Width="19*" />
             </Grid.ColumnDefinitions>
-            <Border Background="White" CornerRadius="5" Grid.RowSpan="9" Grid.ColumnSpan="7" Grid.Column="3"/>
-            <ContentControl
-            Content="{Binding SelectedViewModel}" Grid.ColumnSpan="10" Grid.RowSpan="9" />
+            <Border Background="White" CornerRadius="5" Grid.RowSpan="11" Grid.ColumnSpan="7" Grid.Column="3"/>
+            <ContentControl 
+                Content="{Binding SelectedViewModel}" 
+                Grid.ColumnSpan="10" 
+                Grid.RowSpan="11">
+            </ContentControl>
             <Button
-            Style="{StaticResource BlackButton}"
-            Grid.Column="1" Grid.Row="3"
-            Command="{Binding ToProcessPageCommand, Mode=OneWay}">
+                Style="{StaticResource BlackButton}"
+                Grid.Column="1" Grid.Row="5"
+                Command="{Binding ToProcessPageCommand, Mode=OneWay}">
                 <Image
-                Width="37" Height="37"
-                Source="{StaticResource Process}" Stretch="Fill" />
+                    Width="37" Height="37"
+                    Source="{StaticResource Process}" Stretch="Fill">
+                </Image>
             </Button>
             <Button
-            Style="{StaticResource BlackButton}"
-            Command="{Binding ToSettingsMainPageCommand, Mode=OneWay}" Grid.Column="1" Grid.Row="1">
+                Style="{StaticResource BlackButton}"
+                Command="{Binding ToSettingsMainPageCommand, Mode=OneWay}" Grid.Column="1" Grid.Row="3">
                 <Image
-                Width="37" Height="37"
-                Source="{StaticResource Main}" Stretch="Fill" />
+                    Width="37" Height="37"
+                    Source="{StaticResource Main}" Stretch="Fill">
+                </Image>
             </Button>
             <Button
-            Style="{StaticResource BlackButton}"
-            Grid.Column="1"
-            Command="{Binding ToOtherSettingsPageCommand, Mode=OneWay}" Height="45" VerticalAlignment="Top" Grid.Row="5">
+                Style="{StaticResource BlackButton}"
+                Grid.Column="1"
+                Command="{Binding ToOtherSettingsPageCommand, Mode=OneWay}" Height="45" VerticalAlignment="Top" Grid.Row="7">
                 <Image
-                Width="37" Height="37"
-                Source="{StaticResource Other}" Stretch="Fill" />
+                    Width="37" Height="37"
+                    Source="{StaticResource Other}" Stretch="Fill">
+                </Image>
             </Button>
             <Button
-            Style="{StaticResource LightGrayButton}"
-            Content="{DynamicResource Loc_Reset}"
-            Command="{Binding ResetSettingsCommand, Mode=OneWay}"
-            Grid.Row="7" Grid.Column="4" />
+                Style="{StaticResource LightGrayButton}"
+                Content="{DynamicResource Loc_Reset}"
+                Command="{Binding ResetSettingsCommand, Mode=OneWay}"
+                Grid.Row="9" Grid.Column="4">
+            </Button>
             <Button
-            Style="{StaticResource LightGrayButton}"
-            Content="{DynamicResource Loc_Cancel}"
-            Command="{Binding CloseSettingsCommand, Mode=OneWay}"
-            Grid.Row="7" Grid.Column="6" />
+                Style="{StaticResource LightGrayButton}"
+                Content="{DynamicResource Loc_Cancel}"
+                Command="{Binding CloseSettingsCommand, Mode=OneWay}"
+                Grid.Row="9" Grid.Column="6">
+            </Button>
             <Button
-            Style="{StaticResource LightGrayButton}"
-            Content="{DynamicResource Loc_Apply}"
-            Command="{Binding ApplySettingsCommand, Mode=OneWay}"
-            Grid.Row="7" Grid.Column="8" />
+                Style="{StaticResource LightGrayButton}"
+                Content="{DynamicResource Loc_Apply}"
+                Command="{Binding ApplySettingsCommand, Mode=OneWay}"
+                Grid.Row="9" Grid.Column="8"></Button>
+            <ComboBox
+                SelectedIndex="{Binding SelectedLangIndex}"
+                ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
+                Style="{StaticResource PictureComboBoxStyle}" Grid.Column="1" Grid.Row="1">
+                <ComboBoxItem 
+                    Width="50" Height="34"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    Padding="2,1,1,1" Margin="0,0,0,-1">
+                    <Image 
+                        RenderOptions.BitmapScalingMode ="HighQuality"
+                        Width="41" Height="26"
+                        Source="{StaticResource FlagEng}">
+                    </Image>
+                </ComboBoxItem>
+                <ComboBoxItem 
+                    Width="50" Height="34"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    Padding="5,1,4,1" Margin="0,2,0,0">
+                    <Image 
+                        RenderOptions.BitmapScalingMode ="HighQuality"
+                        Width="41" Height="26"
+                        Source="{StaticResource FlagRus}">
+                    </Image>
+                </ComboBoxItem>
+                <ComboBoxItem 
+                    Width="50" Height="34"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    Padding="5,1,4,1" Margin="0,2,0,0">
+                    <Image 
+                        RenderOptions.BitmapScalingMode ="HighQuality"
+                        Width="41" Height="26"
+                        Source="{StaticResource FlagChn}">
+                    </Image>
+                </ComboBoxItem>
+                <ComboBoxItem 
+                    Width="50"
+                    Height="34"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    Padding="5,1,4,1" 
+                    Margin="0,2,0,0">
+                    <Image 
+                        RenderOptions.BitmapScalingMode ="HighQuality"
+                        Width="41" Height="26"
+                        Source="{StaticResource FlagSpa}">
+                    </Image>
+                </ComboBoxItem>
+                <ComboBoxItem 
+                    Width="50"
+                    Height="34"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    Padding="5,1,4,1" 
+                    Margin="0,2,0,0" >
+                    <Image 
+                        RenderOptions.BitmapScalingMode ="HighQuality"
+                        Width="41" Height="26"
+                        Source="{StaticResource FlagUae}">
+                    </Image>
+                </ComboBoxItem>
+                <ComboBoxItem 
+                    Width="50"
+                    Height="34"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    Padding="5,1,4,1" 
+                    Margin="0,2,0,0">
+                    <Image 
+                        RenderOptions.BitmapScalingMode ="HighQuality"
+                        Width="41" Height="26"
+                        Source="{StaticResource FlagFra}">
+                    </Image>
+                </ComboBoxItem>
+            </ComboBox>
         </Grid>
     </Border>
 </Window>

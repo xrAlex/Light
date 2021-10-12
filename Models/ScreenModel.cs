@@ -67,7 +67,7 @@ namespace Light.Models
         public void ApplyColorConfiguration(ScreenEntity screen)
         {
             var configuration = screen.ColorConfiguration;
-            float brightness;
+            double brightness;
             int colorTemperature;
             if (screen.IsDayTimePeriod)
             {
@@ -84,7 +84,7 @@ namespace Light.Models
             screen.ColorConfiguration.CurrentBrightness = brightness;
         }
 
-        public void ApplyColorConfiguration(ScreenEntity screen, int colorTemperature, float brightness)
+        public void ApplyColorConfiguration(ScreenEntity screen, int colorTemperature, double brightness)
         {
             var configuration = screen.ColorConfiguration;
 
@@ -98,9 +98,10 @@ namespace Light.Models
 
         public static void SetDefaultColorTemperatureOnAllScreens()
         {
-            foreach (var screen in Screen.AllScreens)
+            var screens = ServiceLocator.Settings.Screens;
+            foreach (var screen in screens)
             {
-                GammaRegulator.ApplyColorConfiguration(6600, 1f, screen.DeviceName);
+                GammaRegulator.ApplyColorConfiguration(6600, 1f, screen.SysName);
             }
         }
 
