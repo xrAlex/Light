@@ -243,6 +243,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\Interfaces\ICurrentTimeService.cs" />
+    <Compile Include="Services\Interfaces\IDialogService.cs" />
+    <Compile Include="Services\Interfaces\ISettingsService.cs" />
+    <Compile Include="Services\Interfaces\ITrayNotifierService.cs" />
+    <Compile Include="Services\Interfaces\IPeriodWatcherService.cs" />
     <Compile Include="Templates\Entities\Base\NotifyingEntity.cs" />
     <Compile Include="Templates\Entities\ColorConfiguration.cs" />
     <Compile Include="Templates\Entities\ApplicationEntity.cs" />
@@ -269,7 +274,6 @@
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Models\ScreenModel.cs" />
     <Compile Include="Services\CurrentTimeService.cs" />
-    <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Templates\EventHandlers\TimeEventArgs.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

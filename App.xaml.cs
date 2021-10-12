@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using Light.Services;
+using Light.Services.Interfaces;
 using Light.ViewModels;
 using Light.Views.Main;
 using Light.Views.Settings;
@@ -16,7 +17,6 @@ namespace Light
     public partial class App
     {
         private readonly Mutex _mutex;
-        private readonly TrayNotifierService _trayNotifier;
         private App()
         {
             _mutex = new Mutex(true, ResourceAssembly.GetName().Name);
@@ -27,22 +27,21 @@ namespace Light
                 return;
             }
 
-            var appSettings = ServiceLocator.Settings;
+            var appSettings = ServicesHost.Services.GetRequiredService<ISettingsService>();
             appSettings.Load();
 
-            InitializeComponent();
+            var dialogService = ServicesHost.Services.GetRequiredService<IDialogService>();
+            var periodWatcherService = ServicesHost.Services.GetRequiredService<IPeriodWatcherService>();
 
-            var dialogService = ServiceLocator.DialogService;
-            var periodWatcherService = ServiceLocator.PeriodWatcherService;
             var silentLaunch = Environment.GetCommandLineArgs().Contains("-silent");
-            periodWatcherService.StartWatch();
 
             dialogService.Register<MainWindowViewModel, MainWindowView>();
             dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
             dialogService.Register<TrayMenuViewModel, TrayMenuView>();
 
+            periodWatcherService.StartWatch();
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
-            _trayNotifier = ServicesHost.Services.GetRequiredService<TrayNotifierService>();
+            InitializeComponent();
 
             if (!silentLaunch)
             {
@@ -76,8 +75,8 @@ namespace Light
 
         protected override async void OnExit(ExitEventArgs e)
         {
-            ServiceLocator.PeriodWatcherService.StopWatch();
-            _trayNotifier?.Dispose();
+            ServicesHost.Services.GetRequiredService<IPeriodWatcherService>().StopWatch();
+            ServicesHost.Services.GetRequiredService<ITrayNotifierService>().Dispose();
             _mutex?.ReleaseMutex();
             base.OnExit(e);
 
@@ -88,11 +87,11 @@ namespace Light
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
             //Services
-            services.AddSingleton<PeriodWatcherService>();
-            services.AddSingleton<SettingsService>();
-            services.AddSingleton<DialogService>();
-            services.AddSingleton<TrayNotifierService>();
-            services.AddTransient<CurrentTimeService>();
+            services.AddSingleton<IPeriodWatcherService, PeriodWatcherService>();
+            services.AddSingleton<ISettingsService, SettingsService>();
+            services.AddSingleton<IDialogService, DialogService>();
+            services.AddSingleton<ITrayNotifierService, TrayNotifierService>();
+            services.AddTransient<ICurrentTimeService, CurrentTimeService>();
 
             //ViewModels
             services.AddTransient<MainWindowViewModel>();

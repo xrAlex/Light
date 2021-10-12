@@ -27,9 +27,6 @@ namespace Light.Templates.Entities
                 Instance.Activate();
             }
         }
-
-        public void HideInstance() => Instance.Hide();
-
         public DialogStorage(Type type)
         {
             Type = type;

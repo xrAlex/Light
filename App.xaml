@@ -34,6 +34,7 @@
             <DataTemplate DataType="{x:Type viewmodels:TrayMenuViewModel}">
                 <tray:TrayMenuView/>
             </DataTemplate>
+
             <viewmodels:ViewModelLocator x:Key="Locator"/>
             <xamlConverters:MinConverter x:Key="MinConverter"></xamlConverters:MinConverter>
             <xamlConverters:HourConverter x:Key="HourConverter"></xamlConverters:HourConverter>

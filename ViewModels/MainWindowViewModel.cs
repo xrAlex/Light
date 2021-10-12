@@ -5,6 +5,7 @@ using Light.Templates.Entities;
 using Light.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Light.Services.Interfaces;
 using Application = System.Windows.Application;
 
 namespace Light.ViewModels
@@ -14,9 +15,9 @@ namespace Light.ViewModels
         #region Fields
 
         private string _currentTime = "12:00";
-        public ObservableCollection<ScreenEntity> Screens { get; } = new();
-        private readonly DialogService _dialogService;
-        private readonly TrayNotifierService _trayNotifier;
+        public ObservableCollection<ScreenEntity> Screens { get; }
+        private readonly IDialogService _dialogService;
+        private readonly ITrayNotifierService _trayNotifierService;
 
         #endregion
 
@@ -44,7 +45,7 @@ namespace Light.ViewModels
 
         private void OnAppToTrayCommandExecute()
         {
-            _trayNotifier.ShowTip(Localization.LangDictionary.GetString("Loc_ToTrayNotification"));
+            _trayNotifierService.ShowTip(Localization.LangDictionary.GetString("Loc_ToTrayNotification"));
             _dialogService.CloseDialog<MainWindowViewModel>();
         }
 
@@ -55,18 +56,20 @@ namespace Light.ViewModels
 
         #endregion
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(
+            ICurrentTimeService currentTimeService, 
+            ITrayNotifierService trayNotifierService, 
+            ISettingsService settingsService, 
+            IDialogService dialogService)
         {
+            _trayNotifierService = trayNotifierService;
+            _dialogService = dialogService;
             OpenSettingsWindowCommand = new LambdaCommand(p => OnOpenSettingsWindowCommandExecute());
             CloseAppCommand = new LambdaCommand(p => OnCloseAppCommandExecute());
             AppToTrayCommand = new LambdaCommand(p => OnAppToTrayCommandExecute());
 
-            var screenModel = new ScreenModel();
-            _dialogService = ServiceLocator.DialogService;
-            _trayNotifier = ServiceLocator.TrayNotifier;
-            var currentTimeService = ServiceLocator.CurrentTimeService;
 
-            Screens = ServiceLocator.Settings.Screens;
+            Screens = settingsService.Screens;
             CurrentTime = currentTimeService.GetCurrentTime();
 
             currentTimeService.OnCurrTimeChanged += (_, args) => { CurrentTime = args.CurrentTime; };

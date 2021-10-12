@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Light.Services.Interfaces;
 
 namespace Light.Models
 {
@@ -13,7 +14,8 @@ namespace Light.Models
     {
         #region Fields
 
-        private ObservableCollection<ApplicationEntity> Applications { get; }
+        private readonly ISettingsService _settingsService;
+        private readonly ObservableCollection<ApplicationEntity> Applications;
         private List<string> IgnoredApplications { get; }
 
         #endregion
@@ -66,16 +68,16 @@ namespace Light.Models
 
         private bool IsFullScreenProcess(nint handle)
         {
-            var settings = ServiceLocator.Settings;
-
-            return settings.Screens.Select(screen => SystemWindow.IsWindowOnFullScreen(screen, handle)).FirstOrDefault();
+            return _settingsService.Screens
+                .Select(screen => SystemWindow.IsWindowOnFullScreen(screen, handle))
+                .FirstOrDefault();
         }
 
         #endregion
 
-        public ApplicationModel()
+        public ApplicationModel(ISettingsService settingsService)
         {
-            var settingsService = ServiceLocator.Settings;
+            _settingsService = settingsService;
             IgnoredApplications = settingsService.IgnoredApplications;
             Applications = settingsService.Applications;
             FillApplicationsCollection();

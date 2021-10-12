@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
+using Light.Services.Interfaces;
 using Light.Templates.EventHandlers;
 
 namespace Light.Services
@@ -7,7 +8,7 @@ namespace Light.Services
     /// <summary>
     /// Updates current time
     /// </summary>
-    internal sealed class CurrentTimeService
+    internal sealed class CurrentTimeService : ICurrentTimeService
     {
         public CurrentTimeService()
         {

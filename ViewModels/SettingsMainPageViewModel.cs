@@ -5,6 +5,7 @@ using Light.Templates.Entities;
 using Light.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Light.Services.Interfaces;
 
 
 namespace Light.ViewModels
@@ -33,7 +34,7 @@ namespace Light.ViewModels
         #region Fields
 
         public ObservableCollection<ScreenEntity> Screens { get; }
-        private readonly SettingsService _settings;
+        private readonly ISettingsService _settingsService;
         private readonly ScreenModel _screenModel;
         private readonly RegistryModel _registryModel;
 
@@ -47,10 +48,10 @@ namespace Light.ViewModels
 
         public int SelectedScreenIndex
         {
-            get => _settings.SelectedScreen;
+            get => _settingsService.SelectedScreen;
             set
             {
-                _settings.SelectedScreen = value;
+                _settingsService.SelectedScreen = value;
                 RefreshUI();
             }
         }
@@ -151,15 +152,15 @@ namespace Light.ViewModels
 
         #endregion
 
-        public SettingsMainPageViewModel()
+        public SettingsMainPageViewModel(ISettingsService settingsService)
         {
             MonitorDoubleClickCommand = new LambdaCommand(p => OnMonitorDoubleClickCommandExecute());
 
-            _screenModel = new ScreenModel();
+            _settingsService = settingsService;
+            _screenModel = new ScreenModel(settingsService);
             _registryModel = new RegistryModel();
-            _settings = ServiceLocator.Settings;
-            Screens = _screenModel.Screens;
-            SelectedScreenIndex = _settings.SelectedScreen;
+            Screens = _settingsService.Screens;
+            SelectedScreenIndex = _settingsService.SelectedScreen;
             _screenModel.ForceColorTemperature();
             Localization.LangDictionary.OnLocalizationChanged += (_,_) => {RefreshUI();};
         }

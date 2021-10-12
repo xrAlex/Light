@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Light.Infrastructure;
+using Light.Services.Interfaces;
 using Light.Templates.Entities;
 using WindowsDisplayAPI.DisplayConfig;
 
@@ -14,7 +15,7 @@ namespace Light.Services
     /// <summary>
     /// Loads, saves and storage application settings
     /// </summary>
-    internal sealed partial class SettingsService
+    internal sealed partial class SettingsService : ISettingsService
     {
         public ObservableCollection<ApplicationEntity> Applications { get; }
         public ObservableCollection<ScreenEntity> Screens { get; }

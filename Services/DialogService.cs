@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
+using Light.Services.Interfaces;
 using Light.Templates.Entities;
 using Light.ViewModels.Base;
 
@@ -15,7 +16,7 @@ namespace Light.Services
     /// <summary>
     /// Class for working with program dialog windows
     /// </summary>
-    internal sealed class DialogService
+    internal sealed class DialogService : IDialogService
     {
         private readonly Dictionary<Type, DialogStorage> _mappings;
 
@@ -54,15 +55,6 @@ namespace Light.Services
         {
             var dialogStorage = _mappings[typeof(TViewModel)];
             dialogStorage.CloseInstance();
-        }
-
-        /// <summary>
-        /// Hiding dialog window
-        /// </summary>
-        public void HideDialog<TViewModel>() where TViewModel : ViewModelBase
-        {
-            var dialogStorage = _mappings[typeof(TViewModel)];
-            dialogStorage.HideInstance();
         }
 
         public DialogService()

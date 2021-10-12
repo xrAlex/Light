@@ -2,18 +2,19 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using Light.Services.Interfaces;
 
 namespace Light.Services
 {
     /// <summary>
     /// Creates TrayIcon and gives it functionality
     /// </summary>
-    internal sealed class TrayNotifierService : IDisposable
+    internal sealed class TrayNotifierService : IDisposable, ITrayNotifierService
     {
         #region Fields
 
         private readonly NotifyIcon _notifier;
-        private readonly DialogService _dialogService;
+        private readonly IDialogService _dialogService;
 
         #endregion
 
@@ -46,9 +47,9 @@ namespace Light.Services
 
         #endregion
 
-        public TrayNotifierService()
+        public TrayNotifierService(IDialogService dialogService)
         {
-            _dialogService = ServiceLocator.DialogService;
+            _dialogService = dialogService;
 
             _notifier = new NotifyIcon
             {
@@ -56,7 +57,7 @@ namespace Light.Services
                 Text = $@"{AppDomain.CurrentDomain.FriendlyName}",
                 Visible = true
             };
-            
+
             _notifier.MouseClick += TrayIcon_Click;
         }
 #if DEBUG

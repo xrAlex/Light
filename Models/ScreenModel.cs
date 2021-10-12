@@ -4,8 +4,10 @@ using System.Linq;
 using System.Windows.Forms;
 using Light.Infrastructure;
 using Light.Services;
+using Light.Services.Interfaces;
 using Light.Templates.Entities;
 using Light.WinApi;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Light.Models
 {
@@ -13,8 +15,8 @@ namespace Light.Models
     {
         #region Fields
 
-        public ObservableCollection<ScreenEntity> Screens { get; }
-        private readonly SettingsService _settings; 
+        private readonly ObservableCollection<ScreenEntity> _screens;
+        private readonly ISettingsService _settingsService; 
 
         #endregion
 
@@ -32,8 +34,8 @@ namespace Light.Models
         public int GetEndHour(int screenIndex) => GetScreen(screenIndex).EndTime / Hour;
         public int GetStartMin(int screenIndex) => GetScreen(screenIndex).StartTime % Hour;
         public int GetEndMin(int screenIndex) => GetScreen(screenIndex).EndTime % Hour;
-        public void ChangeScreenActivity(int screenIndex) => Screens[screenIndex].IsActive = !Screens[screenIndex].IsActive;
-        public ScreenEntity GetScreen(int screenIndex) => Screens[screenIndex];
+        public void ChangeScreenActivity(int screenIndex) => _screens[screenIndex].IsActive = !_screens[screenIndex].IsActive;
+        public ScreenEntity GetScreen(int screenIndex) => _screens[screenIndex];
 
         public void SetDayPeriod(ScreenEntity screen)
         {
@@ -61,7 +63,7 @@ namespace Light.Models
             var processPath = process?.TryGetProcessPath();
             var processFileName = Path.GetFileNameWithoutExtension(processPath);
 
-            return _settings.IgnoredApplications.Count == 0 || _settings.IgnoredApplications.All(p => p != processFileName);
+            return _settingsService.IgnoredApplications.Count == 0 || _settingsService.IgnoredApplications.All(p => p != processFileName);
         }
 
         public void ApplyColorConfiguration(ScreenEntity screen)
@@ -98,7 +100,7 @@ namespace Light.Models
 
         public static void SetDefaultColorTemperatureOnAllScreens()
         {
-            var screens = ServiceLocator.Settings.Screens;
+            var screens = App.ServicesHost.Services.GetRequiredService<ISettingsService>().Screens;
             foreach (var screen in screens)
             {
                 GammaRegulator.ApplyColorConfiguration(6600, 1f, screen.SysName);
@@ -108,7 +110,7 @@ namespace Light.Models
         public void ForceColorTemperature()
         {
             var workTime = new WorkTime();
-            foreach (var screen in Screens)
+            foreach (var screen in _screens)
             {
                 if (!screen.IsActive) continue;
 
@@ -125,10 +127,10 @@ namespace Light.Models
 
         #endregion
 
-        public ScreenModel()
+        public ScreenModel(ISettingsService settingsService)
         {
-            _settings = ServiceLocator.Settings;
-            Screens = _settings.Screens;
+            _settingsService = settingsService;
+            _screens = _settingsService.Screens;
         }
 
 #if DEBUG

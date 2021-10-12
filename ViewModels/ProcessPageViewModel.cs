@@ -5,6 +5,7 @@ using Light.Templates.Entities;
 using Light.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Light.Services.Interfaces;
 
 namespace Light.ViewModels
 {
@@ -14,8 +15,8 @@ namespace Light.ViewModels
 
         public bool CheckFullScreenApps
         {
-            get => _settings.CheckFullScreenApps;
-            set => _settings.CheckFullScreenApps = value;
+            get => _settingsService.CheckFullScreenApps;
+            set => _settingsService.CheckFullScreenApps = value;
         }
 
         #endregion
@@ -23,7 +24,7 @@ namespace Light.ViewModels
         #region Fields
 
         private readonly ApplicationModel _processModel;
-        private readonly SettingsService _settings;
+        private readonly ISettingsService _settingsService;
         public ObservableCollection<ApplicationEntity> Processes { get; }
 
         #endregion
@@ -35,13 +36,12 @@ namespace Light.ViewModels
 
         #endregion
 
-        public ProcessPageViewModel()
+        public ProcessPageViewModel(ISettingsService settingsService)
         {
             MoveToIgnoredProcessesCommand = new LambdaCommand(p => OnMoveToIgnoredProcessesCommandExecute());
-
-            _processModel = new ApplicationModel();
-            _settings = ServiceLocator.Settings;
-            Processes = _settings.Applications;
+            _settingsService = settingsService;
+            _processModel = new ApplicationModel(settingsService);
+            Processes = _settingsService.Applications;
         }
 
 #if DEBUG

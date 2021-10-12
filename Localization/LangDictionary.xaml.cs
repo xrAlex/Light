@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Light.Services;
+using Light.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Light.Localization
 {
@@ -17,8 +19,13 @@ namespace Light.Localization
             if (Instance == null)
             {
                 Instance = this;
-                var settings = ServiceLocator.Settings;
-                SetLang(settings.SelectedLang);
+                var selectedLang = App
+                    .ServicesHost
+                    .Services
+                    .GetRequiredService<ISettingsService>()
+                    .SelectedLang;
+
+                SetLang(selectedLang);
             }
         }
 

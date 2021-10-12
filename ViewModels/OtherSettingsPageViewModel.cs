@@ -1,6 +1,7 @@
 ﻿using System.CodeDom.Compiler;
 using Light.Models;
 using Light.Services;
+using Light.Services.Interfaces;
 using Light.ViewModels.Base;
 
 namespace Light.ViewModels
@@ -8,8 +9,7 @@ namespace Light.ViewModels
     internal sealed class OtherSettingsPageViewModel : ViewModelBase
     {
         private readonly RegistryModel _registryModel;
-        private readonly SettingsService _settings;
-        private readonly TrayNotifierService _trayNotifier;
+        private readonly ITrayNotifierService _trayNotifierService;
 
         public bool LaunchOnStartup
         {
@@ -32,7 +32,7 @@ namespace Light.ViewModels
             get => _registryModel.IsExtendedGammaRangeActive();
             set
             {
-                _trayNotifier.ShowTip(Localization.LangDictionary.GetString("Loc_RestartNotification"));
+                _trayNotifierService.ShowTip(Localization.LangDictionary.GetString("Loc_RestartNotification"));
                 if (value)
                 {
                     _registryModel.SetExtendedGammaRangeKey();
@@ -44,10 +44,9 @@ namespace Light.ViewModels
             }
         }
 
-        public OtherSettingsPageViewModel()
+        public OtherSettingsPageViewModel(ITrayNotifierService trayNotifier)
         {
-            _trayNotifier = ServiceLocator.TrayNotifier;
-            _settings = ServiceLocator.Settings;
+            _trayNotifierService = trayNotifier;
             _registryModel = new RegistryModel();
         }
 

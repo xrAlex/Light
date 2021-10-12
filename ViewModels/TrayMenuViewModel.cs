@@ -12,7 +12,7 @@ namespace Light.ViewModels
     {
         #region Fields
 
-        private readonly PeriodWatcherService _periodWatcherService;
+        private readonly IPeriodWatcherService _periodWatcherService;
         private bool _isAppPaused;
         private string _workTimeKeyText = Localization.LangDictionary.GetString("Loc_TrayPause");
 
@@ -59,12 +59,12 @@ namespace Light.ViewModels
 
         #endregion
 
-        public TrayMenuViewModel()
+        public TrayMenuViewModel(IPeriodWatcherService periodWatcherService)
         {
             PauseCommand = new LambdaCommand(p => OnPauseCommandExecute());
             ShutdownCommand = new LambdaCommand(p => OnShutdownCommandExecute());
 
-            _periodWatcherService = ServiceLocator.PeriodWatcherService;
+            _periodWatcherService = periodWatcherService;
             var tray = new TrayMenuPosition();
             var pos = tray.GetTrayMenuPos();
 

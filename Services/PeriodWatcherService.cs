@@ -6,24 +6,25 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Light.Services.Interfaces;
 
 namespace Light.Services
 {
     /// <summary>
     /// Checks which color configuration should be set
     /// </summary>
-    internal sealed class PeriodWatcherService
+    internal sealed class PeriodWatcherService : IPeriodWatcherService
     {
         private readonly ScreenModel _screenModel;
-        private readonly SettingsService _settings;
         private readonly WorkTime _workTime;
+        private readonly ISettingsService _settingsService;
         private CancellationTokenSource _cts;
 
-        public PeriodWatcherService()
+        public PeriodWatcherService(ISettingsService settingsService)
         {
-            _screenModel = new ScreenModel();
+            _screenModel = new ScreenModel(settingsService);
             _workTime = new WorkTime();
-            _settings = ServiceLocator.Settings;
+            _settingsService = settingsService;
         }
 
         public void StartWatch()
@@ -41,7 +42,7 @@ namespace Light.Services
         {
             while (!token.IsCancellationRequested)
             {
-                foreach (var screen in _screenModel.Screens)
+                foreach (var screen in _settingsService.Screens)
                 {
                     if (!screen.IsActive) continue;
 
@@ -49,7 +50,7 @@ namespace Light.Services
 
                     if (isWorkTime)
                     {
-                        if (_settings.CheckFullScreenApps)
+                        if (_settingsService.CheckFullScreenApps)
                         {
                             if (_screenModel.IsFullScreenProcessFounded(screen))
                             {

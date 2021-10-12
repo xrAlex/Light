@@ -2,20 +2,29 @@
 using Light.Services;
 using Light.ViewModels.Base;
 using System.Windows.Input;
+using Light.Services.Interfaces;
 
 
 namespace Light.ViewModels
 {
     internal sealed class SettingsWindowViewModel : ViewModelBase
     {
+        #region Fields
+        private ViewModelBase _selectedViewModel;
+        private readonly IDialogService _dialogService;
+        private readonly IPeriodWatcherService _periodWatcherService;
+        private readonly ISettingsService _settingsService;
+
+        #endregion
+
         #region Properties
 
         public int SelectedLangIndex
         {
-            get => _settings.SelectedLang;
+            get => _settingsService.SelectedLang;
             set
             {
-                _settings.SelectedLang = value;
+                _settingsService.SelectedLang = value;
                 Localization.LangDictionary.SetLang(value);
             }
         }
@@ -25,14 +34,6 @@ namespace Light.ViewModels
             get => _selectedViewModel;
             private set => Set(ref _selectedViewModel, value);
         }
-
-        #endregion
-
-        #region Fields
-        private ViewModelBase _selectedViewModel;
-        private readonly DialogService _dialogService;
-        private readonly SettingsService _settings;
-        private readonly PeriodWatcherService _colorTemperatureWatcher;
 
         #endregion
 
@@ -60,26 +61,29 @@ namespace Light.ViewModels
 
         private void OnResetSettingsCommandExecute()
         {
-            _settings.Reset();
+            _settingsService.Reset();
         }
 
         private void OnCloseSettingsCommandExecute()
         {
-            _settings.Reset();
+            _settingsService.Reset();
             _dialogService.CloseDialog<SettingsWindowViewModel>();
-            _colorTemperatureWatcher.StartWatch();
+            _periodWatcherService.StartWatch();
         }
 
         private void OnApplySettingsCommandExecute()
         {
-            _settings.Save();
+            _settingsService.Save();
             _dialogService.CloseDialog<SettingsWindowViewModel>();
-            _colorTemperatureWatcher.StartWatch();
+            _periodWatcherService.StartWatch();
         }
 
         #endregion
 
-        public SettingsWindowViewModel()
+        public SettingsWindowViewModel(
+            ISettingsService settingsService, 
+            IPeriodWatcherService periodWatcherService, 
+            IDialogService dialogService)
         {
             ApplySettingsCommand = new LambdaCommand(p => OnApplySettingsCommandExecute());
             ResetSettingsCommand = new LambdaCommand(p => OnResetSettingsCommandExecute());
@@ -89,12 +93,12 @@ namespace Light.ViewModels
             ToSettingsMainPageCommand = new LambdaCommand(p => OnToSettingsMainPageCommandExecute());
             ToProcessPageCommand = new LambdaCommand(p => OnToProcessPageCommandExecute());
 
-            _settings = ServiceLocator.Settings;
-            _dialogService = ServiceLocator.DialogService;
-            _colorTemperatureWatcher = ServiceLocator.PeriodWatcherService;
-            _colorTemperatureWatcher.StopWatch();
+            _settingsService = settingsService;
+            _periodWatcherService = periodWatcherService;
+            _dialogService = dialogService;
+            _periodWatcherService.StopWatch();
 
-            SelectedViewModel = new SettingsMainPageViewModel();
+            SelectedViewModel = ViewModelLocator.SettingsMainPageViewModel;
         }
 
 #if DEBUG
