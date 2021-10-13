@@ -7,7 +7,7 @@ using Light.Services.Interfaces;
 namespace Light.Services
 {
     /// <summary>
-    /// Checks which color configuration should be set
+    /// Contains method for control current time period
     /// </summary>
     internal sealed class PeriodWatcherService : IPeriodWatcherService
     {
@@ -23,17 +23,26 @@ namespace Light.Services
             _settingsService = settingsService;
         }
 
+        /// <summary>
+        /// Starts current period watcher cycle
+        /// </summary>
         public void StartWatch()
         {
             _cts = new CancellationTokenSource();
             Task.Run(() => Cycle(_cts.Token), _cts.Token).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Stops current period watcher cycle
+        /// </summary>
         public void StopWatch()
         {
             _cts.Cancel();
         }
 
+        /// <summary>
+        /// Checks in cycle which color configuration should be set
+        /// </summary>
         private async Task Cycle(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
@@ -48,7 +57,7 @@ namespace Light.Services
                     {
                         if (_settingsService.CheckFullScreenApps)
                         {
-                            if (_screenModel.IsFullScreenProcessFounded(screen))
+                            if (_screenModel.IsFullScreenWindowFounded(screen))
                             {
                                 _screenModel.SetDayPeriod(screen);
                             }

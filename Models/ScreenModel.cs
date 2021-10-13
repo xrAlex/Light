@@ -48,10 +48,10 @@ namespace Light.Models
         }
 
         /// <summary>
-        /// Метод проверяет для устройства отображения развернуто ли окно на переднем плане во весь экран
+        /// Checks foreground Window bounds
         /// </summary>
-        /// <returns> true если окно работает в полноэкранном режиме </returns>
-        public bool IsFullScreenProcessFounded(ScreenEntity screen)
+        /// <returns> <see cref="bool"/> true, if the window is maximized to full screen </returns>
+        public bool IsFullScreenWindowFounded(ScreenEntity screen)
         {
             var handle = Native.GetForegroundWindow();
             if (!SystemWindow.IsWindowValid(handle) || !SystemWindow.IsWindowOnFullScreen(screen, handle)) return false;
@@ -61,7 +61,7 @@ namespace Light.Models
             var processPath = process?.TryGetProcessPath();
             var processFileName = Path.GetFileNameWithoutExtension(processPath);
 
-            return _settingsService.IgnoredApplications.Count == 0 || _settingsService.IgnoredApplications.All(p => p != processFileName);
+            return _settingsService.ApplicationsWhitelist.Count == 0 || _settingsService.ApplicationsWhitelist.All(p => p != processFileName);
         }
 
         public void ApplyColorConfiguration(ScreenEntity screen)
@@ -105,7 +105,7 @@ namespace Light.Models
             }
         }
 
-        public void ForceColorTemperature()
+        public void ForceCurrentWorkPeriod()
         {
             var workTime = new WorkTime();
             foreach (var screen in _screens)

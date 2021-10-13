@@ -15,17 +15,43 @@ namespace Light.Services
     /// </summary>
     internal sealed partial class SettingsService : ISettingsService
     {
+        /// <summary>
+        /// Running user apps
+        /// </summary>
         public ObservableCollection<ApplicationEntity> Applications { get; }
-        public ObservableCollection<ScreenEntity> Screens { get; }
-        public List<string> IgnoredApplications { get; }
 
+        /// <summary>
+        /// All system display devices
+        /// </summary>
+        public ObservableCollection<ScreenEntity> Screens { get; }
+
+        /// <summary>
+        /// User-added names of ignored apps to whitelisted apps 
+        /// </summary>
+        public List<string> ApplicationsWhitelist { get; }
+
+        /// <summary>
+        /// If loading data from API fails then allow load Screens on Legacy mode using WinForms.Screens
+        /// </summary>
         private bool _legacyMode;
+
+        /// <summary>
+        /// Current selected screen in settings menu
+        /// </summary>
         public int SelectedScreen { get; set; }
+
+        /// <summary>
+        /// Current selected language
+        /// </summary>
         public int SelectedLang { get; set; }
+
+        /// <summary>
+        /// Allows/Prevents to Period Watcher Service checks fullscreen application on computer
+        /// </summary>
         public bool CheckFullScreenApps { get; set; }
         public SettingsService()
         {
-            IgnoredApplications = new List<string>();
+            ApplicationsWhitelist = new List<string>();
             Screens = new ObservableCollection<ScreenEntity>();
             Applications = new ObservableCollection<ApplicationEntity>();
         }
@@ -55,7 +81,7 @@ namespace Light.Services
 
         public void Reset()
         {
-            IgnoredApplications.Clear();
+            ApplicationsWhitelist.Clear();
             Screens.Clear();
             Load();
         }
@@ -193,13 +219,13 @@ namespace Light.Services
 
             foreach (var processName in strTable)
             {
-                IgnoredApplications.Add($"{processName}");
+                ApplicationsWhitelist.Add($"{processName}");
             }
         }
 
         private void SaveProcesses()
         {
-            var processStr = IgnoredApplications.Aggregate("", (current, process) => current + $"{process};");
+            var processStr = ApplicationsWhitelist.Aggregate("", (current, process) => current + $"{process};");
             INIManager.WriteValue("Processes", "Ignored", processStr);
         }
 

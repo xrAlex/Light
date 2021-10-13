@@ -32,7 +32,7 @@ namespace Light.ViewModels
         public ICommand RefreshApplicationsList { get; }
         public ICommand MoveToIgnoredProcesses { get; }
 
-        private void OnRefreshApplicationsListCommandExecute() => _applicationModel.MoveToIgnoredApplications();
+        private void OnRefreshApplicationsListCommandExecute() => _applicationModel.RelocateToWhitelist();
         private void OnMoveToIgnoredProcessesCommandExecute() => _applicationModel.FillApplicationsCollection();
 
         #endregion

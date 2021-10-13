@@ -4,7 +4,7 @@ using Light.Templates.Entities;
 namespace Light.Infrastructure
 {
     /// <summary>
-    /// Checks which working period needs to be set for screen
+    /// Contains method for check which working period needs to be set for screen
     /// </summary>
     internal sealed class WorkTime
     {

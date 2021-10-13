@@ -160,7 +160,7 @@ namespace Light.ViewModels
             _registryModel = new RegistryModel();
             Screens = _settingsService.Screens;
             SelectedScreenIndex = _settingsService.SelectedScreen;
-            _screenModel.ForceColorTemperature();
+            _screenModel.ForceCurrentWorkPeriod();
             Localization.LangDictionary.OnLocalizationChanged += (_,_) => {RefreshUI();};
         }
 

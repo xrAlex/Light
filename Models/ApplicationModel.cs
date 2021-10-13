@@ -20,7 +20,10 @@ namespace Light.Models
 
         #region Methods
 
-        public void MoveToIgnoredApplications()
+        /// <summary>
+        /// Relocates user selected applications names to whitelist
+        /// </summary>
+        public void RelocateToWhitelist()
         {
             _ignoredApplications.Clear();
 
@@ -77,7 +80,7 @@ namespace Light.Models
         public ApplicationModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
-            _ignoredApplications = settingsService.IgnoredApplications;
+            _ignoredApplications = settingsService.ApplicationsWhitelist;
             _applications = settingsService.Applications;
             FillApplicationsCollection();
         }

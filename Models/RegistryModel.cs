@@ -25,7 +25,7 @@ namespace Light.Models
         public bool IsAppStartupKeyFounded()
         {
             var output = ExecuteFromCMD(CheckCommand + StartupPath + AppNameKey, false, true);
-            return output.Contains("Light.exe");
+            return output.Contains(AppDomain.CurrentDomain.FriendlyName);
         }
 
         public bool IsExtendedGammaRangeActive()
