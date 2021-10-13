@@ -2,10 +2,7 @@
 {
     public partial class ProcessesPageUserControl 
     {
-        public ProcessesPageUserControl()
-        {
-            InitializeComponent();
-        }
+        public ProcessesPageUserControl() => InitializeComponent();
 #if DEBUG
         ~ProcessesPageUserControl()
         {

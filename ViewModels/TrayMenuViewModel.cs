@@ -61,8 +61,8 @@ namespace Light.ViewModels
 
         public TrayMenuViewModel(IPeriodWatcherService periodWatcherService)
         {
-            PauseCommand = new LambdaCommand(p => OnPauseCommandExecute());
-            ShutdownCommand = new LambdaCommand(p => OnShutdownCommandExecute());
+            PauseCommand = new LambdaCommand(_ => OnPauseCommandExecute());
+            ShutdownCommand = new LambdaCommand(_ => OnShutdownCommandExecute());
 
             _periodWatcherService = periodWatcherService;
             var tray = new TrayMenuPosition();

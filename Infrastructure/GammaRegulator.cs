@@ -1,5 +1,4 @@
-﻿using System;
-using Light.Templates.Entities;
+﻿using Light.Templates.Entities;
 using Light.WinApi;
 
 namespace Light.Infrastructure

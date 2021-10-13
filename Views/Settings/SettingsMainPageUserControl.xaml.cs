@@ -2,10 +2,7 @@
 {
     public partial class SettingsMainPageUserControl
     {
-        public SettingsMainPageUserControl()
-        {
-            InitializeComponent();
-        }
+        public SettingsMainPageUserControl() => InitializeComponent();
 #if DEBUG
         ~SettingsMainPageUserControl()
         {

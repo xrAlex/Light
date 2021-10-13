@@ -80,7 +80,7 @@ namespace Light
             _mutex?.ReleaseMutex();
             base.OnExit(e);
 
-            await ServicesHost.StopAsync().ConfigureAwait(false);
+            using (ServicesHost) await ServicesHost.StopAsync().ConfigureAwait(false);
             _servicesHost = null;
         }
 

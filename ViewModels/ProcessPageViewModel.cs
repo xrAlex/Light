@@ -1,6 +1,5 @@
 ﻿using Light.Commands;
 using Light.Models;
-using Light.Services;
 using Light.Templates.Entities;
 using Light.ViewModels.Base;
 using System.Collections.ObjectModel;
@@ -23,24 +22,28 @@ namespace Light.ViewModels
 
         #region Fields
 
-        private readonly ApplicationModel _processModel;
+        private readonly ApplicationModel _applicationModel;
         private readonly ISettingsService _settingsService;
         public ObservableCollection<ApplicationEntity> Processes { get; }
 
         #endregion
 
         #region Commands
+        public ICommand RefreshApplicationsList { get; }
+        public ICommand MoveToIgnoredProcesses { get; }
 
-        public ICommand MoveToIgnoredProcessesCommand { get; }
-        private void OnMoveToIgnoredProcessesCommandExecute() => _processModel.MoveToIgnoredProcesses();
+        private void OnRefreshApplicationsListCommandExecute() => _applicationModel.MoveToIgnoredProcesses();
+        private void OnMoveToIgnoredProcessesCommandExecute() => _applicationModel.FillApplicationsCollection();
 
         #endregion
 
         public ProcessPageViewModel(ISettingsService settingsService)
         {
-            MoveToIgnoredProcessesCommand = new LambdaCommand(p => OnMoveToIgnoredProcessesCommandExecute());
+            RefreshApplicationsList = new LambdaCommand(_ => OnMoveToIgnoredProcessesCommandExecute());
+            MoveToIgnoredProcesses = new LambdaCommand(_ => OnRefreshApplicationsListCommandExecute());
+
             _settingsService = settingsService;
-            _processModel = new ApplicationModel(settingsService);
+            _applicationModel = new ApplicationModel(settingsService);
             Processes = _settingsService.Applications;
         }
 

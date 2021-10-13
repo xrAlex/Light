@@ -4,15 +4,9 @@ namespace Light.Views.Settings
 {
     public partial class SettingsWindowView
     {
-        public SettingsWindowView()
-        {
-            InitializeComponent();
-        }
+        public SettingsWindowView() => InitializeComponent();
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
 
 #if DEBUG
         ~SettingsWindowView()

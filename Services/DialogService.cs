@@ -2,8 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
 using Light.Services.Interfaces;
 using Light.Templates.Entities;

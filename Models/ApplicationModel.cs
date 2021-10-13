@@ -1,9 +1,7 @@
 ﻿using Light.Infrastructure;
-using Light.Services;
 using Light.Templates.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Light.Services.Interfaces;
@@ -15,7 +13,7 @@ namespace Light.Models
         #region Fields
 
         private readonly ISettingsService _settingsService;
-        private readonly ObservableCollection<ApplicationEntity> Applications;
+        private readonly ObservableCollection<ApplicationEntity> _applications;
         private List<string> IgnoredApplications { get; }
 
         #endregion
@@ -26,7 +24,7 @@ namespace Light.Models
         {
             IgnoredApplications.Clear();
 
-            foreach (var applicationEntity in Applications)
+            foreach (var applicationEntity in _applications)
             {
                 if (applicationEntity.IsSelected)
                 {
@@ -35,9 +33,9 @@ namespace Light.Models
             }
         }
 
-        private void FillApplicationsCollection()
+        public void FillApplicationsCollection()
         {
-            Applications.Clear();
+            _applications.Clear();
 
             var windowsHandle = SystemWindow.GetAllWindows();
 
@@ -50,7 +48,7 @@ namespace Light.Models
 
                 if (!IsProcessValid(processPath, processFileName)) continue;
 
-                Applications.Add(new ApplicationEntity
+                _applications.Add(new ApplicationEntity
                 {
                     ExecutableFilePath = processPath,
                     Name = processFileName,
@@ -62,8 +60,9 @@ namespace Light.Models
 
         private bool IsProcessValid(string processPath, string processFileName)
         {
-            return !string.IsNullOrWhiteSpace(processPath) && !string.IsNullOrWhiteSpace(processFileName) 
-                                                           && Applications.All(y => y.ExecutableFilePath != processPath);
+            return !string.IsNullOrWhiteSpace(processPath)
+                   && !string.IsNullOrWhiteSpace(processFileName)
+                   && _applications.All(y => y.ExecutableFilePath != processPath);
         }
 
         private bool IsFullScreenProcess(nint handle)
@@ -79,7 +78,7 @@ namespace Light.Models
         {
             _settingsService = settingsService;
             IgnoredApplications = settingsService.IgnoredApplications;
-            Applications = settingsService.Applications;
+            _applications = settingsService.Applications;
             FillApplicationsCollection();
         }
 

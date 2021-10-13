@@ -85,13 +85,13 @@ namespace Light.ViewModels
             IPeriodWatcherService periodWatcherService, 
             IDialogService dialogService)
         {
-            ApplySettingsCommand = new LambdaCommand(p => OnApplySettingsCommandExecute());
-            ResetSettingsCommand = new LambdaCommand(p => OnResetSettingsCommandExecute());
-            CloseSettingsCommand = new LambdaCommand(p => OnCloseSettingsCommandExecute());
+            ApplySettingsCommand = new LambdaCommand(_ => OnApplySettingsCommandExecute());
+            ResetSettingsCommand = new LambdaCommand(_ => OnResetSettingsCommandExecute());
+            CloseSettingsCommand = new LambdaCommand(_ => OnCloseSettingsCommandExecute());
 
-            ToOtherSettingsPageCommand = new LambdaCommand(p => OnToOtherSettingsPageCommandExecute());
-            ToSettingsMainPageCommand = new LambdaCommand(p => OnToSettingsMainPageCommandExecute());
-            ToProcessPageCommand = new LambdaCommand(p => OnToProcessPageCommandExecute());
+            ToOtherSettingsPageCommand = new LambdaCommand(_ => OnToOtherSettingsPageCommandExecute());
+            ToSettingsMainPageCommand = new LambdaCommand(_ => OnToSettingsMainPageCommandExecute());
+            ToProcessPageCommand = new LambdaCommand(_ => OnToProcessPageCommandExecute());
 
             _settingsService = settingsService;
             _periodWatcherService = periodWatcherService;

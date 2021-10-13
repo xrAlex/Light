@@ -456,6 +456,9 @@
     <Resource Include="Resources\Images\Flags\spain.png" />
     <Resource Include="Resources\Images\Flags\united-arab-emirates.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\refresh-option.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

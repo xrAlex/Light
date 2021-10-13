@@ -1,6 +1,5 @@
 ﻿using Light.Commands;
 using Light.Models;
-using Light.Services;
 using Light.Templates.Entities;
 using Light.ViewModels.Base;
 using System.Collections.ObjectModel;
@@ -154,7 +153,7 @@ namespace Light.ViewModels
 
         public SettingsMainPageViewModel(ISettingsService settingsService)
         {
-            MonitorDoubleClickCommand = new LambdaCommand(p => OnMonitorDoubleClickCommandExecute());
+            MonitorDoubleClickCommand = new LambdaCommand(_ => OnMonitorDoubleClickCommandExecute());
 
             _settingsService = settingsService;
             _screenModel = new ScreenModel(settingsService);
