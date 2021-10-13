@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Globalization;
 using System.Text;
 using Light.WinApi;
 
@@ -21,7 +23,13 @@ namespace Light.Infrastructure
             StringBuilder buffer = new(MaxStringSize);
             Native.GetPrivateProfileString(section, key, defaultValue, buffer, MaxStringSize, Path);
 
-            return (T)Convert.ChangeType(buffer.ToString(), typeof(T));
+            var canConvert = TypeDescriptor.GetConverter(typeof(T)).CanConvertFrom(typeof(T));
+            if (canConvert)
+            {
+                return (T)Convert.ChangeType(buffer.ToString(), typeof(T), CultureInfo.InvariantCulture);
+            }
+
+            return (T)Convert.ChangeType(defaultValue, typeof(T), CultureInfo.InvariantCulture);
         }
 
         /// <summary>
