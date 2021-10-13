@@ -126,8 +126,8 @@ namespace Light.Services
                     {
                         DayColorTemperature = INIManager.GetValue<int>($"{index}", "DayColorTemperature", "6600"),
                         DayBrightness = INIManager.GetValue<float>($"{index}", "DayBrightness", "1"),
-                        NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "4200"),
-                        NightBrightness = INIManager.GetValue<float>($"{index}", "NightBrightness", "1"),
+                        NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "5500"),
+                        NightBrightness = INIManager.GetValue<float>($"{index}", "NightBrightness", "0.8"),
                     },
                     Height = screen.Bounds.Height,
                     Width = screen.Bounds.Width,
@@ -159,8 +159,8 @@ namespace Light.Services
                     {
                         DayColorTemperature = INIManager.GetValue<int>($"{displayCode}", "DayColorTemperature", "6600"),
                         DayBrightness = INIManager.GetValue<float>($"{displayCode}", "DayBrightness", "1"),
-                        NightColorTemperature = INIManager.GetValue<int>($"{displayCode}", "NightColorTemperature", "4200"),
-                        NightBrightness = INIManager.GetValue<float>($"{displayCode}", "NightBrightness", "1"),
+                        NightColorTemperature = INIManager.GetValue<int>($"{displayCode}", "NightColorTemperature", "5500"),
+                        NightBrightness = INIManager.GetValue<float>($"{displayCode}", "NightBrightness", "0.8"),
                     },
 
                     Height = displayHeight,
