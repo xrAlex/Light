@@ -14,21 +14,21 @@ namespace Light.Models
 
         private readonly ISettingsService _settingsService;
         private readonly ObservableCollection<ApplicationEntity> _applications;
-        private List<string> IgnoredApplications { get; }
+        private readonly List<string> _ignoredApplications;
 
         #endregion
 
         #region Methods
 
-        public void MoveToIgnoredProcesses()
+        public void MoveToIgnoredApplications()
         {
-            IgnoredApplications.Clear();
+            _ignoredApplications.Clear();
 
             foreach (var applicationEntity in _applications)
             {
                 if (applicationEntity.IsSelected)
                 {
-                    IgnoredApplications.Add($"{applicationEntity.Name}");
+                    _ignoredApplications.Add($"{applicationEntity.Name}");
                 }
             }
         }
@@ -52,7 +52,7 @@ namespace Light.Models
                 {
                     ExecutableFilePath = processPath,
                     Name = processFileName,
-                    IsSelected = IgnoredApplications.Any(x => x == processFileName),
+                    IsSelected = _ignoredApplications.Any(x => x == processFileName),
                     OnFullScreen = IsFullScreenProcess(handle)
                 });
             }
@@ -77,7 +77,7 @@ namespace Light.Models
         public ApplicationModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
-            IgnoredApplications = settingsService.IgnoredApplications;
+            _ignoredApplications = settingsService.IgnoredApplications;
             _applications = settingsService.Applications;
             FillApplicationsCollection();
         }
