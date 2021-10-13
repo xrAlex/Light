@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using Light.Models;
 using Light.Services;
 using Light.Services.Interfaces;
 using Light.ViewModels;
@@ -77,6 +78,7 @@ namespace Light
         {
             ServicesHost.Services.GetRequiredService<IPeriodWatcherService>().StopWatch();
             ServicesHost.Services.GetRequiredService<ITrayNotifierService>().Dispose();
+            ScreenModel.SetDefaultColorTemperatureOnAllScreens();
             _mutex?.ReleaseMutex();
             base.OnExit(e);
 

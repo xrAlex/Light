@@ -66,8 +66,8 @@ namespace Light.ViewModels
 
         private void OnCloseSettingsCommandExecute()
         {
-            _settingsService.Reset();
             _dialogService.CloseDialog<SettingsWindowViewModel>();
+            _settingsService.Reset();
             _periodWatcherService.StartWatch();
         }
 

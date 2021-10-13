@@ -14,6 +14,7 @@ namespace Light.ViewModels.Base
 
         protected void Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
+            if (Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
         }

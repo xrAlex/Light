@@ -33,7 +33,7 @@ namespace Light.Services
         {
             var dialogStorage = _mappings[typeof(TViewModel)];
             var dialog = dialogStorage.Instance;
-            if (dialog == null)
+            if (dialog == null || !dialog.IsLoaded)
             {
                 dialog = (Window)Activator.CreateInstance(dialogStorage.Type);
                 dialogStorage.Instance = dialog;

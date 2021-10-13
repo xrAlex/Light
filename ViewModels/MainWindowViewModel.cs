@@ -38,7 +38,6 @@ namespace Light.ViewModels
 
         private void OnCloseAppCommandExecute()
         {
-            ScreenModel.SetDefaultColorTemperatureOnAllScreens();
             Application.Current.Shutdown();
         }
 

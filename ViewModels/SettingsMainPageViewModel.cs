@@ -1,4 +1,5 @@
-﻿using Light.Commands;
+﻿using System;
+using Light.Commands;
 using Light.Models;
 using Light.Templates.Entities;
 using Light.ViewModels.Base;
@@ -15,17 +16,14 @@ namespace Light.ViewModels
 
         private void RefreshUI()
         {
-            if (SelectedScreenIndex != -1)
-            {
-                HourStart = _screenModel.GetStartHour(SelectedScreenIndex);
-                MinStart = _screenModel.GetStartMin(SelectedScreenIndex);
-                HourEnd = _screenModel.GetEndHour(SelectedScreenIndex);
-                MinEnd = _screenModel.GetEndMin(SelectedScreenIndex);
-                DayColorTemperature = SelectedScreen.ColorConfiguration.DayColorTemperature;
-                NightColorTemperature = SelectedScreen.ColorConfiguration.NightColorTemperature;
-                DayBrightness = SelectedScreen.ColorConfiguration.DayBrightness;
-                NightBrightness = SelectedScreen.ColorConfiguration.NightBrightness;
-            }
+            OnPropertyChanged("DayColorTemperature");
+            OnPropertyChanged("DayBrightness");
+            OnPropertyChanged("NightColorTemperature");
+            OnPropertyChanged("NightBrightness");
+            OnPropertyChanged("HourStart");
+            OnPropertyChanged("MinStart");
+            OnPropertyChanged("HourEnd");
+            OnPropertyChanged("MinEnd");
         }
 
         #endregion
@@ -50,6 +48,7 @@ namespace Light.ViewModels
             get => _settingsService.SelectedScreen;
             set
             {
+                if (value == -1) return;
                 _settingsService.SelectedScreen = value;
                 RefreshUI();
             }
@@ -160,8 +159,7 @@ namespace Light.ViewModels
             _registryModel = new RegistryModel();
             Screens = _settingsService.Screens;
             SelectedScreenIndex = _settingsService.SelectedScreen;
-            _screenModel.ForceCurrentWorkPeriod();
-            Localization.LangDictionary.OnLocalizationChanged += (_,_) => {RefreshUI();};
+            Localization.LangDictionary.OnLocalizationChanged += (_, _) => { RefreshUI(); };
         }
 
 #if DEBUG
