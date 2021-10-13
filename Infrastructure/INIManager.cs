@@ -23,7 +23,8 @@ namespace Light.Infrastructure
             StringBuilder buffer = new(MaxStringSize);
             Native.GetPrivateProfileString(section, key, defaultValue, buffer, MaxStringSize, Path);
 
-            var canConvert = TypeDescriptor.GetConverter(typeof(T)).CanConvertFrom(typeof(T));
+            // можно ли конвертировать строку к bool
+            var canConvert = TypeDescriptor.GetConverter(typeof(string)).CanConvertTo(typeof(T));
             if (canConvert)
             {
                 return (T)Convert.ChangeType(buffer.ToString(), typeof(T), CultureInfo.InvariantCulture);
