@@ -436,9 +436,7 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Icon1.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Images\Lang.png" />
   </ItemGroup>

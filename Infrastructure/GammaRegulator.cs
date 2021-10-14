@@ -33,10 +33,12 @@ namespace Light.Infrastructure
                 channels.Blue[i] = (ushort) (i * channelMult * RGBmask.Blue * brightness);
             }
 
+            var successfully = Native.SetDeviceGammaRamp(dc, ref channels);
 #if DEBUG
-            Logging.Write($"Applying color configuration on screen {screenName} [{colorTemperature} {brightness}]");
+            Logging.Write($"Applying color configuration on screen {screenName} " +
+                          $"[Set successfully: {successfully}] " +
+                          $"[DC: {dc} Color Temperature: {colorTemperature} Brightness: {brightness}]");
 #endif
-            Native.SetDeviceGammaRamp(dc, ref channels);
             Native.DeleteDC(dc);
         }
     }
