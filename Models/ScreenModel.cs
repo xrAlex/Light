@@ -99,31 +99,19 @@ namespace Light.Models
         public static void SetDefaultColorTemperatureOnAllScreens()
         {
             var screens = App.ServicesHost.Services.GetRequiredService<ISettingsService>().Screens;
+#if DEBUG
+            if (screens.Count < 1)
+            {
+                Logging.Write("Cant founded Screens");
+            }
+#endif
             foreach (var screen in screens)
             {
                 GammaRegulator.ApplyColorConfiguration(6600, 1f, screen.SysName);
             }
         }
 
-        public void ForceCurrentWorkPeriod()
-        {
-            var workTime = new WorkTime();
-            foreach (var screen in _screens)
-            {
-                if (!screen.IsActive) continue;
-
-                if (workTime.IsDayPeriod(screen))
-                {
-                    SetNightPeriod(screen);
-                }
-                else
-                {
-                    SetDayPeriod(screen);
-                }
-            }
-        }
-
-        #endregion
+#endregion
 
         public ScreenModel(ISettingsService settingsService)
         {

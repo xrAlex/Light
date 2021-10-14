@@ -177,6 +177,12 @@ namespace Light.Services
 
         private void SaveScreensParameters()
         {
+#if DEBUG
+            if (Screens.Count < 1)
+            {
+                Logging.Write("Cant founded Screens");
+            }
+#endif
             foreach (var screen in Screens)
             {
                 INIManager.WriteValue($"{screen.DisplayCode}", "DayColorTemperature", screen.ColorConfiguration.DayColorTemperature);
@@ -193,6 +199,12 @@ namespace Light.Services
 
         private void LegacySaveScreensParameters()
         {
+#if DEBUG
+            if (Screens.Count < 1)
+            {
+                Logging.Write("Cant founded Screens");
+            }
+#endif
             for (var i = 0; i < Screens.Count; i++)
             {
                 var screen = Screens[i];

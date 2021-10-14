@@ -15,6 +15,12 @@ namespace Light.Templates.Entities
                 Instance.Close();
                 Instance = null;
             }
+#if DEBUG
+            else
+            {
+                Logging.Write($"Instance is null, Type: [{Type}]");
+            }
+#endif
         }
 
         public void ShowInstance()
@@ -24,6 +30,12 @@ namespace Light.Templates.Entities
                 Instance.Show();
                 Instance.Activate();
             }
+#if DEBUG
+            else
+            {
+                Logging.Write($"Instance is null, Type: [{Type}]");
+            }
+#endif
         }
         public DialogStorage(Type type)
         {

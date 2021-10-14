@@ -53,7 +53,11 @@ namespace Light.Infrastructure
         private TaskBarLocation GetTaskBarLocation()
         {
             var taskBarPos = GetTaskBarDimensions();
-            if (taskBarPos == Rectangle.Empty) return TaskBarLocation.Bottom;
+            if (taskBarPos == Rectangle.Empty)
+            {
+                Logging.Write("Task bar cant founded");
+                return TaskBarLocation.Bottom;
+            }
 
             var taskBarLocation = TaskBarLocation.Top;
             var screen = Screen.PrimaryScreen;
