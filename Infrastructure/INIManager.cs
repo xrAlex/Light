@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 using Light.WinApi;
 
@@ -18,19 +19,20 @@ namespace Light.Infrastructure
         /// Converts a string from .ini file to specified type
         /// </summary>
         /// <returns> Converted value <typeparamref name="T"></typeparamref></returns>
-        public static T GetValue<T>(string section, string key, string defaultValue) where T : IConvertible
+        public static T GetValue<T>(string section, string key, T defaultValue) where T : IConvertible
         {
             StringBuilder buffer = new(MaxStringSize);
-            Native.GetPrivateProfileString(section, key, defaultValue, buffer, MaxStringSize, Path);
+            Native.GetPrivateProfileString(section, key, defaultValue.ToString(), buffer, MaxStringSize, Path);
 
-            // можно ли конвертировать строку к bool
-            var canConvert = TypeDescriptor.GetConverter(typeof(string)).CanConvertTo(typeof(T));
-            if (canConvert)
+            try
             {
                 return (T)Convert.ChangeType(buffer.ToString(), typeof(T), CultureInfo.InvariantCulture);
             }
-
-            return (T)Convert.ChangeType(defaultValue, typeof(T), CultureInfo.InvariantCulture);
+            catch (Exception ex)
+            {
+                Logging.Write("Error when loading settings", ex); ;
+                return defaultValue;
+            }
         }
 
         /// <summary>

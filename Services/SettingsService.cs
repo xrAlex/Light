@@ -71,9 +71,9 @@ namespace Light.Services
 
         public void Load()
         {
-            SelectedLang = INIManager.GetValue<int>("Main", "SelectedLang", "0");
-            SelectedScreen = INIManager.GetValue<int>("Main", "SelectedScreen", "0");
-            CheckFullScreenApps = INIManager.GetValue<bool>("Main", "CheckFullScreenApps", "false");
+            SelectedLang = INIManager.GetValue("Main", "SelectedLang", 0);
+            SelectedScreen = INIManager.GetValue("Main", "SelectedScreen", 0);
+            CheckFullScreenApps = INIManager.GetValue("Main", "CheckFullScreenApps", false);
 
             LoadScreens();
             LoadProcesses();
@@ -95,9 +95,9 @@ namespace Light.Services
             {
                 LoadScreensFromAPI();
             }
-            catch
+            catch(Exception ex)
             {
-                DebugConsole.Print("Error when loading screens");
+                Logging.Write("Error when loading screens", ex);
                 LoadScreensLegacy();
                 _legacyMode = true;
             }
@@ -124,18 +124,18 @@ namespace Light.Services
                 {
                     ColorConfiguration =
                     {
-                        DayColorTemperature = INIManager.GetValue<int>($"{index}", "DayColorTemperature", "6600"),
-                        DayBrightness = INIManager.GetValue<float>($"{index}", "DayBrightness", "1"),
-                        NightColorTemperature = INIManager.GetValue<int>($"{index}", "NightColorTemperature", "5500"),
-                        NightBrightness = INIManager.GetValue<float>($"{index}", "NightBrightness", "0.8"),
+                        DayColorTemperature = INIManager.GetValue($"{index}", "DayColorTemperature", 6600),
+                        DayBrightness = INIManager.GetValue($"{index}", "DayBrightness", 1.0),
+                        NightColorTemperature = INIManager.GetValue($"{index}", "NightColorTemperature", 5500),
+                        NightBrightness = INIManager.GetValue($"{index}", "NightBrightness", 0.8),
                     },
                     Height = screen.Bounds.Height,
                     Width = screen.Bounds.Width,
-                    StartTime = INIManager.GetValue<int>($"{index}", "StartTime", "1380"),
-                    EndTime = INIManager.GetValue<int>($"{index}", "EndTime", "420"),
-                    IsActive = INIManager.GetValue<bool>($"{index}", "Active", "true"),
-                    Name = INIManager.GetValue<string>($"{index}", "Name", $"Monitor {index + 1}"),
-                    SysName = INIManager.GetValue<string>($"{index}", "SysName", $"{screen.DeviceName}")
+                    StartTime = INIManager.GetValue($"{index}", "StartTime", 1380),
+                    EndTime = INIManager.GetValue($"{index}", "EndTime", 420),
+                    IsActive = INIManager.GetValue($"{index}", "Active", true),
+                    Name = INIManager.GetValue($"{index}", "Name", $"Monitor {index + 1}"),
+                    SysName = INIManager.GetValue($"{index}", "SysName", $"{screen.DeviceName}")
                 });
                 index++;
             }
@@ -157,20 +157,20 @@ namespace Light.Services
                 {
                     ColorConfiguration =
                     {
-                        DayColorTemperature = INIManager.GetValue<int>($"{displayCode}", "DayColorTemperature", "6600"),
-                        DayBrightness = INIManager.GetValue<float>($"{displayCode}", "DayBrightness", "1"),
-                        NightColorTemperature = INIManager.GetValue<int>($"{displayCode}", "NightColorTemperature", "5500"),
-                        NightBrightness = INIManager.GetValue<float>($"{displayCode}", "NightBrightness", "0.8"),
+                        DayColorTemperature = INIManager.GetValue($"{displayCode}", "DayColorTemperature", 6600),
+                        DayBrightness = INIManager.GetValue($"{displayCode}", "DayBrightness", 1.0),
+                        NightColorTemperature = INIManager.GetValue($"{displayCode}", "NightColorTemperature", 5500),
+                        NightBrightness = INIManager.GetValue($"{displayCode}", "NightBrightness", 0.8),
                     },
 
                     Height = displayHeight,
                     Width = displayWidth,
                     DisplayCode = displayCode,
-                    StartTime = INIManager.GetValue<int>($"{displayCode}", "StartTime", "1380"),
-                    EndTime = INIManager.GetValue<int>($"{displayCode}", "EndTime", "420"),
-                    IsActive = INIManager.GetValue<bool>($"{displayCode}", "Active", "true"),
-                    Name = INIManager.GetValue<string>($"{displayCode}", "Name", $"{displayFriendlyName}"),
-                    SysName = INIManager.GetValue<string>($"{displayCode}", "SysName", $"{displayName}")
+                    StartTime = INIManager.GetValue($"{displayCode}", "StartTime", 1380),
+                    EndTime = INIManager.GetValue($"{displayCode}", "EndTime", 420),
+                    IsActive = INIManager.GetValue($"{displayCode}", "Active", true),
+                    Name = INIManager.GetValue($"{displayCode}", "Name", $"{displayFriendlyName}"),
+                    SysName = INIManager.GetValue($"{displayCode}", "SysName", $"{displayName}")
                 });
             }
         }

@@ -227,7 +227,7 @@
     <Compile Include="Converters\XAMLConverters\BrightnessToDouble.cs" />
     <Compile Include="Converters\XAMLConverters\HourConverter.cs" />
     <Compile Include="Converters\XAMLConverters\MinConverter.cs" />
-    <Compile Include="DebugConsole.cs" />
+    <Compile Include="Logging.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Infrastructure\SystemWindow.cs" />
     <Compile Include="Infrastructure\TrayMenuPosition.cs" />

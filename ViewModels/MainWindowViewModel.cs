@@ -66,7 +66,6 @@ namespace Light.ViewModels
             CloseAppCommand = new LambdaCommand(p => OnCloseAppCommandExecute());
             AppToTrayCommand = new LambdaCommand(p => OnAppToTrayCommandExecute());
 
-
             Screens = settingsService.Screens;
             CurrentTime = currentTimeService.GetCurrentTime();
 

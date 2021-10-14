@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Light.Models;
 using Light.Services;
@@ -51,6 +52,7 @@ namespace Light
         }
     }
 
+
     public partial class App
     {
         public static IHost ServicesHost => _servicesHost ??= CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
@@ -71,6 +73,7 @@ namespace Light
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            SetupExceptionHandling();
             await ServicesHost.StartAsync().ConfigureAwait(false);
         }
 
@@ -102,6 +105,24 @@ namespace Light
             services.AddTransient<SettingsMainPageViewModel>();
             services.AddTransient<SettingsWindowViewModel>();
             services.AddTransient<TrayMenuViewModel>();
+        }
+
+        private void SetupExceptionHandling()
+        {
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => 
+                Logging.Write("UnhandledException", (Exception)e.ExceptionObject);
+
+            DispatcherUnhandledException += (s, e) =>
+            {
+                Logging.Write("DispatcherUnhandledException", e.Exception);
+                e.Handled = true;
+            };
+
+            TaskScheduler.UnobservedTaskException += (s, e) =>
+            {
+                Logging.Write("UnobservedTaskException", e.Exception);
+                e.SetObserved();
+            };
         }
     }
 }
