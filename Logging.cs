@@ -17,14 +17,19 @@ namespace Light
         public static void Write(string logMessage, Exception ex = null, [CallerMemberName] string callerName = null)
         {
             var filename = Path.Combine(FilePath, $"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log");
-            var fullText = $"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] " +  $"Caller: {callerName}\n" +
-                           $"[{logMessage}]\n" +
-                           $"[{ex?.TargetSite.DeclaringType}.{ex?.TargetSite.Name}()] " +
-                           $"{ex?.Message}]\n" +
-                           $"[StackTrace]\n{ex?.StackTrace}\r\n\n";
+            var exText = $"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] " + $"Caller: {callerName}\n" +
+                         $"[{logMessage}]\n";
+            if (ex != null)
+            {
+                exText += $"[{ex.TargetSite.DeclaringType}.{ex.TargetSite.Name}()] " +
+                          $"{ex.Message}]\n" +
+                          $"[StackTrace]\n{ex.StackTrace}";
+            }
+
+            exText += "\r\n\n";
             lock (Sync)
             {
-                File.AppendAllText(filename, fullText, Encoding.GetEncoding("Windows-1251"));
+                File.AppendAllText(filename, exText, Encoding.GetEncoding("Windows-1251"));
             }
         }
     }
