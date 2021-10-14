@@ -63,7 +63,7 @@ namespace Light.Services
 #if DEBUG
         ~DialogService()
         {
-            DebugConsole.Print("[Service] DialogService Disposed");
+            Logging.Write("[Service] DialogService Disposed");
         }
 #endif
     }

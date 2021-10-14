@@ -21,7 +21,7 @@
 #if DEBUG
         ~TrayMenuView()
         {
-            DebugConsole.Print("[Window] TrayMenuView Disposed");
+            Logging.Write("[Window] TrayMenuView Disposed");
         }
 #endif
     }

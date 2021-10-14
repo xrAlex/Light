@@ -244,7 +244,7 @@ namespace Light.Services
 #if DEBUG
         ~SettingsService()
         {
-            DebugConsole.Print("[Service] SettingsService Disposed");
+            Logging.Write("[Service] SettingsService Disposed");
         }
 #endif
     }

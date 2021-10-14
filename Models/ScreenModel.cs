@@ -110,7 +110,7 @@ namespace Light.Models
             foreach (var screen in screens)
             {
 #if DEBUG
-                DebugConsole.Print($"Forced default color configuration on screen {screen.Name} [{screen.SysName}]");
+                Logging.Write($"Forced default color configuration on screen {screen.Name} [{screen.SysName}]");
 #endif
                 GammaRegulator.ApplyColorConfiguration(6600, 1f, screen.SysName);
             }
@@ -127,7 +127,7 @@ namespace Light.Models
 #if DEBUG
         ~ScreenModel()
         {
-            DebugConsole.Print("[Model] ScreenModel Disposed");
+            Logging.Write("[Model] ScreenModel Disposed");
         }
 #endif
     }

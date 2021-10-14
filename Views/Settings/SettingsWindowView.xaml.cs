@@ -11,7 +11,7 @@ namespace Light.Views.Settings
 #if DEBUG
         ~SettingsWindowView()
         {
-            DebugConsole.Print("[Window] SettingsWindowView Disposed");
+            Logging.Write("[Window] SettingsWindowView Disposed");
         }
 #endif
     }

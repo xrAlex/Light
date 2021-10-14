@@ -6,7 +6,7 @@
 #if DEBUG
         ~SettingsMainPageUserControl()
         {
-            DebugConsole.Print("[UC] SettingsMainPageUserControl Disposed");
+            Logging.Write("[UC] SettingsMainPageUserControl Disposed");
         }
 #endif
     }

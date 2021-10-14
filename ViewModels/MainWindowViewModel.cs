@@ -75,7 +75,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~MainWindowViewModel()
         {
-            DebugConsole.Print("[View Model] MainWindowViewModel Disposed");
+            Logging.Write("[View Model] MainWindowViewModel Disposed");
         }
 #endif
     }

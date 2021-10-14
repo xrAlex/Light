@@ -6,7 +6,7 @@
 #if DEBUG
         ~ProcessesPageUserControl()
         {
-            DebugConsole.Print("[UC] ProcessesPageUserControl  Disposed");
+            Logging.Write("[UC] ProcessesPageUserControl  Disposed");
         }
 #endif
     }

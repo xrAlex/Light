@@ -51,7 +51,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~OtherSettingsPageViewModel()
         {
-            DebugConsole.Print("[View Model] OtherSettingsPageViewModel Disposed");
+            Logging.Write("[View Model] OtherSettingsPageViewModel Disposed");
         }
 #endif
     }

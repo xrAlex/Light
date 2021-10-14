@@ -34,7 +34,7 @@ namespace Light.Infrastructure
             }
 
 #if DEBUG
-            DebugConsole.Print($"Applying color configuration on screen {screenName} [{colorTemperature} {brightness}]");
+            Logging.Write($"Applying color configuration on screen {screenName} [{colorTemperature} {brightness}]");
 #endif
             Native.SetDeviceGammaRamp(dc, ref channels);
             Native.DeleteDC(dc);

@@ -88,7 +88,7 @@ namespace Light.Models
 #if DEBUG
         ~ApplicationModel()
         {
-            DebugConsole.Print("[Model] ProcessModel Disposed");
+            Logging.Write("[Model] ProcessModel Disposed");
         }
 #endif
     }

@@ -62,7 +62,7 @@ namespace Light.Services
 #if DEBUG
         ~TrayNotifierService()
         {
-            DebugConsole.Print("[Service] TrayNotifierService Disposed");
+            Logging.Write("[Service] TrayNotifierService Disposed");
         }
 #endif
     }

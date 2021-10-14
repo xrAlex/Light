@@ -71,14 +71,14 @@ namespace Light.ViewModels
             LeftLocation = pos.X;
             TopLocation = pos.Y;
 #if DEBUG
-            DebugConsole.Print($"Current tray window location: [Width: {LeftLocation} Height: {TopLocation}]\n" +
-                               $"Main screens bounds {System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size}");
+            Logging.Write($"Current tray window location: [Width: {LeftLocation} Height: {TopLocation}]\n" +
+                                $"Main screens bounds {System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size}");
 #endif
         }
 #if DEBUG
         ~TrayMenuViewModel()
         {
-            DebugConsole.Print("[View Model] TrayMenuViewModel Disposed");
+            Logging.Write("[View Model] TrayMenuViewModel Disposed");
         }
 #endif
     }

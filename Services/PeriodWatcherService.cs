@@ -31,7 +31,7 @@ namespace Light.Services
             _cts = new CancellationTokenSource();
             Task.Run(() => Cycle(_cts.Token), _cts.Token).ConfigureAwait(false);
 #if DEBUG
-            DebugConsole.Print("PeriodWatcher started");
+            Logging.Write("PeriodWatcher started");
 #endif
         }
 
@@ -42,7 +42,7 @@ namespace Light.Services
         {
             _cts.Cancel();
 #if DEBUG
-            DebugConsole.Print("PeriodWatcher stopped");
+            Logging.Write("PeriodWatcher stopped");
 #endif
         }
 
@@ -89,7 +89,7 @@ namespace Light.Services
 #if DEBUG
         ~PeriodWatcherService()
         {
-            DebugConsole.Print("[Service] PeriodWatcherService Disposed");
+            Logging.Write("[Service] PeriodWatcherService Disposed");
         }
 #endif
     }
