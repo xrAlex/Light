@@ -20,8 +20,8 @@ namespace Light.Templates.Entities
 
         private readonly List<BitmapImage> _imageList = new()
         {
-            new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Gamma.png", UriKind.Absolute)),
-            new BitmapImage(new Uri("pack://application:,,,/Resources/Images/BlueReduce.png", UriKind.Absolute))
+            new BitmapImage(new Uri("/Resources/Images/Gamma.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Resources/Images/Gamma.png", UriKind.Relative))
         };
 
         #endregion
