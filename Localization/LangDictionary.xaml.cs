@@ -14,6 +14,7 @@ namespace Light.Localization
             if (Instance == null)
             {
                 Instance = this;
+                Eng();
                 var selectedLang = App
                     .ServicesHost
                     .Services

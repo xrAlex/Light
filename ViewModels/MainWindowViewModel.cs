@@ -1,9 +1,9 @@
 ﻿using Light.Commands;
-using Light.Models;
 using Light.Templates.Entities;
 using Light.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Light.Infrastructure;
 using Light.Services.Interfaces;
 using Application = System.Windows.Application;
 
@@ -16,7 +16,6 @@ namespace Light.ViewModels
         private string _currentTime = "12:00";
         public ObservableCollection<ScreenEntity> Screens { get; }
         private readonly IDialogService _dialogService;
-        private readonly ITrayNotifierService _trayNotifierService;
 
         #endregion
 
@@ -43,7 +42,7 @@ namespace Light.ViewModels
 
         private void OnAppToTrayCommandExecute()
         {
-            _trayNotifierService.ShowTip(Localization.LangDictionary.GetString("Loc_ToTrayNotification"));
+            UserNotifier.ShowTip("Loc_ToTrayNotification");
             _dialogService.CloseDialog<MainWindowViewModel>();
         }
 
@@ -55,12 +54,10 @@ namespace Light.ViewModels
         #endregion
 
         public MainWindowViewModel(
-            ICurrentTimeService currentTimeService, 
-            ITrayNotifierService trayNotifierService, 
+            ICurrentTimeService currentTimeService,
             ISettingsService settingsService, 
             IDialogService dialogService)
         {
-            _trayNotifierService = trayNotifierService;
             _dialogService = dialogService;
             OpenSettingsWindowCommand = new LambdaCommand(p => OnOpenSettingsWindowCommandExecute());
             CloseAppCommand = new LambdaCommand(p => OnCloseAppCommandExecute());

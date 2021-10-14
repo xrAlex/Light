@@ -9,7 +9,6 @@ using Light.Services.Interfaces;
 using Light.ViewModels;
 using Light.Views.Main;
 using Light.Views.Settings;
-using Light.Views.Tray;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,7 +38,6 @@ namespace Light
 
             dialogService.Register<MainWindowViewModel, MainWindowView>();
             dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
-            dialogService.Register<TrayMenuViewModel, TrayMenuView>();
 
             periodWatcherService.StartWatch();
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
@@ -80,7 +78,6 @@ namespace Light
         protected override async void OnExit(ExitEventArgs e)
         {
             ServicesHost.Services.GetRequiredService<IPeriodWatcherService>().StopWatch();
-            ServicesHost.Services.GetRequiredService<ITrayNotifierService>().Dispose();
             ScreenModel.SetDefaultColorTemperatureOnAllScreens();
             _mutex?.ReleaseMutex();
             base.OnExit(e);
@@ -95,7 +92,6 @@ namespace Light
             services.AddSingleton<IPeriodWatcherService, PeriodWatcherService>();
             services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<IDialogService, DialogService>();
-            services.AddSingleton<ITrayNotifierService, TrayNotifierService>();
             services.AddTransient<ICurrentTimeService, CurrentTimeService>();
 
             //ViewModels

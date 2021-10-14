@@ -7,10 +7,10 @@
              xmlns:tray="clr-namespace:Light.Views.Tray"
              xmlns:settings="clr-namespace:Light.Views.Settings"
              xmlns:language="clr-namespace:Light.Localization"
-             xmlns:xamlConverters="clr-namespace:Light.Converters.XAMLConverters">
+             xmlns:xamlConverters="clr-namespace:Light.Converters.XAMLConverters"
+             xmlns:tb="http://www.hardcodet.net/taskbar">
     <Application.Resources>
         <ResourceDictionary>
-            
             <DataTemplate DataType="{x:Type viewmodels:MainWindowViewModel}">
                 <main:MainWindowView/>
             </DataTemplate>
@@ -32,7 +32,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:TrayMenuViewModel}">
-                <tray:TrayMenuView/>
+                <tray:TrayMenuPopup/>
             </DataTemplate>
 
             <viewmodels:ViewModelLocator x:Key="Locator"/>
@@ -41,8 +41,10 @@
             <xamlConverters:BrightnessToDouble x:Key="BrightnessToDouble"></xamlConverters:BrightnessToDouble>
             <xamlConverters:BrightnessToPercent x:Key="BrightnessToPercent"></xamlConverters:BrightnessToPercent>
             <xamlConverters:TemperatureToKelvin x:Key="TemperatureToKelvin"></xamlConverters:TemperatureToKelvin>
+            <xamlConverters:LocalizationConverter x:Key="LocalizationConverter"></xamlConverters:LocalizationConverter>
 
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Localization/LangDictionary.xaml"/>
                 <x:Static Member="language:LangDictionary.Instance"/>
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
                 <ResourceDictionary Source="Resources/Button.xaml" />
@@ -53,7 +55,9 @@
                 <ResourceDictionary Source="Resources/CheckBox.xaml" />
                 <ResourceDictionary Source="Resources/GlobalStyles.xaml" />
                 <ResourceDictionary Source="Resources/ComboBox.xaml" />
+                <ResourceDictionary Source="Resources/NotifyIcon.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

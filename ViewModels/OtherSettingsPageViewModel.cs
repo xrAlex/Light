@@ -1,5 +1,5 @@
-﻿using Light.Models;
-using Light.Services.Interfaces;
+﻿using Light.Infrastructure;
+using Light.Models;
 using Light.ViewModels.Base;
 
 namespace Light.ViewModels
@@ -7,8 +7,6 @@ namespace Light.ViewModels
     internal sealed class OtherSettingsPageViewModel : ViewModelBase
     {
         private readonly RegistryModel _registryModel;
-        private readonly ITrayNotifierService _trayNotifierService;
-
         public bool LaunchOnStartup
         {
             get => _registryModel.IsAppStartupKeyFounded();
@@ -30,7 +28,7 @@ namespace Light.ViewModels
             get => _registryModel.IsExtendedGammaRangeActive();
             set
             {
-                _trayNotifierService.ShowTip(Localization.LangDictionary.GetString("Loc_RestartNotification"));
+                UserNotifier.ShowTip("Loc_RestartNotification");
                 if (value)
                 {
                     _registryModel.SetExtendedGammaRangeKey();
@@ -42,9 +40,8 @@ namespace Light.ViewModels
             }
         }
 
-        public OtherSettingsPageViewModel(ITrayNotifierService trayNotifier)
+        public OtherSettingsPageViewModel()
         {
-            _trayNotifierService = trayNotifier;
             _registryModel = new RegistryModel();
         }
 

@@ -64,6 +64,9 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Hardcodet.NotifyIcon.Wpf, Version=1.1.0.0, Culture=neutral, PublicKeyToken=682384a853a08aad, processorArchitecture=MSIL">
+      <HintPath>packages\Hardcodet.NotifyIcon.Wpf.1.1.0\lib\net472\Hardcodet.NotifyIcon.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -222,15 +225,16 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\LambdaCommand.cs" />
     <Compile Include="Converters\KelvinToRGB.cs" />
+    <Compile Include="Converters\XAMLConverters\LocalizationConverter.cs" />
     <Compile Include="Converters\XAMLConverters\TemperatureToKelvin.cs" />
     <Compile Include="Converters\XAMLConverters\BrightnessToPercent.cs" />
     <Compile Include="Converters\XAMLConverters\BrightnessToDouble.cs" />
     <Compile Include="Converters\XAMLConverters\HourConverter.cs" />
     <Compile Include="Converters\XAMLConverters\MinConverter.cs" />
+    <Compile Include="Infrastructure\UserNotifier.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Infrastructure\SystemWindow.cs" />
-    <Compile Include="Infrastructure\TrayMenuPosition.cs" />
     <Compile Include="Infrastructure\WorkTime.cs" />
     <Compile Include="Localization\LangDictionary.xaml.cs">
       <DependentUpon>LangDictionary.xaml</DependentUpon>
@@ -245,7 +249,6 @@
     <Compile Include="Services\Interfaces\ICurrentTimeService.cs" />
     <Compile Include="Services\Interfaces\IDialogService.cs" />
     <Compile Include="Services\Interfaces\ISettingsService.cs" />
-    <Compile Include="Services\Interfaces\ITrayNotifierService.cs" />
     <Compile Include="Services\Interfaces\IPeriodWatcherService.cs" />
     <Compile Include="Templates\Entities\Base\NotifyingEntity.cs" />
     <Compile Include="Templates\Entities\ColorConfiguration.cs" />
@@ -257,17 +260,14 @@
     <Compile Include="Infrastructure\INIManager.cs" />
     <Compile Include="Templates\Entities\GammaRamp.cs" />
     <Compile Include="Infrastructure\SystemProcess.cs" />
-    <Compile Include="Services\TrayNotifierService.cs" />
-    <Compile Include="Templates\Entities\TaskBarData.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\Tray\TrayMenuView.xaml.cs">
-      <DependentUpon>TrayMenuView.xaml</DependentUpon>
+    <Compile Include="Views\Tray\TrayMenuPopup.xaml.cs">
+      <DependentUpon>TrayMenuPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="WinApi\Gdi32.cs" />
     <Compile Include="WinApi\Kernel32.cs" />
     <Compile Include="Templates\Entities\Rect.cs" />
-    <Compile Include="WinApi\Shell32.cs" />
     <Compile Include="WinApi\User32.cs" />
     <Compile Include="Services\PeriodWatcherService.cs" />
     <Compile Include="Services\SettingsService.cs" />
@@ -324,6 +324,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\NotifyIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\ScrollBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -360,7 +364,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Tray\TrayMenuView.xaml">
+    <Page Include="Views\Tray\TrayMenuPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
