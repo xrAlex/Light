@@ -35,7 +35,7 @@ namespace Light
         {
             Console.WriteLine($"[{callerName}] {str}");
 #if DEBUG
-            Logging.Write(str);
+            Logging.Write(str, null, callerName);
 #endif
         }
     }
