@@ -1,6 +1,7 @@
 ﻿using Light.Templates.Entities;
 using Light.WinApi;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Light.Infrastructure

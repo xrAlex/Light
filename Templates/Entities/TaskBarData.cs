@@ -3,13 +3,23 @@
 namespace Light.Templates.Entities
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal class TaskBarData
+    internal struct TaskBarData
     {
-        public readonly int CbSize = Marshal.SizeOf(typeof(TaskBarData));
-        public nint HWnd { get; set; }
-        public int UCallbackMessage { get; set; }
-        public int UEdge { get; set; }
-        public Rect Rc { get; set; }
-        public nint LParam { get; set; }
+        public int CbSize { get; }
+        public nint HWnd { get; }
+        public int UCallbackMessage { get; }
+        public int UEdge { get; }
+        public Rect Rc { get; }
+        public nint LParam { get; }
+
+        public TaskBarData(int cbSize, nint hWnd, int uCallbackMessage, int uEdge, Rect rc, nint lParam)
+        {
+            CbSize = Marshal.SizeOf(typeof(TaskBarData));
+            HWnd = hWnd;
+            UCallbackMessage = uCallbackMessage;
+            UEdge = uEdge;
+            Rc = rc;
+            LParam = lParam;
+        }
     }
 }
