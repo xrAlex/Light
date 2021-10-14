@@ -34,6 +34,9 @@ namespace Light
         public static void Print(string str, [CallerMemberName] string callerName = null)
         {
             Console.WriteLine($"[{callerName}] {str}");
+#if DEBUG
+            Logging.Write(str);
+#endif
         }
     }
 }
