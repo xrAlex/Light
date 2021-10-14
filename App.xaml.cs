@@ -9,9 +9,7 @@ using Light.Services.Interfaces;
 using Light.ViewModels;
 using Light.Views.Main;
 using Light.Views.Settings;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Ninject;
 
 namespace Light
 {
@@ -28,11 +26,11 @@ namespace Light
                 return;
             }
 
-            var appSettings = ServicesHost.Services.GetRequiredService<ISettingsService>();
+            var appSettings = Kernel.Get<ISettingsService>();
             appSettings.Load();
 
-            var dialogService = ServicesHost.Services.GetRequiredService<IDialogService>();
-            var periodWatcherService = ServicesHost.Services.GetRequiredService<IPeriodWatcherService>();
+            var dialogService = Kernel.Get<IDialogService>();
+            var periodWatcherService = Kernel.Get<IPeriodWatcherService>();
 
             var silentLaunch = Environment.GetCommandLineArgs().Contains("-silent");
 
@@ -47,60 +45,51 @@ namespace Light
             {
                 dialogService.ShowDialog<MainWindowViewModel>();
             }
+
         }
     }
 
 
     public partial class App
     {
-        public static IHost ServicesHost => _servicesHost ??= CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
-        private static IHost _servicesHost;
+        private static IKernel _kernel;
 
-        private static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            var hostBuilder = Host.CreateDefaultBuilder(args)
-                .UseContentRoot(Environment.CurrentDirectory)
-                .ConfigureAppConfiguration((_, cfg) => cfg
-                    .SetBasePath(Environment.CurrentDirectory)
-                )
-                .ConfigureServices(ConfigureServices);
+        public static IKernel Kernel { get; } = _kernel ??= ConfigureServices();
 
-            return hostBuilder;
-        }
-
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             SetupExceptionHandling();
-            await ServicesHost.StartAsync().ConfigureAwait(false);
         }
 
-        protected override async void OnExit(ExitEventArgs e)
+        protected override void OnExit(ExitEventArgs e)
         {
-            ServicesHost.Services.GetRequiredService<IPeriodWatcherService>().StopWatch();
+            Kernel.Get<IPeriodWatcherService>().StopWatch();
             ScreenModel.SetDefaultColorTemperatureOnAllScreens();
             _mutex?.ReleaseMutex();
             base.OnExit(e);
-
-            using (ServicesHost) await ServicesHost.StopAsync().ConfigureAwait(false);
-            _servicesHost = null;
+            _kernel = null;
         }
 
-        private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
+        private static IKernel ConfigureServices()
         {
+            IKernel standardKernel = new StandardKernel();
+
             //Services
-            services.AddSingleton<IPeriodWatcherService, PeriodWatcherService>();
-            services.AddSingleton<ISettingsService, SettingsService>();
-            services.AddSingleton<IDialogService, DialogService>();
-            services.AddTransient<ICurrentTimeService, CurrentTimeService>();
+            standardKernel.Bind<IPeriodWatcherService>().To<PeriodWatcherService>().InSingletonScope();
+            standardKernel.Bind<ISettingsService>().To<SettingsService>().InSingletonScope();
+            standardKernel.Bind<IDialogService>().To<DialogService>().InSingletonScope();
+            standardKernel.Bind<ICurrentTimeService>().To<CurrentTimeService>().InSingletonScope();
 
             //ViewModels
-            services.AddTransient<MainWindowViewModel>();
-            services.AddTransient<OtherSettingsPageViewModel>();
-            services.AddTransient<ProcessPageViewModel>();
-            services.AddTransient<SettingsMainPageViewModel>();
-            services.AddTransient<SettingsWindowViewModel>();
-            services.AddTransient<TrayMenuViewModel>();
+            standardKernel.Bind<MainWindowViewModel>().ToSelf().InTransientScope();
+            standardKernel.Bind<OtherSettingsPageViewModel>().ToSelf().InTransientScope();
+            standardKernel.Bind<ProcessPageViewModel>().ToSelf().InTransientScope();
+            standardKernel.Bind<SettingsMainPageViewModel>().ToSelf().InTransientScope();
+            standardKernel.Bind<SettingsWindowViewModel>().ToSelf().InTransientScope();
+            standardKernel.Bind<TrayMenuViewModel>().ToSelf().InTransientScope();
+
+            return standardKernel;
         }
 
         private void SetupExceptionHandling()

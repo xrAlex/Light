@@ -1,6 +1,6 @@
 ﻿using System;
 using Light.Services.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
+using Ninject;
 
 namespace Light.Localization
 {
@@ -16,9 +16,8 @@ namespace Light.Localization
                 Instance = this;
                 Eng();
                 var selectedLang = App
-                    .ServicesHost
-                    .Services
-                    .GetRequiredService<ISettingsService>()
+                    .Kernel
+                    .Get<ISettingsService>()
                     .SelectedLang;
 
                 SetLang(selectedLang);

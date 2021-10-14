@@ -1,14 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Ninject;
 
 namespace Light.ViewModels
 {
     internal sealed class ViewModelLocator
     {
-        public static MainWindowViewModel MainWindowViewModel => App.ServicesHost.Services.GetRequiredService<MainWindowViewModel>();
-        public static OtherSettingsPageViewModel OtherSettingsPageViewModel => App.ServicesHost.Services.GetRequiredService<OtherSettingsPageViewModel>();
-        public static ProcessPageViewModel ProcessPageViewModel => App.ServicesHost.Services.GetRequiredService<ProcessPageViewModel>();
-        public static SettingsMainPageViewModel SettingsMainPageViewModel => App.ServicesHost.Services.GetRequiredService<SettingsMainPageViewModel>();
-        public static SettingsWindowViewModel SettingsWindowViewModel => App.ServicesHost.Services.GetRequiredService<SettingsWindowViewModel>();
-        public static TrayMenuViewModel TrayMenuViewModel => App.ServicesHost.Services.GetRequiredService<TrayMenuViewModel>();
+        public static MainWindowViewModel MainWindowViewModel => App.Kernel.Get<MainWindowViewModel>();
+        public static OtherSettingsPageViewModel OtherSettingsPageViewModel => App.Kernel.Get<OtherSettingsPageViewModel>();
+        public static ProcessPageViewModel ProcessPageViewModel => App.Kernel.Get<ProcessPageViewModel>();
+        public static SettingsMainPageViewModel SettingsMainPageViewModel => App.Kernel.Get<SettingsMainPageViewModel>();
+        public static SettingsWindowViewModel SettingsWindowViewModel => App.Kernel.Get<SettingsWindowViewModel>();
+        public static TrayMenuViewModel TrayMenuViewModel => App.Kernel.Get<TrayMenuViewModel>();
     }
 }

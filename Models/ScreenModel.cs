@@ -5,7 +5,7 @@ using Light.Infrastructure;
 using Light.Services.Interfaces;
 using Light.Templates.Entities;
 using Light.WinApi;
-using Microsoft.Extensions.DependencyInjection;
+using Ninject;
 
 namespace Light.Models
 {
@@ -98,7 +98,7 @@ namespace Light.Models
 
         public static void SetDefaultColorTemperatureOnAllScreens()
         {
-            var screens = App.ServicesHost.Services.GetRequiredService<ISettingsService>().Screens;
+            var screens = App.Kernel.Get<ISettingsService>().Screens;
 #if DEBUG
             if (screens.Count < 1)
             {
