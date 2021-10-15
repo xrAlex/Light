@@ -18,7 +18,7 @@ namespace Light.Templates.Entities
 #if DEBUG
             else
             {
-                Logging.Write($"Instance is null, Type: [{Type}]");
+                LoggingModule.Log.Information("Instance is null, Type: [{0}]",Type);
             }
 #endif
         }
@@ -33,7 +33,7 @@ namespace Light.Templates.Entities
 #if DEBUG
             else
             {
-                Logging.Write($"Instance is null, Type: [{Type}]");
+                LoggingModule.Log.Information("Instance is null, Type: [{0}]", Type);
             }
 #endif
         }

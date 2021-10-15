@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using Light.Models;
 using Light.Services;
@@ -25,6 +24,8 @@ namespace Light
                 Current.Shutdown();
                 return;
             }
+            var logs = new LoggingModule();
+            logs.Initialize();
 
             var appSettings = Kernel.Get<ISettingsService>();
             appSettings.Load();
@@ -59,7 +60,6 @@ namespace Light
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            SetupExceptionHandling();
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -67,8 +67,11 @@ namespace Light
             Kernel.Get<IPeriodWatcherService>().StopWatch();
             ScreenModel.SetDefaultColorTemperatureOnAllScreens();
             _mutex?.ReleaseMutex();
+
             base.OnExit(e);
+
             _kernel = null;
+            Kernel.Dispose();
         }
 
         private static IKernel ConfigureServices()
@@ -90,24 +93,6 @@ namespace Light
             standardKernel.Bind<TrayMenuViewModel>().ToSelf().InTransientScope();
 
             return standardKernel;
-        }
-
-        private void SetupExceptionHandling()
-        {
-            AppDomain.CurrentDomain.UnhandledException += (s, e) => 
-                Logging.Write("UnhandledException", (Exception)e.ExceptionObject);
-
-            DispatcherUnhandledException += (s, e) =>
-            {
-                Logging.Write("DispatcherUnhandledException", e.Exception);
-                e.Handled = true;
-            };
-
-            TaskScheduler.UnobservedTaskException += (s, e) =>
-            {
-                Logging.Write("UnobservedTaskException", e.Exception);
-                e.SetObserved();
-            };
         }
     }
 }

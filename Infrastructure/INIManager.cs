@@ -28,7 +28,7 @@ namespace Light.Infrastructure
             }
             catch (Exception ex)
             {
-                Logging.Write("Error when loading settings", ex); ;
+                LoggingModule.Log.Warning(ex, "Error when loading settings");
                 return defaultValue;
             }
         }

@@ -164,7 +164,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~SettingsMainPageViewModel()
         {
-            Logging.Write("[View Model] SettingsMainPageViewModel Disposed");
+            LoggingModule.Log.Verbose("[View Model] SettingsMainPageViewModel Disposed");
         }
 #endif
 

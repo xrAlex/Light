@@ -72,7 +72,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~MainWindowViewModel()
         {
-            Logging.Write("[View Model] MainWindowViewModel Disposed");
+            LoggingModule.Log.Verbose("[View Model] MainWindowViewModel Disposed");
         }
 #endif
     }

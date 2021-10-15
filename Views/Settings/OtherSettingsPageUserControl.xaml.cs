@@ -7,7 +7,7 @@
 #if DEBUG
         ~OtherSettingsPageUserControl()
         {
-            Logging.Write("[UC] OtherSettingsPageUserControl Disposed");
+            LoggingModule.Log.Verbose("[UC] OtherSettingsPageUserControl Disposed");
         }
 #endif
     }

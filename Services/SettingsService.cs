@@ -97,7 +97,7 @@ namespace Light.Services
             }
             catch(Exception ex)
             {
-                Logging.Write("Error when loading screens", ex);
+                LoggingModule.Log.Warning(ex,"Error when loading screens");
                 LoadScreensLegacy();
                 _legacyMode = true;
             }
@@ -180,7 +180,7 @@ namespace Light.Services
 #if DEBUG
             if (Screens.Count < 1)
             {
-                Logging.Write("Cant founded Screens");
+                LoggingModule.Log.Warning("Cant founded Screens");
             }
 #endif
             foreach (var screen in Screens)
@@ -202,7 +202,7 @@ namespace Light.Services
 #if DEBUG
             if (Screens.Count < 1)
             {
-                Logging.Write("Cant founded Screens");
+                LoggingModule.Log.Warning("Cant founded Screens");
             }
 #endif
             for (var i = 0; i < Screens.Count; i++)
@@ -244,7 +244,7 @@ namespace Light.Services
 #if DEBUG
         ~SettingsService()
         {
-            Logging.Write("[Service] SettingsService Disposed");
+            LoggingModule.Log.Verbose("[Service] SettingsService Disposed");
         }
 #endif
     }

@@ -6,7 +6,7 @@
 #if DEBUG
         ~ProcessesPageUserControl()
         {
-            Logging.Write("[UC] ProcessesPageUserControl  Disposed");
+            LoggingModule.Log.Verbose("[UC] ProcessesPageUserControl  Disposed");
         }
 #endif
     }

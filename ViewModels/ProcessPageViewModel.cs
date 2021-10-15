@@ -50,7 +50,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~ProcessPageViewModel()
         {
-            Logging.Write("[View Model] ProcessPageViewModel Disposed");
+            LoggingModule.Log.Verbose("[View Model] ProcessPageViewModel Disposed");
         }
 #endif
     }

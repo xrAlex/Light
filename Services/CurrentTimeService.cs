@@ -36,7 +36,7 @@ namespace Light.Services
 #if DEBUG
         ~CurrentTimeService()
         {
-            Logging.Write("[Service] CurrentTimeService Disposed");
+            LoggingModule.Log.Verbose("[Service] CurrentTimeService Disposed");
         }
 #endif
     }

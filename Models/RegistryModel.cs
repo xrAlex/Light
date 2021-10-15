@@ -86,7 +86,7 @@ namespace Light.Models
 #if DEBUG
         ~RegistryModel()
         {
-            Logging.Write("[Model] RegistryModel Disposed");
+            LoggingModule.Log.Verbose("[Model] RegistryModel Disposed");
         }
 #endif
     }

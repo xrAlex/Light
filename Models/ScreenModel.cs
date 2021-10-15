@@ -102,7 +102,7 @@ namespace Light.Models
 #if DEBUG
             if (screens.Count < 1)
             {
-                Logging.Write("Cant founded Screens");
+                LoggingModule.Log.Error("Cant founded Screens {0}", screens);
             }
 #endif
 
@@ -110,7 +110,7 @@ namespace Light.Models
             foreach (var screen in screens)
             {
 #if DEBUG
-                Logging.Write($"Forced default color configuration on screen {screen.Name} [{screen.SysName}]");
+                LoggingModule.Log.Information($"Forced default color configuration on screen {screen.Name} [{screen.SysName}]");
 #endif
                 GammaRegulator.ApplyColorConfiguration(6600, 1f, screen.SysName);
             }
@@ -127,7 +127,7 @@ namespace Light.Models
 #if DEBUG
         ~ScreenModel()
         {
-            Logging.Write("[Model] ScreenModel Disposed");
+            LoggingModule.Log.Verbose("[Model] ScreenModel Disposed");
         }
 #endif
     }

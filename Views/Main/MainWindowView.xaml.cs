@@ -12,7 +12,7 @@ namespace Light.Views.Main
 #if DEBUG
         ~MainWindowView()
         {
-            Logging.Write("[Window] MainWindowView Disposed");
+            LoggingModule.Log.Verbose("[Window] MainWindowView Disposed");
         }
 #endif
     }

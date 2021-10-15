@@ -6,7 +6,7 @@
 #if DEBUG
         ~SettingsMainPageUserControl()
         {
-            Logging.Write("[UC] SettingsMainPageUserControl Disposed");
+            LoggingModule.Log.Verbose("[UC] SettingsMainPageUserControl Disposed");
         }
 #endif
     }

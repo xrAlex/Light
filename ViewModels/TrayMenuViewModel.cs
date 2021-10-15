@@ -89,7 +89,7 @@ namespace Light.ViewModels
 #if DEBUG
         ~TrayMenuViewModel()
         {
-            Logging.Write("[View Model] TrayMenuViewModel Disposed");
+            LoggingModule.Log.Verbose("[View Model] TrayMenuViewModel Disposed");
         }
 #endif
     }

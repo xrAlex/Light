@@ -34,11 +34,12 @@ namespace Light.Infrastructure
             }
 
             var successfully = Native.SetDeviceGammaRamp(dc, ref channels);
-#if DEBUG
-            Logging.Write($"Applying color configuration on screen {screenName} " +
-                          $"[Set successfully: {successfully}] " +
-                          $"[DC: {dc} Color Temperature: {colorTemperature} Brightness: {brightness}]");
-#endif
+            if (!successfully)
+            {
+                LoggingModule.Log.Warning($"Could not set Color configuration for screen : {screenName}" +
+                                          $"[DC: {dc} Color Temperature: {colorTemperature} Brightness: {brightness}]");
+            }
+
             Native.DeleteDC(dc);
         }
     }
