@@ -14,12 +14,11 @@ namespace Light.Localization
             if (Instance == null)
             {
                 Instance = this;
-                Eng();
+                InitializeComponent();
                 var selectedLang = App
                     .Kernel
                     .Get<ISettingsService>()
                     .SelectedLang;
-
                 SetLang(selectedLang);
             }
         }

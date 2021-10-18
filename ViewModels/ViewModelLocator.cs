@@ -1,14 +1,42 @@
-﻿using Ninject;
+﻿using System.ComponentModel;
+using System.Windows;
+using Ninject;
 
 namespace Light.ViewModels
 {
     internal sealed class ViewModelLocator
     {
-        public static MainWindowViewModel MainWindowViewModel => App.Kernel.Get<MainWindowViewModel>();
-        public static OtherSettingsPageViewModel OtherSettingsPageViewModel => App.Kernel.Get<OtherSettingsPageViewModel>();
-        public static ProcessPageViewModel ProcessPageViewModel => App.Kernel.Get<ProcessPageViewModel>();
-        public static SettingsMainPageViewModel SettingsMainPageViewModel => App.Kernel.Get<SettingsMainPageViewModel>();
-        public static SettingsWindowViewModel SettingsWindowViewModel => App.Kernel.Get<SettingsWindowViewModel>();
-        public static TrayMenuViewModel TrayMenuViewModel => App.Kernel.Get<TrayMenuViewModel>();
+        private static readonly DependencyObject _dependencyObject = new ();
+
+        public static MainWindowViewModel MainWindowViewModel => 
+            IsInDesignMode() 
+                ? new MainWindowViewModel() 
+                : App.Kernel.Get<MainWindowViewModel>();
+
+        public static OtherSettingsPageViewModel OtherSettingsPageViewModel => 
+            IsInDesignMode() 
+                ?  new OtherSettingsPageViewModel() 
+                : App.Kernel.Get<OtherSettingsPageViewModel>();
+
+        public static ProcessPageViewModel ProcessPageViewModel => 
+            IsInDesignMode() 
+                ? new ProcessPageViewModel() 
+                : App.Kernel.Get<ProcessPageViewModel>();
+
+        public static SettingsMainPageViewModel SettingsMainPageViewModel => 
+            IsInDesignMode() 
+                ? new SettingsMainPageViewModel() 
+                : App.Kernel.Get<SettingsMainPageViewModel>();
+
+        public static SettingsWindowViewModel SettingsWindowViewModel =>
+            IsInDesignMode()
+                ? new SettingsWindowViewModel()
+                : App.Kernel.Get<SettingsWindowViewModel>();
+        public static TrayMenuViewModel TrayMenuViewModel =>
+            IsInDesignMode()
+                ? new TrayMenuViewModel()
+                : App.Kernel.Get<TrayMenuViewModel>();
+
+        private static bool IsInDesignMode() => DesignerProperties.GetIsInDesignMode(_dependencyObject);
     }
 }

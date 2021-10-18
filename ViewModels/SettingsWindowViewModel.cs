@@ -101,6 +101,8 @@ namespace Light.ViewModels
             SelectedViewModel = ViewModelLocator.SettingsMainPageViewModel;
         }
 
+        public SettingsWindowViewModel() {}
+
 #if DEBUG
         ~SettingsWindowViewModel()
         {

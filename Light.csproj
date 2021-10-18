@@ -107,6 +107,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\LambdaCommand.cs" />
+    <Compile Include="Converters\CurrentTimeToMin.cs" />
     <Compile Include="Converters\KelvinToRGB.cs" />
     <Compile Include="Converters\XAMLConverters\LocalizationConverter.cs" />
     <Compile Include="Converters\XAMLConverters\TemperatureToKelvin.cs" />
@@ -114,11 +115,9 @@
     <Compile Include="Converters\XAMLConverters\BrightnessToDouble.cs" />
     <Compile Include="Converters\XAMLConverters\HourConverter.cs" />
     <Compile Include="Converters\XAMLConverters\MinConverter.cs" />
-    <Compile Include="Infrastructure\UserNotifier.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Infrastructure\GammaRegulator.cs" />
     <Compile Include="Infrastructure\SystemWindow.cs" />
-    <Compile Include="Infrastructure\WorkTime.cs" />
     <Compile Include="Localization\LangDictionary.xaml.cs">
       <DependentUpon>LangDictionary.xaml</DependentUpon>
     </Compile>
@@ -133,6 +132,8 @@
     <Compile Include="Services\Interfaces\IDialogService.cs" />
     <Compile Include="Services\Interfaces\ISettingsService.cs" />
     <Compile Include="Services\Interfaces\IPeriodWatcherService.cs" />
+    <Compile Include="Services\Interfaces\ITrayNotifierService.cs" />
+    <Compile Include="Services\TrayNotifierService.cs" />
     <Compile Include="Templates\Entities\Base\NotifyingEntity.cs" />
     <Compile Include="Templates\Entities\ColorConfiguration.cs" />
     <Compile Include="Templates\Entities\ApplicationEntity.cs" />
@@ -204,10 +205,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\ListBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\NotifyIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

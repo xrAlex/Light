@@ -1,10 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using Light.Infrastructure;
 using Light.Services.Interfaces;
 using Light.Templates.Entities;
-using Light.WinApi;
 using Ninject;
 
 namespace Light.Models
@@ -45,23 +42,6 @@ namespace Light.Models
         {
             screen.IsDayTimePeriod = false;
             ApplyColorConfiguration(screen);
-        }
-
-        /// <summary>
-        /// Checks foreground Window bounds
-        /// </summary>
-        /// <returns> <see cref="bool"/> true, if the window is maximized to full screen </returns>
-        public bool IsFullScreenWindowFounded(ScreenEntity screen)
-        {
-            var handle = Native.GetForegroundWindow();
-            if (!SystemWindow.IsWindowValid(handle) || !SystemWindow.IsWindowOnFullScreen(screen, handle)) return false;
-
-            var pId = SystemProcess.GetId(handle);
-            using var process = SystemProcess.TryOpenProcess(pId);
-            var processPath = process?.TryGetProcessPath();
-            var processFileName = Path.GetFileNameWithoutExtension(processPath);
-
-            return _settingsService.ApplicationsWhitelist.Count == 0 || _settingsService.ApplicationsWhitelist.All(p => p != processFileName);
         }
 
         public void ApplyColorConfiguration(ScreenEntity screen)

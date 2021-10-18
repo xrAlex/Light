@@ -3,7 +3,7 @@ using Light.Templates.Entities;
 
 namespace Light.Converters
 {
-    internal static class KelvinToRGB
+    internal sealed class KelvinToRGB
     {
         /// <summary>
         /// Converts color temperature (Kelvin) to RGB format

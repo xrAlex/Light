@@ -1,8 +1,11 @@
-﻿using Light.Infrastructure;
+﻿using System.Linq;
+using Light.Infrastructure;
 using Light.Models;
 using System.Threading;
 using System.Threading.Tasks;
+using Light.Converters;
 using Light.Services.Interfaces;
+using Light.Templates.Entities;
 
 namespace Light.Services
 {
@@ -12,14 +15,17 @@ namespace Light.Services
     internal sealed class PeriodWatcherService : IPeriodWatcherService
     {
         private readonly ScreenModel _screenModel;
-        private readonly WorkTime _workTime;
         private readonly ISettingsService _settingsService;
         private CancellationTokenSource _cts;
+        private enum Period
+        {
+            Day,
+            Night
+        }
 
         public PeriodWatcherService(ISettingsService settingsService)
         {
             _screenModel = new ScreenModel(settingsService);
-            _workTime = new WorkTime();
             _settingsService = settingsService;
         }
 
@@ -57,13 +63,11 @@ namespace Light.Services
                 {
                     if (!screen.IsActive) continue;
 
-                    var isWorkTime = _workTime.IsDayPeriod(screen);
-
-                    if (isWorkTime)
+                    if (GetCurrentPeriod(screen) == Period.Night)
                     {
                         if (_settingsService.CheckFullScreenApps)
                         {
-                            if (_screenModel.IsFullScreenWindowFounded(screen))
+                            if (IsFullscreenAppFounded(screen))
                             {
                                 _screenModel.SetDayPeriod(screen);
                             }
@@ -86,6 +90,39 @@ namespace Light.Services
                 await Task.Delay(1000, token);
             }
         }
+
+        private Period GetCurrentPeriod(ScreenEntity screen)
+        {
+            var currentMin = CurrentTimeToMin.Convert();
+            var startFromMin = screen.StartTime;
+            var endFromMin = screen.EndTime;
+
+            if (endFromMin < startFromMin)
+            {
+                if (currentMin >= startFromMin || currentMin < startFromMin && currentMin < endFromMin) return Period.Day;
+            }
+            else
+            {
+                if (currentMin >= startFromMin && currentMin < endFromMin) return Period.Day;
+            }
+
+            return Period.Night;
+        }
+
+        private bool IsFullscreenAppFounded(ScreenEntity screen)
+        {
+            var fullScreenWindowHandle = SystemWindow.GetFullscreenForegroundWindow(screen);
+            if (fullScreenWindowHandle == 0) return false;
+
+            var processFileName = SystemProcess.TryGetProcessFileName(fullScreenWindowHandle);
+            return processFileName != null && IsAppProcessNameNotInIgnored(processFileName);
+        }
+
+        private bool IsAppProcessNameNotInIgnored(string processFileName)
+        {
+            return _settingsService.ApplicationsWhitelist.Count != 0 && _settingsService.ApplicationsWhitelist.All(p => p != processFileName);
+        }
+
 #if DEBUG
         ~PeriodWatcherService()
         {

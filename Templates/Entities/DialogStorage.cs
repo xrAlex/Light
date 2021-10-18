@@ -18,7 +18,7 @@ namespace Light.Templates.Entities
 #if DEBUG
             else
             {
-                LoggingModule.Log.Information("Instance is null, Type: [{0}]",Type);
+                LoggingModule.Log.Information("[CloseInstance] Instance is null, Type: [{0}]",Type);
             }
 #endif
         }
@@ -29,11 +29,26 @@ namespace Light.Templates.Entities
             {
                 Instance.Show();
                 Instance.Activate();
+                Instance.Focus();
             }
 #if DEBUG
             else
             {
-                LoggingModule.Log.Information("Instance is null, Type: [{0}]", Type);
+                LoggingModule.Log.Information("[ShowInstance] Instance is null, Type: [{0}]", Type);
+            }
+#endif
+        }
+
+        public void HideInstance()
+        {
+            if (Instance != null)
+            {
+                Instance.Hide();
+            }
+#if DEBUG
+            else
+            {
+                LoggingModule.Log.Information("[HideInstance] Instance is null, Type: [{0}]", Type);
             }
 #endif
         }

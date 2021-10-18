@@ -1,5 +1,6 @@
 ﻿using Light.WinApi;
 using System;
+using System.IO;
 using System.Text;
 
 namespace Light.Infrastructure
@@ -20,6 +21,20 @@ namespace Light.Infrastructure
 
             return Native.QueryFullProcessImageName(Handle, 0, buffer, ref bufferSize) ? buffer.ToString() : null;
         }
+
+        public static string TryGetProcessFileName(nint handle)
+        {
+            var pId = GetId(handle);
+            using var process = TryOpenProcess(pId);
+            var processPath = process?.TryGetProcessPath();
+            var processFileName = Path.GetFileNameWithoutExtension(processPath);
+            if (string.IsNullOrWhiteSpace(processPath) || string.IsNullOrWhiteSpace(processFileName))
+            {
+                return null;
+            }
+            return processFileName;
+        }
+
 
         /// <summary>
         /// Gets process id by window handle

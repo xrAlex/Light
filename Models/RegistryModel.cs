@@ -9,6 +9,7 @@ namespace Light.Models
     /// </summary>
     internal sealed class RegistryModel
     {
+        // TODO: Заменить HKLM на HKCU
         private const string StartupPath = "\"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" ";
         private static readonly string AppNameKey = $"/v {AppDomain.CurrentDomain.FriendlyName} ";
         private static readonly string AppNameParam = $"/t REG_SZ /d \"{Assembly.GetExecutingAssembly().Location} -silent\" /f";

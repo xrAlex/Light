@@ -55,6 +55,15 @@ namespace Light.Services
             dialogStorage.CloseInstance();
         }
 
+        /// <summary>
+        /// Hiding dialog window
+        /// </summary>
+        public void HideDialog<TViewModel>() where TViewModel : ViewModelBase
+        {
+            var dialogStorage = _mappings[typeof(TViewModel)];
+            dialogStorage.HideInstance();
+        }
+
         public DialogService()
         {
             _mappings = new();

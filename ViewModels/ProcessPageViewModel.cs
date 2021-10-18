@@ -47,6 +47,8 @@ namespace Light.ViewModels
             Processes = _settingsService.Applications;
         }
 
+        public ProcessPageViewModel() {}
+
 #if DEBUG
         ~ProcessPageViewModel()
         {

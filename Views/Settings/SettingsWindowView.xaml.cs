@@ -13,6 +13,7 @@ namespace Light.Views.Settings
         {
             LoggingModule.Log.Verbose("[Window] SettingsWindowView Disposed");
         }
+
 #endif
     }
 }

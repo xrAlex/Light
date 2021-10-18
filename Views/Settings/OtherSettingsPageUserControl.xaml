@@ -13,12 +13,10 @@
             <RowDefinition Height="28*" />
             <RowDefinition Height="25*" />
             <RowDefinition Height="4*" />
-            <RowDefinition Height="13*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="25*"/>
             <RowDefinition Height="4*" />
             <RowDefinition Height="25*"/>
-            <RowDefinition Height="17*" />
-            <RowDefinition Height="312*"/>
+            <RowDefinition Height="329*" />
             <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -37,12 +35,11 @@
             Style="{StaticResource SliderCheckBox}"
             IsChecked="{Binding ExtendedGammaRange, Mode=TwoWay}"
             Content="{DynamicResource Loc_ExtendedGammaRange}"
-            Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2">
-        </CheckBox>
+            Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             Content="{DynamicResource Loc_SmoothBrightnessChange}"
-            Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2">
+            Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2">
         </CheckBox>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 using Light.Models;
@@ -14,8 +15,12 @@ namespace Light
 {
     public partial class App
     {
+
         private readonly Mutex _mutex;
-        private App()
+        private static IKernel _kernel;
+        public static IKernel Kernel { get; } = _kernel ??= ConfigureServices();
+
+        public App()
         {
             _mutex = new Mutex(true, ResourceAssembly.GetName().Name);
 
@@ -46,20 +51,16 @@ namespace Light
             {
                 dialogService.ShowDialog<MainWindowViewModel>();
             }
-
         }
     }
 
 
     public partial class App
     {
-        private static IKernel _kernel;
-
-        public static IKernel Kernel { get; } = _kernel ??= ConfigureServices();
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            _ = Kernel.Get<ITrayNotifierService>();
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -67,7 +68,7 @@ namespace Light
             Kernel.Get<IPeriodWatcherService>().StopWatch();
             ScreenModel.SetDefaultColorTemperatureOnAllScreens();
             _mutex?.ReleaseMutex();
-
+            Kernel.Get<ITrayNotifierService>().Dispose();
             base.OnExit(e);
 
             _kernel = null;
@@ -77,12 +78,14 @@ namespace Light
         private static IKernel ConfigureServices()
         {
             IKernel standardKernel = new StandardKernel();
+            standardKernel.Load(Assembly.GetExecutingAssembly());
 
             //Services
             standardKernel.Bind<IPeriodWatcherService>().To<PeriodWatcherService>().InSingletonScope();
             standardKernel.Bind<ISettingsService>().To<SettingsService>().InSingletonScope();
             standardKernel.Bind<IDialogService>().To<DialogService>().InSingletonScope();
             standardKernel.Bind<ICurrentTimeService>().To<CurrentTimeService>().InSingletonScope();
+            standardKernel.Bind<ITrayNotifierService>().To<TrayNotifierService>().InSingletonScope();
 
             //ViewModels
             standardKernel.Bind<MainWindowViewModel>().ToSelf().InTransientScope();
@@ -91,7 +94,6 @@ namespace Light
             standardKernel.Bind<SettingsMainPageViewModel>().ToSelf().InTransientScope();
             standardKernel.Bind<SettingsWindowViewModel>().ToSelf().InTransientScope();
             standardKernel.Bind<TrayMenuViewModel>().ToSelf().InTransientScope();
-
             return standardKernel;
         }
     }

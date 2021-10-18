@@ -27,6 +27,17 @@ namespace Light.Infrastructure
         }
 
         /// <summary>
+        /// Checks foreground Window bounds
+        /// </summary>
+        /// <returns> <see cref="bool"/> true, if the window is maximized to full screen </returns>
+        public static nint GetFullscreenForegroundWindow(ScreenEntity screen)
+        {
+            var handle = Native.GetForegroundWindow();
+            if (!IsWindowValid(handle) || IsWindowOnFullScreen(screen, handle)) return 0;
+            return handle;
+        }
+
+        /// <summary>
         /// Method gets all window handlers in system
         /// </summary>
         /// <returns> List of window handlers </returns>

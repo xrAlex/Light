@@ -86,6 +86,9 @@ namespace Light.ViewModels
 
             Localization.LangDictionary.OnLocalizationChanged += (_, _) => { RefreshUI(); };
         }
+
+        public TrayMenuViewModel() {}
+
 #if DEBUG
         ~TrayMenuViewModel()
         {

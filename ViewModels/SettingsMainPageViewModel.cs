@@ -161,6 +161,8 @@ namespace Light.ViewModels
             Localization.LangDictionary.OnLocalizationChanged += (_, _) => { RefreshUI(); };
         }
 
+        public SettingsMainPageViewModel() {}
+
 #if DEBUG
         ~SettingsMainPageViewModel()
         {

@@ -1,5 +1,4 @@
-﻿using Light.Infrastructure;
-using Light.Models;
+﻿using Light.Models;
 using Light.ViewModels.Base;
 
 namespace Light.ViewModels
@@ -28,7 +27,6 @@ namespace Light.ViewModels
             get => _registryModel.IsExtendedGammaRangeActive();
             set
             {
-                UserNotifier.ShowTip("Loc_RestartNotification");
                 if (value)
                 {
                     _registryModel.SetExtendedGammaRangeKey();
