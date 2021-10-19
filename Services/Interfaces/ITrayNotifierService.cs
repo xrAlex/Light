@@ -1,4 +1,4 @@
-﻿namespace Light.Services.Interfaces
+﻿namespace Sparky.Services.Interfaces
 {
     interface ITrayNotifierService
     {

@@ -1,8 +1,8 @@
-﻿using Light.Templates.Entities;
+﻿using Sparky.Templates.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Light.Services.Interfaces
+namespace Sparky.Services.Interfaces
 {
     internal interface ISettingsService
     {

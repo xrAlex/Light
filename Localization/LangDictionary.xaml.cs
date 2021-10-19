@@ -1,8 +1,8 @@
 ﻿using System;
-using Light.Services.Interfaces;
+using Sparky.Services.Interfaces;
 using Ninject;
 
-namespace Light.Localization
+namespace Sparky.Localization
 {
     public partial class LangDictionary
     {

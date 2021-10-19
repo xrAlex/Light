@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using Light.Infrastructure;
-using Light.Models;
+using Sparky.Infrastructure;
+using Sparky.Models;
 using System.Threading;
 using System.Threading.Tasks;
-using Light.Converters;
-using Light.Services.Interfaces;
-using Light.Templates.Entities;
+using Sparky.Converters;
+using Sparky.Services.Interfaces;
+using Sparky.Templates.Entities;
 
-namespace Light.Services
+namespace Sparky.Services
 {
     /// <summary>
     /// Contains method for control current time period

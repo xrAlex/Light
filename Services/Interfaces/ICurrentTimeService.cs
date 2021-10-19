@@ -1,7 +1,7 @@
-﻿using Light.Templates.EventHandlers;
+﻿using Sparky.Templates.EventHandlers;
 using System;
 
-namespace Light.Services.Interfaces
+namespace Sparky.Services.Interfaces
 {
     internal interface ICurrentTimeService
     {

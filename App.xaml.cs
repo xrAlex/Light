@@ -3,53 +3,40 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
-using Light.Models;
-using Light.Services;
-using Light.Services.Interfaces;
-using Light.ViewModels;
-using Light.Views.Main;
-using Light.Views.Settings;
+using Sparky.Models;
+using Sparky.Services;
+using Sparky.Services.Interfaces;
+using Sparky.ViewModels;
+using Sparky.Views.Main;
+using Sparky.Views.Settings;
 using Ninject;
 
-namespace Light
+namespace Sparky
 {
-    public partial class App
+    public partial class App : Application
     {
-
         private readonly Mutex _mutex;
-        private static IKernel _kernel;
-        public static IKernel Kernel { get; } = _kernel ??= ConfigureServices();
+        public static IKernel Kernel { get; private set; }
 
         public App()
         {
             _mutex = new Mutex(true, ResourceAssembly.GetName().Name);
-
-            if (!_mutex.WaitOne())
-            {
-                Current.Shutdown();
-                return;
-            }
-            var logs = new LoggingModule();
-            logs.Initialize();
-
-            var appSettings = Kernel.Get<ISettingsService>();
-            appSettings.Load();
-
-            var dialogService = Kernel.Get<IDialogService>();
-            var periodWatcherService = Kernel.Get<IPeriodWatcherService>();
-
-            var silentLaunch = Environment.GetCommandLineArgs().Contains("-silent");
-
-            dialogService.Register<MainWindowViewModel, MainWindowView>();
-            dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
-
-            periodWatcherService.StartWatch();
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            new LoggingModule().Initialize();
+
+            ValidateInstance();
+            ConfigureServices();
+            ConfigureViewContainer();
             InitializeComponent();
 
+            Kernel.Get<ITrayNotifierService>();
+            Kernel.Get<ISettingsService>().Load();
+            Kernel.Get<IPeriodWatcherService>().StartWatch();
+
+            var silentLaunch = Environment.GetCommandLineArgs().Contains("-silent");
             if (!silentLaunch)
             {
-                dialogService.ShowDialog<MainWindowViewModel>();
+                Kernel.Get<IDialogService>().ShowDialog<MainWindowViewModel>();
             }
         }
     }
@@ -57,28 +44,23 @@ namespace Light
 
     public partial class App
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            _ = Kernel.Get<ITrayNotifierService>();
-        }
-
         protected override void OnExit(ExitEventArgs e)
         {
             Kernel.Get<IPeriodWatcherService>().StopWatch();
             ScreenModel.SetDefaultColorTemperatureOnAllScreens();
             _mutex?.ReleaseMutex();
             Kernel.Get<ITrayNotifierService>().Dispose();
-            base.OnExit(e);
-
-            _kernel = null;
             Kernel.Dispose();
-        }
 
-        private static IKernel ConfigureServices()
+            base.OnExit(e);
+        }
+        private void ValidateInstance()
+        {
+            if (!_mutex.WaitOne()) Current.Shutdown();
+        }
+        private void ConfigureServices()
         {
             IKernel standardKernel = new StandardKernel();
-            standardKernel.Load(Assembly.GetExecutingAssembly());
 
             //Services
             standardKernel.Bind<IPeriodWatcherService>().To<PeriodWatcherService>().InSingletonScope();
@@ -94,7 +76,14 @@ namespace Light
             standardKernel.Bind<SettingsMainPageViewModel>().ToSelf().InTransientScope();
             standardKernel.Bind<SettingsWindowViewModel>().ToSelf().InTransientScope();
             standardKernel.Bind<TrayMenuViewModel>().ToSelf().InTransientScope();
-            return standardKernel;
+
+            Kernel = standardKernel;
+        }
+        private void ConfigureViewContainer()
+        {
+            var dialogService = Kernel.Get<IDialogService>();
+            dialogService.Register<MainWindowViewModel, MainWindowView>();
+            dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
         }
     }
 }

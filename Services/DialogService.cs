@@ -3,13 +3,13 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using Light.Services.Interfaces;
-using Light.Templates.Entities;
-using Light.ViewModels.Base;
+using Sparky.Services.Interfaces;
+using Sparky.Templates.Entities;
+using Sparky.ViewModels.Base;
 
 #endregion
 
-namespace Light.Services
+namespace Sparky.Services
 {
     /// <summary>
     /// Class for working with program dialog windows

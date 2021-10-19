@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Light.Commands
+namespace Sparky.Commands
 {
     internal sealed class LambdaCommand : Command
     {

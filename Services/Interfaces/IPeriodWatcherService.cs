@@ -1,4 +1,4 @@
-﻿namespace Light.Services
+﻿namespace Sparky.Services
 {
     internal interface IPeriodWatcherService
     {

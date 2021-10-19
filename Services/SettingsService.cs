@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
-using Light.Infrastructure;
-using Light.Services.Interfaces;
-using Light.Templates.Entities;
+using Sparky.Infrastructure;
+using Sparky.Services.Interfaces;
+using Sparky.Templates.Entities;
 using WindowsDisplayAPI.DisplayConfig;
 
-namespace Light.Services
+namespace Sparky.Services
 {
     /// <summary>
     /// Loads, saves and storage application settings

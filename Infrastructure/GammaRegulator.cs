@@ -1,7 +1,7 @@
-﻿using Light.Templates.Entities;
-using Light.WinApi;
+﻿using Sparky.Templates.Entities;
+using Sparky.WinApi;
 
-namespace Light.Infrastructure
+namespace Sparky.Infrastructure
 {
     /// <summary>
     /// Applies a color configuration to screen source

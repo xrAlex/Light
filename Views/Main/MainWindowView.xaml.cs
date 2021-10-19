@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 
 
-namespace Light.Views.Main
+namespace Sparky.Views.Main
 {
     public partial class MainWindowView
     {

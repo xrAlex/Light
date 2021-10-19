@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Threading;
-using Light.Services.Interfaces;
-using Light.Templates.EventHandlers;
+using Sparky.Services.Interfaces;
+using Sparky.Templates.EventHandlers;
 
-namespace Light.Services
+namespace Sparky.Services
 {
     /// <summary>
     /// Updates current time

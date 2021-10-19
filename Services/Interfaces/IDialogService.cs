@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using Light.ViewModels.Base;
+using Sparky.ViewModels.Base;
 
-namespace Light.Services.Interfaces
+namespace Sparky.Services.Interfaces
 {
     internal interface IDialogService
     {

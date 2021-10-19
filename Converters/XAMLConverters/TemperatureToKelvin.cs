@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Light.Converters.XAMLConverters
+namespace Sparky.Converters.XAMLConverters
 {
     [ValueConversion(typeof(double), typeof(string))]
     internal sealed class TemperatureToKelvin : IValueConverter

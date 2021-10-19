@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Light.Templates.Entities
+namespace Sparky.Templates.Entities
 {
     internal sealed class DialogStorage
     {

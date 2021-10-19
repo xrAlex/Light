@@ -2,7 +2,7 @@
 using System.Windows;
 using Ninject;
 
-namespace Light.ViewModels
+namespace Sparky.ViewModels
 {
     internal sealed class ViewModelLocator
     {

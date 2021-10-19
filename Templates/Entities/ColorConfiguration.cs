@@ -1,6 +1,6 @@
-﻿using Light.Templates.Entities.Base;
+﻿using Sparky.Templates.Entities.Base;
 
-namespace Light.Templates.Entities
+namespace Sparky.Templates.Entities
 {
     internal sealed class ColorConfiguration : NotifyingEntity
     {

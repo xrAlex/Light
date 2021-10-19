@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Light.Converters
+namespace Sparky.Converters
 {
     internal sealed class CurrentTimeToMin
     {

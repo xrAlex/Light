@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Light.Templates.EventHandlers
+namespace Sparky.Templates.EventHandlers
 {
     internal sealed class TimeEventArgs : EventArgs
     { 

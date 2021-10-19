@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Light.WinApi
+namespace Sparky.WinApi
 {
     [Flags]
     internal enum ProcessAccessFlags : uint

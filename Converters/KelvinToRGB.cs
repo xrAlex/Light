@@ -1,7 +1,7 @@
 ﻿using System;
-using Light.Templates.Entities;
+using Sparky.Templates.Entities;
 
-namespace Light.Converters
+namespace Sparky.Converters
 {
     internal sealed class KelvinToRGB
     {

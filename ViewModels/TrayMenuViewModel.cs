@@ -1,12 +1,12 @@
-﻿using Light.Commands;
-using Light.Models;
-using Light.Services;
-using Light.ViewModels.Base;
+﻿using Sparky.Commands;
+using Sparky.Models;
+using Sparky.Services;
+using Sparky.ViewModels.Base;
 using System.Windows.Input;
-using Light.Services.Interfaces;
+using Sparky.Services.Interfaces;
 using Application = System.Windows.Application;
 
-namespace Light.ViewModels
+namespace Sparky.ViewModels
 {
     internal sealed class TrayMenuViewModel : ViewModelBase
     {

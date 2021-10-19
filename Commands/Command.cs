@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Light.Commands
+namespace Sparky.Commands
 {
     internal abstract class Command : ICommand
     {

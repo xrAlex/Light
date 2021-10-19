@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Light.Views.Tray
+namespace Sparky.Views.Tray
 {
     /// <summary>
     /// Логика взаимодействия для TrayMenuPopup.xaml

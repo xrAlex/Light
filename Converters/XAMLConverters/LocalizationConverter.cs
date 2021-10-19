@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Light.Converters.XAMLConverters
+namespace Sparky.Converters.XAMLConverters
 {
     [ValueConversion(typeof(string), null)]
     internal sealed class LocalizationConverter : IValueConverter

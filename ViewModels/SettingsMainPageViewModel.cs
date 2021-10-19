@@ -1,13 +1,13 @@
-﻿using Light.Commands;
-using Light.Models;
-using Light.Templates.Entities;
-using Light.ViewModels.Base;
+﻿using Sparky.Commands;
+using Sparky.Models;
+using Sparky.Templates.Entities;
+using Sparky.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Light.Services.Interfaces;
+using Sparky.Services.Interfaces;
 
 
-namespace Light.ViewModels
+namespace Sparky.ViewModels
 {
     internal sealed class SettingsMainPageViewModel : ViewModelBase
     {

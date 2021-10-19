@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Light.Converters.XAMLConverters
+namespace Sparky.Converters.XAMLConverters
 {
     [ValueConversion(typeof(int), typeof(string))]
     internal sealed class MinConverter : IValueConverter

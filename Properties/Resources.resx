@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Accept.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="BlueReduce" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\BlueReduce.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,9 +127,6 @@
   <data name="Gamma" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Gamma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Icon1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Lang" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Lang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -141,9 +135,6 @@
   </data>
   <data name="MonitorBlack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\MonitorBlack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MonitorWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\MonitorWhite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Other" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Other.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -156,6 +147,9 @@
   </data>
   <data name="Settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TrayLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TrayLogo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="turnoff" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\turnoff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

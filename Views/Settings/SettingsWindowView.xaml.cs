@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Light.Views.Settings
+namespace Sparky.Views.Settings
 {
     public partial class SettingsWindowView
     {

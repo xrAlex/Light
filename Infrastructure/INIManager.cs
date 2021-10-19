@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
-using Light.WinApi;
+using Sparky.WinApi;
 
-namespace Light.Infrastructure
+namespace Sparky.Infrastructure
 {
     /// <summary>
     /// Contains methods for working with .ini files

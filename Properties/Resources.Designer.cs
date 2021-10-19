@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Light.Properties {
+namespace Sparky.Properties {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace Light.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace Light.Properties {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Light.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sparky.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Light.Properties {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,17 +63,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Accept {
-            get {
-                object obj = ResourceManager.GetObject("Accept", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BlueReduce {
+        internal static System.Drawing.Bitmap BlueReduce {
             get {
                 object obj = ResourceManager.GetObject("BlueReduce", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +73,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap eng {
+        internal static System.Drawing.Bitmap eng {
             get {
                 object obj = ResourceManager.GetObject("eng", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +83,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Gamma {
+        internal static System.Drawing.Bitmap Gamma {
             get {
                 object obj = ResourceManager.GetObject("Gamma", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -101,19 +91,9 @@ namespace Light.Properties {
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
-        /// </summary>
-        public static System.Drawing.Icon Icon1 {
-            get {
-                object obj = ResourceManager.GetObject("Icon1", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Lang {
+        internal static System.Drawing.Bitmap Lang {
             get {
                 object obj = ResourceManager.GetObject("Lang", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +103,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Main {
+        internal static System.Drawing.Bitmap Main {
             get {
                 object obj = ResourceManager.GetObject("Main", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +113,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap MonitorBlack {
+        internal static System.Drawing.Bitmap MonitorBlack {
             get {
                 object obj = ResourceManager.GetObject("MonitorBlack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,17 +123,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap MonitorWhite {
-            get {
-                object obj = ResourceManager.GetObject("MonitorWhite", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Other {
+        internal static System.Drawing.Bitmap Other {
             get {
                 object obj = ResourceManager.GetObject("Other", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +133,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Processes {
+        internal static System.Drawing.Bitmap Processes {
             get {
                 object obj = ResourceManager.GetObject("Processes", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +143,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap rus {
+        internal static System.Drawing.Bitmap rus {
             get {
                 object obj = ResourceManager.GetObject("rus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +153,7 @@ namespace Light.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Settings {
+        internal static System.Drawing.Bitmap Settings {
             get {
                 object obj = ResourceManager.GetObject("Settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -191,9 +161,19 @@ namespace Light.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
+        internal static System.Drawing.Icon TrayLogo {
+            get {
+                object obj = ResourceManager.GetObject("TrayLogo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap turnoff {
+        internal static System.Drawing.Bitmap turnoff {
             get {
                 object obj = ResourceManager.GetObject("turnoff", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

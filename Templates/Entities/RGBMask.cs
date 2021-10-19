@@ -1,4 +1,4 @@
-﻿namespace Light.Templates.Entities
+﻿namespace Sparky.Templates.Entities
 {
     internal readonly struct RGBMask
     {

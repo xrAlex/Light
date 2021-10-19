@@ -1,12 +1,12 @@
-﻿using Light.Infrastructure;
-using Light.Templates.Entities;
+﻿using Sparky.Infrastructure;
+using Sparky.Templates.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using Light.Services.Interfaces;
+using Sparky.Services.Interfaces;
 
-namespace Light.Models
+namespace Sparky.Models
 {
     internal sealed class ApplicationModel
     {

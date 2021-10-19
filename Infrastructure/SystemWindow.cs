@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Light.Templates.Entities;
-using Light.WinApi;
+using Sparky.Templates.Entities;
+using Sparky.WinApi;
 
-namespace Light.Infrastructure
+namespace Sparky.Infrastructure
 {
     /// <summary>
     /// Implements methods for working with system windows

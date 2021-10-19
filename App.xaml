@@ -1,12 +1,12 @@
-﻿<Application x:Class="Light.App"
+﻿<Application x:Class="Sparky.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:xamlConverters="clr-namespace:Light.Converters.XAMLConverters"
-             xmlns:language="clr-namespace:Light.Localization"
-             xmlns:viewmodels="clr-namespace:Light.ViewModels"
-             xmlns:main="clr-namespace:Light.Views.Main"
-             xmlns:settings="clr-namespace:Light.Views.Settings"
-             xmlns:tray="clr-namespace:Light.Views.Tray">
+             xmlns:xamlConverters="clr-namespace:Sparky.Converters.XAMLConverters"
+             xmlns:language="clr-namespace:Sparky.Localization"
+             xmlns:viewmodels="clr-namespace:Sparky.ViewModels"
+             xmlns:main="clr-namespace:Sparky.Views.Main"
+             xmlns:settings="clr-namespace:Sparky.Views.Settings"
+             xmlns:tray="clr-namespace:Sparky.Views.Tray">
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type viewmodels:MainWindowViewModel}">

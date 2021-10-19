@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Light.Templates.Entities
+namespace Sparky.Templates.Entities
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct GammaRamp

@@ -1,11 +1,11 @@
-﻿using Light.Commands;
-using Light.Services;
-using Light.ViewModels.Base;
+﻿using Sparky.Commands;
+using Sparky.Services;
+using Sparky.ViewModels.Base;
 using System.Windows.Input;
-using Light.Services.Interfaces;
+using Sparky.Services.Interfaces;
 
 
-namespace Light.ViewModels
+namespace Sparky.ViewModels
 {
     internal sealed class SettingsWindowViewModel : ViewModelBase
     {

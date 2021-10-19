@@ -1,9 +1,9 @@
-﻿using Light.WinApi;
+﻿using Sparky.WinApi;
 using System;
 using System.IO;
 using System.Text;
 
-namespace Light.Infrastructure
+namespace Sparky.Infrastructure
 {
     internal sealed class SystemProcess : IDisposable
     {

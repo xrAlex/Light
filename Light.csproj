@@ -5,8 +5,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E1B6BF7F-767A-483B-BF0C-7591C9A48700}</ProjectGuid>
-    <RootNamespace>Light</RootNamespace>
-    <AssemblyName>Light</AssemblyName>
+    <RootNamespace>Sparky</RootNamespace>
+    <AssemblyName>Sparky</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>Latest</LangVersion>
@@ -56,7 +56,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Light.App</StartupObject>
+    <StartupObject>Sparky.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -259,7 +259,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -285,9 +285,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Accept.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\BlueReduce.png" />
   </ItemGroup>
   <ItemGroup>
@@ -298,9 +295,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\MonitorBlack.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\MonitorWhite.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Other.png" />
@@ -315,12 +309,8 @@
     <Resource Include="Resources\Images\turnoff.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Images\TrayIcon.ico" />
+    <Resource Include="Resources\Images\Logo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Icon1.ico" />
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Images\Lang.png" />
   </ItemGroup>
@@ -339,6 +329,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\refresh-option.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\TrayLogo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\totray.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

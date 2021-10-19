@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
-using Light.Infrastructure;
-using Light.Services.Interfaces;
-using Light.Templates.Entities;
+using Sparky.Infrastructure;
+using Sparky.Services.Interfaces;
+using Sparky.Templates.Entities;
 using Ninject;
 
-namespace Light.Models
+namespace Sparky.Models
 {
     internal sealed class ScreenModel
     {

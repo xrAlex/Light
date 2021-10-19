@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Light.Templates.Entities.Base
+namespace Sparky.Templates.Entities.Base
 {
     internal class NotifyingEntity : INotifyPropertyChanged
     {

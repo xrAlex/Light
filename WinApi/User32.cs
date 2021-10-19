@@ -1,8 +1,8 @@
-﻿using Light.Templates.Entities;
+﻿using Sparky.Templates.Entities;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Light.WinApi
+namespace Sparky.WinApi
 {
     internal static partial class Native
     {

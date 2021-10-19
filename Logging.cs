@@ -9,7 +9,7 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace Light
+namespace Sparky
 {
     public class LoggingModule
     {
@@ -53,7 +53,8 @@ namespace Light
                     filename,
                     restrictedToMinimumLevel: LogEventLevel.Information,
                     rollingInterval: RollingInterval.Day,
-                    rollOnFileSizeLimit: true
+                    rollOnFileSizeLimit: true,
+                    retainedFileCountLimit: 5
                 )
                 .CreateLogger();
 
@@ -79,9 +80,8 @@ namespace Light
                     $"{AppDomain.CurrentDomain.FriendlyName}" +
                     $" Build {Assembly.GetName().Version} \r\n" +
                     $"Command line: {commandLine} \r\n" +
-                    "Github: https://github.com/xrSanya/Light \r\n" +
-                    $"User system: {RuntimeInformation.OSDescription}({RuntimeInformation.ProcessArchitecture})" +
-                    $"Framework version: {RuntimeInformation.FrameworkDescription}\r\n" +
+                    "Github: https://github.com/xrAlex/Light \r\n" +
+                    $"User system: {RuntimeInformation.OSDescription}({RuntimeInformation.ProcessArchitecture}) \r\n" +
                     $"User machine name {Environment.MachineName} \r\n" +
                     "Initializing Application... \r\n";
             }

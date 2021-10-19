@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
-using Light.Services.Interfaces;
-using Light.ViewModels;
-using Light.Views.Tray;
+using Sparky.Services.Interfaces;
+using Sparky.ViewModels;
+using Sparky.Views.Tray;
 
-namespace Light.Services
+namespace Sparky.Services
 {
     internal class TrayNotifierService : IDisposable, ITrayNotifierService
     {
@@ -21,13 +21,13 @@ namespace Light.Services
                 ToolTipText = "Light",
                 TrayPopup = new TrayMenuPopup(),
                 DataContext = ViewModelLocator.TrayMenuViewModel,
-                Icon = Properties.Resources.Icon1,
+                Icon = Properties.Resources.TrayLogo,
                 Visibility = Visibility.Visible
             };
-            _taskBarNotifier.TrayLeftMouseDown += _taskBarNotifier_TrayLeftMouseDown;
+            _taskBarNotifier.TrayLeftMouseDown += OnLeftMouseDown;
         }
 
-        private void _taskBarNotifier_TrayLeftMouseDown(object sender, RoutedEventArgs e)
+        private void OnLeftMouseDown(object sender, RoutedEventArgs e)
         {
             _dialogService.ShowDialog<MainWindowViewModel>();
         }

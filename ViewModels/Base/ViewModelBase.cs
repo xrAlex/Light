@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Light.ViewModels.Base
+namespace Sparky.ViewModels.Base
 {
     internal abstract class ViewModelBase : INotifyPropertyChanged
     {

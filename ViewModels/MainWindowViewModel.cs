@@ -1,11 +1,12 @@
-﻿using Light.Commands;
-using Light.Templates.Entities;
-using Light.ViewModels.Base;
+﻿using Sparky.Commands;
+using Sparky.Templates.Entities;
+using Sparky.ViewModels.Base;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
-using Light.Services.Interfaces;
+using Sparky.Services.Interfaces;
 
-namespace Light.ViewModels
+namespace Sparky.ViewModels
 {
     internal sealed class MainWindowViewModel : ViewModelBase
     {
@@ -37,6 +38,7 @@ namespace Light.ViewModels
         private void OnCloseAppCommandExecute()
         {
             _dialogService.CloseDialog<MainWindowViewModel>();
+            Application.Current.Shutdown();
         }
 
         private void OnAppToTrayCommandExecute()

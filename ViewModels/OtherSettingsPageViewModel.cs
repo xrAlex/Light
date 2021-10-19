@@ -1,7 +1,7 @@
-﻿using Light.Models;
-using Light.ViewModels.Base;
+﻿using Sparky.Models;
+using Sparky.ViewModels.Base;
 
-namespace Light.ViewModels
+namespace Sparky.ViewModels
 {
     internal sealed class OtherSettingsPageViewModel : ViewModelBase
     {

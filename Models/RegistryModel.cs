@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-namespace Light.Models
+namespace Sparky.Models
 {
     /// <summary>
     /// A model for working with register entries

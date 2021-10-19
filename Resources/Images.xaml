@@ -1,24 +1,27 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <BitmapImage x:Key="Monitor" UriSource="/Light;component/Resources/Images/MonitorWhite.png"/>
-    <BitmapImage x:Key="MonitorBlack" UriSource="/Light;component/Resources/Images/MonitorBlack.png"/>
-    <BitmapImage x:Key="Process" UriSource="/Light;component/Resources/Images/Processes.png"/>
-    <BitmapImage x:Key="Main" UriSource="/Light;component/Resources/Images/Main.png"/>
-    <BitmapImage x:Key="Other" UriSource="/Light;component/Resources/Images/Other.png"/>
-    <BitmapImage x:Key="TurnOff" UriSource="/Light;component/Resources/Images/turnoff.png"/>
-    <BitmapImage x:Key="Settings" UriSource="/Light;component/Resources/Images/Settings.png"/>
-    <BitmapImage x:Key="Day" UriSource="/Light;component/Resources/Images/Gamma.png"/>
-    <BitmapImage x:Key="Night" UriSource="/Light;component/Resources/Images/BlueReduce.png"/>
-    <BitmapImage x:Key="Refresh" UriSource="/Light;component/Resources/Images/refresh-option.png"/>
+    <BitmapImage x:Key="MonitorBlack" UriSource="/Sparky;component/Resources/Images/MonitorBlack.png"/>
+    <BitmapImage x:Key="Process" UriSource="/Sparky;component/Resources/Images/Processes.png"/>
+    <BitmapImage x:Key="Main" UriSource="/Sparky;component/Resources/Images/Main.png"/>
+    <BitmapImage x:Key="Other" UriSource="/Sparky;component/Resources/Images/Other.png"/>
+    <BitmapImage x:Key="TurnOff" UriSource="/Sparky;component/Resources/Images/turnoff.png"/>
+    <BitmapImage x:Key="Settings" UriSource="/Sparky;component/Resources/Images/Settings.png"/>
+    <BitmapImage x:Key="Day" UriSource="/Sparky;component/Resources/Images/Gamma.png"/>
+    <BitmapImage x:Key="Night" UriSource="/Sparky;component/Resources/Images/BlueReduce.png"/>
+    <BitmapImage x:Key="Refresh" UriSource="/Sparky;component/Resources/Images/refresh-option.png"/>
+    <BitmapImage x:Key="Logo" UriSource="/Sparky;component/Resources/Images/Logo.png"/>
+    <BitmapImage x:Key="ToTray" UriSource="/Sparky;component/Resources/Images/totray.png"/>
 
-    <BitmapImage x:Key="Lang" UriSource="/Light;component/Resources/Images/Lang.png"/>
-    <BitmapImage x:Key="FlagRus" UriSource="/Light;component/Resources/Images/Flags/russia.png"/>
-    <BitmapImage x:Key="FlagEng" UriSource="/Light;component/Resources/Images/Flags/united-states.png"/>
-    <BitmapImage x:Key="FlagChn" UriSource="/Light;component/Resources/Images/Flags/china.png"/>
-    <BitmapImage x:Key="FlagFra" UriSource="/Light;component/Resources/Images/Flags/france.png"/>
-    <BitmapImage x:Key="FlagGer" UriSource="/Light;component/Resources/Images/Flags/germany.png"/>
-    <BitmapImage x:Key="FlagSpa" UriSource="/Light;component/Resources/Images/Flags/spain.png"/>
-    <BitmapImage x:Key="FlagUae" UriSource="/Light;component/Resources/Images/Flags/united-arab-emirates.png"/>
+    <BitmapImage x:Key="TrayLogo" UriSource="/Sparky;component/Resources/Images/TrayIcon.ico"/>
+
+    <BitmapImage x:Key="Lang" UriSource="/Sparky;component/Resources/Images/Lang.png"/>
+    <BitmapImage x:Key="FlagRus" UriSource="/Sparky;component/Resources/Images/Flags/russia.png"/>
+    <BitmapImage x:Key="FlagEng" UriSource="/Sparky;component/Resources/Images/Flags/united-states.png"/>
+    <BitmapImage x:Key="FlagChn" UriSource="/Sparky;component/Resources/Images/Flags/china.png"/>
+    <BitmapImage x:Key="FlagFra" UriSource="/Sparky;component/Resources/Images/Flags/france.png"/>
+    <BitmapImage x:Key="FlagGer" UriSource="/Sparky;component/Resources/Images/Flags/germany.png"/>
+    <BitmapImage x:Key="FlagSpa" UriSource="/Sparky;component/Resources/Images/Flags/spain.png"/>
+    <BitmapImage x:Key="FlagUae" UriSource="/Sparky;component/Resources/Images/Flags/united-arab-emirates.png"/>
 
 </ResourceDictionary>

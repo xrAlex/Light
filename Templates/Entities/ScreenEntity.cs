@@ -1,9 +1,9 @@
-﻿using Light.Templates.Entities.Base;
+﻿using Sparky.Templates.Entities.Base;
 using System;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
-namespace Light.Templates.Entities
+namespace Sparky.Templates.Entities
 {
     internal sealed class ScreenEntity : NotifyingEntity
     {
