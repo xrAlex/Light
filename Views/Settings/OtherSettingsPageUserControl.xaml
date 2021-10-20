@@ -5,41 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:Sparky.ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="450"
+             d:DesignHeight="410" d:DesignWidth="350"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:OtherSettingsPageViewModel}}"
              Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="28*" />
-            <RowDefinition Height="25*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="329*" />
-            <RowDefinition Height="60*"/>
+            <RowDefinition Height="5*" />
+            <RowDefinition />
+            <RowDefinition Height="0*" />
+            <RowDefinition Height="5*"/>
+            <RowDefinition />
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="65*" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*" />
-            <ColumnDefinition Width="30*" />
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             Content="{DynamicResource Loc_AutoLaunch}"
-            IsChecked="{Binding LaunchOnStartup, Mode=TwoWay}"
-            Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-        </CheckBox>
+            IsChecked="{Binding LaunchOnStartup, Mode=TwoWay}"/>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             IsChecked="{Binding ExtendedGammaRange, Mode=TwoWay}"
-            Content="{DynamicResource Loc_ExtendedGammaRange}"
-            Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
+            Content="{DynamicResource Loc_ExtendedGammaRange}" Grid.Row="3" Margin="0,0,9,0"/>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
-            Content="{DynamicResource Loc_SmoothBrightnessChange}"
-            Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2">
-        </CheckBox>
+            Content="{DynamicResource Loc_SmoothBrightnessChange}" Grid.Row="5" Margin="0,0,9,0"/>
     </Grid>
 </UserControl>

@@ -16,74 +16,99 @@
         DataContext ="{Binding SettingsWindowViewModel, Source={StaticResource Locator}}"
         Background="Transparent" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
-    <Border CornerRadius="10" Background="#FF292929" BorderThickness="5" BorderBrush="#FF292929">
+    <Border CornerRadius="10" Background="#FF292929">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="15*" />
-                <RowDefinition Height="45*"/>
-                <RowDefinition Height="111*"/>
-                <RowDefinition Height="45*" />
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="46*"/>
+                <RowDefinition Height="113*"/>
+                <RowDefinition Height="46*" />
                 <RowDefinition Height="4*" />
-                <RowDefinition Height="45*" />
+                <RowDefinition Height="46*" />
                 <RowDefinition Height="4*" />
-                <RowDefinition Height="45*" />
-                <RowDefinition Height="121*" />
-                <RowDefinition Height="40*" />
-                <RowDefinition Height="15*" />
+                <RowDefinition Height="46*" />
+                <RowDefinition Height="119*" />
+                <RowDefinition Height="46*"/>
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="50*" />
-                <ColumnDefinition Width="6*" />
-                <ColumnDefinition Width="20*" />
-                <ColumnDefinition Width="78*" />
-                <ColumnDefinition Width="54*" />
-                <ColumnDefinition Width="78*" />
-                <ColumnDefinition Width="54*" />
-                <ColumnDefinition Width="78*" />
-                <ColumnDefinition Width="19*" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="77*" />
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Background="White" CornerRadius="5" Grid.RowSpan="11" Grid.ColumnSpan="7" Grid.Column="3"/>
-            <ContentControl Content="{Binding SelectedViewModel}" Grid.ColumnSpan="10" Grid.RowSpan="11"/>
-             <Button
+            <Border 
+                Background="White" 
+                CornerRadius="5" 
+                Grid.RowSpan="11" 
+                Grid.Column="3" 
+                Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="410*"/>
+                        <RowDefinition Height="14*"/>
+                        <RowDefinition Height="41*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="14.833"/>
+                        <ColumnDefinition Width="5.167"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="55"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="55"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="15"/>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Style="{StaticResource LightGrayButton}"
+                        Content="{DynamicResource Loc_Reset}"
+                        Command="{Binding ResetSettingsCommand, Mode=OneWay}" Grid.Column="2" Grid.Row="3"
+                        />
+                    <Button
+                        Style="{StaticResource LightGrayButton}"
+                        Content="{DynamicResource Loc_Cancel}"
+                        Command="{Binding CloseSettingsCommand, Mode=OneWay}" Grid.Column="4" Grid.Row="3"
+                        />
+                    <Button
+                        Style="{StaticResource LightGrayButton}"
+                        Content="{DynamicResource Loc_Apply}"
+                        Command="{Binding ApplySettingsCommand, Mode=OneWay}" Grid.Column="6" Grid.Row="3"
+                        />
+                    <ContentControl Content="{Binding SelectedViewModel}" Grid.ColumnSpan="6" Grid.Row="1" Grid.Column="1" />
+                </Grid>
+            </Border>
+            <Button
                 Style="{StaticResource BlackButton}"
-                Grid.Column="1" Grid.Row="5"
+                Grid.Column="1" Grid.Row="10"
                 Command="{Binding ToProcessPageCommand, Mode=OneWay}">
-                <Image Width="37" Height="37" Source="{StaticResource Process}"/>
+                <Image Width="35" Height="35" Source="{StaticResource Info}"/>
             </Button>
             <Button
                 Style="{StaticResource BlackButton}"
-                Command="{Binding ToSettingsMainPageCommand, Mode=OneWay}" Grid.Column="1" Grid.Row="3">
-                <Image  Stretch ="Fill" Width="37" Height="37" Source="{StaticResource Main}"/>
+                Grid.Column="1" Grid.Row="6"
+                Command="{Binding ToProcessPageCommand, Mode=OneWay}">
+                <Image Width="35" Height="35" Source="{StaticResource Process}"/>
+            </Button>
+            <Button
+                Style="{StaticResource BlackButton}"
+                Command="{Binding ToSettingsMainPageCommand, Mode=OneWay}" Grid.Column="1" Grid.Row="4">
+                <Image  Stretch ="Fill" Width="35" Height="35" Source="{StaticResource Main}"/>
             </Button>
             <Button
                 Style="{StaticResource BlackButton}"
                 Grid.Column="1"
-                Command="{Binding ToOtherSettingsPageCommand, Mode=OneWay}" Height="45" VerticalAlignment="Top" Grid.Row="7">
-                <Image Width="37" Height="37" Source="{StaticResource Other}"/>
-            </Button>
-            <Button
-                Style="{StaticResource LightGrayButton}"
-                Content="{DynamicResource Loc_Reset}"
-                Command="{Binding ResetSettingsCommand, Mode=OneWay}"
-                Grid.Row="9" Grid.Column="4">
-            </Button>
-            <Button
-                Style="{StaticResource LightGrayButton}"
-                Content="{DynamicResource Loc_Cancel}"
-                Command="{Binding CloseSettingsCommand, Mode=OneWay}"
-                Grid.Row="9" Grid.Column="6">
-            </Button>
-            <Button
-                Style="{StaticResource LightGrayButton}"
-                Content="{DynamicResource Loc_Apply}"
-                Command="{Binding ApplySettingsCommand, Mode=OneWay}"
-                Grid.Row="9" Grid.Column="8">
+                Command="{Binding ToOtherSettingsPageCommand, Mode=OneWay}" Height="45" VerticalAlignment="Top" Grid.Row="8">
+                <Image Width="35" Height="35" Source="{StaticResource Other}"/>
             </Button>
             <ComboBox
                 SelectedIndex="{Binding SelectedLangIndex}"
                 ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
-                Style="{StaticResource PictureComboBoxStyle}" Grid.Column="1" Grid.Row="1">
+                Style="{StaticResource PictureComboBoxStyle}" Grid.Column="1" Grid.Row="2">
                 <ComboBoxItem>
                     <Image Width="41" Height="26" Source="{StaticResource FlagEng}"/>
                 </ComboBoxItem>

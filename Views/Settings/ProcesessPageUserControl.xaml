@@ -6,40 +6,37 @@
              xmlns:viewmodels="clr-namespace:Sparky.ViewModels"
              xmlns:prop="clr-namespace:Sparky.Properties"
              mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="450"
+             d:DesignHeight="410" d:DesignWidth="350"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:ProcessPageViewModel}}"
              Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="29*" />
+            <RowDefinition Height="0*" />
             <RowDefinition Height="25*" />
-            <RowDefinition Height="6*" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="35*" />
-            <RowDefinition Height="57*" />
-            <RowDefinition Height="253*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="60*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="21*" />
+            <RowDefinition Height="44*" />
+            <RowDefinition Height="47*" />
+            <RowDefinition Height="207*" />
+            <RowDefinition Height="12*" />
+            <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="16*" />
-            <ColumnDefinition Width="65*" />
+            <ColumnDefinition Width="71*" />
             <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
             x:Name="FullScreenCheckBox"
             Content="{DynamicResource Loc_DontWorkInFullScreen}" 
             VerticalContentAlignment="Center"
-            IsChecked="{Binding CheckFullScreenApps, Mode=TwoWay}"
-            Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+            IsChecked="{Binding CheckFullScreenApps, Mode=TwoWay}" Grid.ColumnSpan="3" Grid.Row="1"/>
         <ListBox
             BorderThickness="0"
             IsEnabled="{Binding IsChecked, ElementName=FullScreenCheckBox}"
             SelectionMode="Multiple"
-            ItemsSource="{Binding Processes, Mode=OneWay}"
-            Grid.Column="1" Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="2">
+            ItemsSource="{Binding Processes, Mode=OneWay}" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="3">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource ProcessListBoxItem}">
                     <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
@@ -60,16 +57,15 @@
         <TextBox
             FontSize="14"
             Text="{DynamicResource Loc_ProcessesWhiteList}"
-            Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
-        </TextBox>
+            Grid.Row="3" Grid.ColumnSpan="3"/>
         <Button 
             Command="{Binding RefreshApplicationsList, Mode=OneWay}"
             Style="{StaticResource RotaryButton}"
             IsEnabled="{Binding IsChecked, ElementName=FullScreenCheckBox}"
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Width="25" Height="20" 
-            Grid.Column="2" Grid.Row="3">
-            <Image Source="{StaticResource Refresh}"/>
+            Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2">
+            <Image Source="{StaticResource Refresh}" Height="20"/>
         </Button>
     </Grid>
 </UserControl>

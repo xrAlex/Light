@@ -12,6 +12,7 @@
     <BitmapImage x:Key="Refresh" UriSource="/Sparky;component/Resources/Images/refresh-option.png"/>
     <BitmapImage x:Key="Logo" UriSource="/Sparky;component/Resources/Images/Logo.png"/>
     <BitmapImage x:Key="ToTray" UriSource="/Sparky;component/Resources/Images/totray.png"/>
+    <BitmapImage x:Key="Info" UriSource="/Sparky;component/Resources/Images/info.png"/>
 
     <BitmapImage x:Key="TrayLogo" UriSource="/Sparky;component/Resources/Images/TrayIcon.ico"/>
 

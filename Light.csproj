@@ -336,6 +336,9 @@
   <ItemGroup>
     <Resource Include="Resources\Images\totray.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\info.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)\ILMerge\merge_all.bat" "$(SolutionDir)" "$(TargetPath)" $(ConfigurationName)

@@ -88,7 +88,7 @@
                     <Border x:Name="templateRoot" Background="{StaticResource TLightBlack}" SnapsToDevicePixels="true" CornerRadius="3" Cursor="Hand">
                         <Grid>
                             <Image 
-                                Width="37" Height="37"
+                                Width="35" Height="35"
                                 HorizontalAlignment="Center" 
                                 Source="{StaticResource Lang}">
                             </Image>
