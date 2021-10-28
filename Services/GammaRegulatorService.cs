@@ -1,17 +1,17 @@
 ﻿using Sparky.Templates.Entities;
 using Sparky.WinApi;
 
-namespace Sparky.Infrastructure
+namespace Sparky.Services
 {
     /// <summary>
     /// Applies a color configuration to screen source
     /// </summary>
-    internal static class GammaRegulator
+    internal static class GammaRegulatorService
     {
         /// <summary>
         /// Converts color configuration to RGB colors for work with WinApi
         /// </summary>
-        public static void ApplyColorConfiguration(int colorTemperature, double brightness, string screenName)
+        public static void ApplyColorConfiguration(double colorTemperature, double brightness, string screenName)
         {
             var dc = Native.CreateDC(screenName, null, null, 0);
             const int maxChannelValue = 256;
@@ -36,7 +36,7 @@ namespace Sparky.Infrastructure
             var successfully = Native.SetDeviceGammaRamp(dc, ref channels);
             if (!successfully)
             {
-                LoggingModule.Log.Warning($"Could not set Color configuration for screen : {screenName}" +
+                LoggingModule.Log.Warning($"Could not set gamma for screen : {screenName}" +
                                           $"[DC: {dc} Color Temperature: {colorTemperature} Brightness: {brightness}]");
             }
 

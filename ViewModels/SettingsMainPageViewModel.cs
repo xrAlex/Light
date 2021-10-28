@@ -19,10 +19,10 @@ namespace Sparky.ViewModels
             OnPropertyChanged("DayBrightness");
             OnPropertyChanged("NightColorTemperature");
             OnPropertyChanged("NightBrightness");
-            OnPropertyChanged("HourStart");
-            OnPropertyChanged("MinStart");
-            OnPropertyChanged("HourEnd");
-            OnPropertyChanged("MinEnd");
+            OnPropertyChanged("NightStartHour");
+            OnPropertyChanged("NightStartMinute");
+            OnPropertyChanged("DayStartHour");
+            OnPropertyChanged("DayStartMinute");
         }
 
         #endregion
@@ -41,7 +41,6 @@ namespace Sparky.ViewModels
         public int MinGammaRange => _registryModel.IsExtendedGammaRangeActive() ? 1000 : 4200;
         public int MinBrightnessRange => _registryModel.IsExtendedGammaRangeActive() ? 10 : 70;
 
-
         public int SelectedScreenIndex
         {
             get => _settingsService.SelectedScreen;
@@ -55,86 +54,90 @@ namespace Sparky.ViewModels
 
         private ScreenEntity SelectedScreen => _screenModel.GetScreen(SelectedScreenIndex);
 
-        public int DayColorTemperature
+        public double DayColorTemperature
         {
-            get => SelectedScreen.ColorConfiguration.DayColorTemperature;
+            get => SelectedScreen.DayColorConfiguration.ColorTemperature;
             set
             {
-                SelectedScreen.ColorConfiguration.DayColorTemperature = value;
-                _screenModel.ApplyColorConfiguration(SelectedScreen, value, -1);
+                var colorConfiguration = new ColorConfiguration(value, DayBrightness);
+                SelectedScreen.DayColorConfiguration = colorConfiguration;
+                _screenModel.ApplyColorConfiguration(SelectedScreen, colorConfiguration);
                 OnPropertyChanged();
             }
         }
 
         public double DayBrightness
         {
-            get => SelectedScreen.ColorConfiguration.DayBrightness;
+            get => SelectedScreen.DayColorConfiguration.Brightness;
             set
             {
-                SelectedScreen.ColorConfiguration.DayBrightness = value;
-                _screenModel.ApplyColorConfiguration(SelectedScreen, -1, value);
+                var colorConfiguration = new ColorConfiguration(DayColorTemperature, value);
+                SelectedScreen.DayColorConfiguration = colorConfiguration;
+                _screenModel.ApplyColorConfiguration(SelectedScreen, colorConfiguration);
                 OnPropertyChanged();
             }
         }
 
-        public int NightColorTemperature
+        public double NightColorTemperature
         {
-            get => SelectedScreen.ColorConfiguration.NightColorTemperature;
+            get => SelectedScreen.NightColorConfiguration.ColorTemperature;
             set
             {
-                SelectedScreen.ColorConfiguration.NightColorTemperature = value;
-                _screenModel.ApplyColorConfiguration(SelectedScreen, value, -1);
+                var colorConfiguration = new ColorConfiguration(value, NightBrightness);
+                SelectedScreen.NightColorConfiguration = colorConfiguration;
+                _screenModel.ApplyColorConfiguration(SelectedScreen, colorConfiguration);
                 OnPropertyChanged();
             }
         }
 
         public double NightBrightness
         {
-            get => SelectedScreen.ColorConfiguration.NightBrightness;
+            get => SelectedScreen.NightColorConfiguration.Brightness;
             set
             {
-                SelectedScreen.ColorConfiguration.NightBrightness = value;
-                _screenModel.ApplyColorConfiguration(SelectedScreen, -1, value);
+                var colorConfiguration = new ColorConfiguration(NightColorTemperature, value);
+                SelectedScreen.NightColorConfiguration = colorConfiguration;
+                _screenModel.ApplyColorConfiguration(SelectedScreen, colorConfiguration);
                 OnPropertyChanged();
             }
         }
 
-        public int HourStart
+        public int NightStartHour
         {
-            get => _screenModel.GetStartHour(SelectedScreenIndex);
+            get => SelectedScreen.NightStartTime.Hour;
             set
             {
-                _screenModel.SetWorkTimeStart(value, MinStart, SelectedScreenIndex);
+                SelectedScreen.NightStartTime = new StartTime(value, NightStartMinute);
                 OnPropertyChanged();
             }
         }
 
-        public int MinStart
+        public int NightStartMinute
         {
-            get => _screenModel.GetStartMin(SelectedScreenIndex);
+            get => SelectedScreen.NightStartTime.Minute;
             set
             {
-                _screenModel.SetWorkTimeStart(HourStart, value, SelectedScreenIndex);
+                SelectedScreen.NightStartTime = new StartTime(NightStartHour, value);
                 OnPropertyChanged();
             }
         }
 
-        public int HourEnd
+        public int DayStartHour
         {
-            get => _screenModel.GetEndHour(SelectedScreenIndex);
+            get => SelectedScreen.DayStartTime.Hour;
             set
             {
-                _screenModel.SetWorkTimeEnd(value, MinEnd, SelectedScreenIndex);
+                SelectedScreen.DayStartTime = new StartTime(value, NightStartMinute);
                 OnPropertyChanged();
             }
         }
 
-        public int MinEnd
+        public int DayStartMinute
         {
-            get => _screenModel.GetEndMin(SelectedScreenIndex);
+            get => SelectedScreen.DayStartTime.Minute;
             set
             {
-                _screenModel.SetWorkTimeEnd(HourEnd, value, SelectedScreenIndex);
+                SelectedScreen.DayStartTime = new StartTime(DayStartHour, value);
                 OnPropertyChanged();
             }
         }

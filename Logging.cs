@@ -48,11 +48,14 @@ namespace Sparky
             var filename = Path.Combine(FilePath, $"{Assembly.GetName().Name}_logs.log");
 
             Log = new LoggerConfiguration()
+#if DEBUG
                 .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Verbose)
+#endif
                 .WriteTo.File(
                     filename,
                     restrictedToMinimumLevel: LogEventLevel.Information,
                     rollingInterval: RollingInterval.Day,
+                    fileSizeLimitBytes: 1048576,
                     rollOnFileSizeLimit: true,
                     retainedFileCountLimit: 5
                 )
@@ -61,7 +64,7 @@ namespace Sparky
             SetupExceptionHandling();
             var info = CollectLaunchInformation();
 
-            Log.Information(info);
+            Log.Information($"\r\n {info}");
             _initialized = true;
         }
 

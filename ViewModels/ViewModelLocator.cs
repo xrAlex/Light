@@ -37,6 +37,11 @@ namespace Sparky.ViewModels
                 ? new TrayMenuViewModel()
                 : App.Kernel.Get<TrayMenuViewModel>();
 
+        public static InformationViewModel InformationViewModel =>
+            IsInDesignMode()
+                ? new InformationViewModel()
+                : App.Kernel.Get<InformationViewModel>();
+
         private static bool IsInDesignMode() => DesignerProperties.GetIsInDesignMode(_dependencyObject);
     }
 }

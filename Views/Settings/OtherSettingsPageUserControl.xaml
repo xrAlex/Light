@@ -28,6 +28,7 @@
             Content="{DynamicResource Loc_ExtendedGammaRange}" Grid.Row="3" Margin="0,0,9,0"/>
         <CheckBox
             Style="{StaticResource SliderCheckBox}"
+            IsChecked="{Binding SmoothGammaChange, Mode=TwoWay}"
             Content="{DynamicResource Loc_SmoothBrightnessChange}" Grid.Row="5" Margin="0,0,9,0"/>
     </Grid>
 </UserControl>

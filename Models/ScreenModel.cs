@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using Sparky.Infrastructure;
 using Sparky.Services.Interfaces;
 using Sparky.Templates.Entities;
 using Ninject;
+using Sparky.Services;
 
 namespace Sparky.Models
 {
@@ -11,7 +11,6 @@ namespace Sparky.Models
         #region Fields
 
         private readonly ObservableCollection<ScreenEntity> _screens;
-        private readonly ISettingsService _settingsService; 
 
         #endregion
 
@@ -22,77 +21,26 @@ namespace Sparky.Models
         #endregion
 
         #region Methods
-
-        public void SetWorkTimeStart(int hour, int min, int screenIndex) => GetScreen(screenIndex).StartTime = hour * Hour + min;
-        public void SetWorkTimeEnd(int hour, int min, int screenIndex) => GetScreen(screenIndex).EndTime = hour * Hour + min;
-        public int GetStartHour(int screenIndex) => GetScreen(screenIndex).StartTime / Hour;
-        public int GetEndHour(int screenIndex) => GetScreen(screenIndex).EndTime / Hour;
-        public int GetStartMin(int screenIndex) => GetScreen(screenIndex).StartTime % Hour;
-        public int GetEndMin(int screenIndex) => GetScreen(screenIndex).EndTime % Hour;
         public void ChangeScreenActivity(int screenIndex) => _screens[screenIndex].IsActive = !_screens[screenIndex].IsActive;
         public ScreenEntity GetScreen(int screenIndex) => _screens[screenIndex];
 
-        public void SetDayPeriod(ScreenEntity screen)
+        public void ApplyColorConfiguration(ScreenEntity screen, ColorConfiguration colorConfiguration)
         {
-            screen.IsDayTimePeriod = true;
-            ApplyColorConfiguration(screen);
-        }
-
-        public void SetNightPeriod(ScreenEntity screen)
-        {
-            screen.IsDayTimePeriod = false;
-            ApplyColorConfiguration(screen);
-        }
-
-        public void ApplyColorConfiguration(ScreenEntity screen)
-        {
-            var configuration = screen.ColorConfiguration;
-            double brightness;
-            int colorTemperature;
-            if (screen.IsDayTimePeriod)
-            {
-                colorTemperature = configuration.DayColorTemperature;
-                brightness = configuration.DayBrightness;
-            }
-            else
-            {
-                colorTemperature = configuration.NightColorTemperature;
-                brightness = configuration.NightBrightness;
-            }
-            GammaRegulator.ApplyColorConfiguration(colorTemperature, brightness, screen.SysName);
-            screen.ColorConfiguration.CurrentColorTemperature = colorTemperature;
-            screen.ColorConfiguration.CurrentBrightness = brightness;
-        }
-
-        public void ApplyColorConfiguration(ScreenEntity screen, int colorTemperature, double brightness)
-        {
-            var configuration = screen.ColorConfiguration;
-
-            colorTemperature = colorTemperature == -1 ? configuration.CurrentColorTemperature : colorTemperature;
-            brightness = brightness == -1 ? configuration.CurrentBrightness : brightness;
-
-            GammaRegulator.ApplyColorConfiguration(colorTemperature, brightness, screen.SysName);
-            screen.ColorConfiguration.CurrentColorTemperature = colorTemperature;
-            screen.ColorConfiguration.CurrentBrightness = brightness;
+            GammaRegulatorService.ApplyColorConfiguration(colorConfiguration.ColorTemperature, colorConfiguration.Brightness, screen.SysName);
+            screen.CurrentBrightness = colorConfiguration.Brightness;
+            screen.CurrentColorTemperature = colorConfiguration.ColorTemperature;
         }
 
         public static void SetDefaultColorTemperatureOnAllScreens()
         {
             var screens = App.Kernel.Get<ISettingsService>().Screens;
-#if DEBUG
-            if (screens.Count < 1)
-            {
-                LoggingModule.Log.Error("Cant founded Screens {0}", screens);
-            }
-#endif
-
 
             foreach (var screen in screens)
             {
 #if DEBUG
                 LoggingModule.Log.Information($"Forced default color configuration on screen {screen.Name} [{screen.SysName}]");
 #endif
-                GammaRegulator.ApplyColorConfiguration(6600, 1f, screen.SysName);
+                GammaRegulatorService.ApplyColorConfiguration(6600, 1f, screen.SysName);
             }
         }
 
@@ -100,8 +48,7 @@ namespace Sparky.Models
 
         public ScreenModel(ISettingsService settingsService)
         {
-            _settingsService = settingsService;
-            _screens = _settingsService.Screens;
+            _screens = settingsService.Screens;
         }
 
 #if DEBUG

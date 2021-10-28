@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Sparky.Infrastructure;
 using Sparky.Models;
 using System.Threading;
 using System.Threading.Tasks;
-using Sparky.Converters;
 using Sparky.Services.Interfaces;
 using Sparky.Templates.Entities;
 
@@ -35,7 +35,7 @@ namespace Sparky.Services
         public void StartWatch()
         {
             _cts = new CancellationTokenSource();
-            Task.Run(() => Cycle(_cts.Token), _cts.Token).ConfigureAwait(false);
+            Task.Run(() => CycleAsync(_cts.Token), _cts.Token).ConfigureAwait(false);
 #if DEBUG
             LoggingModule.Log.Information("PeriodWatcher started");
 #endif
@@ -55,7 +55,7 @@ namespace Sparky.Services
         /// <summary>
         /// Checks in cycle which color configuration should be set
         /// </summary>
-        private async Task Cycle(CancellationToken token)
+        private async Task CycleAsync(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
             {
@@ -63,27 +63,41 @@ namespace Sparky.Services
                 {
                     if (!screen.IsActive) continue;
 
-                    if (GetCurrentPeriod(screen) == Period.Night)
+                    var (period, remainingTime) = GetCurrentPeriod(screen);
+
+                    if (period == Period.Night)
                     {
                         if (_settingsService.CheckFullScreenApps)
                         {
-                            if (IsFullscreenAppFounded(screen))
+                            if (IsFullScreenAppFounded(screen))
                             {
-                                _screenModel.SetDayPeriod(screen);
+                                _screenModel.ApplyColorConfiguration
+                                (
+                                    screen,
+                                    new ColorConfiguration
+                                    (
+                                        screen.DayColorConfiguration.ColorTemperature,
+                                        screen.DayColorConfiguration.Brightness
+                                    )
+                                );
+                                screen.IsDayTimePeriod = true;
                             }
                             else
                             {
-                                _screenModel.SetNightPeriod(screen);
+                                _screenModel.ApplyColorConfiguration(screen, CalculateCurrentConfiguration(period, screen, remainingTime));
+                                screen.IsDayTimePeriod = false;
                             }
                         }
                         else
                         {
-                            _screenModel.SetNightPeriod(screen);
+                            _screenModel.ApplyColorConfiguration(screen, CalculateCurrentConfiguration(period, screen, remainingTime));
+                            screen.IsDayTimePeriod = false;
                         }
                     }
                     else
                     {
-                        _screenModel.SetDayPeriod(screen);
+                        _screenModel.ApplyColorConfiguration(screen, CalculateCurrentConfiguration(period, screen, remainingTime));
+                        screen.IsDayTimePeriod = true;
                     }
                 }
 
@@ -91,25 +105,94 @@ namespace Sparky.Services
             }
         }
 
-        private Period GetCurrentPeriod(ScreenEntity screen)
+        private ColorConfiguration CalculateCurrentConfiguration(Period currentPeriod, ScreenEntity screen, double remainingTime)
         {
-            var currentMin = CurrentTimeToMin.Convert();
-            var startFromMin = screen.StartTime;
-            var endFromMin = screen.EndTime;
+            var screenDayConfig = screen.DayColorConfiguration;
+            var screenNightConfig = screen.NightColorConfiguration;
 
-            if (endFromMin < startFromMin)
+            if (!_settingsService.SmoothGammaChange)
             {
-                if (currentMin >= startFromMin || currentMin < startFromMin && currentMin < endFromMin) return Period.Day;
-            }
-            else
-            {
-                if (currentMin >= startFromMin && currentMin < endFromMin) return Period.Day;
+                return currentPeriod == Period.Day
+                    ? new ColorConfiguration(screenDayConfig.ColorTemperature, screenDayConfig.Brightness)
+                    : new ColorConfiguration(screenNightConfig.ColorTemperature, screenNightConfig.Brightness);
             }
 
-            return Period.Night;
+            if (remainingTime is not (> 0 and <= 10))
+            {
+                return currentPeriod == Period.Day
+                    ? new ColorConfiguration(screenDayConfig.ColorTemperature, screenDayConfig.Brightness)
+                    : new ColorConfiguration(screenNightConfig.ColorTemperature, screenNightConfig.Brightness);
+            }
+
+            return currentPeriod == Period.Day 
+                ? GetTransientColorConfiguration(screenNightConfig, screenDayConfig, remainingTime) 
+                : GetTransientColorConfiguration(screenDayConfig, screenNightConfig, remainingTime);
         }
 
-        private bool IsFullscreenAppFounded(ScreenEntity screen)
+        private ColorConfiguration GetTransientColorConfiguration(ColorConfiguration targetValues, ColorConfiguration startValues, double remainingTime)
+        {
+            var multiplier = remainingTime * 0.1;
+
+            return new ColorConfiguration
+            (
+                Extensions.Lerp
+                (
+                    targetValues.ColorTemperature,
+                    startValues.ColorTemperature,
+                    multiplier
+                ), 
+                Extensions.Lerp
+                (
+                    targetValues.Brightness,
+                    startValues.Brightness,
+                    multiplier
+                )
+            );
+        }
+
+        private (Period period, double remainingTime) GetCurrentPeriod(ScreenEntity screen)
+        {
+            var dayStart = screen.DayStartTime;
+            var nightStart = screen.NightStartTime;
+
+            var currentTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
+            var nightStartTime = new TimeSpan(nightStart.Hour, nightStart.Minute, 0);
+            var dayStartTime = new TimeSpan(dayStart.Hour, dayStart.Minute, 0);
+            double remainingTime;
+
+            // in current day
+            if (dayStartTime <= nightStartTime)
+            {
+                if (currentTime >= dayStartTime && currentTime < nightStartTime)
+                {
+                    remainingTime = nightStartTime.TotalMinutes - currentTime.TotalMinutes;
+                    return (Period.Day, remainingTime);
+                }
+
+                remainingTime = dayStartTime.TotalMinutes - currentTime.TotalMinutes;
+                return (Period.Night, remainingTime);
+            }
+
+            //in next day
+            if (currentTime >= dayStartTime || currentTime < nightStartTime)
+            {
+                const int midNight = 1440;
+                if (currentTime.TotalMinutes == 0)
+                {
+                    remainingTime = nightStartTime.TotalMinutes - currentTime.TotalMinutes;
+                }
+                else
+                {
+                    remainingTime = nightStartTime.TotalMinutes - (currentTime.TotalMinutes - midNight);
+                }
+                return (Period.Day, remainingTime);
+            }
+
+            remainingTime = dayStartTime.TotalMinutes - currentTime.TotalMinutes;
+            return (Period.Night, remainingTime);
+        }
+
+        private bool IsFullScreenAppFounded(ScreenEntity screen)
         {
             var fullScreenWindowHandle = SystemWindow.GetFullscreenForegroundWindow(screen);
             if (fullScreenWindowHandle == 0) return false;

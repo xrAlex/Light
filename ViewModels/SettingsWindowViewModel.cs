@@ -45,6 +45,12 @@ namespace Sparky.ViewModels
         public ICommand ApplySettingsCommand { get; }
         public ICommand ResetSettingsCommand { get; }
         public ICommand CloseSettingsCommand { get; }
+        public ICommand OpenInformationWindowCommand { get; }
+
+        private void OnOpenInformationWindowCommandExecute()
+        {
+            _dialogService.ShowDialog<InformationViewModel>(typeof(SettingsWindowViewModel));
+        }
 
         private void OnToOtherSettingsPageCommandExecute()
         {
@@ -92,6 +98,7 @@ namespace Sparky.ViewModels
             ToOtherSettingsPageCommand = new LambdaCommand(_ => OnToOtherSettingsPageCommandExecute());
             ToSettingsMainPageCommand = new LambdaCommand(_ => OnToSettingsMainPageCommandExecute());
             ToProcessPageCommand = new LambdaCommand(_ => OnToProcessPageCommandExecute());
+            OpenInformationWindowCommand = new LambdaCommand(_ => OnOpenInformationWindowCommandExecute());
 
             _settingsService = settingsService;
             _periodWatcherService = periodWatcherService;
@@ -102,12 +109,5 @@ namespace Sparky.ViewModels
         }
 
         public SettingsWindowViewModel() {}
-
-#if DEBUG
-        ~SettingsWindowViewModel()
-        {
-            LoggingModule.Log.Verbose("[View Model] SettingsWindowViewModel Disposed");
-        }
-#endif
     }
 }

@@ -9,30 +9,96 @@ namespace Sparky.Templates.Entities
     {
         #region Fields
 
-        private bool _active;
-        private int _startTime;
-        private int _endTime;
-        private float _uiOpacity;
-        private bool _isDayTimePeriod;
         private BitmapImage _currentTimePeriodImage;
-
-        public ColorConfiguration ColorConfiguration { get; } = new();
+        private ColorConfiguration _dayColorConfiguration;
+        private ColorConfiguration _nightColorConfiguration;
+        private StartTime _nightStartTime;
+        private StartTime _dayStartTime;
+        private float _uiOpacity;
+        private bool _active;
+        private bool _isDayTimePeriod;
+        private double _currentColorTemperature;
+        private double _currentBrightness;
+        
 
         private readonly List<BitmapImage> _imageList = new()
         {
             new BitmapImage(new Uri("/Resources/Images/Gamma.png", UriKind.Relative)),
-            new BitmapImage(new Uri("/Resources/Images/Gamma.png", UriKind.Relative))
+            new BitmapImage(new Uri("/Resources/Images/BlueReduce.png", UriKind.Relative))
         };
 
         #endregion
 
         #region Propeties
+
         public string SysName { get; set; }
         public string Name { get; set; }
 
         public int Width { get; set; }
         public int Height { get; set; }
         public int DisplayCode { get; set; }
+
+        public ColorConfiguration DayColorConfiguration
+        {
+            get => _dayColorConfiguration;
+            set
+            {
+                _dayColorConfiguration = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ColorConfiguration NightColorConfiguration
+        {
+            get => _nightColorConfiguration;
+            set
+            {
+                _nightColorConfiguration = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public StartTime DayStartTime
+        {
+            get => _dayStartTime;
+            set
+            {
+                _dayStartTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public StartTime NightStartTime
+        {
+            get => _nightStartTime;
+            set
+            {
+                _nightStartTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // TODO: Replace
+        public double CurrentBrightness
+        {
+            get => _currentBrightness;
+            set
+            {
+                _currentBrightness = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // TODO: Replace
+        public double CurrentColorTemperature
+        {
+            get => _currentColorTemperature;
+            set
+            {
+                _currentColorTemperature = value;
+                OnPropertyChanged();
+            }
+        }
 
         public BitmapImage CurrentTimePeriodImage
         {
@@ -73,27 +139,6 @@ namespace Sparky.Templates.Entities
                 Opacity = value ? 1f : 0.5f;
             }
         }
-
-        public int StartTime
-        {
-            get => _startTime;
-            set
-            {
-                _startTime = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int EndTime
-        {
-            get => _endTime;
-            set
-            {
-                _endTime = value;
-                OnPropertyChanged();
-            }
-        }
-
         #endregion
     }
 }

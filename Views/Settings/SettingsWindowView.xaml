@@ -55,8 +55,8 @@
                         <RowDefinition Height="10*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="14.833"/>
-                        <ColumnDefinition Width="5.167"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="55"/>
                         <ColumnDefinition Width="80"/>
@@ -67,25 +67,28 @@
                     <Button
                         Style="{StaticResource LightGrayButton}"
                         Content="{DynamicResource Loc_Reset}"
-                        Command="{Binding ResetSettingsCommand, Mode=OneWay}" Grid.Column="2" Grid.Row="3"
-                        />
+                        Command="{Binding ResetSettingsCommand, Mode=OneWay}"
+                        Grid.Column="2" Grid.Row="3">
+                    </Button>
                     <Button
                         Style="{StaticResource LightGrayButton}"
                         Content="{DynamicResource Loc_Cancel}"
-                        Command="{Binding CloseSettingsCommand, Mode=OneWay}" Grid.Column="4" Grid.Row="3"
-                        />
+                        Command="{Binding CloseSettingsCommand, Mode=OneWay}"
+                        Grid.Column="4" Grid.Row="3">
+                    </Button>
                     <Button
                         Style="{StaticResource LightGrayButton}"
                         Content="{DynamicResource Loc_Apply}"
-                        Command="{Binding ApplySettingsCommand, Mode=OneWay}" Grid.Column="6" Grid.Row="3"
-                        />
+                        Command="{Binding ApplySettingsCommand, Mode=OneWay}"
+                        Grid.Column="6" Grid.Row="3">
+                    </Button>
                     <ContentControl Content="{Binding SelectedViewModel}" Grid.ColumnSpan="6" Grid.Row="1" Grid.Column="1" />
                 </Grid>
             </Border>
             <Button
                 Style="{StaticResource BlackButton}"
                 Grid.Column="1" Grid.Row="10"
-                Command="{Binding ToProcessPageCommand, Mode=OneWay}">
+                Command="{Binding OpenInformationWindowCommand, Mode=OneWay}">
                 <Image Width="35" Height="35" Source="{StaticResource Info}"/>
             </Button>
             <Button

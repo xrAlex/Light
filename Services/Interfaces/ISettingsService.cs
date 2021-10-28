@@ -8,6 +8,7 @@ namespace Sparky.Services.Interfaces
     {
         ObservableCollection<ApplicationEntity> Applications { get; }
         bool CheckFullScreenApps { get; set; }
+        bool SmoothGammaChange { get; set; }
         List<string> ApplicationsWhitelist { get; }
         ObservableCollection<ScreenEntity> Screens { get; }
         int SelectedLang { get; set; }

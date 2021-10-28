@@ -36,10 +36,10 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="6*" />
-                <RowDefinition Height="25*" />
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="6*"/>
+                <RowDefinition Height="6" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="9"/>
+                <RowDefinition Height="6"/>
                 <RowDefinition Height="4*" />
                 <RowDefinition/>
                 <RowDefinition Height="30*" />
@@ -94,8 +94,8 @@
                         Height="194" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <GroupBox Header="{Binding Name, Mode=OneWay}">
-                                    <Grid Height="67" Width="200">
+                                <GroupBox Header="{Binding Name, Mode=OneWay}" Width="380">
+                                    <Grid Height="67" Width="Auto">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="13*" />
                                             <ColumnDefinition Width="36*" />
@@ -128,32 +128,32 @@
                                             Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3">
                                         </Image>
                                         <TextBlock
-                                            Text="{Binding ColorConfiguration.CurrentColorTemperature, Mode=OneWay, StringFormat=CTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding CurrentColorTemperature, Mode=OneWay, StringFormat=CTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                                         </TextBlock>
                                         <TextBlock
-                                            Text="{Binding ColorConfiguration.CurrentBrightness, Mode=OneWay, StringFormat=CBT : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding CurrentBrightness, Mode=OneWay, StringFormat=CBT : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Grid.Column="5" Grid.Row="1" Grid.RowSpan="2">
                                         </TextBlock>
                                         <TextBlock
-                                            Text="{Binding ColorConfiguration.DayColorTemperature, Mode=OneWay, StringFormat=DTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding DayColorConfiguration.ColorTemperature, Mode=OneWay, StringFormat=DTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Grid.Column="4" Grid.Row="3">
                                         </TextBlock>
                                         <TextBlock
-                                            Text="{Binding ColorConfiguration.DayBrightness, Mode=OneWay, StringFormat=DBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding DayColorConfiguration.Brightness, Mode=OneWay, StringFormat=DBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Grid.Column="5" Grid.Row="3">
                                         </TextBlock>
                                         <TextBlock
-                                            Text="{Binding ColorConfiguration.NightColorTemperature, Mode=OneWay, StringFormat=NTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding NightColorConfiguration.ColorTemperature, Mode=OneWay, StringFormat=NTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Grid.Row="5" Grid.Column="4">
                                         </TextBlock>
                                         <TextBlock
-                                            Text="{Binding ColorConfiguration.NightBrightness, Mode=OneWay, StringFormat=NBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding NightColorConfiguration.Brightness, Mode=OneWay, StringFormat=NBK : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Grid.Row="5" Grid.Column="5">
                                         </TextBlock>

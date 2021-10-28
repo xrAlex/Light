@@ -13,7 +13,6 @@ namespace Sparky.Views.Settings
         {
             LoggingModule.Log.Verbose("[Window] SettingsWindowView Disposed");
         }
-
 #endif
     }
 }

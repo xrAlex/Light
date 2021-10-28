@@ -6,7 +6,8 @@
              xmlns:viewmodels="clr-namespace:Sparky.ViewModels"
              xmlns:main="clr-namespace:Sparky.Views.Main"
              xmlns:settings="clr-namespace:Sparky.Views.Settings"
-             xmlns:tray="clr-namespace:Sparky.Views.Tray">
+             xmlns:tray="clr-namespace:Sparky.Views.Tray"
+             xmlns:information="clr-namespace:Sparky.Views.Information">
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type viewmodels:MainWindowViewModel}">
@@ -33,6 +34,10 @@
                 <tray:TrayMenuPopup/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:InformationViewModel}">
+                <information:InformationView/>
+            </DataTemplate>
+
             <viewmodels:ViewModelLocator x:Key="Locator"/>
             <xamlConverters:MinConverter x:Key="MinConverter"></xamlConverters:MinConverter>
             <xamlConverters:HourConverter x:Key="HourConverter"></xamlConverters:HourConverter>
@@ -42,7 +47,7 @@
             <xamlConverters:LocalizationConverter x:Key="LocalizationConverter"></xamlConverters:LocalizationConverter>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Localization/LangDictionary.xaml" />
+                <!--<ResourceDictionary Source="Localization/LangDictionary.xaml" />-->
                 <x:Static Member="language:LangDictionary.Instance"/>
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
                 <ResourceDictionary Source="Resources/Button.xaml" />

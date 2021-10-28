@@ -14,7 +14,7 @@ namespace Sparky.Infrastructure
         /// Checks if the application window is displayed
         /// </summary>
         /// <returns> true when window can be displayed </returns>
-        public static bool IsWindowValid(nint handler) => handler != 0 && Native.IsWindowVisible(handler);
+        private static bool IsWindowValid(nint handler) => handler != 0 && Native.IsWindowVisible(handler);
 
         /// <summary>
         /// Checks if the window works in full screen, given a task bar

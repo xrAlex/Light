@@ -59,6 +59,8 @@ namespace Sparky.Models
         /// </summary>
         /// <remarks> It is used in order not to request administrator rights when starting the program </remarks>
         /// <returns> If redirectOutput = true, returns result of executing command </returns>
+        ///
+        /// TODO: Переменстить в инфрастуктуру
         private string ExecuteFromCMD(string command, bool shellExecute, bool redirectOutput)
         {
             var output = "";
@@ -79,7 +81,7 @@ namespace Sparky.Models
                 using var reader = cmdProcess?.StandardOutput;
                 output = reader?.ReadToEnd();
             }
-            cmdProcess?.WaitForExit();
+            cmdProcess?.WaitForExit(3000);
 
             return output;
         }

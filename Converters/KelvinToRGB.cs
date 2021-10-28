@@ -3,14 +3,14 @@ using Sparky.Templates.Entities;
 
 namespace Sparky.Converters
 {
-    internal sealed class KelvinToRGB
+    internal struct KelvinToRGB
     {
         /// <summary>
         /// Converts color temperature (Kelvin) to RGB format
         /// </summary>
         /// <remarks> <see href="http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code">Algorithm source</see> </remarks>
         /// <returns> <see cref="RGBMask"/> color mask </returns>
-        public static RGBMask Convert(int kelvins)
+        public static RGBMask Convert(double kelvins)
         {
             RGBMask mask = new
             (

@@ -1,82 +1,14 @@
-﻿using Sparky.Templates.Entities.Base;
-
-namespace Sparky.Templates.Entities
+﻿namespace Sparky.Templates.Entities
 {
-    internal sealed class ColorConfiguration : NotifyingEntity
+    internal readonly struct ColorConfiguration
     {
-        #region Fields
+        public double Brightness { get; }
+        public double ColorTemperature { get; }
 
-        private double _currentBrightness;
-        private int _currentColorTemperature;
-        private int _dayColorTemperature;
-        private double _dayBrightness;
-        private int _nightColorTemperature;
-        private double _nightBrightness;
-
-        #endregion
-
-        #region Constructors
-
-        public double CurrentBrightness
+        public ColorConfiguration(double colorTemperature, double brightness)
         {
-            get => _currentBrightness;
-            set
-            {
-                _currentBrightness = value;
-                OnPropertyChanged();
-            }
+            Brightness = brightness;
+            ColorTemperature = colorTemperature;
         }
-
-        public int CurrentColorTemperature
-        {
-            get => _currentColorTemperature;
-            set
-            {
-                _currentColorTemperature = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int DayColorTemperature
-        {
-            get => _dayColorTemperature;
-            set
-            {
-                _dayColorTemperature = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public double DayBrightness
-        {
-            get => _dayBrightness;
-            set
-            {
-                _dayBrightness = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int NightColorTemperature
-        {
-            get => _nightColorTemperature;
-            set
-            {
-                _nightColorTemperature = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public double NightBrightness
-        {
-            get => _nightBrightness;
-            set
-            {
-                _nightBrightness = value;
-                OnPropertyChanged();
-            }
-        }
-
-        #endregion
     }
 }

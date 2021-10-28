@@ -35,7 +35,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -44,9 +44,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -115,8 +116,9 @@
     <Compile Include="Converters\XAMLConverters\BrightnessToDouble.cs" />
     <Compile Include="Converters\XAMLConverters\HourConverter.cs" />
     <Compile Include="Converters\XAMLConverters\MinConverter.cs" />
+    <Compile Include="Infrastructure\Extensions.cs" />
     <Compile Include="Logging.cs" />
-    <Compile Include="Infrastructure\GammaRegulator.cs" />
+    <Compile Include="Services\GammaRegulatorService.cs" />
     <Compile Include="Infrastructure\SystemWindow.cs" />
     <Compile Include="Localization\LangDictionary.xaml.cs">
       <DependentUpon>LangDictionary.xaml</DependentUpon>
@@ -128,11 +130,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\Interfaces\ILinksService.cs" />
     <Compile Include="Services\Interfaces\ICurrentTimeService.cs" />
     <Compile Include="Services\Interfaces\IDialogService.cs" />
     <Compile Include="Services\Interfaces\ISettingsService.cs" />
     <Compile Include="Services\Interfaces\IPeriodWatcherService.cs" />
     <Compile Include="Services\Interfaces\ITrayNotifierService.cs" />
+    <Compile Include="Services\LinksService.cs" />
     <Compile Include="Services\TrayNotifierService.cs" />
     <Compile Include="Templates\Entities\Base\NotifyingEntity.cs" />
     <Compile Include="Templates\Entities\ColorConfiguration.cs" />
@@ -144,8 +148,13 @@
     <Compile Include="Infrastructure\INIManager.cs" />
     <Compile Include="Templates\Entities\GammaRamp.cs" />
     <Compile Include="Infrastructure\SystemProcess.cs" />
+    <Compile Include="Templates\Entities\StartTime.cs" />
+    <Compile Include="ViewModels\InformationViewModel.cs" />
     <Compile Include="ViewModels\TrayMenuViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\Information\InformationView.xaml.cs">
+      <DependentUpon>InformationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tray\TrayMenuPopup.xaml.cs">
       <DependentUpon>TrayMenuPopup.xaml</DependentUpon>
     </Compile>
@@ -213,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Slider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Information\InformationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -338,6 +351,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\SparkyBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\buyacoffe.png" />
+    <Resource Include="Resources\Images\projgit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\howto.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

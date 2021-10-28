@@ -2,7 +2,7 @@
 
 namespace Sparky.Converters
 {
-    internal sealed class CurrentTimeToMin
+    internal struct CurrentTimeToMin
     {
         public static int Convert()
         {

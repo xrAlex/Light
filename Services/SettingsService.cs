@@ -41,7 +41,12 @@ namespace Sparky.Services
         public int SelectedScreen { get; set; }
 
         /// <summary>
-        /// Current selected language
+        /// Allows/Prevents smooth gamma change on period switch
+        /// </summary>
+        public bool SmoothGammaChange { get; set; }
+
+        /// <summary>
+        /// Current selected language index
         /// </summary>
         public int SelectedLang { get; set; }
 
@@ -64,6 +69,7 @@ namespace Sparky.Services
             INIManager.WriteValue("Main", "SelectedLang", SelectedLang);
             INIManager.WriteValue("Main", "SelectedScreen", SelectedScreen);
             INIManager.WriteValue("Main", "CheckFullScreenApps", CheckFullScreenApps);
+            INIManager.WriteValue("Main", "SmoothGammaChange", SmoothGammaChange);
 
             SaveScreens();
             SaveProcesses();
@@ -74,9 +80,15 @@ namespace Sparky.Services
             SelectedLang = INIManager.GetValue("Main", "SelectedLang", 0);
             SelectedScreen = INIManager.GetValue("Main", "SelectedScreen", 0);
             CheckFullScreenApps = INIManager.GetValue("Main", "CheckFullScreenApps", false);
+            SmoothGammaChange = INIManager.GetValue("Main", "SmoothGammaChange", false);
 
             LoadScreens();
             LoadProcesses();
+
+            if (Screens.Count < 1)
+            {
+                LoggingModule.Log.Fatal("Can't find any screens {0}", Screens);
+            }
         }
 
         public void Reset()
@@ -95,9 +107,9 @@ namespace Sparky.Services
             {
                 LoadScreensFromAPI();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                LoggingModule.Log.Warning(ex,"Error when loading screens");
+                LoggingModule.Log.Warning(ex, "Error when loading screens");
                 LoadScreensLegacy();
                 _legacyMode = true;
             }
@@ -122,20 +134,37 @@ namespace Sparky.Services
             {
                 Screens.Add(new ScreenEntity
                 {
-                    ColorConfiguration =
-                    {
-                        DayColorTemperature = INIManager.GetValue($"{index}", "DayColorTemperature", 6600),
-                        DayBrightness = INIManager.GetValue($"{index}", "DayBrightness", 1.0),
-                        NightColorTemperature = INIManager.GetValue($"{index}", "NightColorTemperature", 5500),
-                        NightBrightness = INIManager.GetValue($"{index}", "NightBrightness", 0.8),
-                    },
+                    Name = INIManager.GetValue($"{index}", "Name", $"Monitor {index + 1}"),
+                    SysName = INIManager.GetValue($"{index}", "SysName", $"{screen.DeviceName}"),
+
+                    DayColorConfiguration = new ColorConfiguration
+                    (
+                        colorTemperature: INIManager.GetValue($"{index}", "DayColorTemperature", 6600),
+                        brightness: INIManager.GetValue($"{index}", "DayBrightness", 1.0)
+                    ),
+
+                    NightColorConfiguration = new ColorConfiguration
+                    (
+                        colorTemperature: INIManager.GetValue($"{index}", "NightColorTemperature", 5500),
+                        brightness: INIManager.GetValue($"{index}", "NightBrightness", 0.8)
+                    ),
+
+                    NightStartTime = new StartTime
+                    (
+                        hour: INIManager.GetValue($"{index}", "NightStartHour", 23),
+                        minute: INIManager.GetValue($"{index}", "NightStartMin", 0)
+                    ),
+
+                    DayStartTime = new StartTime
+                    (
+                        hour: INIManager.GetValue($"{index}", "DayStartHour", 7),
+                        minute: INIManager.GetValue($"{index}", "DayStartMin", 0)
+                    ),
+
                     Height = screen.Bounds.Height,
                     Width = screen.Bounds.Width,
-                    StartTime = INIManager.GetValue($"{index}", "StartTime", 1380),
-                    EndTime = INIManager.GetValue($"{index}", "EndTime", 420),
+
                     IsActive = INIManager.GetValue($"{index}", "Active", true),
-                    Name = INIManager.GetValue($"{index}", "Name", $"Monitor {index + 1}"),
-                    SysName = INIManager.GetValue($"{index}", "SysName", $"{screen.DeviceName}")
                 });
                 index++;
             }
@@ -143,6 +172,8 @@ namespace Sparky.Services
 
         private void LoadScreensFromAPI()
         {
+
+            // TODO: Check for display
             foreach (var display in PathDisplayTarget.GetDisplayTargets())
             {
                 var displayDevice = display.ToDisplayDevice();
@@ -155,42 +186,54 @@ namespace Sparky.Services
 
                 Screens.Add(new ScreenEntity
                 {
-                    ColorConfiguration =
-                    {
-                        DayColorTemperature = INIManager.GetValue($"{displayCode}", "DayColorTemperature", 6600),
-                        DayBrightness = INIManager.GetValue($"{displayCode}", "DayBrightness", 1.0),
-                        NightColorTemperature = INIManager.GetValue($"{displayCode}", "NightColorTemperature", 5500),
-                        NightBrightness = INIManager.GetValue($"{displayCode}", "NightBrightness", 0.8),
-                    },
+                    Name = INIManager.GetValue($"{displayCode}", "Name", $"{displayFriendlyName}"),
+                    SysName = INIManager.GetValue($"{displayCode}", "SysName", $"{displayName}"),
+
+                    DayColorConfiguration = new ColorConfiguration
+                    (
+                        colorTemperature: INIManager.GetValue($"{displayCode}", "DayColorTemperature", 6600),
+                        brightness: INIManager.GetValue($"{displayCode}", "DayBrightness", 1.0)
+                    ),
+
+                    NightColorConfiguration = new ColorConfiguration
+                    (
+                        colorTemperature: INIManager.GetValue($"{displayCode}", "NightColorTemperature", 5500),
+                        brightness: INIManager.GetValue($"{displayCode}", "NightBrightness", 0.8)
+                    ),
+
+                    NightStartTime = new StartTime
+                    (
+                        hour: INIManager.GetValue($"{displayCode}", "NightStartHour", 23),
+                        minute: INIManager.GetValue($"{displayCode}", "NightStartMin", 0)
+                    ),
+
+                    DayStartTime = new StartTime
+                    (
+                        hour: INIManager.GetValue($"{displayCode}", "DayStartHour", 7),
+                        minute: INIManager.GetValue($"{displayCode}", "DayStartMin", 0)
+                    ),
+
+                    IsActive = INIManager.GetValue($"{displayCode}", "Active", true),
 
                     Height = displayHeight,
                     Width = displayWidth,
                     DisplayCode = displayCode,
-                    StartTime = INIManager.GetValue($"{displayCode}", "StartTime", 1380),
-                    EndTime = INIManager.GetValue($"{displayCode}", "EndTime", 420),
-                    IsActive = INIManager.GetValue($"{displayCode}", "Active", true),
-                    Name = INIManager.GetValue($"{displayCode}", "Name", $"{displayFriendlyName}"),
-                    SysName = INIManager.GetValue($"{displayCode}", "SysName", $"{displayName}")
                 });
             }
         }
 
         private void SaveScreensParameters()
         {
-#if DEBUG
-            if (Screens.Count < 1)
-            {
-                LoggingModule.Log.Warning("Cant founded Screens");
-            }
-#endif
             foreach (var screen in Screens)
             {
-                INIManager.WriteValue($"{screen.DisplayCode}", "DayColorTemperature", screen.ColorConfiguration.DayColorTemperature);
-                INIManager.WriteValue($"{screen.DisplayCode}", "DayBrightness", screen.ColorConfiguration.DayBrightness);
-                INIManager.WriteValue($"{screen.DisplayCode}", "NightColorTemperature", screen.ColorConfiguration.NightColorTemperature);
-                INIManager.WriteValue($"{screen.DisplayCode}", "NightBrightness", screen.ColorConfiguration.NightBrightness);
-                INIManager.WriteValue($"{screen.DisplayCode}", "StartTime", screen.StartTime);
-                INIManager.WriteValue($"{screen.DisplayCode}", "EndTime", screen.EndTime);
+                INIManager.WriteValue($"{screen.DisplayCode}", "DayColorTemperature", screen.DayColorConfiguration.ColorTemperature);
+                INIManager.WriteValue($"{screen.DisplayCode}", "DayBrightness", screen.DayColorConfiguration.Brightness);
+                INIManager.WriteValue($"{screen.DisplayCode}", "NightColorTemperature", screen.NightColorConfiguration.ColorTemperature);
+                INIManager.WriteValue($"{screen.DisplayCode}", "NightBrightness", screen.NightColorConfiguration.Brightness);
+                INIManager.WriteValue($"{screen.DisplayCode}", "NightStartHour", screen.NightStartTime.Hour);
+                INIManager.WriteValue($"{screen.DisplayCode}", "NightStartMin", screen.NightStartTime.Minute);
+                INIManager.WriteValue($"{screen.DisplayCode}", "DayStartHour", screen.DayStartTime.Hour);
+                INIManager.WriteValue($"{screen.DisplayCode}", "DayStartMin", screen.DayStartTime.Minute);
                 INIManager.WriteValue($"{screen.DisplayCode}", "Active", screen.IsActive);
                 INIManager.WriteValue($"{screen.DisplayCode}", "Name", screen.Name);
                 INIManager.WriteValue($"{screen.DisplayCode}", "SysName", screen.SysName);
@@ -199,21 +242,17 @@ namespace Sparky.Services
 
         private void LegacySaveScreensParameters()
         {
-#if DEBUG
-            if (Screens.Count < 1)
-            {
-                LoggingModule.Log.Warning("Cant founded Screens");
-            }
-#endif
             for (var i = 0; i < Screens.Count; i++)
             {
                 var screen = Screens[i];
-                INIManager.WriteValue($"{i}", "DayColorTemperature", screen.ColorConfiguration.DayColorTemperature);
-                INIManager.WriteValue($"{i}", "DayBrightness", screen.ColorConfiguration.DayBrightness);
-                INIManager.WriteValue($"{i}", "NightColorTemperature", screen.ColorConfiguration.NightColorTemperature);
-                INIManager.WriteValue($"{i}", "NightBrightness", screen.ColorConfiguration.NightBrightness);
-                INIManager.WriteValue($"{i}", "StartTime", screen.StartTime);
-                INIManager.WriteValue($"{i}", "EndTime", screen.EndTime);
+                INIManager.WriteValue($"{i}", "DayColorTemperature", screen.DayColorConfiguration.ColorTemperature);
+                INIManager.WriteValue($"{i}", "DayBrightness", screen.DayColorConfiguration.Brightness);
+                INIManager.WriteValue($"{i}", "NightColorTemperature", screen.NightColorConfiguration.ColorTemperature);
+                INIManager.WriteValue($"{i}", "NightBrightness", screen.NightColorConfiguration.Brightness);
+                INIManager.WriteValue($"{i}", "NightStartHour", screen.NightStartTime.Hour);
+                INIManager.WriteValue($"{i}", "NightStartMin", screen.NightStartTime.Minute);
+                INIManager.WriteValue($"{i}", "DayStartHour", screen.DayStartTime.Hour);
+                INIManager.WriteValue($"{i}", "DayStartMin", screen.DayStartTime.Minute);
                 INIManager.WriteValue($"{i}", "Active", screen.IsActive);
                 INIManager.WriteValue($"{i}", "Name", screen.Name);
                 INIManager.WriteValue($"{i}", "SysName", screen.SysName);

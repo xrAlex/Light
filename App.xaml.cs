@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Windows;
 using Sparky.Models;
@@ -10,6 +9,7 @@ using Sparky.ViewModels;
 using Sparky.Views.Main;
 using Sparky.Views.Settings;
 using Ninject;
+using Sparky.Views.Information;
 
 namespace Sparky
 {
@@ -27,10 +27,10 @@ namespace Sparky
             ValidateInstance();
             ConfigureServices();
             ConfigureViewContainer();
+            Kernel.Get<ISettingsService>().Load();
             InitializeComponent();
 
             Kernel.Get<ITrayNotifierService>();
-            Kernel.Get<ISettingsService>().Load();
             Kernel.Get<IPeriodWatcherService>().StartWatch();
 
             var silentLaunch = Environment.GetCommandLineArgs().Contains("-silent");
@@ -68,6 +68,7 @@ namespace Sparky
             standardKernel.Bind<IDialogService>().To<DialogService>().InSingletonScope();
             standardKernel.Bind<ICurrentTimeService>().To<CurrentTimeService>().InSingletonScope();
             standardKernel.Bind<ITrayNotifierService>().To<TrayNotifierService>().InSingletonScope();
+            standardKernel.Bind<ILinksService>().To<LinksService>().InTransientScope();
 
             //ViewModels
             standardKernel.Bind<MainWindowViewModel>().ToSelf().InTransientScope();
@@ -76,6 +77,9 @@ namespace Sparky
             standardKernel.Bind<SettingsMainPageViewModel>().ToSelf().InTransientScope();
             standardKernel.Bind<SettingsWindowViewModel>().ToSelf().InTransientScope();
             standardKernel.Bind<TrayMenuViewModel>().ToSelf().InTransientScope();
+            standardKernel.Bind<InformationViewModel>().ToSelf().InTransientScope();
+
+            
 
             Kernel = standardKernel;
         }
@@ -84,6 +88,7 @@ namespace Sparky
             var dialogService = Kernel.Get<IDialogService>();
             dialogService.Register<MainWindowViewModel, MainWindowView>();
             dialogService.Register<SettingsWindowViewModel, SettingsWindowView>();
+            dialogService.Register<InformationViewModel, InformationView>();
         }
     }
 }
