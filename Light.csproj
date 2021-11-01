@@ -109,7 +109,6 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\LambdaCommand.cs" />
     <Compile Include="Converters\CurrentTimeToMin.cs" />
-    <Compile Include="Converters\KelvinToRGB.cs" />
     <Compile Include="Converters\XAMLConverters\LocalizationConverter.cs" />
     <Compile Include="Converters\XAMLConverters\TemperatureToKelvin.cs" />
     <Compile Include="Converters\XAMLConverters\BrightnessToPercent.cs" />

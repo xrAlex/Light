@@ -26,9 +26,8 @@ namespace Sparky.Models
 
         public void ApplyColorConfiguration(ScreenEntity screen, ColorConfiguration colorConfiguration)
         {
-            GammaRegulatorService.ApplyColorConfiguration(colorConfiguration.ColorTemperature, colorConfiguration.Brightness, screen.SysName);
-            screen.CurrentBrightness = colorConfiguration.Brightness;
-            screen.CurrentColorTemperature = colorConfiguration.ColorTemperature;
+            GammaRegulatorService.ApplyColorConfiguration(colorConfiguration, screen.SysName);
+            screen.CurrentColorConfiguration = colorConfiguration;
         }
 
         public static void SetDefaultColorTemperatureOnAllScreens()
@@ -40,7 +39,7 @@ namespace Sparky.Models
 #if DEBUG
                 LoggingModule.Log.Information($"Forced default color configuration on screen {screen.Name} [{screen.SysName}]");
 #endif
-                GammaRegulatorService.ApplyColorConfiguration(6600, 1f, screen.SysName);
+                GammaRegulatorService.ApplyColorConfiguration(new ColorConfiguration(6600, 1), screen.SysName);
             }
         }
 

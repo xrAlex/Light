@@ -30,7 +30,7 @@ namespace Sparky.Infrastructure
         /// Checks foreground Window bounds
         /// </summary>
         /// <returns> <see cref="bool"/> true, if the window is maximized to full screen </returns>
-        public static nint GetFullscreenForegroundWindow(ScreenEntity screen)
+        public static nint GetFullScreenForegroundWindow(ScreenEntity screen)
         {
             var handle = Native.GetForegroundWindow();
             if (!IsWindowValid(handle) || IsWindowOnFullScreen(screen, handle)) return 0;

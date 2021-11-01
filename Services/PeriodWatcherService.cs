@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Runtime.Remoting.Lifetime;
 using Sparky.Infrastructure;
 using Sparky.Models;
 using System.Threading;
@@ -14,7 +16,6 @@ namespace Sparky.Services
     /// </summary>
     internal sealed class PeriodWatcherService : IPeriodWatcherService
     {
-        private readonly ScreenModel _screenModel;
         private readonly ISettingsService _settingsService;
         private CancellationTokenSource _cts;
         private enum Period
@@ -25,7 +26,6 @@ namespace Sparky.Services
 
         public PeriodWatcherService(ISettingsService settingsService)
         {
-            _screenModel = new ScreenModel(settingsService);
             _settingsService = settingsService;
         }
 
@@ -63,46 +63,45 @@ namespace Sparky.Services
                 {
                     if (!screen.IsActive) continue;
 
-                    var (period, remainingTime) = GetCurrentPeriod(screen);
+                    var (currentPeriod, remainingTime) = GetCurrentPeriod(screen);
 
-                    if (period == Period.Night)
+                    if (currentPeriod == Period.Night)
                     {
                         if (_settingsService.CheckFullScreenApps)
                         {
                             if (IsFullScreenAppFounded(screen))
                             {
-                                _screenModel.ApplyColorConfiguration
-                                (
-                                    screen,
-                                    new ColorConfiguration
-                                    (
-                                        screen.DayColorConfiguration.ColorTemperature,
-                                        screen.DayColorConfiguration.Brightness
-                                    )
-                                );
+                                SetColorConfiguration(screen, screen.DayColorConfiguration);
                                 screen.IsDayTimePeriod = true;
                             }
                             else
                             {
-                                _screenModel.ApplyColorConfiguration(screen, CalculateCurrentConfiguration(period, screen, remainingTime));
+                                SetColorConfiguration(screen, CalculateCurrentConfiguration(currentPeriod, screen, remainingTime));
                                 screen.IsDayTimePeriod = false;
                             }
                         }
                         else
                         {
-                            _screenModel.ApplyColorConfiguration(screen, CalculateCurrentConfiguration(period, screen, remainingTime));
+                            SetColorConfiguration(screen, CalculateCurrentConfiguration(currentPeriod, screen, remainingTime));
                             screen.IsDayTimePeriod = false;
                         }
                     }
                     else
                     {
-                        _screenModel.ApplyColorConfiguration(screen, CalculateCurrentConfiguration(period, screen, remainingTime));
+                        SetColorConfiguration(screen, CalculateCurrentConfiguration(currentPeriod, screen, remainingTime));
                         screen.IsDayTimePeriod = true;
                     }
+                    await Task.Delay(100, token);
                 }
-
-                await Task.Delay(1000, token);
             }
+        }
+
+        // DCв скрине держать, диспозить при разрешнии класса
+        private void SetColorConfiguration(ScreenEntity screen, ColorConfiguration newColorConfiguration)
+        {
+            var configuration = SmoothColorConfiguration(screen.CurrentColorConfiguration, newColorConfiguration);
+            GammaRegulatorService.ApplyColorConfiguration(configuration, screen.SysName);
+            screen.CurrentColorConfiguration = configuration;
         }
 
         private ColorConfiguration CalculateCurrentConfiguration(Period currentPeriod, ScreenEntity screen, double remainingTime)
@@ -110,23 +109,51 @@ namespace Sparky.Services
             var screenDayConfig = screen.DayColorConfiguration;
             var screenNightConfig = screen.NightColorConfiguration;
 
-            if (!_settingsService.SmoothGammaChange)
+            if (!_settingsService.SmoothGammaChange || remainingTime is not (> 0 and <= 10))
             {
                 return currentPeriod == Period.Day
                     ? new ColorConfiguration(screenDayConfig.ColorTemperature, screenDayConfig.Brightness)
                     : new ColorConfiguration(screenNightConfig.ColorTemperature, screenNightConfig.Brightness);
             }
 
-            if (remainingTime is not (> 0 and <= 10))
-            {
-                return currentPeriod == Period.Day
-                    ? new ColorConfiguration(screenDayConfig.ColorTemperature, screenDayConfig.Brightness)
-                    : new ColorConfiguration(screenNightConfig.ColorTemperature, screenNightConfig.Brightness);
-            }
-
-            return currentPeriod == Period.Day 
-                ? GetTransientColorConfiguration(screenNightConfig, screenDayConfig, remainingTime) 
+            return currentPeriod == Period.Day
+                ? GetTransientColorConfiguration(screenNightConfig, screenDayConfig, remainingTime)
                 : GetTransientColorConfiguration(screenDayConfig, screenNightConfig, remainingTime);
+        }
+
+        private ColorConfiguration SmoothColorConfiguration(ColorConfiguration currentConfiguration, ColorConfiguration targetConfiguration)
+        {
+            var currentTemperature = currentConfiguration.ColorTemperature;
+            var currentBrightness = currentConfiguration.Brightness;
+            var targetTemperature = targetConfiguration.ColorTemperature;
+            var targetBrightness = targetConfiguration.Brightness;
+
+            const double temperatureStepSize = 60;
+            const double brightnessStepSize = 0.016;
+
+            var temperatureAbsDelta = Math.Abs(targetTemperature - currentTemperature);
+            var brightnessAbsDelta = Math.Abs(targetBrightness - currentBrightness);
+
+            var temperatureSteps = temperatureAbsDelta / temperatureStepSize;
+            var brightnessSteps = brightnessAbsDelta / brightnessStepSize;
+
+            var temperatureAdaptedStep = temperatureSteps >= brightnessSteps
+                ? Math.Abs(temperatureStepSize)
+                : Math.Abs(temperatureAbsDelta / brightnessSteps);
+
+            var brightnessAdaptedStep = brightnessSteps >= temperatureSteps
+                ? Math.Abs(brightnessStepSize)
+                : Math.Abs(brightnessAbsDelta / temperatureSteps);
+
+            currentTemperature = targetTemperature >= currentTemperature
+                ? (currentTemperature + temperatureAdaptedStep).ClampMax(targetTemperature)
+                : (currentTemperature - temperatureAdaptedStep).ClampMin(targetTemperature);
+
+            currentBrightness = targetBrightness >= currentBrightness
+                ? (currentBrightness + brightnessAdaptedStep).ClampMax(targetBrightness)
+                : (currentBrightness - brightnessAdaptedStep).ClampMin(targetBrightness);
+
+            return new ColorConfiguration(currentTemperature, currentBrightness);
         }
 
         private ColorConfiguration GetTransientColorConfiguration(ColorConfiguration targetValues, ColorConfiguration startValues, double remainingTime)
@@ -135,18 +162,8 @@ namespace Sparky.Services
 
             return new ColorConfiguration
             (
-                Extensions.Lerp
-                (
-                    targetValues.ColorTemperature,
-                    startValues.ColorTemperature,
-                    multiplier
-                ), 
-                Extensions.Lerp
-                (
-                    targetValues.Brightness,
-                    startValues.Brightness,
-                    multiplier
-                )
+                startValues.ColorTemperature.Lerp(targetValues.ColorTemperature, multiplier),
+                startValues.Brightness.Lerp(targetValues.Brightness, multiplier)
             );
         }
 
@@ -194,7 +211,7 @@ namespace Sparky.Services
 
         private bool IsFullScreenAppFounded(ScreenEntity screen)
         {
-            var fullScreenWindowHandle = SystemWindow.GetFullscreenForegroundWindow(screen);
+            var fullScreenWindowHandle = SystemWindow.GetFullScreenForegroundWindow(screen);
             if (fullScreenWindowHandle == 0) return false;
 
             var processFileName = SystemProcess.TryGetProcessFileName(fullScreenWindowHandle);

@@ -128,12 +128,12 @@
                                             Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3">
                                         </Image>
                                         <TextBlock
-                                            Text="{Binding CurrentColorTemperature, Mode=OneWay, StringFormat=CTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding CurrentColorConfiguration.ColorTemperature, Mode=OneWay, StringFormat=CTK : \{0\}, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                                         </TextBlock>
                                         <TextBlock
-                                            Text="{Binding CurrentBrightness, Mode=OneWay, StringFormat=CBT : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding CurrentColorConfiguration.Brightness, Mode=OneWay, StringFormat=CBT : \{0:N1\}, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Grid.Column="5" Grid.Row="1" Grid.RowSpan="2">
                                         </TextBlock>

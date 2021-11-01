@@ -27,7 +27,6 @@ namespace Sparky
             ValidateInstance();
             ConfigureServices();
             ConfigureViewContainer();
-            Kernel.Get<ISettingsService>().Load();
             InitializeComponent();
 
             Kernel.Get<ITrayNotifierService>();
@@ -78,8 +77,6 @@ namespace Sparky
             standardKernel.Bind<SettingsWindowViewModel>().ToSelf().InTransientScope();
             standardKernel.Bind<TrayMenuViewModel>().ToSelf().InTransientScope();
             standardKernel.Bind<InformationViewModel>().ToSelf().InTransientScope();
-
-            
 
             Kernel = standardKernel;
         }

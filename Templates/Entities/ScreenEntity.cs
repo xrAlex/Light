@@ -12,14 +12,12 @@ namespace Sparky.Templates.Entities
         private BitmapImage _currentTimePeriodImage;
         private ColorConfiguration _dayColorConfiguration;
         private ColorConfiguration _nightColorConfiguration;
+        private ColorConfiguration _currentColorConfiguration;
         private StartTime _nightStartTime;
         private StartTime _dayStartTime;
         private float _uiOpacity;
         private bool _active;
         private bool _isDayTimePeriod;
-        private double _currentColorTemperature;
-        private double _currentBrightness;
-        
 
         private readonly List<BitmapImage> _imageList = new()
         {
@@ -37,6 +35,7 @@ namespace Sparky.Templates.Entities
         public int Width { get; set; }
         public int Height { get; set; }
         public int DisplayCode { get; set; }
+        public nint DeviceContext { get; set; }
 
         public ColorConfiguration DayColorConfiguration
         {
@@ -58,6 +57,16 @@ namespace Sparky.Templates.Entities
             }
         }
 
+        public ColorConfiguration CurrentColorConfiguration
+        {
+            get => _currentColorConfiguration;
+            set
+            {
+                _currentColorConfiguration = value;
+                OnPropertyChanged();
+            }
+        }
+
         public StartTime DayStartTime
         {
             get => _dayStartTime;
@@ -74,28 +83,6 @@ namespace Sparky.Templates.Entities
             set
             {
                 _nightStartTime = value;
-                OnPropertyChanged();
-            }
-        }
-
-        // TODO: Replace
-        public double CurrentBrightness
-        {
-            get => _currentBrightness;
-            set
-            {
-                _currentBrightness = value;
-                OnPropertyChanged();
-            }
-        }
-
-        // TODO: Replace
-        public double CurrentColorTemperature
-        {
-            get => _currentColorTemperature;
-            set
-            {
-                _currentColorTemperature = value;
                 OnPropertyChanged();
             }
         }

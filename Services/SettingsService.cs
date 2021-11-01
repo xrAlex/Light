@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Sparky.Infrastructure;
 using Sparky.Services.Interfaces;
 using Sparky.Templates.Entities;
+using Sparky.WinApi;
 using WindowsDisplayAPI.DisplayConfig;
 
 namespace Sparky.Services
@@ -31,7 +32,7 @@ namespace Sparky.Services
         public List<string> ApplicationsWhitelist { get; }
 
         /// <summary>
-        /// If loading data from API fails then allow load Screens on Legacy mode using WinForms.Screens
+        /// If loading screens data from API fails, then allow load Screens on Legacy mode using WinForms.Screens
         /// </summary>
         private bool _legacyMode;
 
@@ -59,6 +60,7 @@ namespace Sparky.Services
             ApplicationsWhitelist = new List<string>();
             Screens = new ObservableCollection<ScreenEntity>();
             Applications = new ObservableCollection<ApplicationEntity>();
+            Load();
         }
     }
 
@@ -84,7 +86,6 @@ namespace Sparky.Services
 
             LoadScreens();
             LoadProcesses();
-
             if (Screens.Count < 1)
             {
                 LoggingModule.Log.Fatal("Can't find any screens {0}", Screens);
@@ -132,6 +133,8 @@ namespace Sparky.Services
             var index = 0;
             foreach (var screen in Screen.AllScreens)
             {
+                var sysName = INIManager.GetValue($"{index}", "SysName", $"{screen.DeviceName}");
+
                 Screens.Add(new ScreenEntity
                 {
                     Name = INIManager.GetValue($"{index}", "Name", $"Monitor {index + 1}"),
@@ -160,6 +163,8 @@ namespace Sparky.Services
                         hour: INIManager.GetValue($"{index}", "DayStartHour", 7),
                         minute: INIManager.GetValue($"{index}", "DayStartMin", 0)
                     ),
+
+                    DeviceContext = Native.CreateDC(sysName, null, null, 0),
 
                     Height = screen.Bounds.Height,
                     Width = screen.Bounds.Width,
@@ -201,6 +206,12 @@ namespace Sparky.Services
                         brightness: INIManager.GetValue($"{displayCode}", "NightBrightness", 0.8)
                     ),
 
+                    CurrentColorConfiguration = new ColorConfiguration
+                    (
+                        colorTemperature: INIManager.GetValue($"{displayCode}", "DayColorTemperature", 6600),
+                        brightness: INIManager.GetValue($"{displayCode}", "DayBrightness", 1.0)
+                    ),
+
                     NightStartTime = new StartTime
                     (
                         hour: INIManager.GetValue($"{displayCode}", "NightStartHour", 23),
@@ -213,6 +224,7 @@ namespace Sparky.Services
                         minute: INIManager.GetValue($"{displayCode}", "DayStartMin", 0)
                     ),
 
+                    DeviceContext = Native.CreateDC(displayName, null, null, 0),
                     IsActive = INIManager.GetValue($"{displayCode}", "Active", true),
 
                     Height = displayHeight,
