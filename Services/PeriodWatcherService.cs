@@ -123,16 +123,21 @@ namespace Sparky.Services
 
         private ColorConfiguration SmoothColorConfiguration(ColorConfiguration currentConfiguration, ColorConfiguration targetConfiguration)
         {
-            var currentTemperature = currentConfiguration.ColorTemperature;
-            var currentBrightness = currentConfiguration.Brightness;
+            var temperature = currentConfiguration.ColorTemperature;
+            var brightness = currentConfiguration.Brightness;
             var targetTemperature = targetConfiguration.ColorTemperature;
             var targetBrightness = targetConfiguration.Brightness;
+
+            if (temperature.IsCloseTo(targetTemperature) && brightness.IsCloseTo(targetBrightness))
+            {
+                return targetConfiguration;
+            }
 
             const double temperatureStepSize = 60;
             const double brightnessStepSize = 0.016;
 
-            var temperatureAbsDelta = Math.Abs(targetTemperature - currentTemperature);
-            var brightnessAbsDelta = Math.Abs(targetBrightness - currentBrightness);
+            var temperatureAbsDelta = Math.Abs(targetTemperature - temperature);
+            var brightnessAbsDelta = Math.Abs(targetBrightness - brightness);
 
             var temperatureSteps = temperatureAbsDelta / temperatureStepSize;
             var brightnessSteps = brightnessAbsDelta / brightnessStepSize;
@@ -145,20 +150,25 @@ namespace Sparky.Services
                 ? Math.Abs(brightnessStepSize)
                 : Math.Abs(brightnessAbsDelta / temperatureSteps);
 
-            currentTemperature = targetTemperature >= currentTemperature
-                ? (currentTemperature + temperatureAdaptedStep).ClampMax(targetTemperature)
-                : (currentTemperature - temperatureAdaptedStep).ClampMin(targetTemperature);
+            temperature = targetTemperature >= temperature
+                ? (temperature + temperatureAdaptedStep).ClampMax(targetTemperature)
+                : (temperature - temperatureAdaptedStep).ClampMin(targetTemperature);
 
-            currentBrightness = targetBrightness >= currentBrightness
-                ? (currentBrightness + brightnessAdaptedStep).ClampMax(targetBrightness)
-                : (currentBrightness - brightnessAdaptedStep).ClampMin(targetBrightness);
+            brightness = targetBrightness >= brightness
+                ? (brightness + brightnessAdaptedStep).ClampMax(targetBrightness)
+                : (brightness - brightnessAdaptedStep).ClampMin(targetBrightness);
 
-            return new ColorConfiguration(currentTemperature, currentBrightness);
+            return new ColorConfiguration(temperature, brightness);
         }
 
         private ColorConfiguration GetTransientColorConfiguration(ColorConfiguration targetValues, ColorConfiguration startValues, double remainingTime)
         {
             var multiplier = remainingTime * 0.1;
+
+            if (startValues.ColorTemperature.IsCloseTo(targetValues.ColorTemperature) && startValues.Brightness.IsCloseTo(targetValues.Brightness))
+            {
+                return targetValues;
+            }
 
             return new ColorConfiguration
             (

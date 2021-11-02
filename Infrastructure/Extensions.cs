@@ -28,6 +28,13 @@ namespace Sparky.Infrastructure
             // Otherwise - return value
             return value;
         }
+
+        public static bool IsCloseTo(this double value, double secondValue)
+        {
+            return value > secondValue 
+                ? Math.Abs((secondValue - value) / value * 100) < 1 
+                : Math.Abs((value - secondValue) / secondValue * 100) < 1;
+        }
     }
 }
 
